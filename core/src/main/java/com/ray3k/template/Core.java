@@ -3,6 +3,8 @@ package com.ray3k.template;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.Net;
+import com.badlogic.gdx.Net.HttpMethods;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.SkinLoader.SkinParameter;
@@ -38,6 +40,7 @@ import com.ray3k.template.screens.*;
 import com.ray3k.template.transitions.*;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
+import java.security.MessageDigest;
 import java.util.Iterator;
 import java.util.Objects;
 
@@ -663,11 +666,96 @@ public class Core extends JamGame {
     public static float bgm;
     public static float sfx;
     public static Preferences preferences;
+    public static MessageDigest crypt;
+    
+    public static String encrypt(String message) {
+        crypt.reset();
+        try {
+            final byte[] bytes = message.getBytes("UTF-8");
+            final byte[] digest = crypt.digest(bytes);
+            final StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < digest.length; ++i) {
+                sb.append(Integer.toHexString((digest[i] & 0xFF) | 0x100).substring(1, 3));
+            }
+            return sb.toString();
+        } catch (Exception e) {
+        
+        }
+        return null;
+    }
+    
+    public static void setPixel(int column, int row, Color color) {
+        Net.HttpRequest httpRequest = new Net.HttpRequest(HttpMethods.GET);
+        String gameID = Gdx.files.internal("secret/gameid").readString();
+        String key = Gdx.files.internal("secret/key").readString();
+        String url = "https://api.gamejolt.com/api/game/v1_2/data-store/set/";
+        String content = "?game_id=" + gameID + "&key=" + column + "-" + row + "&data=" + color.toString();
+        String signature = encrypt(url + content + key);
+        httpRequest.setUrl(url + content + "&signature=" + signature);
+        
+        Gdx.net.sendHttpRequest(httpRequest, new Net.HttpResponseListener() {
+            @Override
+            public void handleHttpResponse(Net.HttpResponse httpResponse) {
+
+            }
+        
+            @Override
+            public void failed(Throwable t) {
+                t.printStackTrace();
+                System.out.println("failed to send pixel");
+            }
+        
+            @Override
+            public void cancelled() {
+            
+            }
+        });
+    }
+    public static void fetchPixel(int column, int row, FetchPixelHandler handler) {
+        Net.HttpRequest httpRequest = new Net.HttpRequest(HttpMethods.GET);
+        String gameID = Gdx.files.internal("secret/gameid").readString();
+        String key = Gdx.files.internal("secret/key").readString();
+        String url = "https://api.gamejolt.com/api/game/v1_2/data-store/";
+        String content = "?game_id=" + gameID + "&key=" + column + "-" + row;
+        String signature = encrypt(url + content + key);
+        httpRequest.setUrl(url + content + "&signature=" + signature);
+        
+        Gdx.net.sendHttpRequest(httpRequest, new Net.HttpResponseListener() {
+            @Override
+            public void handleHttpResponse(Net.HttpResponse httpResponse) {
+                String response = httpResponse.getResultAsString();
+                System.out.println(response);
+                var jsonReader = new JsonReader();
+                var root = jsonReader.parse(response).get("response");
+                if (root.getBoolean("success", false)) {
+                    handler.handle(Color.valueOf(root.getString("data")));
+                }
+            }
+        
+            @Override
+            public void failed(Throwable t) {
+                handler.handle(null);
+            }
+        
+            @Override
+            public void cancelled() {
+            
+            }
+        });
+    }
+    public interface FetchPixelHandler {
+        void handle(Color color);
+    }
     
     @Override
     public void create() {
         super.create();
         core = this;
+        try {
+            crypt = MessageDigest.getInstance("MD5");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         
         preferences = Gdx.app.getPreferences(PROJECT_NAME);
         
