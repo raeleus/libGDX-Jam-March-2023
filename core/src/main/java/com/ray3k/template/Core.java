@@ -36,6 +36,7 @@ import com.ray3k.template.AnimationStateDataLoader.*;
 import com.ray3k.template.entities.*;
 import com.ray3k.template.screens.*;
 import com.ray3k.template.transitions.*;
+import de.golfgl.gdxgamesvcs.GameJoltClient;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
 import java.util.Iterator;
@@ -663,11 +664,15 @@ public class Core extends JamGame {
     public static float bgm;
     public static float sfx;
     public static Preferences preferences;
+    public static GameJoltClient gjClient;
     
     @Override
     public void create() {
         super.create();
         core = this;
+        
+        gjClient = new GameJoltClient();
+        gjClient.initialize(Gdx.files.internal("secret/gameid").toString(), Gdx.files.internal("secret/key").toString());
         
         preferences = Gdx.app.getPreferences(PROJECT_NAME);
         
