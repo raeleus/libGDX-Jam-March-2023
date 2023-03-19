@@ -29,23 +29,8 @@ public class OptionsScreen extends JamScreen {
         Gdx.input.setInputProcessor(stage);
     
         sceneBuilder.build(stage, skin, Gdx.files.internal("menus/options.json"));
-        
-        TextButton textButton = stage.getRoot().findActor("bindings");
-        textButton.addListener(sndChangeListener);
-        textButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                DialogEditKeyBindings dialog = new DialogEditKeyBindings(stage) {
-                    @Override
-                    public void hide() {
-                        super.hide();
-                    }
-                };
-                dialog.show(stage);
-            }
-        });
     
-        textButton = stage.getRoot().findActor("ok");
+        TextButton textButton = stage.getRoot().findActor("ok");
         textButton.addListener(sndChangeListener);
         textButton.addListener(new ChangeListener() {
             @Override

@@ -1,0 +1,49 @@
+{
+"skeleton": {
+	"hash": "oDJ9OxHbYIA",
+	"spine": "4.1.19",
+	"x": -10,
+	"y": -10,
+	"width": 20,
+	"height": 20,
+	"images": "",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" },
+	{ "name": "game/ping", "parent": "root", "length": 26.91, "rotation": 0.55 }
+],
+"slots": [
+	{ "name": "game/ping", "bone": "game/ping", "attachment": "game/ping" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"game/ping": {
+				"game/ping": { "rotation": -0.55, "width": 20, "height": 20 }
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"slots": {
+			"game/ping": {
+				"rgba": [
+					{ "color": "ffffffff" },
+					{ "time": 1.3333, "color": "ffffff00" }
+				]
+			}
+		},
+		"bones": {
+			"game/ping": {
+				"scale": [
+					{ "x": 0, "y": 0 },
+					{ "time": 1.3333 }
+				]
+			}
+		}
+	}
+}
+}

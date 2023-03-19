@@ -1,0 +1,58 @@
+{
+"skeleton": {
+	"hash": "+yiVEtYRNK4",
+	"spine": "4.1.19",
+	"x": -33.76,
+	"y": -45.61,
+	"width": 68,
+	"height": 84.5,
+	"images": "",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" },
+	{ "name": "game/shield", "parent": "root", "length": 46.74, "x": -1.25, "y": -1.88 }
+],
+"slots": [
+	{ "name": "game/shield", "bone": "game/shield", "attachment": "game/shield" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"game/shield": {
+				"game/shield": { "x": 1.48, "y": -1.48, "scaleX": 0.5, "scaleY": 0.5, "width": 136, "height": 169 }
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"slots": {
+			"game/shield": {
+				"rgba": [
+					{ "color": "ffffff00" },
+					{ "time": 0.5, "color": "fffffffe", "curve": "stepped" },
+					{ "time": 0.7, "color": "fffffffe" },
+					{ "time": 0.8667, "color": "ffffff00" }
+				]
+			}
+		},
+		"bones": {
+			"game/shield": {
+				"translate": [
+					{
+						"y": -20.03,
+						"curve": [ 0.167, 0, 0.333, 0, 0.027, -5.79, 0.105, -0.52 ]
+					},
+					{ "time": 0.5, "y": 3.71 }
+				],
+				"scale": [
+					{ "x": 1.508, "y": 1.508 },
+					{ "time": 0.3333 }
+				]
+			}
+		}
+	}
+}
+}

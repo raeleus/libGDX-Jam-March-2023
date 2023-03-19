@@ -19,9 +19,9 @@ import com.esotericsoftware.spine.utils.SkeletonDrawable;
 import com.ray3k.template.*;
 
 import static com.ray3k.template.Core.*;
-import static com.ray3k.template.Resources.SpineRay3k.*;
+import static com.ray3k.template.Resources.SpineTitle.*;
 
-public class LogoScreen extends JamScreen {
+public class TitleScreen extends JamScreen {
     private Stage stage;
     private Array<SpineDrawable> spineDrawables;
     private final static Color BG_COLOR = new Color(Color.BLACK);
@@ -57,7 +57,7 @@ public class LogoScreen extends JamScreen {
             @Override
             public void complete(AnimationState.TrackEntry entry) {
                 if (entry.getAnimation() == animationAnimation) {
-                    core.transition(new TitleScreen());
+                    core.transition(new MenuScreen());
                 }
             }
             
@@ -74,13 +74,13 @@ public class LogoScreen extends JamScreen {
         stage.addListener(new InputListener() {
             @Override
             public boolean keyDown(InputEvent event, int keycode) {
-                core.transition(new TitleScreen());
+                core.transition(new MenuScreen());
                 return true;
             }
             
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                core.transition(new TitleScreen());
+                core.transition(new MenuScreen());
                 return true;
             }
         });

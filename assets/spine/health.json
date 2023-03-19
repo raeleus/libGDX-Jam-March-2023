@@ -1,0 +1,329 @@
+{
+"skeleton": {
+	"hash": "ek4mMQp1DNE",
+	"spine": "4.1.19",
+	"x": -81.12,
+	"y": -72.74,
+	"width": 158.97,
+	"height": 40.67,
+	"images": "",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" },
+	{ "name": "game/health2", "parent": "root", "length": 32.7, "x": 119.34, "y": 0.8 },
+	{ "name": "game/health4", "parent": "root", "length": 42.26, "rotation": 1.85, "x": 120.71, "y": 58.03 },
+	{ "name": "game/health3", "parent": "root", "length": 38.18, "rotation": 2.05, "x": -117.75, "y": 59.39 },
+	{ "name": "game/health5", "parent": "root", "length": 39.54, "rotation": 1.97, "x": -116.38, "y": -1.93 },
+	{ "name": "game/health6", "parent": "root", "length": 39.54, "rotation": 1.97, "x": -116.38, "y": -1.93 },
+	{ "name": "game/health7", "parent": "root", "length": 42.26, "rotation": 1.85, "x": 120.71, "y": 58.03 },
+	{ "name": "game/health8", "parent": "root", "length": 38.18, "rotation": 2.05, "x": -117.75, "y": 59.39 },
+	{ "name": "game/health9", "parent": "root", "length": 32.7, "x": 119.34, "y": 0.8 }
+],
+"slots": [
+	{ "name": "game/health2", "bone": "game/health2", "attachment": "game/health" },
+	{ "name": "game/health9", "bone": "game/health9", "attachment": "game/health" },
+	{ "name": "game/health3", "bone": "game/health3", "attachment": "game/health" },
+	{ "name": "game/health8", "bone": "game/health8", "attachment": "game/health" },
+	{ "name": "game/health4", "bone": "game/health4", "attachment": "game/health" },
+	{ "name": "game/health7", "bone": "game/health7", "attachment": "game/health" },
+	{ "name": "game/health5", "bone": "game/health5", "attachment": "game/health" },
+	{ "name": "game/health6", "bone": "game/health6", "attachment": "game/health" },
+	{ "name": "healthpath", "bone": "root", "attachment": "healthpath" },
+	{ "name": "healthpath2", "bone": "root", "attachment": "healthpath" }
+],
+"path": [
+	{
+		"name": "health2",
+		"order": 1,
+		"bones": [ "game/health2" ],
+		"target": "healthpath",
+		"mixRotate": 0
+	},
+	{
+		"name": "health3",
+		"order": 2,
+		"bones": [ "game/health3" ],
+		"target": "healthpath",
+		"mixRotate": 0
+	},
+	{
+		"name": "health4",
+		"order": 3,
+		"bones": [ "game/health4" ],
+		"target": "healthpath",
+		"mixRotate": 0
+	},
+	{
+		"name": "health5",
+		"bones": [ "game/health5" ],
+		"target": "healthpath",
+		"mixRotate": 0
+	},
+	{
+		"name": "health6",
+		"order": 4,
+		"bones": [ "game/health6" ],
+		"target": "healthpath2",
+		"mixRotate": 0
+	},
+	{
+		"name": "health7",
+		"order": 5,
+		"bones": [ "game/health7" ],
+		"target": "healthpath2",
+		"mixRotate": 0
+	},
+	{
+		"name": "health8",
+		"order": 6,
+		"bones": [ "game/health8" ],
+		"target": "healthpath2",
+		"mixRotate": 0
+	},
+	{
+		"name": "health9",
+		"order": 7,
+		"bones": [ "game/health9" ],
+		"target": "healthpath2",
+		"mixRotate": 0
+	}
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"game/health2": {
+				"game/health": { "x": 1.93, "y": -0.8, "scaleX": 0.287, "scaleY": 0.287, "width": 121, "height": 120 }
+			},
+			"game/health3": {
+				"game/health": {
+					"x": -0.83,
+					"y": -0.77,
+					"scaleX": 0.287,
+					"scaleY": 0.287,
+					"rotation": -2.05,
+					"width": 121,
+					"height": 120
+				}
+			},
+			"game/health4": {
+				"game/health": {
+					"x": 0.49,
+					"y": -2.18,
+					"scaleX": 0.287,
+					"scaleY": 0.287,
+					"rotation": -1.85,
+					"width": 121,
+					"height": 120
+				}
+			},
+			"game/health5": {
+				"game/health": {
+					"x": 0.63,
+					"y": 1.91,
+					"scaleX": 0.287,
+					"scaleY": 0.287,
+					"rotation": -1.97,
+					"width": 121,
+					"height": 120
+				}
+			},
+			"game/health6": {
+				"game/health": {
+					"x": 0.63,
+					"y": 1.91,
+					"scaleX": 0.287,
+					"scaleY": 0.287,
+					"rotation": -1.97,
+					"width": 121,
+					"height": 120
+				}
+			},
+			"game/health7": {
+				"game/health": {
+					"x": 0.49,
+					"y": -2.18,
+					"scaleX": 0.287,
+					"scaleY": 0.287,
+					"rotation": -1.85,
+					"width": 121,
+					"height": 120
+				}
+			},
+			"game/health8": {
+				"game/health": {
+					"x": -0.83,
+					"y": -0.77,
+					"scaleX": 0.287,
+					"scaleY": 0.287,
+					"rotation": -2.05,
+					"width": 121,
+					"height": 120
+				}
+			},
+			"game/health9": {
+				"game/health": { "x": 1.93, "y": -0.8, "scaleX": 0.287, "scaleY": 0.287, "width": 121, "height": 120 }
+			},
+			"healthpath": {
+				"healthpath": {
+					"type": "path",
+					"lengths": [ 313.77, 572.12 ],
+					"vertexCount": 6,
+					"vertices": [ -198.94, -78.51, -62.96, -53.36, 272.22, 8.64, -217.62, 16.41, 37.18, 51.84, 247.76, 81.12 ]
+				}
+			},
+			"healthpath2": {
+				"healthpath": {
+					"type": "path",
+					"lengths": [ 271.56, 527.66 ],
+					"vertexCount": 6,
+					"vertices": [ 195.91, -67.24, 58.56, -51.23, -204.44, -20.57, 205.58, 21.15, -34.24, 51.13, -245.2, 77.5 ]
+				}
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"slots": {
+			"game/health2": {
+				"rgba": [
+					{ "color": "ffffff00" },
+					{ "time": 0.3, "color": "ffffffff" },
+					{ "time": 0.6333, "color": "ffffff00" }
+				]
+			},
+			"game/health3": {
+				"rgba": [
+					{ "color": "ffffff00", "curve": "stepped" },
+					{ "time": 0.1667, "color": "ffffff00" },
+					{ "time": 0.5, "color": "ffffffff" },
+					{ "time": 0.8, "color": "ffffff00" }
+				]
+			},
+			"game/health4": {
+				"rgba": [
+					{ "color": "ffffff00", "curve": "stepped" },
+					{ "time": 0.4, "color": "ffffff00" },
+					{ "time": 0.7, "color": "ffffffff" },
+					{ "time": 1.0333, "color": "ffffff00" }
+				]
+			},
+			"game/health5": {
+				"rgba": [
+					{ "color": "ffffff00", "curve": "stepped" },
+					{ "time": 0.6333, "color": "ffffff00" },
+					{ "time": 0.9333, "color": "ffffffff" },
+					{ "time": 1.2333, "color": "ffffff00" }
+				]
+			},
+			"game/health6": {
+				"rgba": [
+					{ "color": "ffffff00", "curve": "stepped" },
+					{ "time": 0.7, "color": "ffffff00" },
+					{ "time": 1.0333, "color": "ffffffff" },
+					{ "time": 1.3333, "color": "ffffff00" }
+				]
+			},
+			"game/health7": {
+				"rgba": [
+					{ "color": "ffffff00", "curve": "stepped" },
+					{ "time": 0.5, "color": "ffffff00" },
+					{ "time": 0.8, "color": "ffffffff" },
+					{ "time": 1.1, "color": "ffffff00" }
+				]
+			},
+			"game/health8": {
+				"rgba": [
+					{ "color": "ffffff00", "curve": "stepped" },
+					{ "time": 0.2667, "color": "ffffff00" },
+					{ "time": 0.5667, "color": "ffffffff" },
+					{ "time": 0.9, "color": "ffffff00" }
+				]
+			},
+			"game/health9": {
+				"rgba": [
+					{ "color": "ffffff00", "curve": "stepped" },
+					{ "time": 0.1, "color": "ffffff00" },
+					{ "time": 0.4, "color": "ffffffff" },
+					{ "time": 0.7, "color": "ffffff00" }
+				]
+			}
+		},
+		"path": {
+			"health2": {
+				"position": [
+					{
+						"curve": [ 0.097, 0.6542, 0.487, 0.7288 ]
+					},
+					{ "time": 0.6333, "value": 1 }
+				]
+			},
+			"health3": {
+				"position": [
+					{
+						"time": 0.1667,
+						"curve": [ 0.264, 0.6542, 0.654, 0.7288 ]
+					},
+					{ "time": 0.8, "value": 1 }
+				]
+			},
+			"health4": {
+				"position": [
+					{
+						"time": 0.4,
+						"curve": [ 0.497, 0.6542, 0.887, 0.7288 ]
+					},
+					{ "time": 1.0333, "value": 1 }
+				]
+			},
+			"health5": {
+				"position": [
+					{
+						"time": 0.6333,
+						"curve": [ 0.726, 0.6542, 1.095, 0.7288 ]
+					},
+					{ "time": 1.2333, "value": 1 }
+				]
+			},
+			"health6": {
+				"position": [
+					{
+						"time": 0.7,
+						"curve": [ 0.797, 0.6542, 1.187, 0.7288 ]
+					},
+					{ "time": 1.3333, "value": 1 }
+				]
+			},
+			"health7": {
+				"position": [
+					{
+						"time": 0.5,
+						"curve": [ 0.592, 0.6542, 0.962, 0.7288 ]
+					},
+					{ "time": 1.1, "value": 1 }
+				]
+			},
+			"health8": {
+				"position": [
+					{
+						"time": 0.2667,
+						"curve": [ 0.364, 0.6542, 0.754, 0.7288 ]
+					},
+					{ "time": 0.9, "value": 1 }
+				]
+			},
+			"health9": {
+				"position": [
+					{
+						"time": 0.1,
+						"curve": [ 0.192, 0.6542, 0.562, 0.7288 ]
+					},
+					{ "time": 0.7, "value": 1 }
+				]
+			}
+		}
+	}
+}
+}

@@ -1,0 +1,180 @@
+{
+"skeleton": { "hash": "WfeoNBZ4qMI", "spine": "4.1.19", "width": 1024, "height": 576, "images": "", "audio": "" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "dangerous", "parent": "root", "length": 354.33, "rotation": -0.55, "x": 512, "y": 149.46 },
+	{ "name": "the", "parent": "root", "length": 155.98, "rotation": 0.62, "x": 205.36, "y": 222.36 },
+	{ "name": "in", "parent": "root", "length": 76.31, "rotation": 1.27, "x": 512, "y": 295.26 },
+	{ "name": "justice", "parent": "root", "length": 330.62, "rotation": -0.88, "x": 512, "y": 410.54 }
+],
+"slots": [
+	{ "name": "bg", "bone": "root", "color": "000000ff", "attachment": "game/white" },
+	{ "name": "dangerous", "bone": "dangerous", "attachment": "game/title-dangerous" },
+	{ "name": "in", "bone": "in", "attachment": "game/title-in" },
+	{ "name": "justice", "bone": "justice", "attachment": "game/title-justice" },
+	{ "name": "the", "bone": "the", "attachment": "game/title-the" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"bg": {
+				"game/white": { "x": 512, "y": 288, "scaleX": 1024, "scaleY": 576, "width": 1, "height": 1 }
+			},
+			"dangerous": {
+				"game/title-dangerous": {
+					"x": -0.03,
+					"y": 3.39,
+					"scaleX": 0.5,
+					"scaleY": 0.5,
+					"rotation": 0.55,
+					"width": 1411,
+					"height": 138
+				}
+			},
+			"in": {
+				"game/title-in": {
+					"x": -0.02,
+					"y": -0.83,
+					"scaleX": 0.5,
+					"scaleY": 0.5,
+					"rotation": -1.27,
+					"width": 222,
+					"height": 93
+				}
+			},
+			"justice": {
+				"game/title-justice": {
+					"x": -0.18,
+					"y": 11.87,
+					"scaleX": 0.5,
+					"scaleY": 0.5,
+					"rotation": 0.88,
+					"width": 1407,
+					"height": 238
+				}
+			},
+			"the": {
+				"game/title-the": { "scaleX": 0.5, "scaleY": 0.5, "rotation": -0.62, "width": 218, "height": 103 }
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"slots": {
+			"dangerous": {
+				"rgba": [
+					{ "color": "ffffff00", "curve": "stepped" },
+					{ "time": 2.4, "color": "ffffff00" },
+					{ "time": 5.2, "color": "ffffffff" }
+				]
+			},
+			"in": {
+				"rgba": [
+					{ "color": "ffffff00", "curve": "stepped" },
+					{ "time": 1.8, "color": "ffffff00" },
+					{ "time": 1.9333, "color": "ffffffff" }
+				]
+			},
+			"justice": {
+				"rgba": [
+					{ "color": "ffffff00" },
+					{ "time": 0.6667, "color": "ffffffff" }
+				]
+			},
+			"the": {
+				"rgba": [
+					{ "color": "ffffff00", "curve": "stepped" },
+					{ "time": 2.4, "color": "ffffff00" },
+					{ "time": 5.2, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 6.6667, "color": "ffffffff" }
+				]
+			}
+		},
+		"bones": {
+			"dangerous": {
+				"translate": [
+					{ "x": 510.28, "curve": "stepped" },
+					{
+						"time": 2.4,
+						"x": 510.28,
+						"curve": [ 3.333, 510.28, 4.267, 0, 3.333, 0, 4.267, 0 ]
+					},
+					{ "time": 5.2 }
+				]
+			},
+			"the": {
+				"translate": [
+					{ "x": -215.3, "curve": "stepped" },
+					{
+						"time": 2.4,
+						"x": -215.3,
+						"curve": [ 2.883, -11.54, 4.436, -2.19, 3.333, 0, 4.267, 0 ]
+					},
+					{ "time": 5.2 }
+				]
+			},
+			"justice": {
+				"translate": [
+					{ "y": -122.54, "curve": "stepped" },
+					{
+						"time": 0.6667,
+						"y": -122.54,
+						"curve": [ 0.889, 0, 1.111, 0, 1.068, -93.13, 0.984, -22.38 ]
+					},
+					{ "time": 1.3333 }
+				],
+				"scale": [
+					{ "x": 4, "y": 4 },
+					{ "time": 0.6667 }
+				]
+			}
+		}
+	},
+	"stand": {
+		"slots": {
+			"dangerous": {
+				"rgba": [
+					{ "color": "ffffff00" }
+				]
+			},
+			"in": {
+				"rgba": [
+					{ "color": "ffffff00" }
+				]
+			},
+			"justice": {
+				"rgba": [
+					{ "color": "ffffff00" }
+				]
+			},
+			"the": {
+				"rgba": [
+					{ "color": "ffffff00" }
+				]
+			}
+		},
+		"bones": {
+			"dangerous": {
+				"translate": [
+					{ "x": 510.28 }
+				]
+			},
+			"the": {
+				"translate": [
+					{ "x": -215.3 }
+				]
+			},
+			"justice": {
+				"translate": [
+					{ "y": -122.54 }
+				],
+				"scale": [
+					{ "x": 4, "y": 4 }
+				]
+			}
+		}
+	}
+}
+}

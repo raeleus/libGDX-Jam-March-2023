@@ -1,0 +1,58 @@
+{
+"skeleton": {
+	"hash": "8wZXgxlcbf0",
+	"spine": "4.1.19",
+	"x": -57.2,
+	"y": -40.71,
+	"width": 111,
+	"height": 88,
+	"images": "",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" },
+	{ "name": "game/bite", "parent": "root", "length": 74.1, "rotation": 0.39, "x": -0.03, "y": -0.28 }
+],
+"slots": [
+	{ "name": "game/bite", "bone": "game/bite", "attachment": "game/bite" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"game/bite": {
+				"game/bite": { "x": -1.65, "y": 3.58, "rotation": -0.39, "width": 111, "height": 88 }
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"slots": {
+			"game/bite": {
+				"rgba": [
+					{
+						"color": "ffffff00",
+						"curve": [ 0.067, 1, 0.133, 1, 0.067, 1, 0.133, 1, 0.067, 1, 0.133, 1, 0.067, 0, 0.066, 1 ]
+					},
+					{
+						"time": 0.2,
+						"color": "ffffffff",
+						"curve": [ 0.356, 1, 0.511, 1, 0.356, 1, 0.511, 1, 0.356, 1, 0.511, 1, 0.503, 0.99, 0.511, 0 ]
+					},
+					{ "time": 0.6667, "color": "ffffff00" }
+				]
+			}
+		},
+		"bones": {
+			"game/bite": {
+				"translate": [
+					{},
+					{ "time": 0.2, "y": 19.16 },
+					{ "time": 0.6667, "y": -38.31 }
+				]
+			}
+		}
+	}
+}
+}

@@ -1,0 +1,60 @@
+{
+"skeleton": {
+	"hash": "2lXWai5QqnU",
+	"spine": "4.1.19",
+	"x": -219.62,
+	"y": -27.91,
+	"width": 244.86,
+	"height": 55.82,
+	"images": "",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "game/swipe-01", "bone": "root", "attachment": "game/swipe-01" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"game/swipe-01": {
+				"game/swipe-01": {
+					"path": "game/swipe-",
+					"x": -97.19,
+					"scaleX": -1,
+					"rotation": 2.8,
+					"width": 243,
+					"height": 44,
+					"sequence": { "count": 10, "digits": 2 }
+				}
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"slots": {
+			"game/swipe-01": {
+				"attachment": [
+					{},
+					{ "time": 0.0333, "name": "game/swipe-01" },
+					{ "time": 0.5667 }
+				]
+			}
+		},
+		"attachments": {
+			"default": {
+				"game/swipe-01": {
+					"game/swipe-01": {
+						"sequence": [
+							{ "time": 0.0333, "mode": "once", "delay": 0.05 }
+						]
+					}
+				}
+			}
+		}
+	}
+}
+}

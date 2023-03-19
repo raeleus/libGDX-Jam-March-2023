@@ -1,7 +1,16 @@
-sfx/ahh.mp3
 sfx/click.mp3
-sfx/libgdx.mp3
-sfx/please don't kill me.mp3
-sfx/shot.mp3
-sfx/swoosh.mp3
-sfx/tv.mp3
+sfx/libgdx01.mp3
+sfx/libgdx02.mp3
+sfx/libgdx03.mp3
+sfx/libgdx04.mp3
+sfx/libgdx05.mp3
+sfx/libgdx06.mp3
+sfx/libgdx07.mp3
+sfx/libgdx08.mp3
+sfx/libgdx09.mp3
+sfx/libgdx10.mp3
+sfx/libgdx11.mp3
+sfx/ray3k01.mp3
+sfx/ray3k02.mp3
+sfx/ray3k03.mp3
+sfx/ray3k04.mp3

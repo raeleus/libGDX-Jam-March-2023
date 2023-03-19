@@ -1,0 +1,60 @@
+{
+"skeleton": {
+	"hash": "MOHu9FQgqJk",
+	"spine": "4.1.19",
+	"x": -45,
+	"y": -10.25,
+	"width": 90,
+	"height": 58.5,
+	"images": "",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "game/spark-01", "bone": "root", "attachment": "game/spark-01" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"game/spark-01": {
+				"game/spark-01": {
+					"path": "game/spark-",
+					"y": 19,
+					"scaleX": 0.5,
+					"scaleY": 0.5,
+					"width": 180,
+					"height": 117,
+					"sequence": { "count": 15, "digits": 2 }
+				}
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"slots": {
+			"game/spark-01": {
+				"attachment": [
+					{},
+					{ "time": 0.0333, "name": "game/spark-01" },
+					{ "time": 0.8333 }
+				]
+			}
+		},
+		"attachments": {
+			"default": {
+				"game/spark-01": {
+					"game/spark-01": {
+						"sequence": [
+							{ "time": 0.0333, "mode": "once", "delay": 0.05 }
+						]
+					}
+				}
+			}
+		}
+	}
+}
+}

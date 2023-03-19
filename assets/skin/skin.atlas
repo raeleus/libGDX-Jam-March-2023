@@ -1,0 +1,146 @@
+
+skin.png
+size: 2048, 2048
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+battle-divider
+  rotate: false
+  xy: 743, 1764
+  size: 346, 31
+  orig: 346, 31
+  offset: 0, 0
+  index: -1
+big-font
+  rotate: false
+  xy: 1, 1206
+  size: 506, 493
+  orig: 506, 493
+  offset: 0, 0
+  index: -1
+button-normal
+  rotate: false
+  xy: 509, 1264
+  size: 136, 32
+  orig: 136, 32
+  offset: 0, 0
+  index: -1
+button-pressed
+  rotate: false
+  xy: 219, 915
+  size: 136, 32
+  orig: 136, 32
+  offset: 0, 0
+  index: -1
+character-box
+  rotate: false
+  xy: 1893, 1941
+  size: 152, 102
+  orig: 152, 102
+  offset: 0, 0
+  index: -1
+character-highlight
+  rotate: false
+  xy: 1, 731
+  size: 152, 102
+  orig: 152, 102
+  offset: 0, 0
+  index: -1
+character-target
+  rotate: false
+  xy: 509, 1298
+  size: 187, 132
+  orig: 187, 132
+  offset: 0, 0
+  index: -1
+dangerous-title
+  rotate: false
+  xy: 1, 1797
+  size: 1382, 246
+  orig: 1382, 246
+  offset: 0, 0
+  index: -1
+image-outline
+  rotate: false
+  xy: 509, 1432
+  size: 338, 330
+  orig: 338, 330
+  offset: 0, 0
+  index: -1
+log-font
+  rotate: false
+  xy: 1, 1701
+  size: 506, 61
+  orig: 506, 61
+  offset: 0, 0
+  index: -1
+namesake-font
+  rotate: false
+  xy: 1, 949
+  size: 506, 255
+  orig: 506, 255
+  offset: 0, 0
+  index: -1
+normal-font
+  rotate: false
+  xy: 1385, 1883
+  size: 506, 160
+  orig: 506, 160
+  offset: 0, 0
+  index: -1
+pop
+  rotate: false
+  xy: 849, 1645
+  size: 171, 117
+  orig: 171, 117
+  offset: 0, 0
+  index: -1
+pop-description
+  rotate: false
+  xy: 1, 835
+  size: 216, 112
+  orig: 216, 112
+  offset: 0, 0
+  index: -1
+pop-skills
+  rotate: false
+  xy: 698, 1325
+  size: 133, 105
+  orig: 133, 105
+  offset: 0, 0
+  index: -1
+setup-divider
+  rotate: false
+  xy: 1, 1764
+  size: 740, 31
+  orig: 740, 31
+  offset: 0, 0
+  index: -1
+slider
+  rotate: false
+  xy: 1385, 1877
+  size: 152, 4
+  orig: 152, 4
+  offset: 0, 0
+  index: -1
+slider-knob
+  rotate: false
+  xy: 849, 1620
+  size: 9, 23
+  orig: 9, 23
+  offset: 0, 0
+  index: -1
+textfield
+  rotate: false
+  xy: 1091, 1783
+  size: 46, 12
+  orig: 46, 12
+  offset: 0, 0
+  index: -1
+white
+  rotate: false
+  xy: 1022, 1761
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,81 @@
+{
+"skeleton": {
+	"hash": "ulGdj63eqNo",
+	"spine": "4.1.19",
+	"x": -125.92,
+	"y": -68.53,
+	"width": 137.62,
+	"height": 121.37,
+	"images": "",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" },
+	{
+		"name": "game/strike-01",
+		"parent": "root",
+		"length": 95.62,
+		"rotation": 2.55,
+		"x": 0.98,
+		"y": 1.83,
+		"scaleX": -1
+	}
+],
+"slots": [
+	{ "name": "game/strike-01", "bone": "game/strike-01", "attachment": "game/strike-01" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"game/strike-01": {
+				"game/strike-01": {
+					"path": "game/strike-",
+					"x": 58.46,
+					"y": -7.09,
+					"scaleX": 0.5,
+					"scaleY": 0.5,
+					"rotation": -28.75,
+					"width": 237,
+					"height": 140,
+					"sequence": { "count": 9, "digits": 2 }
+				}
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"slots": {
+			"game/strike-01": {
+				"attachment": [
+					{},
+					{ "time": 0.0333, "name": "game/strike-01" },
+					{ "time": 0.5333 }
+				]
+			}
+		},
+		"bones": {
+			"game/strike-01": {
+				"translate": [
+					{
+						"curve": [ 0.398, -0.28, 0.073, 77.77, 0.178, 0, 0.356, 0 ]
+					},
+					{ "time": 0.5333, "x": 76.65 }
+				]
+			}
+		},
+		"attachments": {
+			"default": {
+				"game/strike-01": {
+					"game/strike-01": {
+						"sequence": [
+							{ "time": 0.0333, "mode": "once", "delay": 0.05 }
+						]
+					}
+				}
+			}
+		}
+	}
+}
+}

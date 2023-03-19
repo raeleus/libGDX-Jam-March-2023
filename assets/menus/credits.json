@@ -11,7 +11,7 @@
 						"clazz": "com.badlogic.gdx.scenes.scene2d.ui.Label",
 						"name": "default"
 					},
-					"text": "This game was made by Raeleus.\\nCopyright Raymond \"Raeleus\" Buckley © 2021\\n\\nMusic by Jake Stevens, https://www.youtube.com/user/jakery1295",
+					"text": "This game was made by Raeleus.\\nCopyright Raymond \"Raeleus\" Buckley © 2023\\n\\nMusic by Jake Stevens, https://www.youtube.com/user/jakery1295\\n\\nSpecial thanks to JavaCake James, Fourlaster, and Tommy Ettinger!",
 					"textAlignment": 1,
 					"ellipsis": false,
 					"ellipsisString": "...",

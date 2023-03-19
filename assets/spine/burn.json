@@ -1,0 +1,57 @@
+{
+"skeleton": {
+	"hash": "+OEkzWF/VjI",
+	"spine": "4.1.19",
+	"x": -54.5,
+	"y": -81,
+	"width": 109,
+	"height": 162,
+	"images": "",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "game/burn-01", "bone": "root", "attachment": "game/burn-01" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"game/burn-01": {
+				"game/burn-01": {
+					"path": "game/burn-",
+					"width": 109,
+					"height": 162,
+					"sequence": { "count": 13, "digits": 2 }
+				}
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"slots": {
+			"game/burn-01": {
+				"attachment": [
+					{},
+					{ "time": 0.0333, "name": "game/burn-01" },
+					{ "time": 0.8 }
+				]
+			}
+		},
+		"attachments": {
+			"default": {
+				"game/burn-01": {
+					"game/burn-01": {
+						"sequence": [
+							{ "time": 0.0333, "mode": "once", "delay": 0.0556 }
+						]
+					}
+				}
+			}
+		}
+	}
+}
+}
