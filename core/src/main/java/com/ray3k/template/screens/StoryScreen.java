@@ -7,17 +7,21 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.github.tommyettinger.textra.TextraLabel;
+import com.github.tommyettinger.textra.TypingLabel;
 import com.ray3k.template.*;
 
 import static com.ray3k.template.Core.*;
 import static com.ray3k.template.Resources.*;
+import static com.ray3k.template.Resources.SkinSkinStyles.*;
 
-public class MenuScreen extends JamScreen {
+public class StoryScreen extends JamScreen {
     private Stage stage;
     private final static Color BG_COLOR = new Color(Color.BLACK);
     
@@ -39,46 +43,25 @@ public class MenuScreen extends JamScreen {
         root.setFillParent(true);
         stage.addActor(root);
         
-        var image = new Image(skin, "dangerous-title");
-        image.setScaling(Scaling.fit);
-        root.add(image).padLeft(50).padRight(50).growX();
+        var label = new Label("The ghost in the machine...", lBig);
+        root.add(label);
         
         root.row();
-        var table = new Table();
-        root.add(table);
+        var typingLabel = new TypingLabel(Gdx.files.internal("text/story").readString(), lButton);
+        typingLabel.setWrap(true);
+        root.add(typingLabel).growX().pad(20);
         
-        table.defaults().space(30);
-        var textButton = new TextButton("Play", skin);
-        table.add(textButton);
+        root.row();
+        
+        var textButton = new TextButton("Continue", skin);
+        root.add(textButton);
         textButton.addListener(sndChangeListener);
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Gdx.input.setInputProcessor(null);
                 bgm.stop();
-                core.transition(new StoryScreen());
-            }
-        });
-    
-        textButton = new TextButton("Options", skin);
-        table.add(textButton);
-        textButton.addListener(sndChangeListener);
-        textButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                Gdx.input.setInputProcessor(null);
-                core.transition(new OptionsScreen());
-            }
-        });
-    
-        textButton = new TextButton("Credits", skin);
-        table.add(textButton);
-        textButton.addListener(sndChangeListener);
-        textButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                Gdx.input.setInputProcessor(null);
-                core.transition(new CreditsScreen());
+                core.transition(new GameScreen());
             }
         });
     }
