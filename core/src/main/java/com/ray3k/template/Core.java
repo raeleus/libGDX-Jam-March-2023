@@ -667,6 +667,9 @@ public class Core extends JamGame {
     public static float sfx;
     public static Preferences preferences;
     public static MessageDigest crypt;
+    public static Array<String> tags = new Array<>();
+    public static Array<String> tagDescriptions = new Array<>();
+    public static Array<String> tagNameMatches = new Array<>();
     
     public static String encrypt(String message) {
         crypt.reset();
@@ -756,6 +759,10 @@ public class Core extends JamGame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+        tags.addAll(Gdx.files.internal("text/tag-names").readString().split("\\n"));
+        tagDescriptions.addAll(Gdx.files.internal("text/tag-descriptions").readString().split("\\n"));
+        tagNameMatches.addAll(Gdx.files.internal("text/tag-name-matches").readString().split("\\n"));
         
         preferences = Gdx.app.getPreferences(PROJECT_NAME);
         

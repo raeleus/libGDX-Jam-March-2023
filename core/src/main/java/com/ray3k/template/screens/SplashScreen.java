@@ -37,7 +37,7 @@ public class SplashScreen extends JamScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.input.setInputProcessor(null);
-                core.transition(new StoryScreen());
+                core.transition(new NameScreen());
             }
         });
     }
