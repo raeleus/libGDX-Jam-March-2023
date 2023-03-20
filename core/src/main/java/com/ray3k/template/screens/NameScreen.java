@@ -101,9 +101,9 @@ public class NameScreen extends JamScreen {
                     room.description = roomDescriptions.get(i % roomDescriptions.size);
                     if (i == getRoomIndex()) room.description = Gdx.files.internal("text/rooms-first").readString().split("\\n")[0];
                     room.marker = Color.BLACK;
-                    room.upgrade = true;
-                    room.tag = true;
-                    room.hero = "test";
+                    room.upgrade = i < 50 * 50 * .25f;
+                    room.tag = i < 50 * 50 * .10f;
+                    room.hero = i < 50 * 50 * .05f ? "test" : null;
                     rooms.add(room);
                 }
                 
