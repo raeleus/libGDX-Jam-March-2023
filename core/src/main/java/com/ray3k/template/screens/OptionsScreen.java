@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
@@ -27,21 +29,22 @@ public class OptionsScreen extends JamScreen {
     
         stage = new Stage(new ScreenViewport(), batch);
         Gdx.input.setInputProcessor(stage);
-    
-        sceneBuilder.build(stage, skin, Gdx.files.internal("menus/options.json"));
-    
-        TextButton textButton = stage.getRoot().findActor("ok");
-        textButton.addListener(sndChangeListener);
-        textButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                Gdx.input.setInputProcessor(null);
-                core.transition(new MenuScreen());
-            }
-        });
         
+        var root = new Table();
+        root.setFillParent(true);
+        stage.addActor(root);
+        
+        root.defaults().space(10);
+        var table = new Table();
+        root.add(table);
+    
+        table.defaults().space(10);
+        var label = new Label("BGM", skin);
+        table.add(label);
+        
+        var slider = new Slider(0, 1, .001f, false, skin);
+        table.add(slider);
         final Music bgm = bgm_menu;
-        Slider slider = stage.getRoot().findActor("bgm");
         slider.setValue(Core.bgm);
         slider.addListener(new ChangeListener() {
             @Override
@@ -52,11 +55,31 @@ public class OptionsScreen extends JamScreen {
                 bgm.setVolume(Core.bgm);
             }
         });
+        
+        root.row();
+        table = new Table();
+        root.add(table);
     
+        table.defaults().space(20);
+        label = new Label("SFX", skin);
+        table.add(label);
+    
+        slider = new Slider(0, 1, .001f, false, skin);
+        table.add(slider);
+        
+        root.row();
+        var textButton = new TextButton("OK", skin);
+        root.add(textButton);
+        textButton.addListener(sndChangeListener);
+        textButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Gdx.input.setInputProcessor(null);
+                core.transition(new MenuScreen());
+            }
+        });
         final Music sfx = bgm_audioSample;
         sfx.setLooping(true);
-        
-        slider = stage.getRoot().findActor("sfx");
         slider.setValue(Core.sfx);
         slider.addListener(new ChangeListener() {
             @Override

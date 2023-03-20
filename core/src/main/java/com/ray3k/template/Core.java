@@ -32,8 +32,6 @@ import com.esotericsoftware.spine.AnimationStateData;
 import com.esotericsoftware.spine.SkeletonData;
 import com.esotericsoftware.spine.SkeletonRenderer;
 import com.esotericsoftware.spine.utils.TwoColorPolygonBatch;
-import com.ray3k.stripe.FreeTypeSkinLoader;
-import com.ray3k.stripe.scenecomposer.SceneComposerStageBuilder;
 import com.ray3k.template.AnimationStateDataLoader.*;
 import com.ray3k.template.entities.*;
 import com.ray3k.template.screens.*;
@@ -44,6 +42,7 @@ import java.security.MessageDigest;
 import java.util.Iterator;
 import java.util.Objects;
 
+import static com.ray3k.template.GameData.*;
 import static com.ray3k.template.Resources.*;
 
 public class Core extends JamGame {
@@ -86,7 +85,6 @@ public class Core extends JamGame {
     public static TwoColorPolygonBatch batch;
     public static ShapeRenderer shapeRenderer;
     public static VfxManager vfxManager;
-    public static SceneComposerStageBuilder sceneBuilder;
     public static ShapeDrawer shapeDrawer;
     public static Transition defaultTransition;
     public static float defaultTransitionDuration;
@@ -743,6 +741,7 @@ public class Core extends JamGame {
             }
         });
     }
+    
     public interface FetchPixelHandler {
         void handle(Color color);
     }
@@ -756,6 +755,10 @@ public class Core extends JamGame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+        tags.addAll(Gdx.files.internal("text/tag-names").readString().split("\\n"));
+        tagDescriptions.addAll(Gdx.files.internal("text/tag-descriptions").readString().split("\\n"));
+        tagNameMatches.addAll(Gdx.files.internal("text/tag-name-matches").readString().split("\\n"));
         
         preferences = Gdx.app.getPreferences(PROJECT_NAME);
         
@@ -796,7 +799,6 @@ public class Core extends JamGame {
     
     @Override
     public void loadAssets() {
-        assetManager.setLoader(Skin.class, new FreeTypeSkinLoader(assetManager.getFileHandleResolver()));
         assetManager.setLoader(SkeletonData.class, new SkeletonDataLoader(assetManager.getFileHandleResolver()));
         assetManager.setLoader(AnimationStateData.class, new AnimationStateDataLoader(assetManager.getFileHandleResolver()));
         

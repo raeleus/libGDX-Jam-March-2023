@@ -52,7 +52,6 @@ public class StoryScreen extends JamScreen {
         root.add(typingLabel).growX().pad(20);
         
         root.row();
-        
         var textButton = new TextButton("Continue", skin);
         root.add(textButton);
         textButton.addListener(sndChangeListener);
@@ -61,7 +60,7 @@ public class StoryScreen extends JamScreen {
             public void changed(ChangeEvent event, Actor actor) {
                 Gdx.input.setInputProcessor(null);
                 bgm.stop();
-                core.transition(new GameScreen());
+                core.transition(new NameScreen());
             }
         });
     }

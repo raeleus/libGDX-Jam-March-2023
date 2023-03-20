@@ -12,7 +12,6 @@ dependencies {
     api "com.squareup:javapoet:1.13.0"
     api 'com.github.raeleus.TenPatch:tenpatch:5.2.2'
     api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
-    api 'com.github.raeleus:stripe:0.2.0'
     api 'space.earlygrey:shapedrawer:2.5.0'
 }
 

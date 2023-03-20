@@ -28,10 +28,17 @@ public class CreditsScreen extends JamScreen {
         stage = new Stage(new ScreenViewport(), batch);
         Gdx.input.setInputProcessor(stage);
         
-        sceneBuilder.build(stage, skin, Gdx.files.internal("menus/credits.json"));
+        var root = new Table();
+        root.setFillParent(true);
+        stage.addActor(root);
         
-        TextButton textButton = stage.getRoot().findActor("ok");
-        textButton.addListener(sndChangeListener);
+        var label = new TypingLabel(Gdx.files.internal("text/credits").readString("UTF-8"), skin);
+        label.setAlignment(Align.center);
+        root.add(label).space(50);
+        
+        root.row();
+        var textButton = new TextButton("OK", skin);
+        root.add(textButton);
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -39,12 +46,8 @@ public class CreditsScreen extends JamScreen {
                 core.transition(new MenuScreen());
             }
         });
-    
+        
         TypingConfig.INTERVAL_MULTIPLIERS_BY_CHAR.put('\n', .5f);
-        Label label = stage.getRoot().findActor("label");
-        var typingLabel = new TypingLabel(label.getText().toString(), skin);
-        typingLabel.setAlignment(Align.center);
-        ((Table) label.getParent()).getCell(label).setActor(typingLabel);
     }
     
     @Override

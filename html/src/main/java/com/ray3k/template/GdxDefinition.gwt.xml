@@ -7,10 +7,9 @@
     <inherits name="com.badlogic.gdx.graphics.g2d.freetype.freetype-gwt" />
     <inherits name="com.ray3k.tenpatch.tenpatch"/>
     <inherits name="space.earlygrey.shapedrawer"/>
+    <inherits name="regexodus.regexodus" />
     <inherits name="com.github.tommyettinger.textratypist" />
-    <inherits name="regexodus.regexodus"/>
     <inherits name="com.esotericsoftware.spine"/>
-    <inherits name="com.ray3k.stripe" />
     <inherits name='com.crashinvaders.vfx.GdxVfxCore' />
     <inherits name='com.crashinvaders.vfx.GdxVfxGwt' />
     <inherits name='com.crashinvaders.vfx.GdxVfxEffects' />

@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.crashinvaders.vfx.VfxManager;
 import com.esotericsoftware.spine.utils.TwoColorPolygonBatch;
-import com.ray3k.stripe.scenecomposer.SceneComposerStageBuilder;
 import com.ray3k.template.transitions.*;
 
 import static com.ray3k.template.transitions.Transitions.*;
@@ -34,8 +33,6 @@ public abstract class JamGame implements ApplicationListener {
         Core.transitionEngine = new TransitionEngine(this, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Core.defaultTransition = crossFade();
         Core.defaultTransitionDuration = .5f;
-    
-        Core.sceneBuilder = new SceneComposerStageBuilder();
         
         loadAssets();
     }
