@@ -32,8 +32,6 @@ import com.esotericsoftware.spine.AnimationStateData;
 import com.esotericsoftware.spine.SkeletonData;
 import com.esotericsoftware.spine.SkeletonRenderer;
 import com.esotericsoftware.spine.utils.TwoColorPolygonBatch;
-import com.ray3k.stripe.FreeTypeSkinLoader;
-import com.ray3k.stripe.scenecomposer.SceneComposerStageBuilder;
 import com.ray3k.template.AnimationStateDataLoader.*;
 import com.ray3k.template.entities.*;
 import com.ray3k.template.screens.*;
@@ -86,7 +84,6 @@ public class Core extends JamGame {
     public static TwoColorPolygonBatch batch;
     public static ShapeRenderer shapeRenderer;
     public static VfxManager vfxManager;
-    public static SceneComposerStageBuilder sceneBuilder;
     public static ShapeDrawer shapeDrawer;
     public static Transition defaultTransition;
     public static float defaultTransitionDuration;
@@ -667,9 +664,6 @@ public class Core extends JamGame {
     public static float sfx;
     public static Preferences preferences;
     public static MessageDigest crypt;
-    public static Array<String> tags = new Array<>();
-    public static Array<String> tagDescriptions = new Array<>();
-    public static Array<String> tagNameMatches = new Array<>();
     
     public static String encrypt(String message) {
         crypt.reset();
@@ -746,6 +740,7 @@ public class Core extends JamGame {
             }
         });
     }
+    
     public interface FetchPixelHandler {
         void handle(Color color);
     }
@@ -803,7 +798,6 @@ public class Core extends JamGame {
     
     @Override
     public void loadAssets() {
-        assetManager.setLoader(Skin.class, new FreeTypeSkinLoader(assetManager.getFileHandleResolver()));
         assetManager.setLoader(SkeletonData.class, new SkeletonDataLoader(assetManager.getFileHandleResolver()));
         assetManager.setLoader(AnimationStateData.class, new AnimationStateDataLoader(assetManager.getFileHandleResolver()));
         

@@ -28,23 +28,23 @@ public class CreditsScreen extends JamScreen {
         stage = new Stage(new ScreenViewport(), batch);
         Gdx.input.setInputProcessor(stage);
         
-        sceneBuilder.build(stage, skin, Gdx.files.internal("menus/credits.json"));
-        
-        TextButton textButton = stage.getRoot().findActor("ok");
-        textButton.addListener(sndChangeListener);
-        textButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                Gdx.input.setInputProcessor(null);
-                core.transition(new MenuScreen());
-            }
-        });
-    
-        TypingConfig.INTERVAL_MULTIPLIERS_BY_CHAR.put('\n', .5f);
-        Label label = stage.getRoot().findActor("label");
-        var typingLabel = new TypingLabel(label.getText().toString(), skin);
-        typingLabel.setAlignment(Align.center);
-        ((Table) label.getParent()).getCell(label).setActor(typingLabel);
+//        sceneBuilder.build(stage, skin, Gdx.files.internal("menus/credits.json"));
+//
+//        TextButton textButton = stage.getRoot().findActor("ok");
+//        textButton.addListener(sndChangeListener);
+//        textButton.addListener(new ChangeListener() {
+//            @Override
+//            public void changed(ChangeEvent event, Actor actor) {
+//                Gdx.input.setInputProcessor(null);
+//                core.transition(new MenuScreen());
+//            }
+//        });
+//
+//        TypingConfig.INTERVAL_MULTIPLIERS_BY_CHAR.put('\n', .5f);
+//        Label label = stage.getRoot().findActor("label");
+//        var typingLabel = new TypingLabel(label.getText().toString(), skin);
+//        typingLabel.setAlignment(Align.center);
+//        ((Table) label.getParent()).getCell(label).setActor(typingLabel);
     }
     
     @Override

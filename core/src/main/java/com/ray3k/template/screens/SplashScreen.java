@@ -23,7 +23,7 @@ public class SplashScreen extends JamScreen {
         stage = new Stage(new ScreenViewport(), batch);
         Gdx.input.setInputProcessor(stage);
         
-        sceneBuilder.build(stage, skin, Gdx.files.internal("menus/splash.json"));
+//        sceneBuilder.build(stage, skin, Gdx.files.internal("menus/splash.json"));
         
         stage.addListener(new ClickListener(Input.Buttons.LEFT) {
             @Override
