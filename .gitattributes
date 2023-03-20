@@ -1,2 +1,5 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Auto detect text files but force line endings to LF (Unix endings),
+# because the asset files break if saved with CRLF (Windows endings).
+* text=auto eol=lf
+# However, .bat files must use CRLF to run properly.
+*.bat text=auto eol=crlf
