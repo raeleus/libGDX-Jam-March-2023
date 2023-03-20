@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "WfeoNBZ4qMI", "spine": "4.1.19", "width": 1024, "height": 576, "images": "", "audio": "" },
+"skeleton": { "hash": "C2ZOCvW8hpM", "spine": "4.1.19", "width": 1024, "height": 576, "images": "", "audio": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "dangerous", "parent": "root", "length": 354.33, "rotation": -0.55, "x": 512, "y": 149.46 },
@@ -66,15 +66,15 @@
 			"dangerous": {
 				"rgba": [
 					{ "color": "ffffff00", "curve": "stepped" },
-					{ "time": 2.4, "color": "ffffff00" },
-					{ "time": 5.2, "color": "ffffffff" }
+					{ "time": 2.8667, "color": "ffffff00" },
+					{ "time": 5.6667, "color": "ffffffff" }
 				]
 			},
 			"in": {
 				"rgba": [
 					{ "color": "ffffff00", "curve": "stepped" },
-					{ "time": 1.8, "color": "ffffff00" },
-					{ "time": 1.9333, "color": "ffffffff" }
+					{ "time": 2.2667, "color": "ffffff00" },
+					{ "time": 2.4, "color": "ffffffff" }
 				]
 			},
 			"justice": {
@@ -86,9 +86,9 @@
 			"the": {
 				"rgba": [
 					{ "color": "ffffff00", "curve": "stepped" },
-					{ "time": 2.4, "color": "ffffff00" },
-					{ "time": 5.2, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 6.6667, "color": "ffffffff" }
+					{ "time": 2.8667, "color": "ffffff00" },
+					{ "time": 5.6667, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 7.1333, "color": "ffffffff" }
 				]
 			}
 		},
@@ -97,33 +97,33 @@
 				"translate": [
 					{ "x": 510.28, "curve": "stepped" },
 					{
-						"time": 2.4,
+						"time": 2.8667,
 						"x": 510.28,
-						"curve": [ 3.333, 510.28, 4.267, 0, 3.333, 0, 4.267, 0 ]
+						"curve": [ 3.8, 510.28, 4.733, 0, 3.8, 0, 4.733, 0 ]
 					},
-					{ "time": 5.2 }
+					{ "time": 5.6667 }
 				]
 			},
 			"the": {
 				"translate": [
 					{ "x": -215.3, "curve": "stepped" },
 					{
-						"time": 2.4,
+						"time": 2.8667,
 						"x": -215.3,
-						"curve": [ 2.883, -11.54, 4.436, -2.19, 3.333, 0, 4.267, 0 ]
+						"curve": [ 3.35, -11.54, 4.903, -2.19, 3.8, 0, 4.733, 0 ]
 					},
-					{ "time": 5.2 }
+					{ "time": 5.6667 }
 				]
 			},
 			"justice": {
 				"translate": [
 					{ "y": -122.54, "curve": "stepped" },
 					{
-						"time": 0.6667,
+						"time": 1.1333,
 						"y": -122.54,
-						"curve": [ 0.889, 0, 1.111, 0, 1.068, -93.13, 0.984, -22.38 ]
+						"curve": [ 1.356, 0, 1.578, 0, 1.535, -93.13, 1.451, -22.38 ]
 					},
-					{ "time": 1.3333 }
+					{ "time": 1.8 }
 				],
 				"scale": [
 					{ "x": 4, "y": 4 },
