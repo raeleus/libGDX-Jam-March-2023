@@ -726,20 +726,20 @@ public class Core extends JamGame {
                 var jsonReader = new JsonReader();
                 var root = jsonReader.parse(response).get("response");
                 if (root.getBoolean("success", false)) {
-                    handler.handle(Color.valueOf(root.getString("data")));
+                    Gdx.app.postRunnable(() -> handler.handle(Color.valueOf(root.getString("data"))));
                 } else {
-                    handler.handle(Color.BLACK);
+                    Gdx.app.postRunnable(() -> handler.handle(Color.BLACK));
                 }
             }
         
             @Override
             public void failed(Throwable t) {
-                handler.handle(Color.BLACK);
+                Gdx.app.postRunnable(() -> handler.handle(Color.BLACK));
             }
         
             @Override
             public void cancelled() {
-                handler.handle(Color.BLACK);
+                Gdx.app.postRunnable(() -> handler.handle(Color.BLACK));
             }
         });
     }

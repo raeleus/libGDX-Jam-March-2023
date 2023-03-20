@@ -84,8 +84,14 @@ public class RoomScreen extends JamScreen {
         label = new Label("A mysterious " + colorName.toLowerCase(Locale.ROOT) + " marker rests here.", lLog);
         labelTable.add(label);
         
-        var textButton = new TextButton("Change the marker color", skin);
+        var textButton = new TextButton("Hack marker node", skin);
         buttonTable.add(textButton);
+        textButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+            
+            }
+        });
         
         if (room.upgrade) {
             labelTable.row();
@@ -123,7 +129,11 @@ public class RoomScreen extends JamScreen {
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                core.transition(new MapScreen());
+                Gdx.input.setInputProcessor(null);
+                Core.fetchPixel(column, row, color -> {
+                    room.marker = color;
+                    core.transition(new MapScreen());
+                });
             }
         });
         
