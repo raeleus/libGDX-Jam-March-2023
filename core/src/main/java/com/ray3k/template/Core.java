@@ -42,6 +42,7 @@ import java.security.MessageDigest;
 import java.util.Iterator;
 import java.util.Objects;
 
+import static com.ray3k.template.GameData.*;
 import static com.ray3k.template.Resources.*;
 
 public class Core extends JamGame {

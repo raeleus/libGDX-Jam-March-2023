@@ -1,9 +1,11 @@
 package com.ray3k.template.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -12,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.github.tommyettinger.textra.TypingLabel;
 import com.ray3k.template.*;
@@ -19,6 +22,7 @@ import com.ray3k.template.*;
 import java.util.Locale;
 
 import static com.ray3k.template.Core.*;
+import static com.ray3k.template.GameData.*;
 import static com.ray3k.template.Resources.SkinSkinStyles.*;
 import static com.ray3k.template.Resources.*;
 
@@ -82,7 +86,28 @@ public class NameScreen extends JamScreen {
             public void changed(ChangeEvent event, Actor actor) {
                 Gdx.input.setInputProcessor(null);
                 bgm.stop();
-                core.transition(new GameScreen());
+                
+                column = MathUtils.random(49);
+                row = MathUtils.random(49);
+    
+                Array<String> roomDescriptions = new Array<>();
+                roomDescriptions.addAll(Gdx.files.internal("text/rooms").readString().split("\\n"));
+                roomDescriptions.shuffle();
+                
+                rooms.clear();
+                
+                for (int i = 0; i < 50 * 50; i++) {
+                    var room = new RoomData();
+                    room.description = roomDescriptions.get(i % roomDescriptions.size);
+                    if (i == getRoomIndex()) room.description = Gdx.files.internal("text/rooms-first").readString().split("\\n")[0];
+                    room.marker = Color.BLACK;
+                    room.upgrade = true;
+                    room.tag = true;
+                    room.hero = "test";
+                    rooms.add(room);
+                }
+                
+                core.transition(new RoomScreen());
             }
         });
         
@@ -129,20 +154,5 @@ public class NameScreen extends JamScreen {
     @Override
     public void dispose() {
     
-    }
-    
-    public static int matchTagToName(String name) {
-        for (int i = 0; i < tagNameMatches.size; i++) {
-            var tag = tagNameMatches.get(i);
-            var keywords = tag.split(",");
-            for (var keyword : keywords) {
-                if (name.contains(keyword)) return i;
-            }
-        }
-    
-        int score = 0;
-        for (int j = 0; j < name.length(); j++) score += name.charAt(j);
-        
-        return score * name.length() % (tags.size - 1) + 1;
     }
 }
