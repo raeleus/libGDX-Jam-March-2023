@@ -4,6 +4,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
@@ -379,6 +380,12 @@ public class Resources {
         SpineTitle.slotThe = SpineTitle.skeletonData.findSlot("the");
         SpineTitle.skinDefault = SpineTitle.skeletonData.findSkin("default");
         skin_skin = assetManager.get("skin/skin.json");
+        SkinSkinStyles.bCompassRight = skin_skin.get("compass-right", Button.ButtonStyle.class);
+        SkinSkinStyles.bDefault = skin_skin.get("default", Button.ButtonStyle.class);
+        SkinSkinStyles.bMapColor = skin_skin.get("map-color", Button.ButtonStyle.class);
+        SkinSkinStyles.bCompassLeft = skin_skin.get("compass-left", Button.ButtonStyle.class);
+        SkinSkinStyles.bCompassUp = skin_skin.get("compass-up", Button.ButtonStyle.class);
+        SkinSkinStyles.bCompassDown = skin_skin.get("compass-down", Button.ButtonStyle.class);
         SkinSkinStyles.lDefault = skin_skin.get("default", Label.LabelStyle.class);
         SkinSkinStyles.lBig = skin_skin.get("big", Label.LabelStyle.class);
         SkinSkinStyles.lNamesake = skin_skin.get("namesake", Label.LabelStyle.class);
@@ -1102,6 +1109,18 @@ public class Resources {
     }
 
     public static class SkinSkinStyles {
+        public static Button.ButtonStyle bCompassRight;
+
+        public static Button.ButtonStyle bDefault;
+
+        public static Button.ButtonStyle bMapColor;
+
+        public static Button.ButtonStyle bCompassLeft;
+
+        public static Button.ButtonStyle bCompassUp;
+
+        public static Button.ButtonStyle bCompassDown;
+
         public static Label.LabelStyle lDefault;
 
         public static Label.LabelStyle lBig;

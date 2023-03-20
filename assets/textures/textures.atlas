@@ -804,6 +804,14 @@ character-highlight
 bounds:509,1216,152,102
 character-target
 bounds:1,764,187,132
+compass-down
+bounds:727,1400,55,32
+compass-left
+bounds:1022,1676,32,55
+compass-right
+bounds:1893,1886,32,55
+compass-up
+bounds:509,1182,55,32
 dangerous-title
 bounds:1,1799,1382,246
 image-outline
@@ -829,4 +837,4 @@ bounds:1197,1741,9,23
 textfield
 bounds:1251,1785,46,12
 white
-bounds:727,1431,1,1
+bounds:663,1317,1,1

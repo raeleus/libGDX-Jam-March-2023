@@ -53,6 +53,34 @@ character-target
   orig: 187, 132
   offset: 0, 0
   index: -1
+compass-down
+  rotate: false
+  xy: 849, 1611
+  size: 55, 32
+  orig: 55, 32
+  offset: 0, 0
+  index: -1
+compass-left
+  rotate: false
+  xy: 1893, 1884
+  size: 32, 55
+  orig: 32, 55
+  offset: 0, 0
+  index: -1
+compass-right
+  rotate: false
+  xy: 1, 674
+  size: 32, 55
+  orig: 32, 55
+  offset: 0, 0
+  index: -1
+compass-up
+  rotate: false
+  xy: 1022, 1730
+  size: 55, 32
+  orig: 55, 32
+  offset: 0, 0
+  index: -1
 dangerous-title
   rotate: false
   xy: 1, 1797
@@ -125,7 +153,7 @@ slider
   index: -1
 slider-knob
   rotate: false
-  xy: 849, 1620
+  xy: 155, 810
   size: 9, 23
   orig: 9, 23
   offset: 0, 0
@@ -139,7 +167,7 @@ textfield
   index: -1
 white
   rotate: false
-  xy: 1022, 1761
+  xy: 1385, 1874
   size: 1, 1
   orig: 1, 1
   offset: 0, 0

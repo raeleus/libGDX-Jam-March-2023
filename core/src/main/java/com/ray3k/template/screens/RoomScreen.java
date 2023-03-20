@@ -123,7 +123,7 @@ public class RoomScreen extends JamScreen {
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                core.transition(new NameScreen());
+                core.transition(new MapScreen());
             }
         });
         
