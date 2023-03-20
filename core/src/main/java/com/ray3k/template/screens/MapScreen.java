@@ -48,42 +48,166 @@ public class MapScreen extends JamScreen {
         root.defaults().space(20).padLeft(20).padRight(20);
         root.pad(10);
         
+        if (row - 1 >= 0) {
+            var nextRoom = GameData.getRoom(column, row - 1);
+            
+            var table = new Table();
+            root.add(table).colspan(5).uniformY();
+    
+            var listener = new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    row--;
+                    core.transition(new MapScreen());
+                }
+            };
+            
+            var upRoomButton = new Button(bMapColor);
+            table.add(upRoomButton);
+            upRoomButton.setColor(nextRoom.marker);
+            upRoomButton.addListener(listener);
+            Core.fetchPixel(column, row - 1, color -> {
+                System.out.println(color);
+                nextRoom.marker = color;
+                upRoomButton.setColor(color);
+            });
+            
+            table.row();
+            var label = new Label("(" + column + "," + (row - 1) + ")", lButton);
+            table.add(label).uniform();
+    
+            root.row();
+            var button = new Button(bCompassUp);
+            root.add(button).colspan(5);
+            button.addListener(listener);
+        } else {
+            root.add().colspan(5).uniformY();
+        }
+    
+        
+        root.row();
+        if (column - 1 >= 0) {
+            var nextRoom = GameData.getRoom(column - 1, row);
+            
+            var table = new Table();
+            root.add(table).uniform();
+    
+            var listener = new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    column--;
+                    core.transition(new MapScreen());
+                }
+            };
+    
+            final var leftRoomButton = new Button(bMapColor);
+            table.add(leftRoomButton);
+            leftRoomButton.setColor(nextRoom.marker);
+            leftRoomButton.addListener(listener);
+            Core.fetchPixel(column, row - 1, color -> {
+                System.out.println(color);
+                nextRoom.marker = color;
+                leftRoomButton.setColor(color);
+            });
+    
+            table.row();
+            var label = new Label("(" + (column - 1) + "," + row + ")", lButton);
+            table.add(label);
+    
+            var button = new Button(bCompassLeft);
+            root.add(button);
+            button.addListener(listener);
+        } else {
+            root.add().uniform();
+        }
+    
         var table = new Table();
-        root.add(table).colspan(5);
-        
-        var label = new Label("Room (" + column + "," + (row - 1) + ")", lButton);
+        root.add(table).uniform();
+    
+        var thisRoomButton = new Button(bMapColor);
+        table.add(thisRoomButton);
+        thisRoomButton.setColor(room.marker);
+        Core.fetchPixel(column, row - 1, color -> {
+            System.out.println(color);
+            room.marker = color;
+            thisRoomButton.setColor(color);
+        });
+    
+        table.row();
+        var label = new Label("(" + column + "," + row + ")", lButton);
         table.add(label);
+    
+        if (column + 1 < 50) {
+            var nextRoom = GameData.getRoom(column + 1, row);
+    
+            var listener = new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    column++;
+                    core.transition(new MapScreen());
+                }
+            };
+            
+            var button = new Button(bCompassRight);
+            root.add(button);
+            button.addListener(listener);
+    
+            table = new Table();
+            root.add(table).uniform();
+    
+            var rightRoomButton = new Button(bMapColor);
+            table.add(rightRoomButton);
+            rightRoomButton.setColor(nextRoom.marker);
+            rightRoomButton.addListener(listener);
+            Core.fetchPixel(column, row - 1, color -> {
+                System.out.println(color);
+                nextRoom.marker = color;
+                rightRoomButton.setColor(color);
+            });
+    
+            table.row();
+            label = new Label("(" + (column + 1) + "," + row + ")", lButton);
+            table.add(label);
+        } else {
+            root.add().uniform();
+        }
         
         root.row();
-        var button = new Button(bCompassUp);
-        root.add(button).colspan(5);
+        if (row + 1 < 50) {
+            var nextRoom = GameData.getRoom(column, row + 1);
     
-        root.row();
-        table = new Table();
-        root.add(table);
+            var listener = new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    row++;
+                    core.transition(new MapScreen());
+                }
+            };
+            
+            var button = new Button(bCompassDown);
+            root.add(button).colspan(5);
+            button.addListener(listener);
     
-        label = new Label("Room (" + (column - 1) + "," + row + ")", lButton);
-        table.add(label);
+            root.row();
+            table = new Table();
+            root.add(table).colspan(5).uniformY();
     
-        button = new Button(bCompassLeft);
-        root.add(button);
+            var downRoomButton = new Button(bMapColor);
+            table.add(downRoomButton);
+            downRoomButton.setColor(nextRoom.marker);
+            downRoomButton.addListener(listener);
+            Core.fetchPixel(column, row - 1, color -> {
+                System.out.println(color);
+                nextRoom.marker = color;
+                downRoomButton.setColor(color);
+            });
     
-        table = new Table();
-        root.add(table);
-    
-        button = new Button(bCompassRight);
-        root.add(button);
-    
-        table = new Table();
-        root.add(table);
-        
-        root.row();
-        button = new Button(bCompassDown);
-        root.add(button).colspan(5);
-        
-        root.row();
-        table = new Table();
-        root.add(table).colspan(5);
+            table.row();
+            label = new Label("(" + column + "," + (row + 1) + ")", lButton);
+            table.add(label);
+        } else {
+            root.add().uniformY();
+        }
         
         root = new Table();
         root.setFillParent(true);
