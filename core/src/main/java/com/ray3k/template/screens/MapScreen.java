@@ -13,11 +13,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.ray3k.template.*;
-
-import java.util.Locale;
+import com.ray3k.template.data.*;
 
 import static com.ray3k.template.Core.*;
-import static com.ray3k.template.GameData.*;
+import static com.ray3k.template.data.GameData.*;
 import static com.ray3k.template.Resources.SkinSkinStyles.*;
 import static com.ray3k.template.Resources.*;
 
@@ -132,10 +131,10 @@ public class MapScreen extends JamScreen {
         var thisRoomButton = new Button(bMapColor);
         table.add(thisRoomButton);
         thisRoomButton.setColor(room.marker);
-        Core.fetchPixel(column, row, color -> {
-            room.marker = color;
-            thisRoomButton.setColor(color);
-        });
+//        Core.fetchPixel(column, row, color -> {
+//            room.marker = color;
+//            thisRoomButton.setColor(color);
+//        });
         
         table.row();
         var label = new Label("(" + column + "," + row + ")", lButton);

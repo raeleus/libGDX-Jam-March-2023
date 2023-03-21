@@ -1,7 +1,6 @@
 package com.ray3k.template.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -24,7 +23,7 @@ import com.ray3k.template.*;
 import java.util.Locale;
 
 import static com.ray3k.template.Core.*;
-import static com.ray3k.template.GameData.*;
+import static com.ray3k.template.data.GameData.*;
 import static com.ray3k.template.Resources.SkinSkinStyles.*;
 import static com.ray3k.template.Resources.*;
 
@@ -85,7 +84,7 @@ public class NameScreen extends JamScreen {
         tagLabel.addListener(tagLabelHoverListener);
         var pop = tagLabelHoverListener.getPopTable();
         
-        var descriptionLabel = new Label(tagDescriptions.get(0), lLog);
+        var descriptionLabel = new Label(tagTemplates.get(0).description, lLog);
         descriptionLabel.setWrap(true);
         descriptionLabel.setAlignment(Align.center);
         pop.add(descriptionLabel).growX();
@@ -136,9 +135,9 @@ public class NameScreen extends JamScreen {
                     textButton.setVisible(true);
                     textButton.setDisabled(false);
                     characterLabel.setText(name);
-                    var index = matchTagToName(name.toLowerCase(Locale.ROOT));
-                    tagLabel.setText("a " + tags.get(index).toUpperCase(Locale.ROOT));
-                    descriptionLabel.setText(tagDescriptions.get(index));
+                    var tag = matchTag(name.toLowerCase(Locale.ROOT));
+                    tagLabel.setText("a " + tag.name.toUpperCase(Locale.ROOT));
+                    descriptionLabel.setText(tag.description);
                 }
             }
         });

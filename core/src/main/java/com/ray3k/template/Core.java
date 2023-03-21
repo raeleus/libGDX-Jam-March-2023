@@ -33,6 +33,7 @@ import com.esotericsoftware.spine.SkeletonData;
 import com.esotericsoftware.spine.SkeletonRenderer;
 import com.esotericsoftware.spine.utils.TwoColorPolygonBatch;
 import com.ray3k.template.AnimationStateDataLoader.*;
+import com.ray3k.template.data.*;
 import com.ray3k.template.entities.*;
 import com.ray3k.template.screens.*;
 import com.ray3k.template.transitions.*;
@@ -42,7 +43,7 @@ import java.security.MessageDigest;
 import java.util.Iterator;
 import java.util.Objects;
 
-import static com.ray3k.template.GameData.*;
+import static com.ray3k.template.data.GameData.*;
 import static com.ray3k.template.Resources.*;
 
 public class Core extends JamGame {
@@ -759,9 +760,35 @@ public class Core extends JamGame {
             e.printStackTrace();
         }
         
-        tags.addAll(Gdx.files.internal("text/tag-names").readString().split("\\n"));
-        tagDescriptions.addAll(Gdx.files.internal("text/tag-descriptions").readString().split("\\n"));
-        tagNameMatches.addAll(Gdx.files.internal("text/tag-name-matches").readString().split("\\n"));
+        var tagNames = Gdx.files.internal("text/tag-names").readString().split("\\n");
+        var tagDescriptions = Gdx.files.internal("text/tag-descriptions").readString().split("\\n");
+        var tagKeywords = Gdx.files.internal("text/tag-keywords").readString().split("\\n");
+        var tagSkills = Gdx.files.internal("text/tag-skills").readString().split("\\n");
+        for (int i = 0; i < tagNames.length; i++) {
+            var tag = new TagData();
+            tag.name = tagNames[i];
+            tag.description = tagDescriptions[i];
+            tag.keywords.addAll(tagKeywords[i].split(","));
+            tag.availableSkills.addAll(tagSkills[i].split(","));
+            tagTemplates.add(tag);
+        }
+        
+        var skillNames = Gdx.files.internal("text/skill-names").readString().split("\\n");
+        var skillDescriptions = Gdx.files.internal("text/skill-descriptions").readString().split("\\n");
+        for (int i = 0; i < skillNames.length; i++) {
+            var skill = new SkillData();
+            skill.name = skillNames[i];
+            skill.description = skillDescriptions[i];
+        }
+        
+        var heroNames = Gdx.files.internal("text/hero-names").readString().split("\\n");
+        var heroDescriptions = Gdx.files.internal("text/hero-descriptions").readString().split("\\n");
+        for (int i = 0; i < heroNames.length; i++) {
+            var hero = new CharacterData();
+            hero.name = heroNames[i];
+            hero.description = heroDescriptions[i];
+            heroTemplates.add(hero);
+        }
         
         preferences = Gdx.app.getPreferences(PROJECT_NAME);
         
