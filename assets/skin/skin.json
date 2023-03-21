@@ -448,7 +448,15 @@
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": {
 	"default": {
+		"background": "pop-10",
+		"titleFont": "normal"
+	},
+	"pointer-down": {
 		"background": "pop-description-10",
+		"titleFont": "normal"
+	},
+	"pointer-up": {
+		"background": "pop-skills-10",
 		"titleFont": "normal"
 	}
 }

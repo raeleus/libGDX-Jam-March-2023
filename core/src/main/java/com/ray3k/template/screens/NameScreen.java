@@ -80,7 +80,7 @@ public class NameScreen extends JamScreen {
         tagLabel.setAlignment(Align.center);
         table.add(tagLabel).width(300);
     
-        PopTableStyle popTableStyle = new PopTableStyle(wDefault);
+        PopTableStyle popTableStyle = new PopTableStyle(wPointerUp);
         var tagLabelHoverListener = new PopTableHoverListener(Align.top, Align.top, popTableStyle);
         tagLabel.addListener(tagLabelHoverListener);
         var pop = tagLabelHoverListener.getPopTable();

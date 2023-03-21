@@ -114,7 +114,7 @@ public class MapScreen extends JamScreen {
             };
             
             leftRoomButton.addListener(listener);
-            Core.fetchPixel(column, row - 1, color -> {
+            Core.fetchPixel(column -1, row, color -> {
                 nextRoom.marker = color;
                 leftRoomButton.setColor(color);
             });
@@ -132,7 +132,7 @@ public class MapScreen extends JamScreen {
         var thisRoomButton = new Button(bMapColor);
         table.add(thisRoomButton);
         thisRoomButton.setColor(room.marker);
-        Core.fetchPixel(column, row - 1, color -> {
+        Core.fetchPixel(column, row, color -> {
             room.marker = color;
             thisRoomButton.setColor(color);
         });
@@ -169,7 +169,7 @@ public class MapScreen extends JamScreen {
             
             rightRoomButton.setColor(nextRoom.marker);
             rightRoomButton.addListener(listener);
-            Core.fetchPixel(column, row - 1, color -> {
+            Core.fetchPixel(column + 1, row, color -> {
                 nextRoom.marker = color;
                 rightRoomButton.setColor(color);
             });
@@ -209,7 +209,7 @@ public class MapScreen extends JamScreen {
             
             downRoomButton.setColor(nextRoom.marker);
             downRoomButton.addListener(listener);
-            Core.fetchPixel(column, row - 1, color -> {
+            Core.fetchPixel(column, row + 1, color -> {
                 nextRoom.marker = color;
                 downRoomButton.setColor(color);
             });

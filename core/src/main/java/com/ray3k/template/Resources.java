@@ -397,7 +397,9 @@ public class Resources {
         SkinSkinStyles.tbDefault = skin_skin.get("default", TextButton.TextButtonStyle.class);
         SkinSkinStyles.tfDefault = skin_skin.get("default", TextField.TextFieldStyle.class);
         SkinSkinStyles.ttDefault = skin_skin.get("default", TextTooltip.TextTooltipStyle.class);
+        SkinSkinStyles.wPointerUp = skin_skin.get("pointer-up", Window.WindowStyle.class);
         SkinSkinStyles.wDefault = skin_skin.get("default", Window.WindowStyle.class);
+        SkinSkinStyles.wPointerDown = skin_skin.get("pointer-down", Window.WindowStyle.class);
         sfx_click = assetManager.get("sfx/click.mp3");
         sfx_libgdx01 = assetManager.get("sfx/libgdx01.mp3");
         sfx_libgdx02 = assetManager.get("sfx/libgdx02.mp3");
@@ -1143,7 +1145,11 @@ public class Resources {
 
         public static TextTooltip.TextTooltipStyle ttDefault;
 
+        public static Window.WindowStyle wPointerUp;
+
         public static Window.WindowStyle wDefault;
+
+        public static Window.WindowStyle wPointerDown;
     }
 
     public static class Values {

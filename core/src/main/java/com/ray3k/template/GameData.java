@@ -12,7 +12,7 @@ public class GameData {
     public static Array<String> tagNameMatches = new Array<>();
     public static Array<RoomData> rooms = new Array<>();
     public static Array<Color> colors = new Array<>(new Color[]{Color.BLACK, Color.WHITE, Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.BROWN, Color.CYAN, Color.GRAY, Color.PURPLE, Color.ORANGE, Color.PINK, Color.GOLD});
-    public static Array<String> colorNames = new Array<>(new String[]{"Black", "White", "Red", "Green", "Blue", "Yellow", "Brown", "Cyan", "Gray", "Purple", "Orange", "Pink", "Gold"});
+    public static Array<String> colorNames = new Array<>(new String[]{"Off", "White", "Red", "Green", "Blue", "Yellow", "Brown", "Cyan", "Gray", "Purple", "Orange", "Pink", "Gold"});
     
     public static int matchTagToName(String name) {
         for (int i = 0; i < tagNameMatches.size; i++) {

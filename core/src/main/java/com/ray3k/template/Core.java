@@ -717,7 +717,8 @@ public class Core extends JamGame {
         String content = "?game_id=" + gameID + "&key=" + column + "-" + row;
         String signature = encrypt(url + content + key);
         httpRequest.setUrl(url + content + "&signature=" + signature);
-        
+    
+        System.out.println(column + " " + row + " Url:" + url + content);
         Gdx.net.sendHttpRequest(httpRequest, new Net.HttpResponseListener() {
             @Override
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
