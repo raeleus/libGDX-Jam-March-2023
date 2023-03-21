@@ -16,8 +16,8 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.github.tommyettinger.textra.TypingLabel;
-import com.ray3k.stripe.PopTable.PopTableStyle;
-import com.ray3k.stripe.PopTableHoverListener;
+import com.ray3k.template.stripe.PopTable.PopTableStyle;
+import com.ray3k.template.stripe.PopTableHoverListener;
 import com.ray3k.template.*;
 
 import java.util.Locale;
@@ -101,6 +101,7 @@ public class NameScreen extends JamScreen {
                 
                 column = MathUtils.random(49);
                 row = MathUtils.random(49);
+                difficulty = 0;
     
                 Array<String> roomDescriptions = new Array<>();
                 roomDescriptions.addAll(Gdx.files.internal("text/rooms").readString().split("\\n"));

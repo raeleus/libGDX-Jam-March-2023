@@ -1,4 +1,4 @@
-package com.ray3k.stripe;
+package com.ray3k.template.stripe;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;

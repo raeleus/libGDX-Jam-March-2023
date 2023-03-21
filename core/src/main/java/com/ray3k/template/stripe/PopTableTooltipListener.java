@@ -1,15 +1,15 @@
-package com.ray3k.stripe;
+package com.ray3k.template.stripe;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.Disableable;
 import com.badlogic.gdx.utils.Align;
-import com.ray3k.stripe.PopTable.PopTableStyle;
-import com.ray3k.stripe.PopTable.TableShowHideListener;
+import com.ray3k.template.stripe.PopTable.PopTableStyle;
+import com.ray3k.template.stripe.PopTable.TableShowHideListener;
 
 public class PopTableTooltipListener extends InputListener {
-    protected PopTable popTable;
+    protected com.ray3k.template.stripe.PopTable popTable;
     private final int attachToMouseAlign;
     private final static Vector2 temp = new Vector2();
     
@@ -22,7 +22,7 @@ public class PopTableTooltipListener extends InputListener {
     }
     
     public PopTableTooltipListener(int attachToMouseAlign, PopTableStyle style) {
-        popTable = new PopTable(style);
+        popTable = new com.ray3k.template.stripe.PopTable(style);
         popTable.setModal(false);
         popTable.setHideOnUnfocus(false);
         popTable.setTouchable(Touchable.disabled);

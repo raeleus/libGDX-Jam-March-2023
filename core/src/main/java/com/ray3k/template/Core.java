@@ -710,6 +710,7 @@ public class Core extends JamGame {
             }
         });
     }
+    
     public static void fetchPixel(int column, int row, FetchPixelHandler handler) {
         Net.HttpRequest httpRequest = new Net.HttpRequest(HttpMethods.GET);
         String gameID = Gdx.files.internal("secret/gameid").readString();
@@ -742,6 +743,42 @@ public class Core extends JamGame {
             @Override
             public void cancelled() {
                 Gdx.app.postRunnable(() -> handler.handle(Color.BLACK));
+            }
+        });
+    }
+    
+    public static void fetchPixelUnsafe(int column, int row, FetchPixelHandler handler) {
+        Net.HttpRequest httpRequest = new Net.HttpRequest(HttpMethods.GET);
+        String gameID = Gdx.files.internal("secret/gameid").readString();
+        String key = Gdx.files.internal("secret/key").readString();
+        String url = "https://api.gamejolt.com/api/game/v1_2/data-store/";
+        String content = "?game_id=" + gameID + "&key=" + column + "-" + row;
+        String signature = encrypt(url + content + key);
+        httpRequest.setUrl(url + content + "&signature=" + signature);
+        
+        System.out.println(column + " " + row + " Url:" + url + content);
+        Gdx.net.sendHttpRequest(httpRequest, new Net.HttpResponseListener() {
+            @Override
+            public void handleHttpResponse(Net.HttpResponse httpResponse) {
+                String response = httpResponse.getResultAsString();
+                System.out.println(response);
+                var jsonReader = new JsonReader();
+                var root = jsonReader.parse(response).get("response");
+                if (root.getBoolean("success", false)) {
+                    handler.handle(Color.valueOf(root.getString("data")));
+                } else {
+                    handler.handle(Color.BLACK);
+                }
+            }
+            
+            @Override
+            public void failed(Throwable t) {
+                handler.handle(Color.BLACK);
+            }
+            
+            @Override
+            public void cancelled() {
+                handler.handle(Color.BLACK);
             }
         });
     }

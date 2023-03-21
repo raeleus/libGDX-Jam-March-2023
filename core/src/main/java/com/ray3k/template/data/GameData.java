@@ -5,9 +5,11 @@ import com.badlogic.gdx.utils.Array;
 import com.ray3k.template.*;
 
 public class GameData {
+    public static int difficulty;
     public static int column;
     public static int row;
     public static String victoryText = null;
+    public static String failureText = "Oh no, you died! Sad.";
     public static Array<TagData> tagTemplates = new Array<>();
     public static Array<SkillData> skillTemplates = new Array<>();
     public static Array<CharacterData> heroTemplates = new Array<>();

@@ -1,13 +1,13 @@
-package com.ray3k.stripe;
+package com.ray3k.template.stripe;
 
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.Disableable;
-import com.ray3k.stripe.PopTable.PopTableStyle;
-import com.ray3k.stripe.PopTable.TableShowHideListener;
+import com.ray3k.template.stripe.PopTable.PopTableStyle;
+import com.ray3k.template.stripe.PopTable.TableShowHideListener;
 
 public class PopTableHoverListener extends InputListener {
-    protected PopTable popTable;
+    protected com.ray3k.template.stripe.PopTable popTable;
     public boolean hideOnExit;
     private final int align;
     private final int edge;
@@ -22,7 +22,7 @@ public class PopTableHoverListener extends InputListener {
     
     public PopTableHoverListener(int edge, int align, PopTableStyle style) {
         hideOnExit = true;
-        popTable = new PopTable(style);
+        popTable = new com.ray3k.template.stripe.PopTable(style);
         popTable.setModal(false);
         popTable.setHideOnUnfocus(true);
         popTable.setTouchable(Touchable.disabled);

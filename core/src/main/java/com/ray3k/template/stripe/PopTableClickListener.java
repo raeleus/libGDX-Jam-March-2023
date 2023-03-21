@@ -1,4 +1,4 @@
-package com.ray3k.stripe;
+package com.ray3k.template.stripe;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
@@ -8,11 +8,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Disableable;
 import com.badlogic.gdx.utils.Align;
-import com.ray3k.stripe.PopTable.PopTableStyle;
-import com.ray3k.stripe.PopTable.TableShowHideListener;
+import com.ray3k.template.stripe.PopTable.PopTableStyle;
+import com.ray3k.template.stripe.PopTable.TableShowHideListener;
 
 public class PopTableClickListener extends ClickListener {
-    protected PopTable popTable;
+    protected com.ray3k.template.stripe.PopTable popTable;
     private final int edge;
     private final int align;
     
@@ -37,7 +37,7 @@ public class PopTableClickListener extends ClickListener {
     }
     
     public PopTableClickListener(int edge, int align, PopTableStyle style) {
-        popTable = new PopTable(style);
+        popTable = new com.ray3k.template.stripe.PopTable(style);
         popTable.setModal(true);
         popTable.setHideOnUnfocus(true);
         this.edge = edge;

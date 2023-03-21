@@ -175,7 +175,7 @@ public class MapScreen extends JamScreen {
         } else {
             button.setVisible(false);
             rightRoomButton.setVisible(false);
-            leftRoomLabel.setVisible(false);
+            rightRoomLabel.setVisible(false);
         }
         
         root.row();
@@ -232,7 +232,7 @@ public class MapScreen extends JamScreen {
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                core.transition(new MenuScreen());
+                core.transition(new GameOverScreen());
             }
         });
     }

@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.ray3k.stripe.PopTable;
+import com.ray3k.template.stripe.PopTable;
 import com.ray3k.template.*;
 
 import java.util.Locale;
@@ -109,7 +109,9 @@ public class RoomScreen extends JamScreen {
                         @Override
                         public void changed(ChangeEvent event, Actor actor) {
                             var index = colorNames.indexOf(textButton.getText().toString(), false);
-                            setPixel(column, row, colors.get(index));
+                            var color = colors.get(index);
+                            setPixel(column, row, color);
+                            room.marker = color;
                             core.transition(new MapScreen());
                         }
                     });
@@ -184,7 +186,7 @@ public class RoomScreen extends JamScreen {
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                core.transition(new MenuScreen());
+                core.transition(new GameOverScreen());
             }
         });
     }

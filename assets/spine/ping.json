@@ -1,6 +1,6 @@
 {
 "skeleton": {
-	"hash": "oDJ9OxHbYIA",
+	"hash": "H8TYsE3dz88",
 	"spine": "4.1.19",
 	"x": -10,
 	"y": -10,
@@ -32,7 +32,7 @@
 			"game/ping": {
 				"rgba": [
 					{ "color": "ffffffff" },
-					{ "time": 1.3333, "color": "ffffff00" }
+					{ "time": 1.3333, "color": "00000000" }
 				]
 			}
 		},
