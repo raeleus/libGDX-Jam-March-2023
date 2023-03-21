@@ -17,6 +17,8 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.github.tommyettinger.textra.TypingLabel;
+import com.ray3k.stripe.PopTable.PopTableStyle;
+import com.ray3k.stripe.PopTableHoverListener;
 import com.ray3k.template.*;
 
 import java.util.Locale;
@@ -75,7 +77,18 @@ public class NameScreen extends JamScreen {
         characterTable.add(characterLabel).grow();
         
         var tagLabel = new Label("a DUMBASS", skin);
-        table.add(tagLabel);
+        tagLabel.setAlignment(Align.center);
+        table.add(tagLabel).width(300);
+    
+        PopTableStyle popTableStyle = new PopTableStyle(wDefault);
+        var tagLabelHoverListener = new PopTableHoverListener(Align.top, Align.top, popTableStyle);
+        tagLabel.addListener(tagLabelHoverListener);
+        var pop = tagLabelHoverListener.getPopTable();
+        
+        var descriptionLabel = new Label(tagDescriptions.get(0), lLog);
+        descriptionLabel.setWrap(true);
+        descriptionLabel.setAlignment(Align.center);
+        pop.add(descriptionLabel).growX();
         
         root.row();
         var textButton = new TextButton("Begin Mission", skin);
@@ -115,9 +128,18 @@ public class NameScreen extends JamScreen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 var name = textField.getText();
-                characterLabel.setText(name);
-                var index = matchTagToName(name.toLowerCase(Locale.ROOT));
-                tagLabel.setText("a " + tags.get(index).toUpperCase(Locale.ROOT));
+                
+                if (name.equals("")) {
+                    textButton.setVisible(false);
+                    textButton.setDisabled(true);
+                } else {
+                    textButton.setVisible(true);
+                    textButton.setDisabled(false);
+                    characterLabel.setText(name);
+                    var index = matchTagToName(name.toLowerCase(Locale.ROOT));
+                    tagLabel.setText("a " + tags.get(index).toUpperCase(Locale.ROOT));
+                    descriptionLabel.setText(tagDescriptions.get(index));
+                }
             }
         });
     }

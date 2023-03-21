@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextTooltip;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.esotericsoftware.spine.Animation;
 import com.esotericsoftware.spine.AnimationStateData;
 import com.esotericsoftware.spine.BoneData;
@@ -396,6 +397,7 @@ public class Resources {
         SkinSkinStyles.tbDefault = skin_skin.get("default", TextButton.TextButtonStyle.class);
         SkinSkinStyles.tfDefault = skin_skin.get("default", TextField.TextFieldStyle.class);
         SkinSkinStyles.ttDefault = skin_skin.get("default", TextTooltip.TextTooltipStyle.class);
+        SkinSkinStyles.wDefault = skin_skin.get("default", Window.WindowStyle.class);
         sfx_click = assetManager.get("sfx/click.mp3");
         sfx_libgdx01 = assetManager.get("sfx/libgdx01.mp3");
         sfx_libgdx02 = assetManager.get("sfx/libgdx02.mp3");
@@ -1140,6 +1142,8 @@ public class Resources {
         public static TextField.TextFieldStyle tfDefault;
 
         public static TextTooltip.TextTooltipStyle ttDefault;
+
+        public static Window.WindowStyle wDefault;
     }
 
     public static class Values {

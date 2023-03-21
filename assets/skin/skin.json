@@ -445,5 +445,11 @@
 	"default": {
 		"label": "default"
 	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": {
+	"default": {
+		"background": "pop-description-10",
+		"titleFont": "normal"
+	}
 }
 }
