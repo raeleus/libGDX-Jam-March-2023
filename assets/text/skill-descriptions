@@ -133,35 +133,34 @@ All effects of character are applied to an enemy.
 Character removes all effects.
 Copy the effects of a target.
 Attack an enemy in back row and bring them to the front.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
+Attack any enemy in the front row.
+Attack diaganol cells.
+Attack any enemy in the corners
+Attack all enemies.
+Attack all corners with devastating damage.
+Attack all enemies with limited damage.
+Melee attack.
+Move to adjacent horizontal cell.
+Devastating melee attack enemy directly in front of character.
+Stun an enemy in the front row.
+Character is no longer controllable but does significant damage to enemies.
+All allies start dancing and move to random cells.
+Move to an adjacent vertical cell.
+Ranged attack.
+Melee attack. Enemy either moves back or to side.
+Do increased damage for the rest of the match. Receive damage every turn.
+Block an incoming attack to selected ally.
+All incoming attacks to the front row are reduced in damage.
+Any ranged attacks to the back row are reflected back to the enemy.
+Melee attack. Enemy moves to back cell. If back cell is occupied, double the damage.
+Smack an enemy in melee range with your appendage.
+Decrease health by half and create a duplicate of character.
+Ally is sacrificed. All health, tags, and skills are merged randomly.
+Ranged attack. Character is damaged.
+Ranged attack. Enemy is slower.
+Character is sacrificed. All enemies are stunned.
+Heal self.
+
 Enemy has reduced damage for a turn.
 Enemy has reduced damage for a turn.
 Enemy has reduced damage for a turn.
