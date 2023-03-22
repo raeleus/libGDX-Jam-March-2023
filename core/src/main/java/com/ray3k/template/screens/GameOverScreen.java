@@ -110,31 +110,24 @@ public class GameOverScreen extends JamScreen {
         stage.addActor(spineImage);
         spineImage.setVisible(false);
     
-        colorPixel(0, 0, 10);
-        colorPixel(0, 10, 20);
-        colorPixel(0, 20, 30);
-        colorPixel(0, 30, 40);
-        colorPixel(0, 40, 50);
-    }
-    
-    private void colorPixel(final int x, final int y, final int maxY) {
-        fetchPixelUnsafe(x, y, color -> {
-            Gdx.app.postRunnable(() -> {
-                pixmap.setColor(color);
-                pixmap.drawPixel(x, y);
-                texture.dispose();
-                texture = new Texture(pixmap);
-                image.setDrawable(new TextureRegionDrawable(texture));
-            });
-    
-            int newX = x + 1;
-            int newY = y;
-            if (newX >= 50) {
-                newX = 0;
-                newY++;
+        var handler = new FetchPixelHandler() {
+            @Override
+            public void handle(int c, int r, Color color) {
+                Gdx.app.postRunnable(() -> {
+                    pixmap.setColor(color);
+                    pixmap.drawPixel(c, r);
+                    texture.dispose();
+                    texture = new Texture(pixmap);
+                    image.setDrawable(new TextureRegionDrawable(texture));
+                });
             }
-            if (newY < maxY) colorPixel(newX, newY, maxY);
-        });
+        };
+        
+        Core.fetchPixelBatch(0, 10, handler);
+        Core.fetchPixelBatch(10, 20, handler);
+        Core.fetchPixelBatch(20, 30, handler);
+        Core.fetchPixelBatch(30, 40, handler);
+        Core.fetchPixelBatch(40, 50, handler);
     }
     
     @Override

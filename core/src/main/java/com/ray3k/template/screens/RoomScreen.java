@@ -168,7 +168,7 @@ public class RoomScreen extends JamScreen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Gdx.input.setInputProcessor(null);
-                Core.fetchPixel(column, row, color -> {
+                Core.fetchPixel(column, row, (c, r, color) -> {
                     room.marker = color;
                     core.transition(new MapScreen());
                 });

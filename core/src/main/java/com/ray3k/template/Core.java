@@ -33,18 +33,20 @@ import com.esotericsoftware.spine.SkeletonData;
 import com.esotericsoftware.spine.SkeletonRenderer;
 import com.esotericsoftware.spine.utils.TwoColorPolygonBatch;
 import com.ray3k.template.AnimationStateDataLoader.*;
+import com.ray3k.template.Core.*;
 import com.ray3k.template.data.*;
 import com.ray3k.template.entities.*;
 import com.ray3k.template.screens.*;
 import com.ray3k.template.transitions.*;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
+import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.util.Iterator;
 import java.util.Objects;
 
-import static com.ray3k.template.data.GameData.*;
 import static com.ray3k.template.Resources.*;
+import static com.ray3k.template.data.GameData.*;
 
 public class Core extends JamGame {
     public static final String PROJECT_NAME = "dangerousroom";
@@ -729,20 +731,20 @@ public class Core extends JamGame {
                 var jsonReader = new JsonReader();
                 var root = jsonReader.parse(response).get("response");
                 if (root.getBoolean("success", false)) {
-                    Gdx.app.postRunnable(() -> handler.handle(Color.valueOf(root.getString("data"))));
+                    Gdx.app.postRunnable(() -> handler.handle(column, row, Color.valueOf(root.getString("data"))));
                 } else {
-                    Gdx.app.postRunnable(() -> handler.handle(Color.BLACK));
+                    Gdx.app.postRunnable(() -> handler.handle(column, row, Color.BLACK));
                 }
             }
         
             @Override
             public void failed(Throwable t) {
-                Gdx.app.postRunnable(() -> handler.handle(Color.BLACK));
+                Gdx.app.postRunnable(() -> handler.handle(column, row, Color.BLACK));
             }
         
             @Override
             public void cancelled() {
-                Gdx.app.postRunnable(() -> handler.handle(Color.BLACK));
+                Gdx.app.postRunnable(() -> handler.handle(column, row, Color.BLACK));
             }
         });
     }
@@ -765,26 +767,88 @@ public class Core extends JamGame {
                 var jsonReader = new JsonReader();
                 var root = jsonReader.parse(response).get("response");
                 if (root.getBoolean("success", false)) {
-                    handler.handle(Color.valueOf(root.getString("data")));
+                    handler.handle(column, row, Color.valueOf(root.getString("data")));
                 } else {
-                    handler.handle(Color.BLACK);
+                    handler.handle(column, row, Color.BLACK);
                 }
             }
             
             @Override
             public void failed(Throwable t) {
-                handler.handle(Color.BLACK);
+                handler.handle(column, row, Color.BLACK);
             }
             
             @Override
             public void cancelled() {
-                handler.handle(Color.BLACK);
+                handler.handle(column, row, Color.BLACK);
+            }
+        });
+    }
+    
+    private static String urlEncode(String string) {
+        try {
+            return URLEncoder.encode(string, "UTF-8").replace("+", "%20");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public static void fetchPixelBatch(int row, int rowEnd, FetchPixelHandler handler) {
+        Net.HttpRequest httpRequest = new Net.HttpRequest(HttpMethods.GET);
+        String gameID = Gdx.files.internal("secret/gameid").readString();
+        String key = Gdx.files.internal("secret/key").readString();
+        var url = "https://api.gamejolt.com/api/game/v1_2/batch?game_id=" + gameID + "&parallel=true";
+        for (int column = 0; column < 50; column++) {
+            String subUrl = "/data-store/";
+            String content = "?game_id=" + gameID + "&key=" + row + "-" + column;
+            String signature = encrypt(subUrl + content + key);
+            subUrl = subUrl + content + "&signature=" + signature;
+            subUrl = "&" + "requests[]=" + urlEncode(subUrl);
+            url += subUrl;
+        }
+    
+        String signature = encrypt(url + key);
+        url += "&signature=" + signature;
+        
+        httpRequest.setUrl(url);
+        Gdx.net.sendHttpRequest(httpRequest, new Net.HttpResponseListener() {
+            @Override
+            public void handleHttpResponse(Net.HttpResponse httpResponse) {
+                String response = httpResponse.getResultAsString();
+                var jsonReader = new JsonReader();
+                var root = jsonReader.parse(response).get("response");
+                if (root.getBoolean("success", false)) {
+                    var responseNode = root.get("responses");
+                    var c = 0;
+                    for (var child : responseNode.iterator()) {
+                        final var cValue = c;
+                        if (child.getBoolean("success", false)) {
+                            Gdx.app.postRunnable(() -> handler.handle(cValue, row, Color.valueOf(child.getString("data"))));
+                        } else {
+                            Gdx.app.postRunnable(() -> handler.handle(cValue, row, Color.BLACK));
+                        }
+                        c++;
+                    }
+                }
+                
+                if (row + 1 < rowEnd) fetchPixelBatch(row + 1, rowEnd, handler);
+            }
+        
+            @Override
+            public void failed(Throwable t) {
+            
+            }
+        
+            @Override
+            public void cancelled() {
+            
             }
         });
     }
     
     public interface FetchPixelHandler {
-        void handle(Color color);
+        void handle(int c, int r, Color color);
     }
     
     @Override
