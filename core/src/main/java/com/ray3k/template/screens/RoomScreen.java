@@ -150,10 +150,62 @@ public class RoomScreen extends JamScreen {
                 textButton.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
-                        room.upgrade = false;
-                        room.tag = false;
-                        room.hero = null;
-                        core.transition(new MapScreen());
+                        var pop = new PopTable(wDefault);
+                        pop.setKeepCenteredInWindow(true);
+                        pop.setModal(true);
+                        pop.pad(10);
+    
+                        pop.defaults().space(10);
+                        var label = new Label("Which hero?", lButton);
+                        pop.add(label);
+    
+                        for (var teamHero : playerTeam) {
+                            pop.row();
+                            var textButton = new TextButton(teamHero.name, skin);
+                            pop.add(textButton);
+                            textButton.addListener(new ChangeListener() {
+                                @Override
+                                public void changed(ChangeEvent event, Actor actor) {
+                                    pop.hide();
+                                    
+                                    var skillPop = new PopTable(wDefault);
+                                    skillPop.setKeepCenteredInWindow(true);
+                                    skillPop.setModal(true);
+                                    skillPop.pad(10);
+                                    
+                                    for (var skill : teamHero.skills) {
+                                        var textButton = new TextButton(skill, skin);
+                                        skillPop.add(textButton);
+                                        textButton.addListener(new ChangeListener() {
+                                            @Override
+                                            public void changed(ChangeEvent event, Actor actor) {
+                                                var skillData = findSkill(skill);
+                                                skillData.level++;
+                                                
+                                                room.upgrade = false;
+                                                room.tag = false;
+                                                room.hero = null;
+                                                core.transition(new MapScreen());
+                                            }
+                                        });
+                                    }
+                                    
+                                    skillPop.show(stage);
+                                }
+                            });
+                        }
+    
+                        pop.row();
+                        var textButton = new TextButton("Cancel", skin);
+                        pop.add(textButton);
+                        textButton.addListener(new ChangeListener() {
+                            @Override
+                            public void changed(ChangeEvent event, Actor actor) {
+                                pop.hide();
+                            }
+                        });
+    
+                        pop.show(stage);
                     }
                 });
             }
