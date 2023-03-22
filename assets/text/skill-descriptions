@@ -11,6 +11,20 @@ Move to any free position.
 Heal self. Character is stunned.
 Damage given and received is increased for a turn.
 Enemy has reduced damage for a turn.
+If character receives no damage by the next turn, do devasting damage to an enemy in melee range.
+Spawn a hairball that distracts enemies.
+Bite an enemy in melee range.
+Scoop damage to enemy in melee range.
+Character is enraged next turn.
+Throw a pistachio nut at a character. It heals allies and hurts enemies.
+Serve yogurt to an ally. Ally receives reduced damage for a turn.
+Serve sherbert to an ally. The ally is faster for the rest of the match.
+Serve a banana sundade to an ally. The ally does increased damage for a turn.
+Cover enemy in choco syrup. Enemy is stunned but receives reduced damage.
+Heal all allies.
+All allies do more damage but are slower for the rest of the match.
+Ranged attack.
+Attack enemies in a column directly in front of the character.
 Enemy has reduced damage for a turn.
 Enemy has reduced damage for a turn.
 Enemy has reduced damage for a turn.
@@ -162,17 +176,10 @@ Enemy has reduced damage for a turn.
 Enemy has reduced damage for a turn.
 Enemy has reduced damage for a turn.
 Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
+poke
+scream
+rage out
+rind
+tasty snack
+vitamin c
+crown of thorns
