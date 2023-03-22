@@ -69,7 +69,7 @@ public class MapScreen extends JamScreen {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     row--;
-                    core.transition(new MapScreen());
+                    loadNextRoom();
                 }
             };
             
@@ -108,7 +108,7 @@ public class MapScreen extends JamScreen {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     column--;
-                    core.transition(new MapScreen());
+                    loadNextRoom();
                 }
             };
             
@@ -130,11 +130,13 @@ public class MapScreen extends JamScreen {
         
         var thisRoomButton = new Button(bMapColor);
         table.add(thisRoomButton);
+        thisRoomButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                loadNextRoom();
+            }
+        });
         thisRoomButton.setColor(room.marker);
-//        Core.fetchPixel(column, row, color -> {
-//            room.marker = color;
-//            thisRoomButton.setColor(color);
-//        });
         
         table.row();
         var label = new Label("(" + column + "," + row + ")", lButton);
@@ -160,7 +162,7 @@ public class MapScreen extends JamScreen {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     column++;
-                    core.transition(new MapScreen());
+                    loadNextRoom();
                 }
             };
             
@@ -200,7 +202,7 @@ public class MapScreen extends JamScreen {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     row++;
-                    core.transition(new MapScreen());
+                    loadNextRoom();
                 }
             };
             
@@ -269,5 +271,9 @@ public class MapScreen extends JamScreen {
     @Override
     public void dispose() {
     
+    }
+    
+    private void loadNextRoom() {
+        core.transition(new RoomScreen());
     }
 }

@@ -8,4 +8,5 @@ public class RoomData {
     public boolean tag;
     public boolean upgrade;
     public String hero;
+    public boolean hasEnemies = true;
 }

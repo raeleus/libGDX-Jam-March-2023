@@ -50,6 +50,7 @@ public class RoomScreen extends JamScreen {
         if (victoryText != null) {
             var label = new Label(victoryText, lLog);
             label.setWrap(true);
+            label.setAlignment(Align.center);
             root.add(label).growX();
             root.row();
         }
@@ -59,29 +60,18 @@ public class RoomScreen extends JamScreen {
         
         root.row();
         label = new Label(room.description, lLog);
+        label.setAlignment(Align.center);
         label.setWrap(true);
         root.add(label).growX();
-        
-        root.row();
-        var labelTable = new Table();
-        root.add(labelTable);
-        labelTable.defaults().space(10);
     
         root.row();
-        label = new Label("There is only enough ephemeral energy to commit to one task. You may...", lLog);
-        root.add(label);
+        var colorName = colorToName(room.marker);
+        var markerLabel = new Label("A mysterious " + colorName.toLowerCase(Locale.ROOT) + " marker rests here.", lLog);
+        root.add(markerLabel);
         
         root.row();
-        var buttonTable = new Table();
-        root.add(buttonTable);
-        buttonTable.defaults().space(10);
-        
-        var colorName = colorToName(room.marker);
-        label = new Label("A mysterious " + colorName.toLowerCase(Locale.ROOT) + " marker rests here.", lLog);
-        labelTable.add(label);
-        
         var textButton = new TextButton("Hack marker node", skin);
-        buttonTable.add(textButton);
+        root.add(textButton);
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -89,11 +79,11 @@ public class RoomScreen extends JamScreen {
                 pop.setModal(true);
                 pop.setKeepCenteredInWindow(true);
                 pop.setKeepSizedWithinStage(true);
-                
+            
                 pop.defaults().space(10);
                 var label = new Label("Choose a color:", skin);
                 pop.add(label);
-                
+            
                 pop.row();
                 var horizontalGroup = new HorizontalGroup();
                 horizontalGroup.wrap();
@@ -101,7 +91,7 @@ public class RoomScreen extends JamScreen {
                 horizontalGroup.space(10);
                 horizontalGroup.wrapSpace(5);
                 pop.add(horizontalGroup).width(350f);
-                
+            
                 for (var name : colorNames) {
                     var textButton = new TextButton(name, skin);
                     horizontalGroup.addActor(textButton);
@@ -112,11 +102,12 @@ public class RoomScreen extends JamScreen {
                             var color = colors.get(index);
                             setPixel(column, row, color);
                             room.marker = color;
-                            core.transition(new MapScreen());
+                            markerLabel.setText("A mysterious " + textButton.getText() + " marker rests here.");
+                            pop.hide();
                         }
                     });
                 }
-                
+            
                 pop.row();
                 var textButton = new TextButton("Cancel", skin);
                 pop.add(textButton);
@@ -126,54 +117,112 @@ public class RoomScreen extends JamScreen {
                         pop.hide();
                     }
                 });
-                
+            
                 pop.show(stage);
             }
         });
         
-        if (room.upgrade) {
-            labelTable.row();
-            label = new Label("An upgrade cube hums in the corner.", lLog);
-            labelTable.add(label);
+        root.row();
+        var labelTable = new Table();
+        root.add(labelTable);
+        labelTable.defaults().space(10);
     
-            buttonTable.row();
-            textButton = new TextButton("Take the upgrade", skin);
-            buttonTable.add(textButton);
-        }
+        if (room.upgrade || room.tag || room.hero != null) {
+            root.row();
+            label = new Label(
+                    "There is only enough ephemeral energy to commit to one of the following tasks. You may...", lLog);
+            root.add(label);
     
-        if (room.tag) {
-            labelTable.row();
-            label = new Label("A powerful tag is within reach.", lLog);
-            labelTable.add(label);
+            root.row();
+            var buttonTable = new Table();
+            root.add(buttonTable);
+            buttonTable.defaults().space(10);
     
-            buttonTable.row();
-            textButton = new TextButton("Add a tag to a hero", skin);
-            buttonTable.add(textButton);
-        }
+            if (room.upgrade) {
+                labelTable.row();
+                label = new Label("An upgrade cube hums in the corner.", lLog);
+                labelTable.add(label);
         
-        if (room.hero != null) {
-            labelTable.row();
-            label = new Label("A hero, " + room.hero + ", is trapped in a hyperbolic phase cell.", lLog);
-            labelTable.add(label);
-    
-            buttonTable.row();
-            textButton = new TextButton("Release " + room.hero, skin);
-            buttonTable.add(textButton);
-        }
-    
-        buttonTable.row();
-        textButton = new TextButton("Just leave and forget about it", skin);
-        buttonTable.add(textButton);
-        textButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                Gdx.input.setInputProcessor(null);
-                Core.fetchPixel(column, row, (c, r, color) -> {
-                    room.marker = color;
-                    core.transition(new MapScreen());
+                buttonTable.row();
+                textButton = new TextButton("Take the upgrade", skin);
+                buttonTable.add(textButton);
+                textButton.addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+                        room.upgrade = false;
+                        room.tag = false;
+                        room.hero = null;
+                        core.transition(new MapScreen());
+                    }
                 });
             }
-        });
+    
+            if (room.tag) {
+                labelTable.row();
+                label = new Label("A powerful tag is within reach.", lLog);
+                labelTable.add(label);
+        
+                buttonTable.row();
+                textButton = new TextButton("Add a tag to a hero", skin);
+                buttonTable.add(textButton);
+                textButton.addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+                        room.upgrade = false;
+                        room.tag = false;
+                        room.hero = null;
+                        core.transition(new MapScreen());
+                    }
+                });
+            }
+    
+            if (room.hero != null) {
+                labelTable.row();
+                label = new Label("A hero, " + room.hero + ", is trapped in a hyperbolic phase cell.", lLog);
+                labelTable.add(label);
+        
+                buttonTable.row();
+                textButton = new TextButton("Release " + room.hero, skin);
+                buttonTable.add(textButton);
+                textButton.addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+                        room.upgrade = false;
+                        room.tag = false;
+                        room.hero = null;
+                        core.transition(new MapScreen());
+                    }
+                });
+            }
+    
+            buttonTable.row();
+            textButton = new TextButton("Just leave and forget about it", skin);
+            buttonTable.add(textButton);
+            textButton.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    Gdx.input.setInputProcessor(null);
+                    Core.fetchPixel(column, row, (c, r, color) -> {
+                        room.marker = color;
+                        core.transition(new MapScreen());
+                    });
+                }
+            });
+        } else {
+            root.row();
+            textButton = new TextButton("Leave", skin);
+            root.add(textButton);
+            textButton.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    Gdx.input.setInputProcessor(null);
+                    Core.fetchPixel(column, row, (c, r, color) -> {
+                        room.marker = color;
+                        core.transition(new MapScreen());
+                    });
+                }
+            });
+        }
         
         root = new Table();
         root.setFillParent(true);

@@ -7,5 +7,7 @@ public class TagData {
     public String description;
     public Array<String> keywords = new Array<>();
     public int level = 1;
+    public float healthModifier;
+    public float speedModifier;
     public Array<String> availableSkills = new Array<>();
 }

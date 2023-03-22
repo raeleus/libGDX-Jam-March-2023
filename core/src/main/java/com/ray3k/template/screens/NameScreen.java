@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.github.tommyettinger.textra.TypingLabel;
+import com.ray3k.template.data.*;
 import com.ray3k.template.stripe.PopTable.PopTableStyle;
 import com.ray3k.template.stripe.PopTableHoverListener;
 import com.ray3k.template.*;
@@ -30,6 +31,9 @@ import static com.ray3k.template.Resources.*;
 public class NameScreen extends JamScreen {
     private Stage stage;
     private final static Color BG_COLOR = new Color(Color.BLACK);
+    private String name = "Hero";
+    private String tag = "dumbass";
+    private String description;
     
     @Override
     public void show() {
@@ -112,13 +116,26 @@ public class NameScreen extends JamScreen {
                 for (int i = 0; i < 50 * 50; i++) {
                     var room = new RoomData();
                     room.description = roomDescriptions.get(i % roomDescriptions.size);
-                    if (i == getRoomIndex()) room.description = Gdx.files.internal("text/rooms-first").readString().split("\\n")[0];
                     room.marker = Color.BLACK;
                     room.upgrade = i < 50 * 50 * .25f;
                     room.tag = i < 50 * 50 * .10f;
-                    room.hero = i < 50 * 50 * .05f ? "test" : null;
+                    room.hero = i < 50 * 50 * .05f ? heroTemplates.random().name : null;
                     rooms.add(room);
                 }
+                rooms.shuffle();
+                
+                var startingRoom = rooms.get(getRoomIndex());
+                startingRoom.description = Gdx.files.internal("text/rooms-first").readString().split("\\n")[0];
+                startingRoom.upgrade = true;
+                startingRoom.tag = false;
+                startingRoom.hasEnemies = false;
+                startingRoom.hero = heroTemplates.random().name;
+    
+                var hero = new CharacterData();
+                hero.name = name;
+                hero.addTag(tag);
+                hero.description = description;
+                playerTeam.add(hero);
                 
                 core.transition(new RoomScreen());
             }
@@ -139,6 +156,9 @@ public class NameScreen extends JamScreen {
                     var tag = matchTag(name.toLowerCase(Locale.ROOT));
                     tagLabel.setText("a " + tag.name.toUpperCase(Locale.ROOT));
                     descriptionLabel.setText(tag.description);
+                    NameScreen.this.name = name;
+                    NameScreen.this.tag = tag.name;
+                    description = tag.description;
                 }
             }
         });
