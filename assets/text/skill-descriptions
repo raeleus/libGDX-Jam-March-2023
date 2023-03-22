@@ -25,29 +25,29 @@ Heal all allies.
 All allies do more damage but are slower for the rest of the match.
 Ranged attack.
 Attack enemies in a column directly in front of the character.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
+Ranged attack that stuns a character.
+Enemy that attacks this character next turn will be stunned.
+Slide to any unoccupied cell horizontally or vertically.
+Spawn an ice character that distracts enemies.
+Strong melee attack to enemy in a diagonal cell.
+Stuns an enemy in melee range. Character is stunned as well.
+Devastating combination of attacks to enemy directly in front of character.
+Take down an enemy with less than 10% health.
+Melee attack that stumbles an enemy to an adjacent horizontal cell.
+Melee attack that pushes an enemy to the back row.
+Melee attack up to three different enemies in melee range.
+Melee attack an enemy in melee range or in two cells directly ahead.
+Block the next attack. Can be stacked.
+Counter-attack the next attack. Can be stacked.
+Move forward one cell.
+Move back one cell.
+Move to adjacent cell horizontally.
+Ranged attack.
+Ranged attack.
+Counter-attack any enemies that damage allies.
+Devastating ranged attack to an enemy in the back row.
+Devastating attack to an enemy in the front row.
+Ranged attack. Damage is delayed by one turn.
 Enemy has reduced damage for a turn.
 Enemy has reduced damage for a turn.
 Enemy has reduced damage for a turn.
