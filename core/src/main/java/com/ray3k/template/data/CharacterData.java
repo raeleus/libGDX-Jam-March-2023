@@ -12,6 +12,19 @@ public class CharacterData {
     public Array<String> tags = new Array<>();
     public int position;
     
+    public CharacterData() {
+    }
+    
+    public CharacterData(CharacterData other) {
+        this.name = other.name;
+        this.description = other.description;
+        this.health = other.health;
+        this.healthMax = other.healthMax;
+        this.speed = other.speed;
+        skills.addAll(other.skills);
+        tags.addAll(other.tags);
+    }
+    
     public void addTag(String tag) {
         tags.add(tag);
         

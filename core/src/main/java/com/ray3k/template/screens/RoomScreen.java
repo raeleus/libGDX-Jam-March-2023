@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.ray3k.template.data.*;
 import com.ray3k.template.stripe.PopTable;
 import com.ray3k.template.*;
 
@@ -187,10 +188,69 @@ public class RoomScreen extends JamScreen {
                 textButton.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
-                        room.upgrade = false;
-                        room.tag = false;
-                        room.hero = null;
-                        core.transition(new MapScreen());
+                        var hero = new CharacterData(GameData.findHeroTemplate(room.hero));
+    
+                        var congratsPop = new PopTable(wDefault);
+                        congratsPop.setKeepCenteredInWindow(true);
+                        congratsPop.setModal(true);
+                        congratsPop.pad(10);
+    
+                        congratsPop.defaults().space(10);
+                        var label = new Label(room.hero + " has joined the Justice Buddies!", lButton);
+                        congratsPop.add(label);
+    
+                        congratsPop.row();
+                        var textButton = new TextButton("OK", skin);
+                        congratsPop.add(textButton);
+                        textButton.addListener(new ChangeListener() {
+                            @Override
+                            public void changed(ChangeEvent event, Actor actor) {
+                                playerTeam.add(hero);
+                                room.upgrade = false;
+                                room.tag = false;
+                                room.hero = null;
+                                core.transition(new MapScreen());
+                            }
+                        });
+                        
+                        if (playerTeam.size < 4) {
+                            congratsPop.show(stage);
+                        } else {
+                            var pop = new PopTable(wDefault);
+                            pop.setKeepCenteredInWindow(true);
+                            pop.setModal(true);
+                            pop.pad(10);
+    
+                            pop.defaults().space(10);
+                            label = new Label("You must kick someone from the team first...", lButton);
+                            pop.add(label);
+    
+                            for (var teamHero : playerTeam) {
+                                pop.row();
+                                textButton = new TextButton(teamHero.name, skin);
+                                pop.add(textButton);
+                                textButton.addListener(new ChangeListener() {
+                                    @Override
+                                    public void changed(ChangeEvent event, Actor actor) {
+                                        playerTeam.removeValue(teamHero, true);
+                                        pop.hide();
+                                        congratsPop.show(stage);
+                                    }
+                                });
+                            }
+                            
+                            pop.row();
+                            textButton = new TextButton("Cancel", skin);
+                            pop.add(textButton);
+                            textButton.addListener(new ChangeListener() {
+                                @Override
+                                public void changed(ChangeEvent event, Actor actor) {
+                                    pop.hide();
+                                }
+                            });
+    
+                            pop.show(stage);
+                        }
                     }
                 });
             }

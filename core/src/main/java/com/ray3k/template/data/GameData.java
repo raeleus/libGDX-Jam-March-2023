@@ -45,10 +45,19 @@ public class GameData {
     public static SkillData findSkill(String name) {
         for (int i = 0; i < skillTemplates.size; i++) {
             var skill = skillTemplates.get(i);
-            if (name.equals(name)) return skill;
+            if (name.equals(skill.name)) return skill;
         }
         
         return skillTemplates.get(0);
+    }
+    
+    public static CharacterData findHeroTemplate(String name) {
+        for (int i = 0; i < heroTemplates.size; i++) {
+            var hero = heroTemplates.get(i);
+            if (name.equals(hero.name)) return hero;
+        }
+    
+        return heroTemplates.get(0);
     }
     
     public static int getRoomIndex(int column, int row) {
