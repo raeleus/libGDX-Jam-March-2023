@@ -160,17 +160,17 @@ Ranged attack. Character is damaged.
 Ranged attack. Enemy is slower.
 Character is sacrificed. All enemies are stunned.
 Heal self.
+Scraping damage to enemy in melee range.
+Increases damage received by target, but it can't be targeted directly for the next turn.
+Enemy cannot target the character.
+Summons wolf friend.
+Move to adjacent cell. Heal self.
+Move to another cell every turn.
+Ranged attack.
+Ranged attack that stuns an enemy.
+Ranged attack that disables an enemy skill.
+Ranged attack that hits an enemy in the front row and the back.
 
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
 Enemy has reduced damage for a turn.
 Enemy has reduced damage for a turn.
 poke
