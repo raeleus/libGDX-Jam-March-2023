@@ -2,7 +2,7 @@ A basic melee attack.
 A strong melee attack.
 Ponder about the troubling things in life.
 Complain about stuff you don't understand.
-Move forward if there is an empty space. Do devastating damage to an enemy directly in front of character.
+Move forward if there is an empty cell. Do devastating damage to an enemy directly in front of character.
 Slap a foe in melee range. Enemy damage is reduced.
 Tickle a foe in melee range. Enemy is stunned.
 A strong melee attack. Character receives equal damage.
@@ -75,31 +75,29 @@ Any player or enemy action rewards a small heal to the character.
 Devastating bunny melee attack.
 Heal character and target ally.
 Melee attack.
-Melee atta
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
+Melee attack. Hit twice if character is alone in row.
+Strong melee attack if there is an empty cellin front of character.
+Move to adjacent horizontal cell to avoid an attack.
+Character cannot be directly targeted next turn.
+Speed is increased for the rest of the match. Can be stacked.
+Attack an enemy in melee range or in cell directly in back row.
+Drag an enemy from back to front row if the cell is empty.
+Character cannot be directly targeted next turn.
+Enemies take damage each turn while standing on this cell.
+Heal self.
+Enemy is stunned.
+Enemy weakness is found for increased damage.
+Ranged elite hacking attack.
+Enemy deals less damage.
+An enemy is duplicated as an ally.
+Heal this turn and receive poison damage every following turn.
+Copy the tags and skills of an ally. Non-reversable.
+Fire damage in melee range.
+Melee attack. Target has decreased damage.
+Fire damage to a row at next turn.
+Ranged fire attack.
+Fire attack to two adjacent targets.
+Smack a fool in melee range.
 Enemy has reduced damage for a turn.
 Enemy has reduced damage for a turn.
 Enemy has reduced damage for a turn.
