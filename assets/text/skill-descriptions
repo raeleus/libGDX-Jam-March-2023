@@ -23,7 +23,7 @@ Serve a banana sundade to an ally. The ally does increased damage for a turn.
 Cover enemy in choco syrup. Enemy is stunned but receives reduced damage.
 Heal all allies.
 All allies do more damage but are slower for the rest of the match.
-Ranged attack.
+Ranged ice attack.
 Attack enemies in a column directly in front of the character.
 Ranged attack that stuns a character.
 Enemy that attacks this character next turn will be stunned.
@@ -48,12 +48,12 @@ Counter-attack any enemies that damage allies.
 Devastating ranged attack to an enemy in the back row.
 Devastating attack to an enemy in the front row.
 Ranged attack. Damage is delayed by one turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
-Enemy has reduced damage for a turn.
+Explosive damage to enemy front row by next attack.
+Melee attack.
+Attack two enemies in front row.
+Ranged fire attack.
+Ranged fire attack. Adjacent enemies also receive fire damage.
+Ranged lightning attack.
 Enemy has reduced damage for a turn.
 Enemy has reduced damage for a turn.
 Enemy has reduced damage for a turn.
