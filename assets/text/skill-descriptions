@@ -7,7 +7,7 @@ Slap a foe in melee range. Enemy damage is reduced.
 Tickle a foe in melee range. Enemy is stunned.
 A strong melee attack. Character receives equal damage.
 Scratch an enemy in melee range.
-Move to any free position.
+Move to any free cell.
 Heal self. Character is stunned.
 Damage given and received is increased for a turn.
 Enemy has reduced damage for a turn.
@@ -33,7 +33,7 @@ Strong melee attack to enemy in a diagonal cell.
 Stuns an enemy in melee range. Character is stunned as well.
 Devastating combination of attacks to enemy directly in front of character.
 Take down an enemy with less than 10% health.
-Melee attack that stumbles an enemy to an adjacent horizontal cell.
+Melee attack that stumbles an enemy to a side cell.
 Melee attack that pushes an enemy to the back row.
 Melee attack up to three different enemies in melee range.
 Melee attack an enemy in melee range or in two cells directly ahead.
@@ -76,8 +76,8 @@ Devastating bunny melee attack.
 Heal character and target ally.
 Melee attack.
 Melee attack. Hit twice if character is alone in row.
-Strong melee attack if there is an empty cellin front of character.
-Move to adjacent horizontal cell to avoid an attack.
+Strong melee attack if there is an empty cell in front of character.
+Move to side cell to avoid an attack.
 Character cannot be directly targeted next turn.
 Speed is increased for the rest of the match. Can be stacked.
 Attack an enemy in melee range or in cell directly in back row.
@@ -107,12 +107,12 @@ Character dies and instant kills all enemies.
 Ranged attack. Character takes damage.
 Smack an enemy with your bone in melee range.
 Hit an enemy with a boomerang bone.
-Stun an enemy in melee.
+Stun an enemy in melee range.
 Melee attack and heal.
 Take less damage for the remainder of the match.
 Allies can only target a single enemy but that enemy takes increased damage.
 Devastating melee attack.
-Cannot be targeted and stunned.
+Cannot be targeted. Character is stunned.
 Melee attack.
 Ranged attack.
 Stun an enemy.
@@ -134,18 +134,18 @@ Character removes all effects.
 Copy the effects of a target.
 Attack an enemy in back row and bring them to the front.
 Attack any enemy in the front row.
-Attack diaganol cells.
+Attack diagonal cells.
 Attack any enemy in the corners
 Attack all enemies.
 Attack all corners with devastating damage.
 Attack all enemies with limited damage.
 Melee attack.
-Move to adjacent horizontal cell.
+Move to side cell.
 Devastating melee attack enemy directly in front of character.
 Stun an enemy in the front row.
 Character is no longer controllable but does significant damage to enemies.
 All allies start dancing and move to random cells.
-Move to an adjacent vertical cell.
+Move forward or backward.
 Ranged attack.
 Melee attack. Enemy either moves back or to side.
 Do increased damage for the rest of the match. Receive damage every turn.
@@ -179,3 +179,4 @@ Nothing pentrates the skin. Well, not too deep.
 A delicious snack for some, but a terrible outcome for the pineapple.
 Ooooh tasty!
 I'm the pine-apple! Bananas aint got shit on me.
+Instant kill an enemy at 10% health or less. Heal self by that amount.
