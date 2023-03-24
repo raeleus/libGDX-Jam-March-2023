@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.ray3k.template.data.*;
-import com.ray3k.template.stripe.PopTable;
+import com.ray3k.template.stripe.*;
 import com.ray3k.template.*;
 
 import java.util.Locale;
@@ -167,30 +167,166 @@ public class RoomScreen extends JamScreen {
                                 @Override
                                 public void changed(ChangeEvent event, Actor actor) {
                                     pop.hide();
+    
+                                    var upgradeChoicePop = new PopTable(wDefault);
+                                    upgradeChoicePop.setKeepCenteredInWindow(true);
+                                    upgradeChoicePop.setModal(true);
+                                    upgradeChoicePop.pad(10);
                                     
-                                    var skillPop = new PopTable(wDefault);
-                                    skillPop.setKeepCenteredInWindow(true);
-                                    skillPop.setModal(true);
-                                    skillPop.pad(10);
-                                    
-                                    for (var skill : teamHero.skills) {
-                                        var textButton = new TextButton(skill, skin);
-                                        skillPop.add(textButton);
-                                        textButton.addListener(new ChangeListener() {
-                                            @Override
-                                            public void changed(ChangeEvent event, Actor actor) {
-                                                var skillData = findSkill(skill);
-                                                skillData.level++;
-                                                
-                                                room.upgrade = false;
-                                                room.tag = false;
-                                                room.hero = null;
-                                                core.transition(new MapScreen());
+                                    upgradeChoicePop.defaults().space(10);
+                                    var textButton = new TextButton("Upgrade Skill", skin);
+                                    upgradeChoicePop.add(textButton);
+                                    textButton.addListener(new ChangeListener() {
+                                        @Override
+                                        public void changed(ChangeEvent event, Actor actor) {
+                                            upgradeChoicePop.hide();
+                                            
+                                            var skillPop = new PopTable(wDefault);
+                                            skillPop.setKeepCenteredInWindow(true);
+                                            skillPop.setModal(true);
+                                            skillPop.pad(10);
+    
+                                            skillPop.defaults().space(10);
+                                            var label = new Label("No upgradeable skills...", lButton);
+                                            skillPop.add(label);
+                                            
+                                            for (var skill : teamHero.skills) {
+                                                if (skill.level + 1 < skill.maxLevel) {
+                                                    label.setText("Upgrade Skill:");
+                                                    
+                                                    skillPop.row();
+                                                    var textButton = new TextButton(skill.name + " (" + skill.level + "/" + skill.maxLevel + ")", skin);
+                                                    skillPop.add(textButton);
+                                                    textButton.addListener(new ChangeListener() {
+                                                        @Override
+                                                        public void changed(ChangeEvent event, Actor actor) {
+                                                            skill.level++;
+    
+                                                            room.upgrade = false;
+                                                            room.tag = false;
+                                                            room.hero = null;
+                                                            core.transition(new MapScreen());
+                                                        }
+                                                    });
+                                                }
                                             }
-                                        });
-                                    }
+                                            
+                                            skillPop.row();
+                                            var textButton = new TextButton("Cancel", skin);
+                                            skillPop.add(textButton);
+                                            textButton.addListener(new ChangeListener() {
+                                                @Override
+                                                public void changed(ChangeEvent event, Actor actor) {
+                                                    skillPop.hide();
+                                                }
+                                            });
+    
+                                            skillPop.show(stage);
+                                        }
+                                    });
+    
+                                    upgradeChoicePop.row();
+                                    textButton = new TextButton("Upgrade Tag", skin);
+                                    upgradeChoicePop.add(textButton);
+                                    textButton.addListener(new ChangeListener() {
+                                        @Override
+                                        public void changed(ChangeEvent event, Actor actor) {
+                                            upgradeChoicePop.hide();
+            
+                                            var tagPop = new PopTable(wDefault);
+                                            tagPop.setKeepCenteredInWindow(true);
+                                            tagPop.setModal(true);
+                                            tagPop.pad(10);
+            
+                                            tagPop.defaults().space(10);
+                                            var label = new Label("No upgradeable tags...", lButton);
+                                            tagPop.add(label);
+            
+                                            for (var tag : teamHero.tags) {
+                                                if (tag.availableSkills.size > 0) {
+                                                    label.setText("Upgrade Tag:");
+                    
+                                                    tagPop.row();
+                                                    var textButton = new TextButton(tag.name + " (" + tag.level + "/" + (tag.availableSkills.size + tag.level) + ")", skin);
+                                                    tagPop.add(textButton);
+                                                    textButton.addListener(new ChangeListener() {
+                                                        @Override
+                                                        public void changed(ChangeEvent event, Actor actor) {
+                                                            tagPop.hide();
+                                                            
+                                                            if (teamHero.skills.size >= 6) {
+                                                                var deleteSkillPop = new PopTable(wDefault);
+                                                                deleteSkillPop.setKeepCenteredInWindow(true);
+                                                                deleteSkillPop.setModal(true);
+                                                                deleteSkillPop.pad(10);
+    
+                                                                deleteSkillPop.defaults().space(10);
+                                                                var label = new Label("You can only have 6 skills equipped.\nChoose a skill to remove:", lButton);
+                                                                label.setAlignment(Align.center);
+                                                                deleteSkillPop.add(label);
+                                                                
+                                                                for (var skill : teamHero.skills) {
+                                                                    deleteSkillPop.row();
+                                                                    var textButton = new TextButton(skill.name + " (" + skill.level + "/" + skill.maxLevel + ")", skin);
+                                                                    deleteSkillPop.add(textButton);
+                                                                    textButton.addListener(new ChangeListener() {
+                                                                        @Override
+                                                                        public void changed(ChangeEvent event,
+                                                                                            Actor actor) {
+                                                                            deleteSkillPop.hide();
+                                                                            
+                                                                            teamHero.skills.removeValue(skill, true);
+    
+                                                                            showConfirmSkillPop(tag, teamHero, room);
+                                                                        }
+                                                                    });
+                                                                }
+    
+                                                                deleteSkillPop.row();
+                                                                var textButton = new TextButton("Cancel", skin);
+                                                                deleteSkillPop.add(textButton);
+                                                                textButton.addListener(new ChangeListener() {
+                                                                    @Override
+                                                                    public void changed(ChangeEvent event,
+                                                                                        Actor actor) {
+                                                                        deleteSkillPop.hide();
+                                                                    }
+                                                                });
+                                                                
+                                                                deleteSkillPop.show(stage);
+                                                            } else {
+                                                                showConfirmSkillPop(tag, teamHero, room);
+                                                            }
+                                                        }
+                                                    });
+                                                }
+                                            }
+            
+                                            tagPop.row();
+                                            var textButton = new TextButton("Cancel", skin);
+                                            tagPop.add(textButton);
+                                            textButton.addListener(new ChangeListener() {
+                                                @Override
+                                                public void changed(ChangeEvent event, Actor actor) {
+                                                    tagPop.hide();
+                                                }
+                                            });
+            
+                                            tagPop.show(stage);
+                                        }
+                                    });
+    
+                                    upgradeChoicePop.row();
+                                    textButton = new TextButton("Cancel", skin);
+                                    upgradeChoicePop.add(textButton);
+                                    textButton.addListener(new ChangeListener() {
+                                        @Override
+                                        public void changed(ChangeEvent event, Actor actor) {
+                                            upgradeChoicePop.hide();
+                                        }
+                                    });
                                     
-                                    skillPop.show(stage);
+                                    upgradeChoicePop.show(stage);
                                 }
                             });
                         }
@@ -240,71 +376,19 @@ public class RoomScreen extends JamScreen {
                 textButton.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
-                        var hero = new CharacterData(GameData.findHeroTemplate(room.hero));
-    
-                        var congratsPop = new PopTable(wDefault);
-                        congratsPop.setKeepCenteredInWindow(true);
-                        congratsPop.setModal(true);
-                        congratsPop.pad(10);
-    
-                        congratsPop.defaults().space(10);
-                        var label = new Label(room.hero + " has joined the Justice Buddies!", lButton);
-                        congratsPop.add(label);
-    
-                        congratsPop.row();
-                        var textButton = new TextButton("OK", skin);
-                        congratsPop.add(textButton);
-                        textButton.addListener(new ChangeListener() {
-                            @Override
-                            public void changed(ChangeEvent event, Actor actor) {
-                                playerTeam.add(hero);
-                                room.upgrade = false;
-                                room.tag = false;
-                                room.hero = null;
-                                core.transition(new MapScreen());
-                            }
-                        });
-                        
-                        if (playerTeam.size < 4) {
-                            congratsPop.show(stage);
-                        } else {
-                            var pop = new PopTable(wDefault);
-                            pop.setKeepCenteredInWindow(true);
-                            pop.setModal(true);
-                            pop.pad(10);
-    
-                            pop.defaults().space(10);
-                            label = new Label("You must kick someone from the team first...", lButton);
-                            pop.add(label);
-    
-                            for (var teamHero : playerTeam) {
-                                pop.row();
-                                textButton = new TextButton(teamHero.name, skin);
-                                pop.add(textButton);
-                                textButton.addListener(new ChangeListener() {
-                                    @Override
-                                    public void changed(ChangeEvent event, Actor actor) {
-                                        playerTeam.removeValue(teamHero, true);
-                                        pop.hide();
-                                        congratsPop.show(stage);
-                                    }
-                                });
-                            }
-                            
-                            pop.row();
-                            textButton = new TextButton("Cancel", skin);
-                            pop.add(textButton);
-                            textButton.addListener(new ChangeListener() {
-                                @Override
-                                public void changed(ChangeEvent event, Actor actor) {
-                                    pop.hide();
-                                }
-                            });
-    
-                            pop.show(stage);
-                        }
+                        showConfirmHeroPop(room);
                     }
                 });
+                var listener = new PopTableHoverListener(Align.top, Align.top, new PopTable.PopTableStyle(wPointerDown));
+                textButton.addListener(listener);
+                var pop = listener.getPopTable();
+                pop.pad(10);
+    
+                pop.defaults().space(10);
+                var description = findHeroTemplate(room.hero).description;
+                label = new Label(description, lLog);
+                label.setWrap(true);
+                pop.add(label).growX();
             }
     
             buttonTable.row();
@@ -350,6 +434,102 @@ public class RoomScreen extends JamScreen {
                 core.transition(new GameOverScreen());
             }
         });
+    }
+    
+    private void showConfirmSkillPop(TagData tag, CharacterData teamHero, RoomData room) {
+        tag.level++;
+        var skill = tag.availableSkills.random();
+        tag.availableSkills.removeValue(skill, false);
+        teamHero.addSkill(skill);
+    
+        var tagConfirmationPop = new PopTable(wDefault);
+        tagConfirmationPop.setKeepCenteredInWindow(true);
+        tagConfirmationPop.setModal(true);
+        tagConfirmationPop.pad(10);
+    
+        tagConfirmationPop.defaults().space(10);
+        var label = new Label("Added skill: " + skill, lButton);
+        tagConfirmationPop.add(label);
+    
+        tagConfirmationPop.row();
+        var textButton = new TextButton("OK", skin);
+        tagConfirmationPop.add(textButton);
+        textButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                room.upgrade = false;
+                room.tag = false;
+                room.hero = null;
+                core.transition(new MapScreen());
+            }
+        });
+        tagConfirmationPop.show(stage);
+    }
+    
+    private void showConfirmHeroPop(RoomData room) {
+        var hero = new CharacterData(GameData.findHeroTemplate(room.hero));
+    
+        var congratsPop = new PopTable(wDefault);
+        congratsPop.setKeepCenteredInWindow(true);
+        congratsPop.setModal(true);
+        congratsPop.pad(10);
+    
+        congratsPop.defaults().space(10);
+        var label = new Label(room.hero + " has joined the Justice Buddies!", lButton);
+        congratsPop.add(label);
+    
+        congratsPop.row();
+        var textButton = new TextButton("OK", skin);
+        congratsPop.add(textButton);
+        textButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                playerTeam.add(hero);
+                room.upgrade = false;
+                room.tag = false;
+                room.hero = null;
+                core.transition(new MapScreen());
+            }
+        });
+    
+        if (playerTeam.size < 4) {
+            congratsPop.show(stage);
+        } else {
+            var pop = new PopTable(wDefault);
+            pop.setKeepCenteredInWindow(true);
+            pop.setModal(true);
+            pop.pad(10);
+        
+            pop.defaults().space(10);
+            label = new Label("You must kick someone from the team first...", lButton);
+            pop.add(label);
+        
+            for (var teamHero : playerTeam) {
+                pop.row();
+                textButton = new TextButton(teamHero.name, skin);
+                pop.add(textButton);
+                textButton.addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+                        playerTeam.removeValue(teamHero, true);
+                        pop.hide();
+                        congratsPop.show(stage);
+                    }
+                });
+            }
+        
+            pop.row();
+            textButton = new TextButton("Cancel", skin);
+            pop.add(textButton);
+            textButton.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    pop.hide();
+                }
+            });
+        
+            pop.show(stage);
+        }
     }
     
     @Override

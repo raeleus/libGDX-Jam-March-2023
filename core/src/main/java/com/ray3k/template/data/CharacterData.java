@@ -8,8 +8,8 @@ public class CharacterData {
     public float health;
     public float healthMax = 100f;
     public int speed;
-    public Array<String> skills = new Array<>();
-    public Array<String> tags = new Array<>();
+    public Array<SkillData> skills = new Array<>();
+    public Array<TagData> tags = new Array<>();
     public int position;
     
     public CharacterData() {
@@ -26,9 +26,8 @@ public class CharacterData {
     }
     
     public void addTag(String tag) {
-        tags.add(tag);
-        
         var tagData = GameData.findTag(tag);
+        tags.add(tagData);
         
         healthMax += tagData.healthModifier;
         if (healthMax > 0) health += healthMax;
@@ -36,8 +35,17 @@ public class CharacterData {
         speed += tagData.speedModifier;
         
         if (tagData.availableSkills.size > 0) {
-            skills.add(tagData.availableSkills.first());
+            addSkill(tagData.availableSkills.first());
             tagData.availableSkills.removeIndex(0);
         }
+    }
+    
+    public void addSkill(String skill) {
+        for (var skillData : skills) {
+            if (skill.equals(skillData.name)) return;
+        }
+        
+        var skillData = GameData.findSkill(skill);
+        skills.add(skillData);
     }
 }

@@ -880,6 +880,7 @@ public class Core extends JamGame {
             var skill = new SkillData();
             skill.name = skillNames[i];
             skill.description = skillDescriptions[i];
+            skillTemplates.add(skill);
         }
         
         var heroNames = Gdx.files.internal("text/hero-names").readString().split("\\n");
