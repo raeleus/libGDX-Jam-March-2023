@@ -70,5 +70,22 @@ tripwire,caltrops,sticky tape,smoke pellet
 scanner,sticky tape,extendo punch,grapnel hook
 crypto,nerf,hack,dupe,fanboy
 crypto,nerf,hack,dupe,fanboy,lunge
-tail sweep,crocodile roll,chomp,dino bop
-claw,fire-ball,
+tail sweep,crocodile roll,chomp,dino bop,fly
+claw,fire-ball,burn,brimstone,fly
+tail sweep,slash,fire-ball,flame shotgun,incindiary grenade,fly
+slash,chomp,claw,fly
+grapple,bite,stalk
+heat vision,gear,fuel up,beam
+gear,charge,fuel up,compute,beam
+hook,grapple,grapnel hook,tripwire
+scratch,gear,beam
+scratch,nibble,multiply,gear,beam
+bone throw,bone rattle,rigor mortis,dead eye
+knee cap,charge,scratch head,bury
+pistachio,heavy punch,free samples,ice-scream
+tombstone smack,heavy punch,bone throw
+eat,panda smash,lay down for a bit,bamboo shoot
+panda paw,lay down for a bit,bamboo shoot,tasty snack
+panda paw,lay down for a bit,bamboo shoot,laser beam
+heavy punch,panda paw,bamboo shoot,blast
+panda paw,lay down for a bit,bamboo shoot
