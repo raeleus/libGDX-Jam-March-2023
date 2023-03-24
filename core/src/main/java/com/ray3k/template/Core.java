@@ -861,10 +861,10 @@ public class Core extends JamGame {
             e.printStackTrace();
         }
         
-        var tagNames = Gdx.files.internal("text/tag-names").readString().split("\\n");
-        var tagDescriptions = Gdx.files.internal("text/tag-descriptions").readString().split("\\n");
-        var tagKeywords = Gdx.files.internal("text/tag-keywords").readString().split("\\n");
-        var tagSkills = Gdx.files.internal("text/tag-skills").readString().split("\\n");
+        var tagNames = Gdx.files.internal("text/tag-names").readString("UTF-8").split("\n");
+        var tagDescriptions = Gdx.files.internal("text/tag-descriptions").readString("UTF-8").split("\\n");
+        var tagKeywords = Gdx.files.internal("text/tag-keywords").readString("UTF-8").split("\\n");
+        var tagSkills = Gdx.files.internal("text/tag-skills").readString("UTF-8").split("\\n");
         for (int i = 0; i < tagNames.length; i++) {
             var tag = new TagData();
             tag.name = tagNames[i];
@@ -885,10 +885,18 @@ public class Core extends JamGame {
         
         var heroNames = Gdx.files.internal("text/hero-names").readString().split("\\n");
         var heroDescriptions = Gdx.files.internal("text/hero-descriptions").readString().split("\\n");
+        var heroSkills = Gdx.files.internal("text/hero-skills").readString().split("\\n");
+        var heroTags = Gdx.files.internal("text/hero-tags").readString().split("\\n");
         for (int i = 0; i < heroNames.length; i++) {
             var hero = new CharacterData();
             hero.name = heroNames[i];
             hero.description = heroDescriptions[i];
+            for (var skill : heroSkills[i].split(",")) {
+                hero.addSkill(skill);
+            }
+            for (var tag : heroTags[i].split(",")) {
+                hero.addTag(tag);
+            }
             heroTemplates.add(hero);
         }
         

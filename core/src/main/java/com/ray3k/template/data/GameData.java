@@ -2,7 +2,6 @@ package com.ray3k.template.data;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Array;
-import com.ray3k.template.*;
 
 public class GameData {
     public static int difficulty;
@@ -36,9 +35,9 @@ public class GameData {
     public static TagData findTag(String name) {
         for (int i = 0; i < tagTemplates.size; i++) {
             var tag = tagTemplates.get(i);
-            if (name.equals(name)) return tag;
+            if (name.equals(tag.name)) return tag;
         }
-    
+        
         return tagTemplates.get(0);
     }
     

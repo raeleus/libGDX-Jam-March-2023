@@ -1,4 +1,4 @@
-package com.ray3k.template;
+package com.ray3k.template.data;
 
 import com.badlogic.gdx.graphics.Color;
 

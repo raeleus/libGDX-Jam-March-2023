@@ -241,7 +241,8 @@ public class RoomScreen extends JamScreen {
                                             tagPop.defaults().space(10);
                                             var label = new Label("No upgradeable tags...", lButton);
                                             tagPop.add(label);
-            
+    
+                                            
                                             for (var tag : teamHero.tags) {
                                                 if (tag.availableSkills.size > 0) {
                                                     label.setText("Upgrade Tag:");
@@ -382,12 +383,12 @@ public class RoomScreen extends JamScreen {
                 var listener = new PopTableHoverListener(Align.top, Align.top, new PopTable.PopTableStyle(wPointerDown));
                 textButton.addListener(listener);
                 var pop = listener.getPopTable();
-                pop.pad(10);
     
                 pop.defaults().space(10);
                 var description = findHeroTemplate(room.hero).description;
                 label = new Label(description, lLog);
                 label.setWrap(true);
+                label.setAlignment(Align.center);
                 pop.add(label).growX();
             }
     
