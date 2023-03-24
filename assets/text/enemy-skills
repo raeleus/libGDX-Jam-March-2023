@@ -13,10 +13,10 @@ blast,scoop,free samples,pistachio
 thwack,claw,fly,yip
 heavy punch,thrash,belly crawl
 dagger throw,lunge,riposte
-slash,leap,round-house kick,combo
-quick punch,lunge,slap,tripple kick
-slash,parry,riposte,pirouette,dagger throw
-heavy punch,finisher,hook,uppercut,tripple kick
+slash,leap,round-house kick,combo,smoke pellet
+quick punch,lunge,slap,tripple kick,smoke pellet
+slash,parry,riposte,pirouette,dagger throw,smoke pellet
+heavy punch,finisher,hook,uppercut,tripple kick,smoke pellet
 heroic punch,defend,heroic kick,deflect,block
 burn,brimstone,torch
 slime slap,goo blast,regenerate
@@ -46,3 +46,25 @@ scoop,banana sundae,pistachio
 ice cream social,scoop,ice-clone,freeze ray
 slime slap,goo blast, scoop,sherbert
 incindiary grenade,juice up,deflect,heroic kick,heavy punch
+slap,tickle
+slap,tickle,cat-nap
+charge,heavy punch,slide,hook,uppercut
+heroic punch,heroic kick,defend,deflect,shield throw
+scratch,claw,bite,defend,block
+slash,lunge,grenade,shotgun
+hack,nerf,crypto,slash,blast
+bone throw,bone rattle,slash,incindiary grenade,knee cap
+grapple,heavy punch,slash,caltrops,blast
+thwack,quick punch,blast,retreat,advance
+lightning strike,fire-ball,flame bolt
+blaspheme,siphon filter,shotgun,grumble
+energy sword,contort,iceicle,snowball,lightning strike
+nibble,hop,lob carrot
+pellet blast,cute up,fuzzy,bunny claw
+nibble,bite,scratch,lob carrot,multiply,snuggle
+free samples,goo blast,headbutt,pellet blast
+quick punch,double punch,dash punch,quick dodge,speed up
+juice up,speed up,phase,quick dodge,quick punch
+grenade,incindiary grenade,fire-ball
+tripwire,caltrops,sticky tape,smoke pellet
+scanner,sticky tape,extendo punch,grapnel hook
