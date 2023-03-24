@@ -11,3 +11,10 @@ lunge,combo,grenade
 finisher,pistol-whip,shotgun,blast
 blast,scoop,free samples,pistachio
 thwack,claw,fly,yip
+heavy punch,thrash,belly crawl
+dagger throw,lunge,riposte
+slash,leap,round-house kick,combo
+quick punch,lunge,slap,tripple kick
+slash,parry,riposte,pirouette,dagger throw
+heavy punch,finisher,hook,uppercut,tripple kick
+heroic punch,defend,heroic kick,deflect,block
