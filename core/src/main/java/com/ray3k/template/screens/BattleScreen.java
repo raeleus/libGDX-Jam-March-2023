@@ -4,15 +4,18 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.github.tommyettinger.textra.TextraLabel;
+import com.github.tommyettinger.textra.TypingLabel;
 import com.ray3k.template.*;
 import com.ray3k.template.battle.*;
+import com.ray3k.template.data.CharacterData;
 import com.ray3k.template.data.*;
 import com.ray3k.template.stripe.*;
 import com.ray3k.template.stripe.PopTable.*;
@@ -25,7 +28,7 @@ import static com.ray3k.template.Utils.*;
 import static com.ray3k.template.data.GameData.*;
 
 public class BattleScreen extends JamScreen {
-    private Stage stage;
+    public Stage stage;
     private final static Color BG_COLOR = new Color(Color.BLACK);
     private Array<Table> enemyTiles = new Array<>();
     private Array<Table> playerTiles = new Array<>();
@@ -35,6 +38,7 @@ public class BattleScreen extends JamScreen {
     private Array<Button> selectables = new Array<>();
     private Array<Image> highlights = new Array<>();
     private Label playOrderLabel;
+    public Array<SpineDrawable> spineDrawables = new Array<>();
     
     @Override
     public void show() {
@@ -326,13 +330,15 @@ public class BattleScreen extends JamScreen {
         var stack = new Stack();
         cell.add(stack).grow();
     
-        var textra = new TextraLabel(character.name, skin);
+        var textra = new TypingLabel(character.name, skin);
         textra.setAlignment(Align.center);
         textra.setWrap(true);
+        textra.skipToTheEnd();
         stack.add(textra);
     
         var progressBar = new ProgressBar(0, character.healthMax, 1, false, pHealth);
         progressBar.setValue(character.health);
+        progressBar.setAnimateDuration(.5f);
         var container = new Container(progressBar);
         container.bottom();
         stack.add(container);
@@ -468,9 +474,38 @@ public class BattleScreen extends JamScreen {
     }
     
     public void conductSkill(CharacterData character, SkillData skill, Array<Table> tiles, Table target) {
-        skill.execute(character, tiles, target, () -> {
+        skill.execute(this, character, tiles, target, () -> {
             finishTurn();
         });
+    }
+    
+    private static final Vector2 temp = new Vector2();
+    
+    public void showDamage(Table tile, CharacterData enemy, int damage) {
+        var label = new Label("-" + damage, lNamesake);
+        label.setColor(Color.RED);
+        stage.addActor(label);
+        label.pack();
+        
+        temp.set(tile.getWidth() / 2, tile.getHeight() / 2);
+        tile.localToStageCoordinates(temp);
+        label.setPosition(temp.x, temp.y, Align.center);
+    
+        label.addAction(sequence(parallel(moveBy(0, 50, 1.0f, Interpolation.sineOut), fadeOut(1.0f)), removeActor()));
+        
+        var progressBar = (ProgressBar) ((Container) ((Stack) tile.getChild(0)).getChild(1)).getActor();
+        progressBar.setValue(enemy.health);
+    }
+    
+    public void showTextEffectClear(Table tile, CharacterData enemy) {
+        var label = (TypingLabel) ((Stack)tile.getChild(0)).getChild(0);
+        label.setText(enemy.name);
+    }
+    
+    public void showTextEffectHurt(Table tile, CharacterData enemy) {
+        var label = (TypingLabel) ((Stack)tile.getChild(0)).getChild(0);
+        label.setText("{SHAKE}" + enemy.name);
+        label.addAction(sequence(delay(1f),run(() -> showTextEffectClear(tile, enemy))));
     }
     
     public void finishTurn() {
@@ -481,6 +516,9 @@ public class BattleScreen extends JamScreen {
     @Override
     public void act(float delta) {
         stage.act(delta);
+        for (var spineDrawable : spineDrawables) {
+            spineDrawable.update(delta);
+        }
     }
     
     @Override
