@@ -723,11 +723,13 @@ public class Resources {
         SpineTitle.skinDefault = SpineTitle.skeletonData.findSkin("default");
         skin_skin = assetManager.get("skin/skin.json");
         SkinSkinStyles.bCompassRight = skin_skin.get("compass-right", Button.ButtonStyle.class);
+        SkinSkinStyles.bCharacterHighlight = skin_skin.get("character-highlight", Button.ButtonStyle.class);
         SkinSkinStyles.bDefault = skin_skin.get("default", Button.ButtonStyle.class);
         SkinSkinStyles.bMapColor = skin_skin.get("map-color", Button.ButtonStyle.class);
         SkinSkinStyles.bCompassLeft = skin_skin.get("compass-left", Button.ButtonStyle.class);
         SkinSkinStyles.bCompassUp = skin_skin.get("compass-up", Button.ButtonStyle.class);
         SkinSkinStyles.bCompassDown = skin_skin.get("compass-down", Button.ButtonStyle.class);
+        SkinSkinStyles.bCharacterSelectable = skin_skin.get("character-selectable", Button.ButtonStyle.class);
         SkinSkinStyles.lDefault = skin_skin.get("default", Label.LabelStyle.class);
         SkinSkinStyles.lBig = skin_skin.get("big", Label.LabelStyle.class);
         SkinSkinStyles.lNamesake = skin_skin.get("namesake", Label.LabelStyle.class);
@@ -2232,6 +2234,8 @@ public class Resources {
     public static class SkinSkinStyles {
         public static Button.ButtonStyle bCompassRight;
 
+        public static Button.ButtonStyle bCharacterHighlight;
+
         public static Button.ButtonStyle bDefault;
 
         public static Button.ButtonStyle bMapColor;
@@ -2241,6 +2245,8 @@ public class Resources {
         public static Button.ButtonStyle bCompassUp;
 
         public static Button.ButtonStyle bCompassDown;
+
+        public static Button.ButtonStyle bCharacterSelectable;
 
         public static Label.LabelStyle lDefault;
 

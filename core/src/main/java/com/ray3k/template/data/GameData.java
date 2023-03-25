@@ -87,14 +87,13 @@ public class GameData {
         return "error";
     }
     
-    public static Array<CharacterData> calculateOrder(int turn) {
+    public static void calculateOrder(int turn) {
         var order = new Array<CharacterData>();
         
         if (turn >= characterOrder.size) {
             characterOrder.addAll(nextOrder());
         }
         order.addAll(characterOrder);
-        return order;
     }
     
     public static Array<CharacterData> nextOrder() {

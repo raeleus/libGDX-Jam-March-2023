@@ -127,8 +127,8 @@
 		"horizontalStretchAreas": [ 5, 146 ],
 		"verticalStretchAreas": [ 5, 96 ],
 		"tiling": false,
-		"minWidth": 152,
-		"minHeight": 102,
+		"minWidth": 10,
+		"minHeight": 10,
 		"rightWidth": 0,
 		"leftWidth": 0,
 		"bottomHeight": 0,
@@ -147,8 +147,8 @@
 		"horizontalStretchAreas": [ 25, 161 ],
 		"verticalStretchAreas": [ 25, 106 ],
 		"tiling": false,
-		"minWidth": 187,
-		"minHeight": 132,
+		"minWidth": 10,
+		"minHeight": 10,
 		"rightWidth": 0,
 		"leftWidth": 0,
 		"bottomHeight": 0,
@@ -288,8 +288,8 @@
 		"horizontalStretchAreas": [ 14, 156 ],
 		"verticalStretchAreas": [ 14, 102 ],
 		"tiling": false,
-		"minWidth": 171,
-		"minHeight": 117,
+		"minWidth": 10,
+		"minHeight": 10,
 		"rightWidth": 7,
 		"leftWidth": 7,
 		"bottomHeight": 7,
@@ -547,6 +547,12 @@
 	},
 	"compass-left": {
 		"up": "compass-left"
+	},
+	"character-highlight": {
+		"up": "character-highlight-10"
+	},
+	"character-selectable": {
+		"up": "character-target-10"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
