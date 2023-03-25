@@ -45,7 +45,7 @@ ice cream social,choco syrup,snowball,scoop
 scoop,banana sundae,pistachio
 ice cream social,scoop,ice-clone,freeze ray
 slime slap,goo blast, scoop,sherbert
-incindiary grenade,juice up,deflect,heroic kick,heavy punch
+incendiary grenade,juice up,deflect,heroic kick,heavy punch
 slap,tickle
 slap,tickle,cat-nap
 charge,heavy punch,slide,hook,uppercut
@@ -53,7 +53,7 @@ heroic punch,heroic kick,defend,deflect,shield throw
 scratch,claw,bite,defend,block
 slash,lunge,grenade,shotgun
 hack,nerf,crypto,slash,blast
-bone throw,bone rattle,slash,incindiary grenade,knee cap
+bone throw,bone rattle,slash,incendiary grenade,knee cap
 grapple,heavy punch,slash,caltrops,blast
 thwack,quick punch,blast,retreat,advance
 lightning strike,fire-ball,flame bolt
@@ -65,14 +65,14 @@ nibble,bite,scratch,lob carrot,multiply,snuggle
 free samples,goo blast,headbutt,pellet blast
 quick punch,double punch,dash punch,quick dodge,speed up
 juice up,speed up,phase,quick dodge,quick punch
-grenade,incindiary grenade,fire-ball
+grenade,incendiary grenade,fire-ball
 tripwire,caltrops,sticky tape,smoke pellet
 scanner,sticky tape,extendo punch,grapnel hook
 crypto,nerf,hack,dupe,fanboy
 crypto,nerf,hack,dupe,fanboy,lunge
 tail sweep,crocodile roll,chomp,dino bop,fly
 claw,fire-ball,burn,brimstone,fly
-tail sweep,slash,fire-ball,flame shotgun,incindiary grenade,fly
+tail sweep,slash,fire-ball,flame shotgun,incendiary grenade,fly
 slash,chomp,claw,fly
 grapple,bite,stalk
 heat vision,gear,fuel up,beam
@@ -88,3 +88,38 @@ eat,panda smash,lay down for a bit,bamboo shoot
 panda paw,lay down for a bit,bamboo shoot,tasty snack
 panda paw,lay down for a bit,bamboo shoot,laser beam
 heavy punch,panda paw,bamboo shoot,blast
+line piece,j piece,tee
+line,square,tetros
+line,blast,charge
+scrub,squeeze,rinse,absorb
+scrub,spatula,shine
+slime slap,scrub,buff,squeeze
+flame bolt,scrub,buff
+pie slice,pie graph,radius
+pie slice,radial menu,circumference
+panda paw,pie slice,perimeter
+scoop,pie graph,radial menu,circumference
+sticky,goo blast,regenerate,perimeter,pie slice
+pie slice,radial menu,gadget crisps,siphon filter
+chomp,tiny arm smack,tail sweep,belly crawl
+chomp,crocodile roll,tiny arm smack,tail sweep
+thrash,dino bop,belly crawl,tail whip
+charge,chomp,tail sweep,thrash
+scratch,chomp,crocodile,tail sweep
+bite,claw,yip,snarl,trot,dance
+laser beam,concussive beam,focused beam,devastating beam
+laser beam,burst fire,ricochet
+focused beam,heat vision,blast
+poke,scream,rage out,rind,tasty snack,crown of thorns
+poke,rage out,rind,tasty snack,vitamin c,crown of thorns
+poke,scream,rage out,rind,vitamin c,crown of thorns
+slash,smoke pellet,rage out,rind,tasty snack
+snowball,icicle,freeze ray,slide,ice-clone
+slap,tickle
+free samples,juice up,thrash,heavy-punch
+leap,heroic punch,blast,burst fire,slash
+blast,snipe,burst fire,grenade,tripwire,shotgun
+energy beam,concussive beam,flame bolt,plasma beam
+burst fire,concussive beam,energy sword,flash,incendiary grenade
+snowball,icicle,heat vision,fire ball,brimstone,lightning strike
+blast,snipe,burst fire,grenade,shotgun,heavy punch
