@@ -117,9 +117,9 @@ public class NameScreen extends JamScreen {
                     var room = new RoomData();
                     room.description = roomDescriptions.get(i % roomDescriptions.size);
                     room.marker = Color.BLACK;
-                    room.upgrade = i < 50 * 50 * .25f;
-                    room.tag = i < 50 * 50 * .10f;
-                    room.hero = i < 50 * 50 * .05f ? heroTemplates.random().name : null;
+                    room.upgrade = i < 50 * 50 * .70f;
+                    room.tag = i < 50 * 50 * .50f;
+                    room.hero = i < 50 * 50 * .10f ? heroTemplates.random().name : null;
                     rooms.add(room);
                 }
                 rooms.shuffle();
@@ -127,13 +127,14 @@ public class NameScreen extends JamScreen {
                 var startingRoom = rooms.get(getRoomIndex());
                 startingRoom.description = Gdx.files.internal("text/rooms-first").readString().split("\\n")[0];
                 startingRoom.upgrade = true;
-                startingRoom.tag = false;
+                startingRoom.tag = true;
                 startingRoom.hasEnemies = false;
                 startingRoom.hero = heroTemplates.random().name;
     
+                playerTeam.clear();
                 var hero = new CharacterData();
                 hero.name = name;
-                hero.addTag(tag);
+                hero.addTag(tag, true);
                 hero.description = description;
                 playerTeam.add(hero);
                 

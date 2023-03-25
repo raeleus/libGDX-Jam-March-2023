@@ -25,8 +25,9 @@ public class CharacterData {
         tags.addAll(other.tags);
     }
     
-    public void addTag(String tag) {
+    public void addTag(String tag, boolean addFirstSkill) {
         var tagData = GameData.findTag(tag);
+        tagData = new TagData(tagData);
         tags.add(tagData);
         
         healthMax += tagData.healthModifier;
@@ -34,7 +35,7 @@ public class CharacterData {
         
         speed += tagData.speedModifier;
         
-        if (tagData.availableSkills.size > 0) {
+        if (addFirstSkill && tagData.availableSkills.size > 0) {
             addSkill(tagData.availableSkills.first());
             tagData.availableSkills.removeIndex(0);
         }
@@ -46,6 +47,6 @@ public class CharacterData {
         }
         
         var skillData = GameData.findSkill(skill);
-        skills.add(skillData);
+        skills.add(new SkillData(skillData));
     }
 }

@@ -895,7 +895,7 @@ public class Core extends JamGame {
                 hero.addSkill(skill);
             }
             for (var tag : heroTags[i].split(",")) {
-                hero.addTag(tag);
+                hero.addTag(tag, false);
             }
             heroTemplates.add(hero);
         }

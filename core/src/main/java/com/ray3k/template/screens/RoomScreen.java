@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.ray3k.template.data.*;
 import com.ray3k.template.stripe.*;
@@ -358,10 +359,40 @@ public class RoomScreen extends JamScreen {
                 textButton.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
-                        room.upgrade = false;
-                        room.tag = false;
-                        room.hero = null;
-                        core.transition(new MapScreen());
+                        var pop = new PopTable(wDefault);
+                        pop.setKeepCenteredInWindow(true);
+                        pop.setModal(true);
+                        pop.pad(10);
+        
+                        pop.defaults().space(10);
+                        var label = new Label("Which hero?", lButton);
+                        pop.add(label);
+        
+                        for (var teamHero : playerTeam) {
+                            pop.row();
+                            var textButton = new TextButton(teamHero.name, skin);
+                            pop.add(textButton);
+                            textButton.addListener(new ChangeListener() {
+                                @Override
+                                public void changed(ChangeEvent event, Actor actor) {
+                                    pop.hide();
+    
+                                    showConfirmTagPop(teamHero, room);
+                                }
+                            });
+                        }
+        
+                        pop.row();
+                        var textButton = new TextButton("Cancel", skin);
+                        pop.add(textButton);
+                        textButton.addListener(new ChangeListener() {
+                            @Override
+                            public void changed(ChangeEvent event, Actor actor) {
+                                pop.hide();
+                            }
+                        });
+        
+                        pop.show(stage);
                     }
                 });
             }
@@ -452,6 +483,44 @@ public class RoomScreen extends JamScreen {
         var label = new Label("Added skill: " + skill, lButton);
         tagConfirmationPop.add(label);
     
+        tagConfirmationPop.row();
+        var textButton = new TextButton("OK", skin);
+        tagConfirmationPop.add(textButton);
+        textButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                room.upgrade = false;
+                room.tag = false;
+                room.hero = null;
+                core.transition(new MapScreen());
+            }
+        });
+        tagConfirmationPop.show(stage);
+    }
+    
+    private void showConfirmTagPop(CharacterData teamHero, RoomData room) {
+        var tags = new Array<TagData>();
+        tags.addAll(tagTemplates);
+        var iter = tags.iterator();
+        while (iter.hasNext()) {
+            var tag = iter.next();
+            for (var heroTag : teamHero.tags) {
+                if (tag.name.equals(heroTag.name)) iter.remove();
+            }
+        }
+        
+        var tag = tags.random();
+        teamHero.addTag(tag.name, false);
+        
+        var tagConfirmationPop = new PopTable(wDefault);
+        tagConfirmationPop.setKeepCenteredInWindow(true);
+        tagConfirmationPop.setModal(true);
+        tagConfirmationPop.pad(10);
+        
+        tagConfirmationPop.defaults().space(10);
+        var label = new Label("Added tag: " + tag.name, lButton);
+        tagConfirmationPop.add(label);
+        
         tagConfirmationPop.row();
         var textButton = new TextButton("OK", skin);
         tagConfirmationPop.add(textButton);
