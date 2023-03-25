@@ -9,7 +9,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
@@ -22,36 +25,23 @@ import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.github.tommyettinger.textra.TextraLabel;
 import com.ray3k.template.*;
-import com.ray3k.template.data.*;
+import com.ray3k.template.data.CharacterData;
 
 import static com.ray3k.template.Core.*;
 import static com.ray3k.template.Resources.SkinSkinStyles.*;
 import static com.ray3k.template.Resources.*;
 import static com.ray3k.template.data.GameData.*;
 
-public class PreBattleScreen extends JamScreen {
+public class BattleScreen extends JamScreen {
     private Stage stage;
     private final static Color BG_COLOR = new Color(Color.BLACK);
-    private TextButton fightButton;
+    private Array<Table> enemyCells = new Array<>();
     private Array<Table> characterCells = new Array<>();
     
     @Override
     public void show() {
         super.show();
         var room = getRoom();
-        
-        var numberOfEnemies = MathUtils.clamp(difficulty / 5, 1, 6);
-        enemyTeam.clear();
-        
-        var newEnemyPositions = new IntArray(new int[]{0,1,2,3,4,5});
-        newEnemyPositions.shuffle();
-        
-        for (int i = 0; i < numberOfEnemies; i++) {
-            var enemy = new CharacterData(enemyTemplates.random());
-            enemy.position = newEnemyPositions.pop();
-            enemyTeam.add(enemy);
-            System.out.println(enemy.name + " " + enemy.position);
-        }
     
         final Music music = bgm_game;
         if (!music.isPlaying()) {
@@ -96,6 +86,7 @@ public class PreBattleScreen extends JamScreen {
         }
         if (!found) enemyCell3.setBackground(skin.getDrawable("character-box-empty-10"));
         subTable.add(enemyCell3);
+        enemyCells.add(enemyCell3);
     
         var enemyCell4 = new Table();
         found = false;
@@ -113,6 +104,7 @@ public class PreBattleScreen extends JamScreen {
         }
         if (!found) enemyCell4.setBackground(skin.getDrawable("character-box-empty-10"));
         subTable.add(enemyCell4);
+        enemyCells.add(enemyCell4);
     
         var enemyCell5 = new Table();
         found = false;
@@ -130,6 +122,7 @@ public class PreBattleScreen extends JamScreen {
         }
         if (!found) enemyCell5.setBackground(skin.getDrawable("character-box-empty-10"));
         subTable.add(enemyCell5);
+        enemyCells.add(enemyCell5);
     
         subTable.row().padTop(20);
         var enemyCell0 = new Table();
@@ -148,6 +141,7 @@ public class PreBattleScreen extends JamScreen {
         }
         if (!found) enemyCell0.setBackground(skin.getDrawable("character-box-empty-10"));
         subTable.add(enemyCell0);
+        enemyCells.insert(0, enemyCell0);
     
         var enemyCell1 = new Table();
         found = false;
@@ -165,6 +159,7 @@ public class PreBattleScreen extends JamScreen {
         }
         if (!found) enemyCell1.setBackground(skin.getDrawable("character-box-empty-10"));
         subTable.add(enemyCell1);
+        enemyCells.insert(1, enemyCell1);
     
         var enemyCell2 = new Table();
         found = false;
@@ -182,11 +177,12 @@ public class PreBattleScreen extends JamScreen {
         }
         if (!found) enemyCell2.setBackground(skin.getDrawable("character-box-empty-10"));
         subTable.add(enemyCell2);
+        enemyCells.insert(2, enemyCell2);
         
         table.add().uniformX().expandX();
         
         root.row();
-        var image = new Image(skin, "setup-divider-10");
+        var image = new Image(skin, "battle-divider-10");
         root.add(image).growX();
         
         root.row();
@@ -201,51 +197,122 @@ public class PreBattleScreen extends JamScreen {
     
         subTable.defaults().space(20).size(152, 102);
         var playerCell0 = new Table();
-        playerCell0.setBackground(skin.getDrawable("character-box-empty-10"));
+        found = false;
+        for (var hero : playerTeam) {
+            if (hero.position == 0) {
+                found = true;
+                playerCell0.setBackground(skin.getDrawable("character-box-10"));
+            
+                var textra = new TextraLabel(hero.name, skin);
+                textra.setAlignment(Align.center);
+                textra.setWrap(true);
+                playerCell0.add(textra).growX();
+                break;
+            }
+        }
+        if (!found) playerCell0.setBackground(skin.getDrawable("character-box-empty-10"));
         subTable.add(playerCell0);
         playerCell0.setTouchable(Touchable.enabled);
     
         var playerCell1 = new Table();
-        playerCell1.setBackground(skin.getDrawable("character-box-empty-10"));
+        found = false;
+        for (var hero : playerTeam) {
+            if (hero.position == 1) {
+                found = true;
+                playerCell1.setBackground(skin.getDrawable("character-box-10"));
+            
+                var textra = new TextraLabel(hero.name, skin);
+                textra.setAlignment(Align.center);
+                textra.setWrap(true);
+                playerCell1.add(textra).growX();
+                break;
+            }
+        }
+        if (!found) playerCell1.setBackground(skin.getDrawable("character-box-empty-10"));
         subTable.add(playerCell1);
         playerCell1.setTouchable(Touchable.enabled);
     
         var playerCell2 = new Table();
-        playerCell2.setBackground(skin.getDrawable("character-box-empty-10"));
+        found = false;
+        for (var hero : playerTeam) {
+            if (hero.position == 2) {
+                found = true;
+                playerCell2.setBackground(skin.getDrawable("character-box-10"));
+            
+                var textra = new TextraLabel(hero.name, skin);
+                textra.setAlignment(Align.center);
+                textra.setWrap(true);
+                playerCell2.add(textra).growX();
+                break;
+            }
+        }
+        if (!found) playerCell2.setBackground(skin.getDrawable("character-box-empty-10"));
         subTable.add(playerCell2);
         playerCell2.setTouchable(Touchable.enabled);
     
         subTable.row().padTop(20);
         var playerCell3 = new Table();
-        playerCell3.setBackground(skin.getDrawable("character-box-empty-10"));
+        found = false;
+        for (var hero : playerTeam) {
+            if (hero.position == 3) {
+                found = true;
+                playerCell3.setBackground(skin.getDrawable("character-box-10"));
+            
+                var textra = new TextraLabel(hero.name, skin);
+                textra.setAlignment(Align.center);
+                textra.setWrap(true);
+                playerCell3.add(textra).growX();
+                break;
+            }
+        }
+        if (!found) playerCell3.setBackground(skin.getDrawable("character-box-empty-10"));
         subTable.add(playerCell3);
         playerCell3.setTouchable(Touchable.enabled);
     
         var playerCell4 = new Table();
-        playerCell4.setBackground(skin.getDrawable("character-box-empty-10"));
+        found = false;
+        for (var hero : playerTeam) {
+            if (hero.position == 4) {
+                found = true;
+                playerCell4.setBackground(skin.getDrawable("character-box-10"));
+            
+                var textra = new TextraLabel(hero.name, skin);
+                textra.setAlignment(Align.center);
+                textra.setWrap(true);
+                playerCell4.add(textra).growX();
+                break;
+            }
+        }
+        if (!found) playerCell4.setBackground(skin.getDrawable("character-box-empty-10"));
         subTable.add(playerCell4);
         playerCell4.setTouchable(Touchable.enabled);
     
         var playerCell5 = new Table();
-        playerCell5.setBackground(skin.getDrawable("character-box-empty-10"));
+        found = false;
+        for (var hero : playerTeam) {
+            if (hero.position == 5) {
+                found = true;
+                playerCell5.setBackground(skin.getDrawable("character-box-10"));
+            
+                var textra = new TextraLabel(hero.name, skin);
+                textra.setAlignment(Align.center);
+                textra.setWrap(true);
+                playerCell5.add(textra).growX();
+                break;
+            }
+        }
+        if (!found) playerCell5.setBackground(skin.getDrawable("character-box-empty-10"));
         subTable.add(playerCell5);
         playerCell5.setTouchable(Touchable.enabled);
-    
-        fightButton = new TextButton("FIGHT!", skin);
-        fightButton.setVisible(false);
-        table.add(fightButton).uniformX().expandX();
-        fightButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                core.transition(new BattleScreen());
-            }
-        });
+        
+        table.add().uniformX().expandX();
     
         root = new Table();
         root.setFillParent(true);
         root.pad(20);
         root.top().right();
         stage.addActor(root);
+        
         var textButton = new TextButton("Retire", skin);
         root.add(textButton);
     
@@ -256,104 +323,16 @@ public class PreBattleScreen extends JamScreen {
                 core.transition(new GameOverScreen());
             }
         });
+    
+        root = new Table();
+        root.setFillParent(true);
+        root.pad(20);
+        root.bottom().right();
+        stage.addActor(root);
         
-        var dnd = new DragAndDrop();
-        dnd.setDragActorPosition(76, -51);
-        dnd.addTarget(new DragTarget(playerCell0, 0));
-        dnd.addTarget(new DragTarget(playerCell1, 1));
-        dnd.addTarget(new DragTarget(playerCell2, 2));
-        dnd.addTarget(new DragTarget(playerCell3, 3));
-        dnd.addTarget(new DragTarget(playerCell4, 4));
-        dnd.addTarget(new DragTarget(playerCell5, 5));
-        
-        var offset = 50;
-        
-        for (var hero : playerTeam) {
-            var characterCell = new Table();
-            characterCell.setBackground(skin.getDrawable("character-box-10"));
-            characterCell.setTouchable(Touchable.enabled);
-            stage.addActor(characterCell);
-            
-            var textra = new TextraLabel(hero.name, skin);
-            textra.setAlignment(Align.center);
-            textra.setWrap(true);
-            characterCell.add(textra).growX();
-            
-            characterCell.pack();
-            characterCell.setPosition(stage.getWidth() - 30, offset, Align.bottomRight);
-            offset += 25;
-            dnd.addSource(new DragSource(characterCell, hero));
-            characterCells.add(characterCell);
-        }
-    }
-    
-    private class DragSource extends Source {
-        CharacterData hero;
-        public DragSource(Actor actor, CharacterData hero) {
-            super(actor);
-            this.hero = hero;
-        }
-    
-        @Override
-        public Payload dragStart(InputEvent event, float x, float y, int pointer) {
-            fightButton.setVisible(false);
-            
-            var payload = new Payload();
-            payload.setObject(hero);
-            
-            if (getActor().getParent() instanceof Table) {
-                var table = (Table) getActor().getParent();
-                table.setBackground(skin.getDrawable("character-box-empty-10"));
-            }
-            
-            stage.addActor(getActor());
-            payload.setDragActor(getActor());
-    
-            if (getActor().getParent() instanceof Table) {
-                var table = (Table) getActor().getParent();
-                table.clearChildren();
-            }
-            return payload;
-        }
-    }
-    
-    private class DragTarget extends Target {
-        int position;
-        public DragTarget(Actor actor, int position) {
-            super(actor);
-            this.position = position;
-        }
-    
-        @Override
-        public boolean drag(Source source, Payload payload, float x, float y, int pointer) {
-            return true;
-        }
-    
-        @Override
-        public void drop(Source source, Payload payload, float x, float y, int pointer) {
-            var table = (Table) getActor();
-            var iter = table.getChildren().iterator();
-            for (var child : iter) {
-                stage.addActor(child);
-                child.setPosition(stage.getWidth() - 30, 50, Align.bottomRight);
-            }
-            table.clearChildren();
-            table.add(source.getActor());
-            table.setBackground((Drawable) null);
-            var hero = (CharacterData) payload.getObject();
-            hero.position = position;
-            
-            var readyToGo = true;
-            for (var playerCell : characterCells) {
-                System.out.println(playerCell.getParent().getClass());
-                if (playerCell.getParent() == stage.getRoot()) {
-                    readyToGo = false;
-                    break;
-                }
-            }
-            
-            fightButton.setVisible(readyToGo);
-        }
+        label = new Label("", lLog);
+        label.setWrap(true);
+        root.add(label).width(180);
     }
     
     @Override

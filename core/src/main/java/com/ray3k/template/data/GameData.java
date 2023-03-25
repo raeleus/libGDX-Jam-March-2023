@@ -12,6 +12,7 @@ public class GameData {
     public static Array<TagData> tagTemplates = new Array<>();
     public static Array<SkillData> skillTemplates = new Array<>();
     public static Array<CharacterData> heroTemplates = new Array<>();
+    public static Array<CharacterData> enemyTemplates = new Array<>();
     public static Array<RoomData> rooms = new Array<>();
     public static Array<Color> colors = new Array<>(new Color[]{Color.BLACK, Color.WHITE, Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.BROWN, Color.CYAN, Color.GRAY, Color.PURPLE, Color.ORANGE, Color.PINK, Color.GOLD});
     public static Array<String> colorNames = new Array<>(new String[]{"Off", "White", "Red", "Green", "Blue", "Yellow", "Brown", "Cyan", "Gray", "Purple", "Orange", "Pink", "Gold"});

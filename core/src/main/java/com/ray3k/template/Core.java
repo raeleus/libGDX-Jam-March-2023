@@ -899,6 +899,17 @@ public class Core extends JamGame {
             }
             heroTemplates.add(hero);
         }
+    
+        var enemyNames = Gdx.files.internal("text/enemy-names").readString().split("\\n");
+        var enemykSkills = Gdx.files.internal("text/enemy-skills").readString().split("\\n");
+        for (int i = 0; i < enemyNames.length; i++) {
+            var enemy = new CharacterData();
+            enemy.name = enemyNames[i];
+            for (var skill : enemykSkills[i].split(",")) {
+                enemy.addSkill(skill);
+            }
+            enemyTemplates.add(enemy);
+        }
         
         preferences = Gdx.app.getPreferences(PROJECT_NAME);
         
