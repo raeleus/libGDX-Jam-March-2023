@@ -9,4 +9,5 @@ public class RoomData {
     public boolean upgrade;
     public String hero;
     public boolean hasEnemies = true;
+    public boolean restoration;
 }

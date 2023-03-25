@@ -119,6 +119,7 @@ public class NameScreen extends JamScreen {
                     room.marker = Color.BLACK;
                     room.upgrade = i < 50 * 50 * .70f;
                     room.tag = i < 50 * 50 * .50f;
+                    room.restoration = i < 50 * 50 * .10f;
                     room.hero = i < 50 * 50 * .10f ? heroTemplates.random().name : null;
                     rooms.add(room);
                 }
@@ -129,6 +130,7 @@ public class NameScreen extends JamScreen {
                 startingRoom.upgrade = true;
                 startingRoom.tag = true;
                 startingRoom.hasEnemies = false;
+                startingRoom.restoration = true;
                 startingRoom.hero = heroTemplates.random().name;
     
                 playerTeam.clear();

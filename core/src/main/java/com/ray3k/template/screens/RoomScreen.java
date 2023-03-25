@@ -124,6 +124,49 @@ public class RoomScreen extends JamScreen {
             }
         });
         
+        if (room.restoration) {
+            root.row();
+            var restorationLabel = new Label("Someone left a bleeding heart here. It pumps with supernatural rhythm.", lLog);
+            root.add(restorationLabel);
+    
+            root.row();
+            var restoreButton = new TextButton("Restore health and gear", skin);
+            root.add(restoreButton);
+            restoreButton.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    var pop = new PopTable(wDefault);
+                    pop.setModal(true);
+                    pop.setKeepCenteredInWindow(true);
+                    pop.setKeepSizedWithinStage(true);
+            
+                    pop.defaults().space(10);
+                    var label = new Label("Health and gear fill your insides...", skin);
+                    pop.add(label);
+            
+                    pop.row();
+                    var textButton = new TextButton("OK", skin);
+                    pop.add(textButton);
+                    textButton.addListener(new ChangeListener() {
+                        @Override
+                        public void changed(ChangeEvent event, Actor actor) {
+                            for (var hero : playerTeam) {
+                                hero.health = hero.healthMax;
+                            }
+                            
+                            room.restoration = false;
+                            
+                            restoreButton.setVisible(false);
+                            restoreButton.setDisabled(true);
+                            pop.hide();
+                        }
+                    });
+            
+                    pop.show(stage);
+                }
+            });
+        }
+        
         root.row();
         var labelTable = new Table();
         root.add(labelTable);
@@ -136,18 +179,20 @@ public class RoomScreen extends JamScreen {
             root.add(label);
     
             root.row();
-            var buttonTable = new Table();
-            root.add(buttonTable);
-            buttonTable.defaults().space(10);
+            var horizontalGroup = new HorizontalGroup();
+            root.add(horizontalGroup).growX();
+            horizontalGroup.wrapSpace(10);
+            horizontalGroup.space(10);
+            horizontalGroup.wrap();
+            horizontalGroup.rowAlign(Align.left);
     
             if (room.upgrade) {
                 labelTable.row();
                 label = new Label("An upgrade cube hums in the corner.", lLog);
                 labelTable.add(label);
-        
-                buttonTable.row();
+                
                 textButton = new TextButton("Take the upgrade", skin);
-                buttonTable.add(textButton);
+                horizontalGroup.addActor(textButton);
                 textButton.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
@@ -202,7 +247,7 @@ public class RoomScreen extends JamScreen {
                                                         @Override
                                                         public void changed(ChangeEvent event, Actor actor) {
                                                             skill.level++;
-    
+                                                            
                                                             room.upgrade = false;
                                                             room.tag = false;
                                                             room.hero = null;
@@ -352,10 +397,9 @@ public class RoomScreen extends JamScreen {
                 labelTable.row();
                 label = new Label("A powerful tag is within reach.", lLog);
                 labelTable.add(label);
-        
-                buttonTable.row();
+                
                 textButton = new TextButton("Add a tag to a hero", skin);
-                buttonTable.add(textButton);
+                horizontalGroup.addActor(textButton);
                 textButton.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
@@ -401,10 +445,9 @@ public class RoomScreen extends JamScreen {
                 labelTable.row();
                 label = new Label("A hero, " + room.hero + ", is trapped in a hyperbolic phase cell.", lLog);
                 labelTable.add(label);
-        
-                buttonTable.row();
+                
                 textButton = new TextButton("Release " + room.hero, skin);
-                buttonTable.add(textButton);
+                horizontalGroup.addActor(textButton);
                 textButton.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
@@ -422,10 +465,9 @@ public class RoomScreen extends JamScreen {
                 label.setAlignment(Align.center);
                 pop.add(label).growX();
             }
-    
-            buttonTable.row();
+            
             textButton = new TextButton("Just leave and forget about it", skin);
-            buttonTable.add(textButton);
+            horizontalGroup.addActor(textButton);
             textButton.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
