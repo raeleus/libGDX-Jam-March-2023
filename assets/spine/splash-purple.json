@@ -1,0 +1,61 @@
+{
+"skeleton": {
+	"hash": "cX58WFxtE5g",
+	"spine": "4.1.19",
+	"x": -26.91,
+	"y": -15.52,
+	"width": 57.25,
+	"height": 54,
+	"images": "",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "game/splash-01", "bone": "root", "color": "000000ff", "dark": "ffffff", "attachment": "game/splash-01" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"game/splash-01": {
+				"game/splash-01": {
+					"path": "game/splash-",
+					"x": 1.72,
+					"y": 11.48,
+					"scaleX": 0.25,
+					"scaleY": 0.25,
+					"width": 229,
+					"height": 216,
+					"sequence": { "count": 10, "digits": 2 }
+				}
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"slots": {
+			"game/splash-01": {
+				"attachment": [
+					{},
+					{ "time": 0.0333, "name": "game/splash-01" },
+					{ "time": 0.5333 }
+				]
+			}
+		},
+		"attachments": {
+			"default": {
+				"game/splash-01": {
+					"game/splash-01": {
+						"sequence": [
+							{ "time": 0.0333, "mode": "once", "delay": 0.05 }
+						]
+					}
+				}
+			}
+		}
+	}
+}
+}

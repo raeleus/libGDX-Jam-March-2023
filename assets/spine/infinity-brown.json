@@ -1,0 +1,74 @@
+{
+"skeleton": {
+	"hash": "f1N+mH8mY9Q",
+	"spine": "4.1.19",
+	"x": -105.75,
+	"y": -39.75,
+	"width": 211.5,
+	"height": 79.5,
+	"images": "",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "game/infinity-01", "bone": "root", "color": "20190dff", "dark": "674011", "attachment": "game/infinity-01" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"game/infinity-01": {
+				"game/infinity-01": {
+					"path": "game/infinity-",
+					"scaleX": 0.5,
+					"scaleY": 0.5,
+					"width": 423,
+					"height": 159,
+					"sequence": { "count": 9, "digits": 2 }
+				}
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"slots": {
+			"game/infinity-01": {
+				"rgba2": [
+					{
+						"time": 0.5,
+						"light": "20190dff",
+						"dark": "674011",
+						"curve": [ 0.667, 0.13, 0.696, 1, 0.667, 0.1, 0.696, 1, 0.667, 0.05, 0.696, 1, 0.667, 1, 0.696, 1, 0.667, 0.4, 0.696, 1, 0.667, 0.25, 0.696, 1, 0.667, 0.07, 0.696, 1 ]
+					},
+					{
+						"time": 0.7667,
+						"light": "ffffffff",
+						"dark": "ffffff",
+						"curve": [ 0.844, 1, 0.922, 0.13, 0.844, 1, 0.922, 0.1, 0.844, 1, 0.922, 0.05, 0.844, 1, 0.922, 1, 0.844, 1, 0.922, 0.4, 0.844, 1, 0.922, 0.25, 0.844, 1, 0.922, 0.07 ]
+					},
+					{ "time": 1, "light": "20190dff", "dark": "674011" },
+					{ "time": 1.3333, "light": "20190d00", "dark": "674011" }
+				],
+				"attachment": [
+					{},
+					{ "time": 0.0333, "name": "game/infinity-01" }
+				]
+			}
+		},
+		"attachments": {
+			"default": {
+				"game/infinity-01": {
+					"game/infinity-01": {
+						"sequence": [
+							{ "time": 0.0333, "mode": "once", "delay": 0.05 }
+						]
+					}
+				}
+			}
+		}
+	}
+}
+}

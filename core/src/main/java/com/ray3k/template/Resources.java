@@ -63,6 +63,13 @@ public class Resources {
 
     public static void loadResources(AssetManager assetManager) {
         textures_textures = assetManager.get("textures/textures.atlas");
+        SpineBiteWhite.skeletonData = assetManager.get("spine/bite-white.json");
+        SpineBiteWhite.animationData = assetManager.get("spine/bite-white.json-animation");
+        SpineBiteWhite.animationAnimation = SpineBiteWhite.skeletonData.findAnimation("animation");
+        SpineBiteWhite.boneRoot = SpineBiteWhite.skeletonData.findBone("root");
+        SpineBiteWhite.boneGameBite = SpineBiteWhite.skeletonData.findBone("game/bite");
+        SpineBiteWhite.slotGameBite = SpineBiteWhite.skeletonData.findSlot("game/bite");
+        SpineBiteWhite.skinDefault = SpineBiteWhite.skeletonData.findSkin("default");
         SpineBite.skeletonData = assetManager.get("spine/bite.json");
         SpineBite.animationData = assetManager.get("spine/bite.json-animation");
         SpineBite.animationAnimation = SpineBite.skeletonData.findAnimation("animation");
@@ -70,12 +77,66 @@ public class Resources {
         SpineBite.boneGameBite = SpineBite.skeletonData.findBone("game/bite");
         SpineBite.slotGameBite = SpineBite.skeletonData.findSlot("game/bite");
         SpineBite.skinDefault = SpineBite.skeletonData.findSkin("default");
+        SpineBlastBlue.skeletonData = assetManager.get("spine/blast-blue.json");
+        SpineBlastBlue.animationData = assetManager.get("spine/blast-blue.json-animation");
+        SpineBlastBlue.animationAnimation = SpineBlastBlue.skeletonData.findAnimation("animation");
+        SpineBlastBlue.boneRoot = SpineBlastBlue.skeletonData.findBone("root");
+        SpineBlastBlue.slotGameBlast01 = SpineBlastBlue.skeletonData.findSlot("game/blast-01");
+        SpineBlastBlue.skinDefault = SpineBlastBlue.skeletonData.findSkin("default");
+        SpineBlastGray.skeletonData = assetManager.get("spine/blast-gray.json");
+        SpineBlastGray.animationData = assetManager.get("spine/blast-gray.json-animation");
+        SpineBlastGray.animationAnimation = SpineBlastGray.skeletonData.findAnimation("animation");
+        SpineBlastGray.boneRoot = SpineBlastGray.skeletonData.findBone("root");
+        SpineBlastGray.slotGameBlast01 = SpineBlastGray.skeletonData.findSlot("game/blast-01");
+        SpineBlastGray.skinDefault = SpineBlastGray.skeletonData.findSkin("default");
+        SpineBlastGreen.skeletonData = assetManager.get("spine/blast-green.json");
+        SpineBlastGreen.animationData = assetManager.get("spine/blast-green.json-animation");
+        SpineBlastGreen.animationAnimation = SpineBlastGreen.skeletonData.findAnimation("animation");
+        SpineBlastGreen.boneRoot = SpineBlastGreen.skeletonData.findBone("root");
+        SpineBlastGreen.slotGameBlast01 = SpineBlastGreen.skeletonData.findSlot("game/blast-01");
+        SpineBlastGreen.skinDefault = SpineBlastGreen.skeletonData.findSkin("default");
+        SpineBlastOrange.skeletonData = assetManager.get("spine/blast-orange.json");
+        SpineBlastOrange.animationData = assetManager.get("spine/blast-orange.json-animation");
+        SpineBlastOrange.animationAnimation = SpineBlastOrange.skeletonData.findAnimation("animation");
+        SpineBlastOrange.boneRoot = SpineBlastOrange.skeletonData.findBone("root");
+        SpineBlastOrange.slotGameBlast01 = SpineBlastOrange.skeletonData.findSlot("game/blast-01");
+        SpineBlastOrange.skinDefault = SpineBlastOrange.skeletonData.findSkin("default");
         SpineBlastPink.skeletonData = assetManager.get("spine/blast-pink.json");
         SpineBlastPink.animationData = assetManager.get("spine/blast-pink.json-animation");
         SpineBlastPink.animationAnimation = SpineBlastPink.skeletonData.findAnimation("animation");
         SpineBlastPink.boneRoot = SpineBlastPink.skeletonData.findBone("root");
         SpineBlastPink.slotGameBlast01 = SpineBlastPink.skeletonData.findSlot("game/blast-01");
         SpineBlastPink.skinDefault = SpineBlastPink.skeletonData.findSkin("default");
+        SpineBlastRed.skeletonData = assetManager.get("spine/blast-red.json");
+        SpineBlastRed.animationData = assetManager.get("spine/blast-red.json-animation");
+        SpineBlastRed.animationAnimation = SpineBlastRed.skeletonData.findAnimation("animation");
+        SpineBlastRed.boneRoot = SpineBlastRed.skeletonData.findBone("root");
+        SpineBlastRed.slotGameBlast01 = SpineBlastRed.skeletonData.findSlot("game/blast-01");
+        SpineBlastRed.skinDefault = SpineBlastRed.skeletonData.findSkin("default");
+        SpineBlastWhite.skeletonData = assetManager.get("spine/blast-white.json");
+        SpineBlastWhite.animationData = assetManager.get("spine/blast-white.json-animation");
+        SpineBlastWhite.animationAnimation = SpineBlastWhite.skeletonData.findAnimation("animation");
+        SpineBlastWhite.boneRoot = SpineBlastWhite.skeletonData.findBone("root");
+        SpineBlastWhite.slotGameBlast01 = SpineBlastWhite.skeletonData.findSlot("game/blast-01");
+        SpineBlastWhite.skinDefault = SpineBlastWhite.skeletonData.findSkin("default");
+        SpineBlastYellow.skeletonData = assetManager.get("spine/blast-yellow.json");
+        SpineBlastYellow.animationData = assetManager.get("spine/blast-yellow.json-animation");
+        SpineBlastYellow.animationAnimation = SpineBlastYellow.skeletonData.findAnimation("animation");
+        SpineBlastYellow.boneRoot = SpineBlastYellow.skeletonData.findBone("root");
+        SpineBlastYellow.slotGameBlast01 = SpineBlastYellow.skeletonData.findSlot("game/blast-01");
+        SpineBlastYellow.skinDefault = SpineBlastYellow.skeletonData.findSkin("default");
+        SpineBloodBrown.skeletonData = assetManager.get("spine/blood-brown.json");
+        SpineBloodBrown.animationData = assetManager.get("spine/blood-brown.json-animation");
+        SpineBloodBrown.animationAnimation = SpineBloodBrown.skeletonData.findAnimation("animation");
+        SpineBloodBrown.boneRoot = SpineBloodBrown.skeletonData.findBone("root");
+        SpineBloodBrown.slotGameBlood01 = SpineBloodBrown.skeletonData.findSlot("game/blood-01");
+        SpineBloodBrown.skinDefault = SpineBloodBrown.skeletonData.findSkin("default");
+        SpineBloodWhite.skeletonData = assetManager.get("spine/blood-white.json");
+        SpineBloodWhite.animationData = assetManager.get("spine/blood-white.json-animation");
+        SpineBloodWhite.animationAnimation = SpineBloodWhite.skeletonData.findAnimation("animation");
+        SpineBloodWhite.boneRoot = SpineBloodWhite.skeletonData.findBone("root");
+        SpineBloodWhite.slotGameBlood01 = SpineBloodWhite.skeletonData.findSlot("game/blood-01");
+        SpineBloodWhite.skinDefault = SpineBloodWhite.skeletonData.findSkin("default");
         SpineBlood.skeletonData = assetManager.get("spine/blood.json");
         SpineBlood.animationData = assetManager.get("spine/blood.json-animation");
         SpineBlood.animationAnimation = SpineBlood.skeletonData.findAnimation("animation");
@@ -88,12 +149,94 @@ public class Resources {
         SpineBurn.boneRoot = SpineBurn.skeletonData.findBone("root");
         SpineBurn.slotGameBurn01 = SpineBurn.skeletonData.findSlot("game/burn-01");
         SpineBurn.skinDefault = SpineBurn.skeletonData.findSkin("default");
+        SpineExplosionBlue.skeletonData = assetManager.get("spine/explosion-blue.json");
+        SpineExplosionBlue.animationData = assetManager.get("spine/explosion-blue.json-animation");
+        SpineExplosionBlue.animationAnimation = SpineExplosionBlue.skeletonData.findAnimation("animation");
+        SpineExplosionBlue.boneRoot = SpineExplosionBlue.skeletonData.findBone("root");
+        SpineExplosionBlue.slotGameExplosion01 = SpineExplosionBlue.skeletonData.findSlot("game/explosion-01");
+        SpineExplosionBlue.skinDefault = SpineExplosionBlue.skeletonData.findSkin("default");
+        SpineExplosionBrown.skeletonData = assetManager.get("spine/explosion-brown.json");
+        SpineExplosionBrown.animationData = assetManager.get("spine/explosion-brown.json-animation");
+        SpineExplosionBrown.animationAnimation = SpineExplosionBrown.skeletonData.findAnimation("animation");
+        SpineExplosionBrown.boneRoot = SpineExplosionBrown.skeletonData.findBone("root");
+        SpineExplosionBrown.slotGameExplosion01 = SpineExplosionBrown.skeletonData.findSlot("game/explosion-01");
+        SpineExplosionBrown.skinDefault = SpineExplosionBrown.skeletonData.findSkin("default");
+        SpineExplosionGray.skeletonData = assetManager.get("spine/explosion-gray.json");
+        SpineExplosionGray.animationData = assetManager.get("spine/explosion-gray.json-animation");
+        SpineExplosionGray.animationAnimation = SpineExplosionGray.skeletonData.findAnimation("animation");
+        SpineExplosionGray.boneRoot = SpineExplosionGray.skeletonData.findBone("root");
+        SpineExplosionGray.slotGameExplosion01 = SpineExplosionGray.skeletonData.findSlot("game/explosion-01");
+        SpineExplosionGray.skinDefault = SpineExplosionGray.skeletonData.findSkin("default");
+        SpineExplosionGray2.skeletonData = assetManager.get("spine/explosion-gray2.json");
+        SpineExplosionGray2.animationData = assetManager.get("spine/explosion-gray2.json-animation");
+        SpineExplosionGray2.animationAnimation = SpineExplosionGray2.skeletonData.findAnimation("animation");
+        SpineExplosionGray2.boneRoot = SpineExplosionGray2.skeletonData.findBone("root");
+        SpineExplosionGray2.slotGameExplosion01 = SpineExplosionGray2.skeletonData.findSlot("game/explosion-01");
+        SpineExplosionGray2.skinDefault = SpineExplosionGray2.skeletonData.findSkin("default");
+        SpineExplosionPink.skeletonData = assetManager.get("spine/explosion-pink.json");
+        SpineExplosionPink.animationData = assetManager.get("spine/explosion-pink.json-animation");
+        SpineExplosionPink.animationAnimation = SpineExplosionPink.skeletonData.findAnimation("animation");
+        SpineExplosionPink.boneRoot = SpineExplosionPink.skeletonData.findBone("root");
+        SpineExplosionPink.slotGameExplosion01 = SpineExplosionPink.skeletonData.findSlot("game/explosion-01");
+        SpineExplosionPink.skinDefault = SpineExplosionPink.skeletonData.findSkin("default");
+        SpineExplosionWhite.skeletonData = assetManager.get("spine/explosion-white.json");
+        SpineExplosionWhite.animationData = assetManager.get("spine/explosion-white.json-animation");
+        SpineExplosionWhite.animationAnimation = SpineExplosionWhite.skeletonData.findAnimation("animation");
+        SpineExplosionWhite.boneRoot = SpineExplosionWhite.skeletonData.findBone("root");
+        SpineExplosionWhite.slotGameExplosion01 = SpineExplosionWhite.skeletonData.findSlot("game/explosion-01");
+        SpineExplosionWhite.skinDefault = SpineExplosionWhite.skeletonData.findSkin("default");
         SpineExplosion.skeletonData = assetManager.get("spine/explosion.json");
         SpineExplosion.animationData = assetManager.get("spine/explosion.json-animation");
         SpineExplosion.animationAnimation = SpineExplosion.skeletonData.findAnimation("animation");
         SpineExplosion.boneRoot = SpineExplosion.skeletonData.findBone("root");
         SpineExplosion.slotGameExplosion01 = SpineExplosion.skeletonData.findSlot("game/explosion-01");
         SpineExplosion.skinDefault = SpineExplosion.skeletonData.findSkin("default");
+        SpineHealthBrown.skeletonData = assetManager.get("spine/health-brown.json");
+        SpineHealthBrown.animationData = assetManager.get("spine/health-brown.json-animation");
+        SpineHealthBrown.animationAnimation = SpineHealthBrown.skeletonData.findAnimation("animation");
+        SpineHealthBrown.boneRoot = SpineHealthBrown.skeletonData.findBone("root");
+        SpineHealthBrown.boneGameHealth2 = SpineHealthBrown.skeletonData.findBone("game/health2");
+        SpineHealthBrown.boneGameHealth4 = SpineHealthBrown.skeletonData.findBone("game/health4");
+        SpineHealthBrown.boneGameHealth3 = SpineHealthBrown.skeletonData.findBone("game/health3");
+        SpineHealthBrown.boneGameHealth5 = SpineHealthBrown.skeletonData.findBone("game/health5");
+        SpineHealthBrown.boneGameHealth6 = SpineHealthBrown.skeletonData.findBone("game/health6");
+        SpineHealthBrown.boneGameHealth7 = SpineHealthBrown.skeletonData.findBone("game/health7");
+        SpineHealthBrown.boneGameHealth8 = SpineHealthBrown.skeletonData.findBone("game/health8");
+        SpineHealthBrown.boneGameHealth9 = SpineHealthBrown.skeletonData.findBone("game/health9");
+        SpineHealthBrown.slotGameHealth2 = SpineHealthBrown.skeletonData.findSlot("game/health2");
+        SpineHealthBrown.slotGameHealth9 = SpineHealthBrown.skeletonData.findSlot("game/health9");
+        SpineHealthBrown.slotGameHealth3 = SpineHealthBrown.skeletonData.findSlot("game/health3");
+        SpineHealthBrown.slotGameHealth8 = SpineHealthBrown.skeletonData.findSlot("game/health8");
+        SpineHealthBrown.slotGameHealth4 = SpineHealthBrown.skeletonData.findSlot("game/health4");
+        SpineHealthBrown.slotGameHealth7 = SpineHealthBrown.skeletonData.findSlot("game/health7");
+        SpineHealthBrown.slotGameHealth5 = SpineHealthBrown.skeletonData.findSlot("game/health5");
+        SpineHealthBrown.slotGameHealth6 = SpineHealthBrown.skeletonData.findSlot("game/health6");
+        SpineHealthBrown.slotHealthpath = SpineHealthBrown.skeletonData.findSlot("healthpath");
+        SpineHealthBrown.slotHealthpath2 = SpineHealthBrown.skeletonData.findSlot("healthpath2");
+        SpineHealthBrown.skinDefault = SpineHealthBrown.skeletonData.findSkin("default");
+        SpineHealthRed.skeletonData = assetManager.get("spine/health-red.json");
+        SpineHealthRed.animationData = assetManager.get("spine/health-red.json-animation");
+        SpineHealthRed.animationAnimation = SpineHealthRed.skeletonData.findAnimation("animation");
+        SpineHealthRed.boneRoot = SpineHealthRed.skeletonData.findBone("root");
+        SpineHealthRed.boneGameHealth2 = SpineHealthRed.skeletonData.findBone("game/health2");
+        SpineHealthRed.boneGameHealth4 = SpineHealthRed.skeletonData.findBone("game/health4");
+        SpineHealthRed.boneGameHealth3 = SpineHealthRed.skeletonData.findBone("game/health3");
+        SpineHealthRed.boneGameHealth5 = SpineHealthRed.skeletonData.findBone("game/health5");
+        SpineHealthRed.boneGameHealth6 = SpineHealthRed.skeletonData.findBone("game/health6");
+        SpineHealthRed.boneGameHealth7 = SpineHealthRed.skeletonData.findBone("game/health7");
+        SpineHealthRed.boneGameHealth8 = SpineHealthRed.skeletonData.findBone("game/health8");
+        SpineHealthRed.boneGameHealth9 = SpineHealthRed.skeletonData.findBone("game/health9");
+        SpineHealthRed.slotGameHealth2 = SpineHealthRed.skeletonData.findSlot("game/health2");
+        SpineHealthRed.slotGameHealth9 = SpineHealthRed.skeletonData.findSlot("game/health9");
+        SpineHealthRed.slotGameHealth3 = SpineHealthRed.skeletonData.findSlot("game/health3");
+        SpineHealthRed.slotGameHealth8 = SpineHealthRed.skeletonData.findSlot("game/health8");
+        SpineHealthRed.slotGameHealth4 = SpineHealthRed.skeletonData.findSlot("game/health4");
+        SpineHealthRed.slotGameHealth7 = SpineHealthRed.skeletonData.findSlot("game/health7");
+        SpineHealthRed.slotGameHealth5 = SpineHealthRed.skeletonData.findSlot("game/health5");
+        SpineHealthRed.slotGameHealth6 = SpineHealthRed.skeletonData.findSlot("game/health6");
+        SpineHealthRed.slotHealthpath = SpineHealthRed.skeletonData.findSlot("healthpath");
+        SpineHealthRed.slotHealthpath2 = SpineHealthRed.skeletonData.findSlot("healthpath2");
+        SpineHealthRed.skinDefault = SpineHealthRed.skeletonData.findSkin("default");
         SpineHealth.skeletonData = assetManager.get("spine/health.json");
         SpineHealth.animationData = assetManager.get("spine/health.json-animation");
         SpineHealth.animationAnimation = SpineHealth.skeletonData.findAnimation("animation");
@@ -117,6 +260,18 @@ public class Resources {
         SpineHealth.slotHealthpath = SpineHealth.skeletonData.findSlot("healthpath");
         SpineHealth.slotHealthpath2 = SpineHealth.skeletonData.findSlot("healthpath2");
         SpineHealth.skinDefault = SpineHealth.skeletonData.findSkin("default");
+        SpineInfinityBrown.skeletonData = assetManager.get("spine/infinity-brown.json");
+        SpineInfinityBrown.animationData = assetManager.get("spine/infinity-brown.json-animation");
+        SpineInfinityBrown.animationAnimation = SpineInfinityBrown.skeletonData.findAnimation("animation");
+        SpineInfinityBrown.boneRoot = SpineInfinityBrown.skeletonData.findBone("root");
+        SpineInfinityBrown.slotGameInfinity01 = SpineInfinityBrown.skeletonData.findSlot("game/infinity-01");
+        SpineInfinityBrown.skinDefault = SpineInfinityBrown.skeletonData.findSkin("default");
+        SpineInfinityWhite.skeletonData = assetManager.get("spine/infinity-white.json");
+        SpineInfinityWhite.animationData = assetManager.get("spine/infinity-white.json-animation");
+        SpineInfinityWhite.animationAnimation = SpineInfinityWhite.skeletonData.findAnimation("animation");
+        SpineInfinityWhite.boneRoot = SpineInfinityWhite.skeletonData.findBone("root");
+        SpineInfinityWhite.slotGameInfinity01 = SpineInfinityWhite.skeletonData.findSlot("game/infinity-01");
+        SpineInfinityWhite.skinDefault = SpineInfinityWhite.skeletonData.findSkin("default");
         SpineInfinity.skeletonData = assetManager.get("spine/infinity.json");
         SpineInfinity.animationData = assetManager.get("spine/infinity.json-animation");
         SpineInfinity.animationAnimation = SpineInfinity.skeletonData.findAnimation("animation");
@@ -207,6 +362,24 @@ public class Resources {
         SpineLibgdx.slotLogoLibgdxBoard2 = SpineLibgdx.skeletonData.findSlot("logo/libgdx_board2");
         SpineLibgdx.slotLogoLibgdxBoard3 = SpineLibgdx.skeletonData.findSlot("logo/libgdx_board3");
         SpineLibgdx.skinDefault = SpineLibgdx.skeletonData.findSkin("default");
+        SpineLightningReverseRed.skeletonData = assetManager.get("spine/lightning-reverse-red.json");
+        SpineLightningReverseRed.animationData = assetManager.get("spine/lightning-reverse-red.json-animation");
+        SpineLightningReverseRed.animationAnimation = SpineLightningReverseRed.skeletonData.findAnimation("animation");
+        SpineLightningReverseRed.boneRoot = SpineLightningReverseRed.skeletonData.findBone("root");
+        SpineLightningReverseRed.slotGameLightning09 = SpineLightningReverseRed.skeletonData.findSlot("game/lightning-09");
+        SpineLightningReverseRed.skinDefault = SpineLightningReverseRed.skeletonData.findSkin("default");
+        SpineLightningReverseWhite.skeletonData = assetManager.get("spine/lightning-reverse-white.json");
+        SpineLightningReverseWhite.animationData = assetManager.get("spine/lightning-reverse-white.json-animation");
+        SpineLightningReverseWhite.animationAnimation = SpineLightningReverseWhite.skeletonData.findAnimation("animation");
+        SpineLightningReverseWhite.boneRoot = SpineLightningReverseWhite.skeletonData.findBone("root");
+        SpineLightningReverseWhite.slotGameLightning09 = SpineLightningReverseWhite.skeletonData.findSlot("game/lightning-09");
+        SpineLightningReverseWhite.skinDefault = SpineLightningReverseWhite.skeletonData.findSkin("default");
+        SpineLightningWhite.skeletonData = assetManager.get("spine/lightning-white.json");
+        SpineLightningWhite.animationData = assetManager.get("spine/lightning-white.json-animation");
+        SpineLightningWhite.animationAnimation = SpineLightningWhite.skeletonData.findAnimation("animation");
+        SpineLightningWhite.boneRoot = SpineLightningWhite.skeletonData.findBone("root");
+        SpineLightningWhite.slotGameLightning09 = SpineLightningWhite.skeletonData.findSlot("game/lightning-09");
+        SpineLightningWhite.skinDefault = SpineLightningWhite.skeletonData.findSkin("default");
         SpineLightning.skeletonData = assetManager.get("spine/lightning.json");
         SpineLightning.animationData = assetManager.get("spine/lightning.json-animation");
         SpineLightning.animationAnimation = SpineLightning.skeletonData.findAnimation("animation");
@@ -220,6 +393,24 @@ public class Resources {
         SpinePing.boneGamePing = SpinePing.skeletonData.findBone("game/ping");
         SpinePing.slotGamePing = SpinePing.skeletonData.findSlot("game/ping");
         SpinePing.skinDefault = SpinePing.skeletonData.findSkin("default");
+        SpinePortalBlue.skeletonData = assetManager.get("spine/portal-blue.json");
+        SpinePortalBlue.animationData = assetManager.get("spine/portal-blue.json-animation");
+        SpinePortalBlue.animationAnimation = SpinePortalBlue.skeletonData.findAnimation("animation");
+        SpinePortalBlue.boneRoot = SpinePortalBlue.skeletonData.findBone("root");
+        SpinePortalBlue.slotGamePortal01 = SpinePortalBlue.skeletonData.findSlot("game/portal-01");
+        SpinePortalBlue.skinDefault = SpinePortalBlue.skeletonData.findSkin("default");
+        SpinePortalGreen.skeletonData = assetManager.get("spine/portal-green.json");
+        SpinePortalGreen.animationData = assetManager.get("spine/portal-green.json-animation");
+        SpinePortalGreen.animationAnimation = SpinePortalGreen.skeletonData.findAnimation("animation");
+        SpinePortalGreen.boneRoot = SpinePortalGreen.skeletonData.findBone("root");
+        SpinePortalGreen.slotGamePortal01 = SpinePortalGreen.skeletonData.findSlot("game/portal-01");
+        SpinePortalGreen.skinDefault = SpinePortalGreen.skeletonData.findSkin("default");
+        SpinePortalRed.skeletonData = assetManager.get("spine/portal-red.json");
+        SpinePortalRed.animationData = assetManager.get("spine/portal-red.json-animation");
+        SpinePortalRed.animationAnimation = SpinePortalRed.skeletonData.findAnimation("animation");
+        SpinePortalRed.boneRoot = SpinePortalRed.skeletonData.findBone("root");
+        SpinePortalRed.slotGamePortal01 = SpinePortalRed.skeletonData.findSlot("game/portal-01");
+        SpinePortalRed.skinDefault = SpinePortalRed.skeletonData.findSkin("default");
         SpinePortal.skeletonData = assetManager.get("spine/portal.json");
         SpinePortal.animationData = assetManager.get("spine/portal.json-animation");
         SpinePortal.animationAnimation = SpinePortal.skeletonData.findAnimation("animation");
@@ -257,6 +448,20 @@ public class Resources {
         SpineRay3k.slotLogoRay3kNeck = SpineRay3k.skeletonData.findSlot("logo/ray3k-neck");
         SpineRay3k.slotLogoRay3kLamp00 = SpineRay3k.skeletonData.findSlot("logo/ray3k-lamp-00");
         SpineRay3k.skinDefault = SpineRay3k.skeletonData.findSkin("default");
+        SpineShieldRed.skeletonData = assetManager.get("spine/shield-red.json");
+        SpineShieldRed.animationData = assetManager.get("spine/shield-red.json-animation");
+        SpineShieldRed.animationAnimation = SpineShieldRed.skeletonData.findAnimation("animation");
+        SpineShieldRed.boneRoot = SpineShieldRed.skeletonData.findBone("root");
+        SpineShieldRed.boneGameShield = SpineShieldRed.skeletonData.findBone("game/shield");
+        SpineShieldRed.slotGameShield = SpineShieldRed.skeletonData.findSlot("game/shield");
+        SpineShieldRed.skinDefault = SpineShieldRed.skeletonData.findSkin("default");
+        SpineShieldYellow.skeletonData = assetManager.get("spine/shield-yellow.json");
+        SpineShieldYellow.animationData = assetManager.get("spine/shield-yellow.json-animation");
+        SpineShieldYellow.animationAnimation = SpineShieldYellow.skeletonData.findAnimation("animation");
+        SpineShieldYellow.boneRoot = SpineShieldYellow.skeletonData.findBone("root");
+        SpineShieldYellow.boneGameShield = SpineShieldYellow.skeletonData.findBone("game/shield");
+        SpineShieldYellow.slotGameShield = SpineShieldYellow.skeletonData.findSlot("game/shield");
+        SpineShieldYellow.skinDefault = SpineShieldYellow.skeletonData.findSkin("default");
         SpineShield.skeletonData = assetManager.get("spine/shield.json");
         SpineShield.animationData = assetManager.get("spine/shield.json-animation");
         SpineShield.animationAnimation = SpineShield.skeletonData.findAnimation("animation");
@@ -272,12 +477,40 @@ public class Resources {
         SpineShot3.slotGameShot02 = SpineShot3.skeletonData.findSlot("game/shot-02");
         SpineShot3.slotGameShot03 = SpineShot3.skeletonData.findSlot("game/shot-03");
         SpineShot3.skinDefault = SpineShot3.skeletonData.findSkin("default");
+        SpineShotBlue.skeletonData = assetManager.get("spine/shot-blue.json");
+        SpineShotBlue.animationData = assetManager.get("spine/shot-blue.json-animation");
+        SpineShotBlue.animationAnimation = SpineShotBlue.skeletonData.findAnimation("animation");
+        SpineShotBlue.boneRoot = SpineShotBlue.skeletonData.findBone("root");
+        SpineShotBlue.slotGameShot01 = SpineShotBlue.skeletonData.findSlot("game/shot-01");
+        SpineShotBlue.skinDefault = SpineShotBlue.skeletonData.findSkin("default");
+        SpineShotGray.skeletonData = assetManager.get("spine/shot-gray.json");
+        SpineShotGray.animationData = assetManager.get("spine/shot-gray.json-animation");
+        SpineShotGray.animationAnimation = SpineShotGray.skeletonData.findAnimation("animation");
+        SpineShotGray.boneRoot = SpineShotGray.skeletonData.findBone("root");
+        SpineShotGray.slotGameShot01 = SpineShotGray.skeletonData.findSlot("game/shot-01");
+        SpineShotGray.skinDefault = SpineShotGray.skeletonData.findSkin("default");
+        SpineShotGreen.skeletonData = assetManager.get("spine/shot-green.json");
+        SpineShotGreen.animationData = assetManager.get("spine/shot-green.json-animation");
+        SpineShotGreen.animationAnimation = SpineShotGreen.skeletonData.findAnimation("animation");
+        SpineShotGreen.boneRoot = SpineShotGreen.skeletonData.findBone("root");
+        SpineShotGreen.slotGameShot01 = SpineShotGreen.skeletonData.findSlot("game/shot-01");
+        SpineShotGreen.skinDefault = SpineShotGreen.skeletonData.findSkin("default");
         SpineShot.skeletonData = assetManager.get("spine/shot.json");
         SpineShot.animationData = assetManager.get("spine/shot.json-animation");
         SpineShot.animationAnimation = SpineShot.skeletonData.findAnimation("animation");
         SpineShot.boneRoot = SpineShot.skeletonData.findBone("root");
         SpineShot.slotGameShot01 = SpineShot.skeletonData.findSlot("game/shot-01");
         SpineShot.skinDefault = SpineShot.skeletonData.findSkin("default");
+        SpineShotgunOrange.skeletonData = assetManager.get("spine/shotgun-orange.json");
+        SpineShotgunOrange.animationData = assetManager.get("spine/shotgun-orange.json-animation");
+        SpineShotgunOrange.animationAnimation = SpineShotgunOrange.skeletonData.findAnimation("animation");
+        SpineShotgunOrange.boneRoot = SpineShotgunOrange.skeletonData.findBone("root");
+        SpineShotgunOrange.slotGameShot01 = SpineShotgunOrange.skeletonData.findSlot("game/shot-01");
+        SpineShotgunOrange.slotGameShot02 = SpineShotgunOrange.skeletonData.findSlot("game/shot-02");
+        SpineShotgunOrange.slotGameShot03 = SpineShotgunOrange.skeletonData.findSlot("game/shot-03");
+        SpineShotgunOrange.slotGameShot04 = SpineShotgunOrange.skeletonData.findSlot("game/shot-04");
+        SpineShotgunOrange.slotGameShot05 = SpineShotgunOrange.skeletonData.findSlot("game/shot-05");
+        SpineShotgunOrange.skinDefault = SpineShotgunOrange.skeletonData.findSkin("default");
         SpineShotgun.skeletonData = assetManager.get("spine/shotgun.json");
         SpineShotgun.animationData = assetManager.get("spine/shotgun.json-animation");
         SpineShotgun.animationAnimation = SpineShotgun.skeletonData.findAnimation("animation");
@@ -288,24 +521,88 @@ public class Resources {
         SpineShotgun.slotGameShot04 = SpineShotgun.skeletonData.findSlot("game/shot-04");
         SpineShotgun.slotGameShot05 = SpineShotgun.skeletonData.findSlot("game/shot-05");
         SpineShotgun.skinDefault = SpineShotgun.skeletonData.findSkin("default");
+        SpineSlashBlue.skeletonData = assetManager.get("spine/slash-blue.json");
+        SpineSlashBlue.animationData = assetManager.get("spine/slash-blue.json-animation");
+        SpineSlashBlue.animationAnimation = SpineSlashBlue.skeletonData.findAnimation("animation");
+        SpineSlashBlue.boneRoot = SpineSlashBlue.skeletonData.findBone("root");
+        SpineSlashBlue.slotGameSlash01 = SpineSlashBlue.skeletonData.findSlot("game/slash-01");
+        SpineSlashBlue.skinDefault = SpineSlashBlue.skeletonData.findSkin("default");
+        SpineSlashWhiteUp.skeletonData = assetManager.get("spine/slash-white-up.json");
+        SpineSlashWhiteUp.animationData = assetManager.get("spine/slash-white-up.json-animation");
+        SpineSlashWhiteUp.animationAnimation = SpineSlashWhiteUp.skeletonData.findAnimation("animation");
+        SpineSlashWhiteUp.boneRoot = SpineSlashWhiteUp.skeletonData.findBone("root");
+        SpineSlashWhiteUp.slotGameSlash01 = SpineSlashWhiteUp.skeletonData.findSlot("game/slash-01");
+        SpineSlashWhiteUp.skinDefault = SpineSlashWhiteUp.skeletonData.findSkin("default");
+        SpineSlashWhite.skeletonData = assetManager.get("spine/slash-white.json");
+        SpineSlashWhite.animationData = assetManager.get("spine/slash-white.json-animation");
+        SpineSlashWhite.animationAnimation = SpineSlashWhite.skeletonData.findAnimation("animation");
+        SpineSlashWhite.boneRoot = SpineSlashWhite.skeletonData.findBone("root");
+        SpineSlashWhite.slotGameSlash01 = SpineSlashWhite.skeletonData.findSlot("game/slash-01");
+        SpineSlashWhite.skinDefault = SpineSlashWhite.skeletonData.findSkin("default");
+        SpineSlashYellow.skeletonData = assetManager.get("spine/slash-yellow.json");
+        SpineSlashYellow.animationData = assetManager.get("spine/slash-yellow.json-animation");
+        SpineSlashYellow.animationAnimation = SpineSlashYellow.skeletonData.findAnimation("animation");
+        SpineSlashYellow.boneRoot = SpineSlashYellow.skeletonData.findBone("root");
+        SpineSlashYellow.slotGameSlash01 = SpineSlashYellow.skeletonData.findSlot("game/slash-01");
+        SpineSlashYellow.skinDefault = SpineSlashYellow.skeletonData.findSkin("default");
         SpineSlash.skeletonData = assetManager.get("spine/slash.json");
         SpineSlash.animationData = assetManager.get("spine/slash.json-animation");
         SpineSlash.animationAnimation = SpineSlash.skeletonData.findAnimation("animation");
         SpineSlash.boneRoot = SpineSlash.skeletonData.findBone("root");
         SpineSlash.slotGameSlash01 = SpineSlash.skeletonData.findSlot("game/slash-01");
         SpineSlash.skinDefault = SpineSlash.skeletonData.findSkin("default");
+        SpineSlashx3.skeletonData = assetManager.get("spine/slashx3.json");
+        SpineSlashx3.animationData = assetManager.get("spine/slashx3.json-animation");
+        SpineSlashx3.animationAnimation = SpineSlashx3.skeletonData.findAnimation("animation");
+        SpineSlashx3.boneRoot = SpineSlashx3.skeletonData.findBone("root");
+        SpineSlashx3.slotGameSlash01 = SpineSlashx3.skeletonData.findSlot("game/slash-01");
+        SpineSlashx3.slotGameSlash02 = SpineSlashx3.skeletonData.findSlot("game/slash-02");
+        SpineSlashx3.slotGameSlash03 = SpineSlashx3.skeletonData.findSlot("game/slash-03");
+        SpineSlashx3.skinDefault = SpineSlashx3.skeletonData.findSkin("default");
+        SpineSparkWhite.skeletonData = assetManager.get("spine/spark-white.json");
+        SpineSparkWhite.animationData = assetManager.get("spine/spark-white.json-animation");
+        SpineSparkWhite.animationAnimation = SpineSparkWhite.skeletonData.findAnimation("animation");
+        SpineSparkWhite.boneRoot = SpineSparkWhite.skeletonData.findBone("root");
+        SpineSparkWhite.slotGameSpark01 = SpineSparkWhite.skeletonData.findSlot("game/spark-01");
+        SpineSparkWhite.skinDefault = SpineSparkWhite.skeletonData.findSkin("default");
         SpineSpark.skeletonData = assetManager.get("spine/spark.json");
         SpineSpark.animationData = assetManager.get("spine/spark.json-animation");
         SpineSpark.animationAnimation = SpineSpark.skeletonData.findAnimation("animation");
         SpineSpark.boneRoot = SpineSpark.skeletonData.findBone("root");
         SpineSpark.slotGameSpark01 = SpineSpark.skeletonData.findSlot("game/spark-01");
         SpineSpark.skinDefault = SpineSpark.skeletonData.findSkin("default");
+        SpineSplashPurple.skeletonData = assetManager.get("spine/splash-purple.json");
+        SpineSplashPurple.animationData = assetManager.get("spine/splash-purple.json-animation");
+        SpineSplashPurple.animationAnimation = SpineSplashPurple.skeletonData.findAnimation("animation");
+        SpineSplashPurple.boneRoot = SpineSplashPurple.skeletonData.findBone("root");
+        SpineSplashPurple.slotGameSplash01 = SpineSplashPurple.skeletonData.findSlot("game/splash-01");
+        SpineSplashPurple.skinDefault = SpineSplashPurple.skeletonData.findSkin("default");
+        SpineSplashWhite.skeletonData = assetManager.get("spine/splash-white.json");
+        SpineSplashWhite.animationData = assetManager.get("spine/splash-white.json-animation");
+        SpineSplashWhite.animationAnimation = SpineSplashWhite.skeletonData.findAnimation("animation");
+        SpineSplashWhite.boneRoot = SpineSplashWhite.skeletonData.findBone("root");
+        SpineSplashWhite.slotGameSplash01 = SpineSplashWhite.skeletonData.findSlot("game/splash-01");
+        SpineSplashWhite.skinDefault = SpineSplashWhite.skeletonData.findSkin("default");
         SpineSplash.skeletonData = assetManager.get("spine/splash.json");
         SpineSplash.animationData = assetManager.get("spine/splash.json-animation");
         SpineSplash.animationAnimation = SpineSplash.skeletonData.findAnimation("animation");
         SpineSplash.boneRoot = SpineSplash.skeletonData.findBone("root");
         SpineSplash.slotGameSplash01 = SpineSplash.skeletonData.findSlot("game/splash-01");
         SpineSplash.skinDefault = SpineSplash.skeletonData.findSkin("default");
+        SpineStrikeBlue.skeletonData = assetManager.get("spine/strike-blue.json");
+        SpineStrikeBlue.animationData = assetManager.get("spine/strike-blue.json-animation");
+        SpineStrikeBlue.animationAnimation = SpineStrikeBlue.skeletonData.findAnimation("animation");
+        SpineStrikeBlue.boneRoot = SpineStrikeBlue.skeletonData.findBone("root");
+        SpineStrikeBlue.boneGameStrike01 = SpineStrikeBlue.skeletonData.findBone("game/strike-01");
+        SpineStrikeBlue.slotGameStrike01 = SpineStrikeBlue.skeletonData.findSlot("game/strike-01");
+        SpineStrikeBlue.skinDefault = SpineStrikeBlue.skeletonData.findSkin("default");
+        SpineStrikeDownWhite.skeletonData = assetManager.get("spine/strike-down-white.json");
+        SpineStrikeDownWhite.animationData = assetManager.get("spine/strike-down-white.json-animation");
+        SpineStrikeDownWhite.animationAnimation = SpineStrikeDownWhite.skeletonData.findAnimation("animation");
+        SpineStrikeDownWhite.boneRoot = SpineStrikeDownWhite.skeletonData.findBone("root");
+        SpineStrikeDownWhite.boneGameStrike01 = SpineStrikeDownWhite.skeletonData.findBone("game/strike-01");
+        SpineStrikeDownWhite.slotGameStrike01 = SpineStrikeDownWhite.skeletonData.findSlot("game/strike-01");
+        SpineStrikeDownWhite.skinDefault = SpineStrikeDownWhite.skeletonData.findSkin("default");
         SpineStrikeDown.skeletonData = assetManager.get("spine/strike-down.json");
         SpineStrikeDown.animationData = assetManager.get("spine/strike-down.json-animation");
         SpineStrikeDown.animationAnimation = SpineStrikeDown.skeletonData.findAnimation("animation");
@@ -313,6 +610,13 @@ public class Resources {
         SpineStrikeDown.boneGameStrike01 = SpineStrikeDown.skeletonData.findBone("game/strike-01");
         SpineStrikeDown.slotGameStrike01 = SpineStrikeDown.skeletonData.findSlot("game/strike-01");
         SpineStrikeDown.skinDefault = SpineStrikeDown.skeletonData.findSkin("default");
+        SpineStrikeGray.skeletonData = assetManager.get("spine/strike-gray.json");
+        SpineStrikeGray.animationData = assetManager.get("spine/strike-gray.json-animation");
+        SpineStrikeGray.animationAnimation = SpineStrikeGray.skeletonData.findAnimation("animation");
+        SpineStrikeGray.boneRoot = SpineStrikeGray.skeletonData.findBone("root");
+        SpineStrikeGray.boneGameStrike01 = SpineStrikeGray.skeletonData.findBone("game/strike-01");
+        SpineStrikeGray.slotGameStrike01 = SpineStrikeGray.skeletonData.findSlot("game/strike-01");
+        SpineStrikeGray.skinDefault = SpineStrikeGray.skeletonData.findSkin("default");
         SpineStrikeLeft.skeletonData = assetManager.get("spine/strike-left.json");
         SpineStrikeLeft.animationData = assetManager.get("spine/strike-left.json-animation");
         SpineStrikeLeft.animationAnimation = SpineStrikeLeft.skeletonData.findAnimation("animation");
@@ -320,6 +624,20 @@ public class Resources {
         SpineStrikeLeft.boneGameStrike01 = SpineStrikeLeft.skeletonData.findBone("game/strike-01");
         SpineStrikeLeft.slotGameStrike01 = SpineStrikeLeft.skeletonData.findSlot("game/strike-01");
         SpineStrikeLeft.skinDefault = SpineStrikeLeft.skeletonData.findSkin("default");
+        SpineStrikePurple.skeletonData = assetManager.get("spine/strike-purple.json");
+        SpineStrikePurple.animationData = assetManager.get("spine/strike-purple.json-animation");
+        SpineStrikePurple.animationAnimation = SpineStrikePurple.skeletonData.findAnimation("animation");
+        SpineStrikePurple.boneRoot = SpineStrikePurple.skeletonData.findBone("root");
+        SpineStrikePurple.boneGameStrike01 = SpineStrikePurple.skeletonData.findBone("game/strike-01");
+        SpineStrikePurple.slotGameStrike01 = SpineStrikePurple.skeletonData.findSlot("game/strike-01");
+        SpineStrikePurple.skinDefault = SpineStrikePurple.skeletonData.findSkin("default");
+        SpineStrikeRed.skeletonData = assetManager.get("spine/strike-red.json");
+        SpineStrikeRed.animationData = assetManager.get("spine/strike-red.json-animation");
+        SpineStrikeRed.animationAnimation = SpineStrikeRed.skeletonData.findAnimation("animation");
+        SpineStrikeRed.boneRoot = SpineStrikeRed.skeletonData.findBone("root");
+        SpineStrikeRed.boneGameStrike01 = SpineStrikeRed.skeletonData.findBone("game/strike-01");
+        SpineStrikeRed.slotGameStrike01 = SpineStrikeRed.skeletonData.findSlot("game/strike-01");
+        SpineStrikeRed.skinDefault = SpineStrikeRed.skeletonData.findSkin("default");
         SpineStrikeRight.skeletonData = assetManager.get("spine/strike-right.json");
         SpineStrikeRight.animationData = assetManager.get("spine/strike-right.json-animation");
         SpineStrikeRight.animationAnimation = SpineStrikeRight.skeletonData.findAnimation("animation");
@@ -341,6 +659,26 @@ public class Resources {
         SpineStrike.boneGameStrike01 = SpineStrike.skeletonData.findBone("game/strike-01");
         SpineStrike.slotGameStrike01 = SpineStrike.skeletonData.findSlot("game/strike-01");
         SpineStrike.skinDefault = SpineStrike.skeletonData.findSkin("default");
+        SpineStrikex2.skeletonData = assetManager.get("spine/strikex2.json");
+        SpineStrikex2.animationData = assetManager.get("spine/strikex2.json-animation");
+        SpineStrikex2.animationAnimation = SpineStrikex2.skeletonData.findAnimation("animation");
+        SpineStrikex2.boneRoot = SpineStrikex2.skeletonData.findBone("root");
+        SpineStrikex2.boneGameStrike01 = SpineStrikex2.skeletonData.findBone("game/strike-01");
+        SpineStrikex2.boneGameStrike02 = SpineStrikex2.skeletonData.findBone("game/strike-02");
+        SpineStrikex2.slotGameStrike01 = SpineStrikex2.skeletonData.findSlot("game/strike-01");
+        SpineStrikex2.slotGameStrike02 = SpineStrikex2.skeletonData.findSlot("game/strike-02");
+        SpineStrikex2.skinDefault = SpineStrikex2.skeletonData.findSkin("default");
+        SpineStrikex3.skeletonData = assetManager.get("spine/strikex3.json");
+        SpineStrikex3.animationData = assetManager.get("spine/strikex3.json-animation");
+        SpineStrikex3.animationAnimation = SpineStrikex3.skeletonData.findAnimation("animation");
+        SpineStrikex3.boneRoot = SpineStrikex3.skeletonData.findBone("root");
+        SpineStrikex3.boneGameStrike01 = SpineStrikex3.skeletonData.findBone("game/strike-01");
+        SpineStrikex3.boneGameStrike02 = SpineStrikex3.skeletonData.findBone("game/strike-02");
+        SpineStrikex3.boneGameStrike03 = SpineStrikex3.skeletonData.findBone("game/strike-03");
+        SpineStrikex3.slotGameStrike01 = SpineStrikex3.skeletonData.findSlot("game/strike-01");
+        SpineStrikex3.slotGameStrike02 = SpineStrikex3.skeletonData.findSlot("game/strike-02");
+        SpineStrikex3.slotGameStrike03 = SpineStrikex3.skeletonData.findSlot("game/strike-03");
+        SpineStrikex3.skinDefault = SpineStrikex3.skeletonData.findSkin("default");
         SpineSwipeDown.skeletonData = assetManager.get("spine/swipe-down.json");
         SpineSwipeDown.animationData = assetManager.get("spine/swipe-down.json-animation");
         SpineSwipeDown.animationAnimation = SpineSwipeDown.skeletonData.findAnimation("animation");
@@ -420,6 +758,22 @@ public class Resources {
         bgm_menu = assetManager.get("bgm/menu.mp3");
     }
 
+    public static class SpineBiteWhite {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static BoneData boneGameBite;
+
+        public static SlotData slotGameBite;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
     public static class SpineBite {
         public static SkeletonData skeletonData;
 
@@ -436,6 +790,62 @@ public class Resources {
         public static com.esotericsoftware.spine.Skin skinDefault;
     }
 
+    public static class SpineBlastBlue {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameBlast01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineBlastGray {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameBlast01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineBlastGreen {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameBlast01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineBlastOrange {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameBlast01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
     public static class SpineBlastPink {
         public static SkeletonData skeletonData;
 
@@ -446,6 +856,76 @@ public class Resources {
         public static BoneData boneRoot;
 
         public static SlotData slotGameBlast01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineBlastRed {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameBlast01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineBlastWhite {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameBlast01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineBlastYellow {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameBlast01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineBloodBrown {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameBlood01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineBloodWhite {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameBlood01;
 
         public static com.esotericsoftware.spine.Skin skinDefault;
     }
@@ -478,6 +958,90 @@ public class Resources {
         public static com.esotericsoftware.spine.Skin skinDefault;
     }
 
+    public static class SpineExplosionBlue {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameExplosion01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineExplosionBrown {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameExplosion01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineExplosionGray {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameExplosion01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineExplosionGray2 {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameExplosion01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineExplosionPink {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameExplosion01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineExplosionWhite {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameExplosion01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
     public static class SpineExplosion {
         public static SkeletonData skeletonData;
 
@@ -488,6 +1052,102 @@ public class Resources {
         public static BoneData boneRoot;
 
         public static SlotData slotGameExplosion01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineHealthBrown {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static BoneData boneGameHealth2;
+
+        public static BoneData boneGameHealth4;
+
+        public static BoneData boneGameHealth3;
+
+        public static BoneData boneGameHealth5;
+
+        public static BoneData boneGameHealth6;
+
+        public static BoneData boneGameHealth7;
+
+        public static BoneData boneGameHealth8;
+
+        public static BoneData boneGameHealth9;
+
+        public static SlotData slotGameHealth2;
+
+        public static SlotData slotGameHealth9;
+
+        public static SlotData slotGameHealth3;
+
+        public static SlotData slotGameHealth8;
+
+        public static SlotData slotGameHealth4;
+
+        public static SlotData slotGameHealth7;
+
+        public static SlotData slotGameHealth5;
+
+        public static SlotData slotGameHealth6;
+
+        public static SlotData slotHealthpath;
+
+        public static SlotData slotHealthpath2;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineHealthRed {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static BoneData boneGameHealth2;
+
+        public static BoneData boneGameHealth4;
+
+        public static BoneData boneGameHealth3;
+
+        public static BoneData boneGameHealth5;
+
+        public static BoneData boneGameHealth6;
+
+        public static BoneData boneGameHealth7;
+
+        public static BoneData boneGameHealth8;
+
+        public static BoneData boneGameHealth9;
+
+        public static SlotData slotGameHealth2;
+
+        public static SlotData slotGameHealth9;
+
+        public static SlotData slotGameHealth3;
+
+        public static SlotData slotGameHealth8;
+
+        public static SlotData slotGameHealth4;
+
+        public static SlotData slotGameHealth7;
+
+        public static SlotData slotGameHealth5;
+
+        public static SlotData slotGameHealth6;
+
+        public static SlotData slotHealthpath;
+
+        public static SlotData slotHealthpath2;
 
         public static com.esotericsoftware.spine.Skin skinDefault;
     }
@@ -536,6 +1196,34 @@ public class Resources {
         public static SlotData slotHealthpath;
 
         public static SlotData slotHealthpath2;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineInfinityBrown {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameInfinity01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineInfinityWhite {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameInfinity01;
 
         public static com.esotericsoftware.spine.Skin skinDefault;
     }
@@ -724,6 +1412,48 @@ public class Resources {
         public static com.esotericsoftware.spine.Skin skinDefault;
     }
 
+    public static class SpineLightningReverseRed {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameLightning09;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineLightningReverseWhite {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameLightning09;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineLightningWhite {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameLightning09;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
     public static class SpineLightning {
         public static SkeletonData skeletonData;
 
@@ -750,6 +1480,48 @@ public class Resources {
         public static BoneData boneGamePing;
 
         public static SlotData slotGamePing;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpinePortalBlue {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGamePortal01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpinePortalGreen {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGamePortal01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpinePortalRed {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGamePortal01;
 
         public static com.esotericsoftware.spine.Skin skinDefault;
     }
@@ -832,6 +1604,38 @@ public class Resources {
         public static com.esotericsoftware.spine.Skin skinDefault;
     }
 
+    public static class SpineShieldRed {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static BoneData boneGameShield;
+
+        public static SlotData slotGameShield;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineShieldYellow {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static BoneData boneGameShield;
+
+        public static SlotData slotGameShield;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
     public static class SpineShield {
         public static SkeletonData skeletonData;
 
@@ -866,6 +1670,48 @@ public class Resources {
         public static com.esotericsoftware.spine.Skin skinDefault;
     }
 
+    public static class SpineShotBlue {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameShot01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineShotGray {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameShot01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineShotGreen {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameShot01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
     public static class SpineShot {
         public static SkeletonData skeletonData;
 
@@ -876,6 +1722,28 @@ public class Resources {
         public static BoneData boneRoot;
 
         public static SlotData slotGameShot01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineShotgunOrange {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameShot01;
+
+        public static SlotData slotGameShot02;
+
+        public static SlotData slotGameShot03;
+
+        public static SlotData slotGameShot04;
+
+        public static SlotData slotGameShot05;
 
         public static com.esotericsoftware.spine.Skin skinDefault;
     }
@@ -902,6 +1770,62 @@ public class Resources {
         public static com.esotericsoftware.spine.Skin skinDefault;
     }
 
+    public static class SpineSlashBlue {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameSlash01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineSlashWhiteUp {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameSlash01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineSlashWhite {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameSlash01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineSlashYellow {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameSlash01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
     public static class SpineSlash {
         public static SkeletonData skeletonData;
 
@@ -912,6 +1836,38 @@ public class Resources {
         public static BoneData boneRoot;
 
         public static SlotData slotGameSlash01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineSlashx3 {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameSlash01;
+
+        public static SlotData slotGameSlash02;
+
+        public static SlotData slotGameSlash03;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineSparkWhite {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameSpark01;
 
         public static com.esotericsoftware.spine.Skin skinDefault;
     }
@@ -930,6 +1886,34 @@ public class Resources {
         public static com.esotericsoftware.spine.Skin skinDefault;
     }
 
+    public static class SpineSplashPurple {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameSplash01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineSplashWhite {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static SlotData slotGameSplash01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
     public static class SpineSplash {
         public static SkeletonData skeletonData;
 
@@ -940,6 +1924,38 @@ public class Resources {
         public static BoneData boneRoot;
 
         public static SlotData slotGameSplash01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineStrikeBlue {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static BoneData boneGameStrike01;
+
+        public static SlotData slotGameStrike01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineStrikeDownWhite {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static BoneData boneGameStrike01;
+
+        public static SlotData slotGameStrike01;
 
         public static com.esotericsoftware.spine.Skin skinDefault;
     }
@@ -960,7 +1976,55 @@ public class Resources {
         public static com.esotericsoftware.spine.Skin skinDefault;
     }
 
+    public static class SpineStrikeGray {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static BoneData boneGameStrike01;
+
+        public static SlotData slotGameStrike01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
     public static class SpineStrikeLeft {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static BoneData boneGameStrike01;
+
+        public static SlotData slotGameStrike01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineStrikePurple {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static BoneData boneGameStrike01;
+
+        public static SlotData slotGameStrike01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineStrikeRed {
         public static SkeletonData skeletonData;
 
         public static AnimationStateData animationData;
@@ -1020,6 +2084,50 @@ public class Resources {
         public static BoneData boneGameStrike01;
 
         public static SlotData slotGameStrike01;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineStrikex2 {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static BoneData boneGameStrike01;
+
+        public static BoneData boneGameStrike02;
+
+        public static SlotData slotGameStrike01;
+
+        public static SlotData slotGameStrike02;
+
+        public static com.esotericsoftware.spine.Skin skinDefault;
+    }
+
+    public static class SpineStrikex3 {
+        public static SkeletonData skeletonData;
+
+        public static AnimationStateData animationData;
+
+        public static Animation animationAnimation;
+
+        public static BoneData boneRoot;
+
+        public static BoneData boneGameStrike01;
+
+        public static BoneData boneGameStrike02;
+
+        public static BoneData boneGameStrike03;
+
+        public static SlotData slotGameStrike01;
+
+        public static SlotData slotGameStrike02;
+
+        public static SlotData slotGameStrike03;
 
         public static com.esotericsoftware.spine.Skin skinDefault;
     }

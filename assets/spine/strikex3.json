@@ -1,0 +1,176 @@
+{
+"skeleton": {
+	"hash": "17KsVrxAeVA",
+	"spine": "4.1.19",
+	"x": -127.36,
+	"y": -96.93,
+	"width": 215.71,
+	"height": 161.69,
+	"images": "",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" },
+	{
+		"name": "game/strike-01",
+		"parent": "root",
+		"length": 95.62,
+		"rotation": 2.55,
+		"x": 0.98,
+		"y": 1.83,
+		"scaleX": -1
+	},
+	{
+		"name": "game/strike-02",
+		"parent": "root",
+		"length": 95.62,
+		"rotation": 177.98,
+		"x": 0.98,
+		"y": 1.83,
+		"scaleX": -1
+	},
+	{
+		"name": "game/strike-03",
+		"parent": "root",
+		"length": 95.62,
+		"rotation": 87.22,
+		"x": 0.98,
+		"y": 1.83,
+		"scaleX": -1
+	}
+],
+"slots": [
+	{ "name": "game/strike-01", "bone": "game/strike-01", "attachment": "game/strike-01" },
+	{ "name": "game/strike-02", "bone": "game/strike-02", "attachment": "game/strike-01" },
+	{ "name": "game/strike-03", "bone": "game/strike-03", "attachment": "game/strike-01" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"game/strike-01": {
+				"game/strike-01": {
+					"path": "game/strike-",
+					"x": 58.46,
+					"y": -7.09,
+					"scaleX": 0.5,
+					"scaleY": 0.5,
+					"rotation": -28.75,
+					"width": 237,
+					"height": 140,
+					"sequence": { "count": 9, "digits": 2 }
+				}
+			},
+			"game/strike-02": {
+				"game/strike-01": {
+					"path": "game/strike-",
+					"x": 58.46,
+					"y": -7.09,
+					"scaleX": 0.5,
+					"scaleY": 0.5,
+					"rotation": -28.75,
+					"width": 237,
+					"height": 140,
+					"sequence": { "count": 9, "digits": 2 }
+				}
+			},
+			"game/strike-03": {
+				"game/strike-01": {
+					"path": "game/strike-",
+					"x": 58.46,
+					"y": -7.09,
+					"scaleX": 0.5,
+					"scaleY": 0.5,
+					"rotation": -28.75,
+					"width": 237,
+					"height": 140,
+					"sequence": { "count": 9, "digits": 2 }
+				}
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"slots": {
+			"game/strike-01": {
+				"attachment": [
+					{},
+					{ "time": 0.2, "name": "game/strike-01" },
+					{ "time": 0.7 }
+				]
+			},
+			"game/strike-02": {
+				"attachment": [
+					{},
+					{ "time": 0.0333, "name": "game/strike-01" },
+					{ "time": 0.5333 }
+				]
+			},
+			"game/strike-03": {
+				"attachment": [
+					{},
+					{ "time": 0.4, "name": "game/strike-01" },
+					{ "time": 0.9 }
+				]
+			}
+		},
+		"bones": {
+			"game/strike-01": {
+				"translate": [
+					{
+						"time": 0.1667,
+						"curve": [ 0.564, -0.28, 0.24, 77.77, 0.344, 0, 0.522, 0 ]
+					},
+					{ "time": 0.7, "x": 76.65 }
+				]
+			},
+			"game/strike-02": {
+				"translate": [
+					{
+						"x": 108,
+						"curve": [ 0.398, 107.72, 0.073, -117.23, 0.178, 0, 0.356, 0 ]
+					},
+					{ "time": 0.5333, "x": -118.35 }
+				]
+			},
+			"game/strike-03": {
+				"translate": [
+					{ "y": -71, "curve": "stepped" },
+					{
+						"time": 0.3667,
+						"y": -71,
+						"curve": [ 0.764, -0.28, 0.44, -2.23, 0.544, -71, 0.722, 75 ]
+					},
+					{ "time": 0.9, "x": -3.35, "y": 75 }
+				]
+			}
+		},
+		"attachments": {
+			"default": {
+				"game/strike-01": {
+					"game/strike-01": {
+						"sequence": [
+							{ "time": 0.2, "mode": "once", "delay": 0.05 }
+						]
+					}
+				},
+				"game/strike-02": {
+					"game/strike-01": {
+						"sequence": [
+							{ "time": 0.0333, "mode": "once", "delay": 0.05 }
+						]
+					}
+				},
+				"game/strike-03": {
+					"game/strike-01": {
+						"sequence": [
+							{ "time": 0.4, "mode": "once", "delay": 0.05 }
+						]
+					}
+				}
+			}
+		}
+	}
+}
+}

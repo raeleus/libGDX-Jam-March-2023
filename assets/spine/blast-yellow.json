@@ -1,6 +1,6 @@
 {
 "skeleton": {
-	"hash": "jFHWuYteLN0",
+	"hash": "GerTrq8ZQ+A",
 	"spine": "4.1.19",
 	"x": -77.75,
 	"y": -77.25,
@@ -13,7 +13,7 @@
 	{ "name": "root" }
 ],
 "slots": [
-	{ "name": "game/blast-01", "bone": "root", "attachment": "game/blast-01" }
+	{ "name": "game/blast-01", "bone": "root", "color": "ecff00ff", "dark": "d8ff00", "attachment": "game/blast-01" }
 ],
 "skins": [
 	{

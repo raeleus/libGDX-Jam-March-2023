@@ -1,6 +1,6 @@
 {
 "skeleton": {
-	"hash": "8M0O+DBuQ7c",
+	"hash": "1XoXCbFLcSA",
 	"spine": "4.1.19",
 	"x": -70,
 	"y": -62.25,
@@ -13,7 +13,7 @@
 	{ "name": "root" }
 ],
 "slots": [
-	{ "name": "game/portal-01", "bone": "root", "attachment": "game/portal-01" }
+	{ "name": "game/portal-01", "bone": "root", "color": "ff0000ff", "dark": "ff00e8", "attachment": "game/portal-01" }
 ],
 "skins": [
 	{

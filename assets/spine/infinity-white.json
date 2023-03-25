@@ -1,0 +1,62 @@
+{
+"skeleton": {
+	"hash": "nOtjNK0YnUg",
+	"spine": "4.1.19",
+	"x": -105.75,
+	"y": -39.75,
+	"width": 211.5,
+	"height": 79.5,
+	"images": "",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "game/infinity-01", "bone": "root", "dark": "ffffff", "attachment": "game/infinity-01" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"game/infinity-01": {
+				"game/infinity-01": {
+					"path": "game/infinity-",
+					"scaleX": 0.5,
+					"scaleY": 0.5,
+					"width": 423,
+					"height": 159,
+					"sequence": { "count": 9, "digits": 2 }
+				}
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"slots": {
+			"game/infinity-01": {
+				"rgba2": [
+					{ "time": 0.5, "light": "ffffffff", "dark": "ffffff" },
+					{ "time": 1, "light": "ffffff00", "dark": "ffffff" }
+				],
+				"attachment": [
+					{},
+					{ "time": 0.0333, "name": "game/infinity-01" }
+				]
+			}
+		},
+		"attachments": {
+			"default": {
+				"game/infinity-01": {
+					"game/infinity-01": {
+						"sequence": [
+							{ "time": 0.0333, "mode": "once", "delay": 0.05 }
+						]
+					}
+				}
+			}
+		}
+	}
+}
+}

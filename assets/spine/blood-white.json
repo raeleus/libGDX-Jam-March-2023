@@ -1,0 +1,59 @@
+{
+"skeleton": {
+	"hash": "bMJfufvXlu8",
+	"spine": "4.1.19",
+	"x": -119.5,
+	"y": -71,
+	"width": 239,
+	"height": 142,
+	"images": "",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "game/blood-01", "bone": "root", "dark": "ffffff", "attachment": "game/blood-01" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"game/blood-01": {
+				"game/blood-01": {
+					"path": "game/blood-",
+					"scaleX": 0.5,
+					"scaleY": 0.5,
+					"width": 478,
+					"height": 284,
+					"sequence": { "count": 16, "digits": 2 }
+				}
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"slots": {
+			"game/blood-01": {
+				"attachment": [
+					{},
+					{ "time": 0.0333, "name": "game/blood-01" },
+					{ "time": 0.7 }
+				]
+			}
+		},
+		"attachments": {
+			"default": {
+				"game/blood-01": {
+					"game/blood-01": {
+						"sequence": [
+							{ "time": 0.0333, "mode": "once", "delay": 0.04 }
+						]
+					}
+				}
+			}
+		}
+	}
+}
+}

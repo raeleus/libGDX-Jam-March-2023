@@ -1,0 +1,61 @@
+{
+"skeleton": {
+	"hash": "EaNKe8/M6P8",
+	"spine": "4.1.19",
+	"x": -48.9,
+	"y": -31.18,
+	"width": 84,
+	"height": 154,
+	"images": "",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "game/lightning-09", "bone": "root", "color": "ff0000ff", "dark": "ff0000", "attachment": "game/lightning-09" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"game/lightning-09": {
+				"game/lightning-09": {
+					"path": "game/lightning-",
+					"x": -6.9,
+					"y": 45.82,
+					"scaleX": 0.5,
+					"scaleY": 0.5,
+					"width": 168,
+					"height": 308,
+					"sequence": { "count": 14, "digits": 2 }
+				}
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"slots": {
+			"game/lightning-09": {
+				"attachment": [
+					{},
+					{ "time": 0.0333, "name": "game/lightning-09" },
+					{ "time": 0.6333 }
+				]
+			}
+		},
+		"attachments": {
+			"default": {
+				"game/lightning-09": {
+					"game/lightning-09": {
+						"sequence": [
+							{ "time": 0.0333, "mode": "onceReverse", "delay": 0.04 }
+						]
+					}
+				}
+			}
+		}
+	}
+}
+}
