@@ -29,12 +29,12 @@ public class MapScreen extends JamScreen {
         super.show();
         
         var room = getRoom();
-        
-        final Music bgm = bgm_menu;
-        if (!bgm.isPlaying()) {
-            bgm.play();
-            bgm.setVolume(core.bgm);
-            bgm.setLooping(true);
+    
+        final Music music = bgm_menu;
+        if (!music.isPlaying()) {
+            music.play();
+            music.setVolume(bgm);
+            music.setLooping(true);
         }
         
         stage = new Stage(new ScreenViewport(), batch);

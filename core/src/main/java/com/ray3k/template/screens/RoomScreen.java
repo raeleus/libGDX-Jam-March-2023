@@ -32,11 +32,11 @@ public class RoomScreen extends JamScreen {
         
         var room = getRoom();
     
-        final Music bgm = bgm_menu;
-        if (!bgm.isPlaying()) {
-            bgm.play();
-            bgm.setVolume(core.bgm);
-            bgm.setLooping(true);
+        final Music music = bgm_menu;
+        if (!music.isPlaying()) {
+            music.play();
+            music.setVolume(bgm);
+            music.setLooping(true);
         }
         
         stage = new Stage(new ScreenViewport(), batch);
@@ -184,7 +184,7 @@ public class RoomScreen extends JamScreen {
             horizontalGroup.wrapSpace(10);
             horizontalGroup.space(10);
             horizontalGroup.wrap();
-            horizontalGroup.rowAlign(Align.left);
+            horizontalGroup.align(Align.center);
     
             if (room.upgrade) {
                 labelTable.row();
