@@ -48,9 +48,10 @@ public class PreBattleScreen extends JamScreen {
         
         for (int i = 0; i < numberOfEnemies; i++) {
             var enemy = new CharacterData(enemyTemplates.random());
+            enemy.healthMax = (difficulty * .05f + .5f) * enemy.healthMax;
+            enemy.health = enemy.healthMax;
             enemy.position = newEnemyPositions.pop();
             enemyTeam.add(enemy);
-            System.out.println(enemy.name + " " + enemy.position);
         }
     
         final Music music = bgm_game;
@@ -345,7 +346,6 @@ public class PreBattleScreen extends JamScreen {
             
             var readyToGo = true;
             for (var playerCell : characterCells) {
-                System.out.println(playerCell.getParent().getClass());
                 if (playerCell.getParent() == stage.getRoot()) {
                     readyToGo = false;
                     break;

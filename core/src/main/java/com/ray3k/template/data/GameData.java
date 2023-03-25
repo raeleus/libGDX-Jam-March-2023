@@ -18,6 +18,7 @@ public class GameData {
     public static Array<String> colorNames = new Array<>(new String[]{"Off", "White", "Red", "Green", "Blue", "Yellow", "Brown", "Cyan", "Gray", "Purple", "Orange", "Pink", "Gold"});
     public static Array<CharacterData> playerTeam = new Array<>();
     public static Array<CharacterData> enemyTeam = new Array<>();
+    public static Array<CharacterData> characterOrder = new Array<>();
     
     public static TagData matchTag(String name) {
         for (int i = 0; i < tagTemplates.size; i++) {
@@ -84,5 +85,24 @@ public class GameData {
             if (arrayColor.toIntBits() == colorInt) return colorNames.get(i);
         }
         return "error";
+    }
+    
+    public static Array<CharacterData> calculateOrder(int turn) {
+        var order = new Array<CharacterData>();
+        
+        if (turn >= characterOrder.size) {
+            characterOrder.addAll(nextOrder());
+        }
+        order.addAll(characterOrder);
+        return order;
+    }
+    
+    public static Array<CharacterData> nextOrder() {
+        var order = new Array<CharacterData>();
+    
+        order.addAll(playerTeam);
+        order.addAll(enemyTeam);
+        order.sort((o1, o2) -> o2.speed - o1.speed);
+        return order;
     }
 }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -732,6 +733,11 @@ public class Resources {
         SkinSkinStyles.lNamesake = skin_skin.get("namesake", Label.LabelStyle.class);
         SkinSkinStyles.lButton = skin_skin.get("button", Label.LabelStyle.class);
         SkinSkinStyles.lLog = skin_skin.get("log", Label.LabelStyle.class);
+        SkinSkinStyles.pMagic = skin_skin.get("magic", ProgressBar.ProgressBarStyle.class);
+        SkinSkinStyles.pGear = skin_skin.get("gear", ProgressBar.ProgressBarStyle.class);
+        SkinSkinStyles.pDefaultVertical = skin_skin.get("default-vertical", ProgressBar.ProgressBarStyle.class);
+        SkinSkinStyles.pHealth = skin_skin.get("health", ProgressBar.ProgressBarStyle.class);
+        SkinSkinStyles.pDefaultHorizontal = skin_skin.get("default-horizontal", ProgressBar.ProgressBarStyle.class);
         SkinSkinStyles.sDefaultHorizontal = skin_skin.get("default-horizontal", Slider.SliderStyle.class);
         SkinSkinStyles.tbToggle = skin_skin.get("toggle", TextButton.TextButtonStyle.class);
         SkinSkinStyles.tbDefault = skin_skin.get("default", TextButton.TextButtonStyle.class);
@@ -2245,6 +2251,16 @@ public class Resources {
         public static Label.LabelStyle lButton;
 
         public static Label.LabelStyle lLog;
+
+        public static ProgressBar.ProgressBarStyle pMagic;
+
+        public static ProgressBar.ProgressBarStyle pGear;
+
+        public static ProgressBar.ProgressBarStyle pDefaultVertical;
+
+        public static ProgressBar.ProgressBarStyle pHealth;
+
+        public static ProgressBar.ProgressBarStyle pDefaultHorizontal;
 
         public static Slider.SliderStyle sDefaultHorizontal;
 

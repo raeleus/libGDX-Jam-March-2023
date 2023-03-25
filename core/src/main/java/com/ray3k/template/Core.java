@@ -901,13 +901,16 @@ public class Core extends JamGame {
         }
     
         var enemyNames = Gdx.files.internal("text/enemy-names").readString().split("\\n");
-        var enemykSkills = Gdx.files.internal("text/enemy-skills").readString().split("\\n");
+        var enemySkills = Gdx.files.internal("text/enemy-skills").readString().split("\\n");
+        var enemyHealth = Gdx.files.internal("text/enemy-health").readString().split("\\n");
         for (int i = 0; i < enemyNames.length; i++) {
             var enemy = new CharacterData();
             enemy.name = enemyNames[i];
-            for (var skill : enemykSkills[i].split(",")) {
+            for (var skill : enemySkills[i].split(",")) {
                 enemy.addSkill(skill);
             }
+            enemy.healthMax = Integer.parseInt(enemyHealth[i]);
+            enemy.health = enemy.healthMax;
             enemyTemplates.add(enemy);
         }
         

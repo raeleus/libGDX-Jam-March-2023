@@ -830,6 +830,8 @@ pop-description
 bounds:509,1320,216,112
 pop-skills
 bounds:190,791,133,105
+progress-bar-knob
+bounds:1,652,6,6
 setup-divider
 bounds:509,1766,740,31
 slider
@@ -839,4 +841,4 @@ bounds:1197,1741,9,23
 textfield
 bounds:1251,1785,46,12
 white
-bounds:1,657,1,1
+bounds:155,761,1,1
