@@ -59,6 +59,8 @@ public class Resources {
 
     public static Music bgm_audioSample;
 
+    public static Music bgm_game;
+
     public static Music bgm_menu;
 
     public static void loadResources(AssetManager assetManager) {
@@ -755,6 +757,7 @@ public class Resources {
         sfx_ray3k03 = assetManager.get("sfx/ray3k03.mp3");
         sfx_ray3k04 = assetManager.get("sfx/ray3k04.mp3");
         bgm_audioSample = assetManager.get("bgm/audio-sample.mp3");
+        bgm_game = assetManager.get("bgm/game.mp3");
         bgm_menu = assetManager.get("bgm/menu.mp3");
     }
 

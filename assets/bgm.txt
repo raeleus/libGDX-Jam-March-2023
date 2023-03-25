@@ -1,2 +1,3 @@
 bgm/audio-sample.mp3
+bgm/game.mp3
 bgm/menu.mp3
