@@ -23,6 +23,7 @@ import static com.ray3k.template.Resources.*;
 public class MapScreen extends JamScreen {
     private Stage stage;
     private final static Color BG_COLOR = new Color(Color.BLACK);
+    Music music;
     
     @Override
     public void show() {
@@ -30,7 +31,7 @@ public class MapScreen extends JamScreen {
         
         var room = getRoom();
     
-        final Music music = bgm_menu;
+        music = bgm_menu;
         if (!music.isPlaying()) {
             music.play();
             music.setVolume(bgm);
@@ -274,6 +275,12 @@ public class MapScreen extends JamScreen {
     }
     
     private void loadNextRoom() {
-        core.transition(new RoomScreen());
+        var room = getRoom();
+        if (room.hasEnemies) {
+            core.transition(new PreBattleScreen());
+            music.stop();
+        } else {
+            core.transition(new RoomScreen());
+        }
     }
 }
