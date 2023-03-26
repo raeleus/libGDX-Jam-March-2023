@@ -39,11 +39,11 @@ public class SkillData {
         this.regenerateUses = other.regenerateUses;
     }
     
-    public void execute(BattleScreen battleScreen, CharacterData character, Array<Table> tiles, Table target, Runnable runnable) {
+    public void execute(BattleScreen battleScreen, CharacterData character, Array<Table> tiles, Table target, boolean isPlayerTeam, Runnable runnable) {
         if (usesMax > 0) uses--;
         
         var stage = battleScreen.stage;
-        var targetTiles = chooseTiles(tiles, target);
+        var targetTiles = chooseTiles(battleScreen, target, isPlayerTeam);
         
         switch (name) {
             case "punch":
@@ -6096,10 +6096,105 @@ public class SkillData {
         }
     }
     
-    public Array<Table> chooseTiles(Array<Table> tiles, Table target) {
+    public Array<Table> chooseTiles(BattleScreen battleScreen, Table target, boolean playerTeam) {
         var selected = new Array<Table>();
+        var allies = playerTeam ? battleScreen.getPlayerTiles() : battleScreen.getEnemyTiles();
+        var enemies = playerTeam ? battleScreen.getEnemyTiles() : battleScreen.getPlayerTiles();
         
         switch (name) {
+            case "icicle":
+            case "line piece":
+            case "devastating beam":
+                selected.add(target);
+                var index = enemies.indexOf(target, true);
+                if (index < 3 && enemies.get(index + 3).getUserObject() != null) selected.add(enemies.get(index + 3));
+                else if (index >= 3 && enemies.get(index - 3).getUserObject() != null) selected.add(enemies.get(index - 3));
+                break;
+            case "round-house kick":
+            case "ricochet":
+                selected.add(target);
+                index = enemies.indexOf(target, true);
+                if (index < 3) index += 3;
+                
+                if (index + 1 < 6 && enemies.get(index + 1).getUserObject() != null) selected.add(enemies.get(index + 1));
+                else if (index - 1 >= 3 && enemies.get(index - 1).getUserObject() != null) selected.add(enemies.get(index - 1));
+                break;
+            case "fire-ball":
+                selected.add(target);
+                index = enemies.indexOf(target, true);
+    
+                if (index + 1 < 6 && enemies.get(index + 1).getUserObject() != null) selected.add(enemies.get(index + 1));
+                else if (index + 3 < 6 && enemies.get(index + 3).getUserObject() != null) selected.add(enemies.get(index + 3));
+                else if (index - 1 >= 0 && enemies.get(index - 1).getUserObject() != null) selected.add(enemies.get(index - 1));
+                else if (index - 3 >= 0 && enemies.get(index - 3).getUserObject() != null) selected.add(enemies.get(index - 3));
+                break;
+            case "j piece":
+                selected.add(target);
+                index = enemies.indexOf(target, true);
+                
+                if (index + 3 < 6 && enemies.get(index + 3).getUserObject() != null) selected.add(enemies.get(index + 3));
+                else if (index - 1 >= 0 && enemies.get(index - 1).getUserObject() != null) selected.add(enemies.get(index - 1));
+                break;
+            case "l piece":
+                selected.add(target);
+                index = enemies.indexOf(target, true);
+        
+                if (index + 1 < 6 && enemies.get(index + 1).getUserObject() != null) selected.add(enemies.get(index + 1));
+                else if (index + 3 < 6 && enemies.get(index + 3).getUserObject() != null) selected.add(enemies.get(index + 3));
+                break;
+            case "free samples":
+            case "ice cream social":
+                for (var tile : allies) {
+                    if (tile.getUserObject() != null) selected.add(tile);
+                }
+                break;
+            case "flash":
+            case "square":
+            case "circumference":
+            case "perimeter":
+                for (var tile : enemies) {
+                    if (tile.getUserObject() != null) selected.add(tile);
+                }
+                break;
+            case "triple kick":
+                for (int i = 0; i < 3; i++) {
+                    var tile = enemies.get(i);
+                    if (tile.getUserObject() != null) selected.add(tile);
+                }
+                break;
+            case "tetros":
+                var start = 0;
+                for (int i = 3; i < 6; i++) {
+                    var tile = enemies.get(i);
+                    if (target == tile) {
+                        start = 3;
+                        break;
+                    }
+                }
+                
+                for (int i = start; i < start + 3; i++) {
+                    var tile = enemies.get(i);
+                    if (tile.getUserObject() != null) selected.add(tile);
+                }
+                break;
+            case "tee":
+                for (int i = 3; i < 6; i++) {
+                    var tile = enemies.get(i);
+                    if (tile.getUserObject() != null) selected.add(tile);
+                }
+                var tile = enemies.get(1);
+                if (tile.getUserObject() != null) selected.add(tile);
+                break;
+            case "radius":
+                tile = enemies.get(0);
+                if (tile.getUserObject() != null) selected.add(tile);
+                tile = enemies.get(2);
+                if (tile.getUserObject() != null) selected.add(tile);
+                tile = enemies.get(3);
+                if (tile.getUserObject() != null) selected.add(tile);
+                tile = enemies.get(5);
+                if (tile.getUserObject() != null) selected.add(tile);
+                break;
             default:
                 selected.add(target);
                 break;
@@ -6110,6 +6205,160 @@ public class SkillData {
     
     public Array<Table> collectAvailableTiles(BattleScreen battleScreen, boolean playerTeam, int characterPosition) {
         switch (name) {
+            case "scratch head":
+            case "grumble":
+            case "cat nap":
+            case "cat nip":
+            case "ice-scream":
+            case "patented ice cube system":
+            case "parry":
+            case "riposte":
+            case "covering fire":
+            case "cute up":
+            case "fuzzy":
+            case "quick dodge":
+            case "phase":
+            case "speed up":
+            case "smoke pellet":
+            case "gadget crisps":
+            case "compute":
+            case "fuel up":
+            case "acceleron":
+            case "self-destruct":
+            case "rigor mortis":
+            case "bury":
+            case "lay down for a bit":
+            case "eat":
+            case "rinse":
+            case "thrash":
+            case "juice up":
+            case "goopicide":
+            case "regenerate":
+            case "dance":
+            case "heat vision":
+            case "rind":
+            case "vitamin c":
+            case "crown of thorns":
+                return Selector.selectSelf(battleScreen, playerTeam, characterPosition);
+            case "charge":
+            case "lunge":
+            case "energy blast":
+                return Selector.selectEnemyColumnDirectlyInFront(battleScreen, playerTeam, characterPosition);
+            case "leap":
+            case "hairball":
+            case "ice-clone":
+            case "fly":
+            case "hop":
+            case "multiply":
+            case "divide":
+            case "howl":
+                return Selector.selectAnyEmptyAlly(battleScreen, playerTeam);
+            case "slide":
+            case "flutter":
+            case "crocodile roll":
+            case "trot":
+                return Selector.selectEmptyAllyAdjacent(battleScreen, playerTeam,characterPosition);
+            case "advance":
+                return Selector.selectEmptyAllyForward(battleScreen, playerTeam, characterPosition);
+            case "retreat":
+                return Selector.selectEmptyAllyBackward(battleScreen, playerTeam, characterPosition);
+            case "belly crawl":
+                return Selector.selectEmptyAllyForwardOrBackward(battleScreen, playerTeam, characterPosition);
+            case "pirouette":
+                return Selector.selectEmptyAllySide(battleScreen, playerTeam, characterPosition);
+            case "yogurt":
+            case "sherbert":
+            case "banana sundae":
+            case "free samples":
+            case "ice cream social":
+            case "siphon filter":
+            case "snuggle":
+            case "fanboy":
+            case "throw weight around":
+            case "buff":
+            case "dino bop":
+            case "block":
+            case "merge":
+            case "tasty snack":
+                return Selector.selectAnyAlly(battleScreen, playerTeam);
+            case "defend":
+                return Selector.selectAnyAllyFrontRow(battleScreen, playerTeam);
+            case "deflect":
+                return Selector.selectAnyAllyBackRow(battleScreen, playerTeam);
+            case "pistachio":
+            case "choco syrup":
+            case "snowball":
+            case "icicle":
+            case "freeze ray":
+            case "dagger throw":
+            case "blast":
+            case "snipe":
+            case "burst fire":
+            case "grenade":
+            case "shotgun":
+            case "flame bolt":
+            case "fire-ball":
+            case "lightning strike":
+            case "contort":
+            case "blaspheme":
+            case "plasma beam":
+            case "flash":
+            case "lob carrot":
+            case "pellet blast":
+            case "caltrops":
+            case "sticky tape":
+            case "scanner":
+            case "hack":
+            case "nerf":
+            case "dupe":
+            case "crypto":
+            case "burn":
+            case "incendiary grenade":
+            case "brimstone":
+            case "torch":
+            case "flame shotgun":
+            case "beam":
+            case "gear":
+            case "bone throw":
+            case "knee cap":
+            case "dead eye":
+            case "bamboo shoot":
+            case "tee":
+            case "tetros":
+            case "squeeze":
+            case "absorb":
+            case "circumference":
+            case "perimeter":
+            case "shield throw":
+            case "sticky":
+            case "goo blast":
+            case "yip":
+            case "snarl":
+            case "laser beam":
+            case "concussive beam":
+            case "focused beam":
+            case "devastating beam":
+            case "scream":
+            case "flay and bake":
+                return Selector.selectAnyEnemy(battleScreen, playerTeam);
+            case "combo":
+                return Selector.selectMeleeDirectlyInFront(battleScreen, playerTeam, characterPosition);
+            case "triple kick":
+            case "tripwire":
+            case "panda smash":
+            case "pie slice":
+            case "tail sweep":
+            case "ricochet":
+            case "rage out":
+                return Selector.selectAnyEnemyFrontRow(battleScreen, playerTeam);
+            case "grapnel hook":
+            case "spatula":
+                return Selector.selectAnyEnemyBackRow(battleScreen, playerTeam);
+            case "pie graph":
+                return Selector.selectMeleeDiagonalOnly(battleScreen, playerTeam, characterPosition);
+            case "radial menu":
+            case "radius":
+                return Selector.selectAnyEnemyCorners(battleScreen, playerTeam);
             default:
                 return Selector.selectMelee(battleScreen, playerTeam, characterPosition);
         }

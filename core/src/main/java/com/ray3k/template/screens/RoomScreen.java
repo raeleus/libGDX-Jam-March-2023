@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.ray3k.template.data.*;
 import com.ray3k.template.stripe.*;
 import com.ray3k.template.*;
+import com.ray3k.template.stripe.PopTable.*;
 
 import java.util.Locale;
 
@@ -254,6 +256,14 @@ public class RoomScreen extends JamScreen {
                                                             core.transition(new MapScreen());
                                                         }
                                                     });
+    
+                                                    var hoverListener = new PopTableHoverListener(Align.top, Align.top, new PopTableStyle(wPointerDown));
+                                                    textButton.addListener(hoverListener);
+                                                    var descriptionPop = hoverListener.getPopTable();
+                                                    label = new Label(skill.description, lLog);
+                                                    label.setWrap(true);
+                                                    label.setAlignment(Align.center);
+                                                    descriptionPop.add(label).growX().width(200);
                                                 }
                                             }
                                             
@@ -523,7 +533,16 @@ public class RoomScreen extends JamScreen {
     
         tagConfirmationPop.defaults().space(10);
         var label = new Label("Added skill: " + skill, lButton);
+        label.setTouchable(Touchable.enabled);
         tagConfirmationPop.add(label);
+    
+        var hoverListener = new PopTableHoverListener(Align.top, Align.top, new PopTableStyle(wPointerDown));
+        label.addListener(hoverListener);
+        var skillPop = hoverListener.getPopTable();
+        label = new Label(findSkill(skill).description, lLog);
+        label.setWrap(true);
+        label.setAlignment(Align.center);
+        skillPop.add(label).growX().width(200);
     
         tagConfirmationPop.row();
         var textButton = new TextButton("OK", skin);

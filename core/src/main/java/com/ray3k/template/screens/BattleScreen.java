@@ -470,14 +470,15 @@ public class BattleScreen extends JamScreen {
                 }
                 button.addAction(sequence(fadeOut(.5f), run(() -> {
                     popTable.hide();
-                    conductSkill(hero, skill, playerTiles.contains(tile, true) ? playerTiles : enemyTiles, tile);
+                    conductSkill(hero, skill, playerTiles.contains(tile, true) ? playerTiles : enemyTiles, tile, true);
                 }), removeActor()));
             });
             button.addListener(new InputListener() {
                 @Override
                 public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                     var stack = (Stack) button.getParent();
-                    skill.chooseTiles(playerTiles.contains(tile, true) ? playerTiles : enemyTiles, tile);
+                    var isPlayerTeam = playerTiles.contains(tile, true);
+                    skill.chooseTiles(BattleScreen.this, tile, isPlayerTeam);
                     var image = new Image(skin.getDrawable("character-highlight-10"));
                     image.setTouchable(Touchable.disabled);
                     stack.add(image);
@@ -544,15 +545,15 @@ public class BattleScreen extends JamScreen {
             popTable.addAction(sequence(delay(2f), fadeOut(.5f), run(() -> {
                 popTable.hide();
                 var tile = selectableTiles.random();
-                conductSkill(enemy, skill, playerTiles.contains(tile, true) ? playerTiles : enemyTiles, tile);
+                conductSkill(enemy, skill, playerTiles.contains(tile, true) ? playerTiles : enemyTiles, tile, false);
             }), removeActor()));
     
             popTable.show(stage);
         }
     }
     
-    public void conductSkill(CharacterData character, SkillData skill, Array<Table> tiles, Table target) {
-        skill.execute(this, character, tiles, target, () -> {
+    public void conductSkill(CharacterData character, SkillData skill, Array<Table> tiles, Table target, boolean isPlayerTeam) {
+        skill.execute(this, character, tiles, target, isPlayerTeam, () -> {
             checkForDead();
         });
     }
