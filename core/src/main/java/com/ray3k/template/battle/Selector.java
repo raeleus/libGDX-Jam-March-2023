@@ -112,34 +112,63 @@ public class Selector {
         var playerTiles = playerTeam ? battle.getPlayerTiles() : battle.getEnemyTiles();
         var enemyTiles = playerTeam ? battle.getEnemyTiles() : battle.getPlayerTiles();
         
+        //if in back row and players are in front
         if (characterPosition >= 3) {
             for (int i = 0; i < 3; i++) {
                 var tile = playerTiles.get(i);
-                
                 if (tile.getUserObject() != null) return returnValue;
             }
-            characterPosition -= 3;
         }
         
-        var offset = 3;
-        for (int i =0; i < 3; i++) {
-            var tile = enemyTiles.get(i);
-            
-            if (tile.getUserObject() != null) {
-                offset = 0;
-                break;
+        var targetIndex = characterPosition < 3 ? characterPosition : characterPosition - 3;
+        //front row
+        var tile = enemyTiles.get(targetIndex);
+        if (tile.getUserObject() != null) returnValue.add(tile);
+        
+        //check to left
+        if (targetIndex - 1 >= 0) {
+            tile = enemyTiles.get(targetIndex - 1);
+            if (tile.getUserObject() != null) returnValue.add(tile);
+        }
+        
+        //check to right
+        if (targetIndex + 1 < 3) {
+            tile = enemyTiles.get(targetIndex + 1);
+            if (tile.getUserObject() != null) returnValue.add(tile);
+        }
+        
+        //if no targets
+        if (returnValue.size == 0) {
+            //check far right
+            if (targetIndex + 2 < 3) {
+                tile = enemyTiles.get(targetIndex + 2);
+                if (tile.getUserObject() != null) returnValue.add(tile);
+            } else if (targetIndex - 2 >= 0) {
+                tile = enemyTiles.get(targetIndex - 2);
+                if (tile.getUserObject() != null) returnValue.add(tile);
             }
         }
         
-        if (enemyTiles.get(characterPosition + offset).getUserObject() != null) returnValue.add(enemyTiles.get(characterPosition));
-        else if (characterPosition - 1 >= offset && enemyTiles.get(characterPosition - 1).getUserObject() != null) returnValue.add(enemyTiles.get(characterPosition - 1));
-        else if (characterPosition + 1 < 3 + offset && enemyTiles.get(characterPosition + 1).getUserObject() != null) returnValue.add(enemyTiles.get(characterPosition + 1));
-        
+        //if still no targets
         if (returnValue.size == 0) {
-            if (characterPosition - 2 >= offset && enemyTiles.get(characterPosition - 2).getUserObject() != null) returnValue.add(enemyTiles.get(characterPosition - 2));
-            else if (characterPosition + 2 < 3 + offset && enemyTiles.get(characterPosition + 2).getUserObject() != null) returnValue.add(enemyTiles.get(characterPosition + 2));
+            targetIndex += 3;
+    
+            //back row
+            tile = enemyTiles.get(targetIndex);
+            if (tile.getUserObject() != null) returnValue.add(tile);
+    
+            //check to left
+            if (targetIndex - 1 >= 0) {
+                tile = enemyTiles.get(targetIndex - 1);
+                if (tile.getUserObject() != null) returnValue.add(tile);
+            }
+    
+            //check to right
+            if (targetIndex + 1 < 3) {
+                tile = enemyTiles.get(targetIndex + 1);
+                if (tile.getUserObject() != null) returnValue.add(tile);
+            }
         }
-        
         return returnValue;
     }
     

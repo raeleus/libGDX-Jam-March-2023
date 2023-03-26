@@ -64,8 +64,9 @@ public class MapScreen extends JamScreen {
             upRoomButton.setColor(nextRoom.marker);
             
             if (nextRoom.hasEnemies) {
-                var image = new Image(skin.getDrawable("enemy-icon"));
-                upRoomButton.add(image);
+                var label = new Label("DANGER", lLog);
+                label.setColor(Color.RED);
+                upRoomButton.add(label);
             }
             
             var listener = new ChangeListener() {
@@ -109,8 +110,9 @@ public class MapScreen extends JamScreen {
             leftRoomButton.setColor(nextRoom.marker);
     
             if (nextRoom.hasEnemies) {
-                var image = new Image(skin.getDrawable("enemy-icon"));
-                leftRoomButton.add(image);
+                var label = new Label("DANGER", lLog);
+                label.setColor(Color.RED);
+                leftRoomButton.add(label);
             }
             
             var listener = new ChangeListener() {
@@ -148,8 +150,9 @@ public class MapScreen extends JamScreen {
         thisRoomButton.setColor(room.marker);
     
         if (room.hasEnemies) {
-            var image = new Image(skin.getDrawable("enemy-icon"));
-            thisRoomButton.add(image);
+            var label = new Label("DANGER", lLog);
+            label.setColor(Color.RED);
+            thisRoomButton.add(label);
         }
         
         table.row();
@@ -184,8 +187,9 @@ public class MapScreen extends JamScreen {
             
             rightRoomButton.setColor(nextRoom.marker);
             if (nextRoom.hasEnemies) {
-                var image = new Image(skin.getDrawable("enemy-icon"));
-                rightRoomButton.add(image);
+                label = new Label("DANGER", lLog);
+                label.setColor(Color.RED);
+                rightRoomButton.add(label);
             }
             
             rightRoomButton.addListener(listener);
@@ -229,8 +233,9 @@ public class MapScreen extends JamScreen {
             
             downRoomButton.setColor(nextRoom.marker);
             if (nextRoom.hasEnemies) {
-                var image = new Image(skin.getDrawable("enemy-icon"));
-                downRoomButton.add(image);
+                label = new Label("DANGER", lLog);
+                label.setColor(Color.RED);
+                downRoomButton.add(label);
             }
             
             downRoomButton.addListener(listener);
