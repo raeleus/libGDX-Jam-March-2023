@@ -70,7 +70,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(10 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -103,7 +103,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(20 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -219,7 +219,7 @@ public class SkillData {
                                     
                                     var enemy = (CharacterData) enemyTile.getUserObject();
                                     int damage = MathUtils.floor(30 + (float) level / maxLevel * 20.f);
-                                    enemy.health -= damage;
+                                    enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                     battleScreen.showDamage(enemyTile, enemy, damage);
                                     battleScreen.showTextEffectHurt(enemyTile, enemy);
                                 }
@@ -253,7 +253,8 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(5 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
+                                enemy.extraDamage -= 20;
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -286,7 +287,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(2 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 enemy.stunned = true;
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectStunned(tile, enemy);
@@ -320,7 +321,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(30 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                                 
@@ -357,7 +358,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(15 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -449,12 +450,9 @@ public class SkillData {
                         public void complete(TrackEntry entry) {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
-                            }
+                            
+                            character.damageMitigation += 10;
+                            character.extraDamage += 10;
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
                     });
@@ -484,7 +482,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -517,7 +515,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -550,7 +548,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -583,7 +581,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(20 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -616,7 +614,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(8 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -649,7 +647,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -682,7 +680,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -714,10 +712,9 @@ public class SkillData {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
+                                enemy.damageMitigation += 15;
+                                battleScreen.showBuff(tile, enemy, 15);
+                                battleScreen.showTextEffectHeal(tile, enemy);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
@@ -748,7 +745,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -780,10 +777,9 @@ public class SkillData {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
+                                enemy.extraDamage = 10;
+                                battleScreen.showBuff(tile, enemy, 10);
+                                battleScreen.showTextEffectHeal(tile, enemy);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
@@ -814,8 +810,9 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 enemy.stunned = true;
+                                enemy.damageMitigation = 20;
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectStunned(tile, enemy);
                             }
@@ -880,10 +877,9 @@ public class SkillData {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
+                                enemy.extraDamage += 5;
+                                battleScreen.showBuff(tile, enemy, 5);
+                                battleScreen.showTextEffectHeal(tile, enemy);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
@@ -914,7 +910,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(5 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -947,7 +943,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(20 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -980,7 +976,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 enemy.stunned = true;
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectStunned(tile, enemy);
@@ -1014,7 +1010,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -1047,7 +1043,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -1080,7 +1076,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -1113,7 +1109,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(13 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -1147,7 +1143,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(2 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 enemy.stunned = true;
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectStunned(tile, enemy);
@@ -1185,7 +1181,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(20 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -1218,7 +1214,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(100 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -1251,7 +1247,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(15 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -1284,7 +1280,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(25 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -1317,7 +1313,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(15 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -1350,7 +1346,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(15 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -1383,7 +1379,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -1416,7 +1412,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -1536,7 +1532,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 * (1 + (float) level / maxLevel * 20.0f));
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -1569,7 +1565,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(18 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -1602,7 +1598,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -1635,7 +1631,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(30 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -1668,7 +1664,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -1701,7 +1697,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -1734,7 +1730,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -1767,7 +1763,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(10 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -1800,7 +1796,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(30 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -1833,7 +1829,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(14 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -1866,7 +1862,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(25 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -1899,7 +1895,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(30 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -1932,7 +1928,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -1965,7 +1961,8 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(5 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
+                                enemy.extraDamage -= 10;
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -1998,7 +1995,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -2031,7 +2028,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(20 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -2064,7 +2061,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(25 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -2126,7 +2123,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(15 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -2159,7 +2156,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(15 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -2192,7 +2189,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -2226,7 +2223,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 enemy.stunned = true;
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectStunned(tile, enemy);
@@ -2289,7 +2286,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(5 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -2351,7 +2348,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -2384,7 +2381,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(5 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -2417,7 +2414,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(30 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -2449,10 +2446,9 @@ public class SkillData {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
+                                enemy.damageMitigation += 100;
+                                battleScreen.showBuff(tile, enemy, 100);
+                                battleScreen.showTextEffectHeal(tile, enemy);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
@@ -2483,7 +2479,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -2516,7 +2512,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(20 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -2582,7 +2578,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(8 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -2615,7 +2611,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(16 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -2648,7 +2644,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(20 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -2681,7 +2677,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -2714,7 +2710,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -2747,7 +2743,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -2780,7 +2776,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(15 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -2813,7 +2809,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -2846,7 +2842,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -2879,7 +2875,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -2945,7 +2941,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 enemy.stunned = true;
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectStunned(tile, enemy);
@@ -2978,9 +2974,8 @@ public class SkillData {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
+                                enemy.damageMitigation -= 10;
+                                battleScreen.showBuff(tile, enemy, 10);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
@@ -3012,7 +3007,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(8 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -3044,9 +3039,8 @@ public class SkillData {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
+                                enemy.extraDamage -= 10;
+                                battleScreen.showBuff(tile, enemy, 10);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
@@ -3078,7 +3072,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -3144,7 +3138,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -3177,7 +3171,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(12 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -3210,7 +3204,8 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(20 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
+                                enemy.extraDamage -= 5;
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -3243,7 +3238,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(50 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -3276,7 +3271,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(15 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -3310,7 +3305,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(30 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -3343,7 +3338,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(30 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -3376,7 +3371,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(15 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -3408,10 +3403,9 @@ public class SkillData {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
+                                enemy.extraDamage += 10;
+                                battleScreen.showBuff(tile, enemy, 10);
+                                battleScreen.showTextEffectHeal(tile, enemy);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
@@ -3441,10 +3435,9 @@ public class SkillData {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
+                                enemy.extraDamage = 10;
+                                battleScreen.showBuff(tile, enemy, 10);
+                                battleScreen.showTextEffectHeal(tile, enemy);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
@@ -3474,9 +3467,8 @@ public class SkillData {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
+                                enemy.damageMitigation -= 10;
+                                battleScreen.showBuff(tile, enemy, 10);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
@@ -3508,7 +3500,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(15 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -3541,7 +3533,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(2000 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -3574,7 +3566,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(12 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -3607,7 +3599,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(8 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -3640,7 +3632,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(8 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -3673,7 +3665,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(5 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 enemy.stunned = true;
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectStunned(tile, enemy);
@@ -3707,7 +3699,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(5 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -3739,10 +3731,9 @@ public class SkillData {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
+                                enemy.damageMitigation += 10;
+                                battleScreen.showBuff(tile, enemy, 10);
+                                battleScreen.showTextEffectHeal(tile, enemy);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
@@ -3772,9 +3763,8 @@ public class SkillData {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
+                                enemy.damageMitigation -= 10;
+                                battleScreen.showBuff(tile, enemy, -10);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
@@ -3806,7 +3796,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(25 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -3838,10 +3828,9 @@ public class SkillData {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
+                                enemy.damageMitigation += 100;
+                                battleScreen.showBuff(tile, enemy, 100);
+                                battleScreen.showTextEffectHeal(tile, enemy);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
@@ -3872,7 +3861,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(15 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -3905,7 +3894,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(5 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -3938,7 +3927,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(2 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 enemy.stunned = true;
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectStunned(tile, enemy);
@@ -3972,7 +3961,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(10 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -4040,7 +4029,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -4073,7 +4062,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(20 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -4106,7 +4095,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -4139,7 +4128,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(8 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -4172,7 +4161,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(8 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -4205,7 +4194,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(8 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -4238,7 +4227,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(8 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -4271,7 +4260,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(13 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -4304,7 +4293,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(40 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -4337,7 +4326,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(5 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -4369,9 +4358,10 @@ public class SkillData {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
+                                enemy.extraDamage = 10;
+                                enemy.stunned = false;
+                                enemy.damageMitigation = 0;
+                                battleScreen.showDamage(tile, enemy, 10);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
@@ -4404,7 +4394,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -4437,7 +4427,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -4470,7 +4460,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -4503,7 +4493,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -4536,7 +4526,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(20 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -4569,7 +4559,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(20 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -4602,7 +4592,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(20 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -4635,7 +4625,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(15 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -4668,7 +4658,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(25 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -4701,7 +4691,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(5 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -4734,7 +4724,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(25 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -4796,7 +4786,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(30 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -4829,7 +4819,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(2 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 enemy.stunned = true;
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectStunned(tile, enemy);
@@ -4862,10 +4852,9 @@ public class SkillData {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
+                                enemy.extraDamage += 20;
+                                battleScreen.showBuff(tile, enemy, 20);
+                                battleScreen.showTextEffectHeal(tile, enemy);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
@@ -4896,7 +4885,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -4958,7 +4947,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(12 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -4991,7 +4980,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(30 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -5023,10 +5012,9 @@ public class SkillData {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
+                                enemy.extraDamage += 20;
+                                battleScreen.showBuff(tile, enemy, 20);
+                                battleScreen.showTextEffectHeal(tile, enemy);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
@@ -5057,7 +5045,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -5089,10 +5077,9 @@ public class SkillData {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
+                                enemy.damageMitigation = 20;
+                                battleScreen.showBuff(tile, enemy, 20);
+                                battleScreen.showTextEffectHeal(tile, enemy);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
@@ -5123,7 +5110,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -5156,7 +5143,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(35 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -5189,7 +5176,8 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(12 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
+                                enemy.extraDamage -= 20;
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -5222,7 +5210,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -5255,7 +5243,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -5288,7 +5276,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -5321,7 +5309,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(20 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -5354,7 +5342,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(2000);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                                 
@@ -5425,7 +5413,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(20 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -5457,9 +5445,8 @@ public class SkillData {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
+                                enemy.damageMitigation -= 10;
+                                battleScreen.showBuff(tile, enemy, -10);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
@@ -5492,7 +5479,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -5525,7 +5512,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -5594,7 +5581,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -5627,7 +5614,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(20 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -5660,7 +5647,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(10 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 enemy.stunned = true;
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectStunned(tile, enemy);
@@ -5694,7 +5681,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(10 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -5727,7 +5714,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(35 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -5760,7 +5747,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(10 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -5793,7 +5780,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -5826,7 +5813,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(5 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -5859,7 +5846,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -5892,7 +5879,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -5925,7 +5912,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -5958,7 +5945,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -5991,7 +5978,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -6024,7 +6011,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -6057,7 +6044,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(30 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -6090,7 +6077,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
                                 int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }

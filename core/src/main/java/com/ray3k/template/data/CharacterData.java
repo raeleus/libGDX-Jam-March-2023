@@ -12,6 +12,8 @@ public class CharacterData {
     public Array<TagData> tags = new Array<>();
     public int position;
     public boolean stunned;
+    public float damageMitigation;
+    public float extraDamage;
     
     public CharacterData() {
     }
@@ -23,6 +25,8 @@ public class CharacterData {
         this.healthMax = other.healthMax;
         this.speed = other.speed;
         this.stunned = other.stunned;
+        this.damageMitigation = other.damageMitigation;
+        this.extraDamage = other.extraDamage;
         skills.addAll(other.skills);
         tags.addAll(other.tags);
     }

@@ -331,6 +331,7 @@ public class BattleScreen extends JamScreen {
 
         if (turn < characterOrder.size) {
             var character = characterOrder.get(turn);
+            character.damageMitigation = 0;
             
             if (character.stunned) {
                 for (var tile : playerTiles) {
@@ -411,7 +412,7 @@ public class BattleScreen extends JamScreen {
     
         popTable.addAction(sequence(delay(2f), fadeOut(.5f), run(() -> {
             popTable.hide();
-            checkForDead();
+            checkForDead(character);
             showTextEffectClear(tile, character);
         }), removeActor()));
     
@@ -470,7 +471,9 @@ public class BattleScreen extends JamScreen {
         popTable.add(textButton);
         onChange(textButton, () -> {
             popTable.hide();
-            stage.addAction(sequence(delay(.5f), run(this::finishTurn)));
+            stage.addAction(sequence(delay(.5f), run(() -> {
+                finishTurn(hero);
+            })));
         });
     
         var hoverListener = new PopTableHoverListener(Align.top, Align.top, new PopTableStyle(wPointerDown));
@@ -580,7 +583,7 @@ public class BattleScreen extends JamScreen {
     
             popTable.addAction(sequence(delay(2f), fadeOut(.5f), run(() -> {
                 popTable.hide();
-                checkForDead();
+                checkForDead(enemy);
             }), removeActor()));
     
             popTable.show(stage);
@@ -607,7 +610,7 @@ public class BattleScreen extends JamScreen {
     
     public void conductSkill(CharacterData character, SkillData skill, Array<Table> tiles, Table target, boolean isPlayerTeam) {
         skill.execute(this, character, tiles, target, isPlayerTeam, () -> {
-            checkForDead();
+            checkForDead(character);
         });
     }
     
@@ -623,6 +626,22 @@ public class BattleScreen extends JamScreen {
         tile.localToStageCoordinates(temp);
         label.setPosition(temp.x, temp.y, Align.center);
     
+        label.addAction(sequence(parallel(moveBy(0, 50, 1.0f, Interpolation.sineOut), fadeOut(1.0f)), removeActor()));
+        
+        var progressBar = (ProgressBar) ((Container) ((Stack) tile.getChild(0)).getChild(1)).getActor();
+        progressBar.setValue(enemy.health);
+    }
+    
+    public void showBuff(Table tile, CharacterData enemy, int damage) {
+        var label = new Label((damage > 0 ? "+" : "")  + damage, lNamesake);
+        label.setColor(Color.YELLOW);
+        stage.addActor(label);
+        label.pack();
+        
+        temp.set(tile.getWidth() / 2, tile.getHeight() / 2);
+        tile.localToStageCoordinates(temp);
+        label.setPosition(temp.x, temp.y, Align.center);
+        
         label.addAction(sequence(parallel(moveBy(0, 50, 1.0f, Interpolation.sineOut), fadeOut(1.0f)), removeActor()));
         
         var progressBar = (ProgressBar) ((Container) ((Stack) tile.getChild(0)).getChild(1)).getActor();
@@ -689,38 +708,40 @@ public class BattleScreen extends JamScreen {
         addCharacterToTile(characterData, tiles.get(newIndex));
     }
     
-    public void checkForDead() {
+    public void checkForDead(CharacterData character) {
         var foundDead = false;
         
         for (var tile : enemyTiles) {
-            var character = (CharacterData) tile.getUserObject();
-            if (character != null && character.health <= 0) {
+            var tileCharacter = (CharacterData) tile.getUserObject();
+            if (tileCharacter != null && tileCharacter.health <= 0) {
                 applyBlood(tile);
                 
                 foundDead = true;
                 tile.setUserObject(null);
                 tile.clearChildren();
                 tile.setBackground(skin.getDrawable("character-box-empty-10"));
-                enemyTeam.removeValue(character, true);
+                enemyTeam.removeValue(tileCharacter, true);
             }
         }
     
         for (var tile : playerTiles) {
-            var character = (CharacterData) tile.getUserObject();
-            if (character != null && character.health <= 0) {
+            var tileCharacter = (CharacterData) tile.getUserObject();
+            if (tileCharacter != null && tileCharacter.health <= 0) {
                 applyBlood(tile);
             
                 foundDead = true;
                 tile.setUserObject(null);
                 tile.clearChildren();
                 tile.setBackground(skin.getDrawable("character-box-empty-10"));
-                playerTeam.removeValue(character, true);
+                playerTeam.removeValue(tileCharacter, true);
             }
         }
         
-        if (!foundDead) finishTurn();
+        if (!foundDead) finishTurn(character);
         else {
-            stage.addAction(Actions.sequence(Actions.delay(3f), Actions.run(this::finishTurn)));
+            stage.addAction(Actions.sequence(Actions.delay(3f), Actions.run(() -> {
+                finishTurn(character);
+            })));
         }
     }
     
@@ -747,7 +768,7 @@ public class BattleScreen extends JamScreen {
         });
     }
     
-    public void finishTurn() {
+    public void finishTurn(CharacterData character) {
         if (playerTeam.size == 0) {
             music.stop();
             core.transition(new GameOverScreen());

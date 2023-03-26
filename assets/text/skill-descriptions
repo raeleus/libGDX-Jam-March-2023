@@ -70,7 +70,7 @@ Move to any adjacent cell.
 Spawn a new bunny.
 Ranged attack.
 Ranged attack. Enemy is poisoned.
-Incoming damage is decreased for the remainder of the match.
+Incoming damage is negated for the next round.
 Any player or enemy action rewards a small heal to the character.
 Devastating bunny melee attack.
 Heal character and target ally.
