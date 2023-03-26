@@ -3839,7 +3839,7 @@ public class SkillData {
                     var enemy = (CharacterData) tile.getUserObject();
             
                     var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeGreen.skeletonData, SpineStrikeGreen.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpineStrike.animationAnimation, false);
+                    spineDrawable.getAnimationState().setAnimation(0, SpineStrikeGreen.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
             

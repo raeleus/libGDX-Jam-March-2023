@@ -115,7 +115,7 @@ public class NameScreen extends JamScreen {
                 for (int i = 0; i < 50 * 50; i++) {
                     var room = new RoomData();
                     room.description = roomDescriptions.get(i % roomDescriptions.size);
-                    room.marker = Color.BLACK;
+                    room.marker = Color.WHITE;
                     room.upgrade = i < 50 * 50 * .70f;
                     room.tag = i < 50 * 50 * .50f;
                     room.restoration = i < 50 * 50 * .10f;

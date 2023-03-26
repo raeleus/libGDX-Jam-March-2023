@@ -7,11 +7,14 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.*;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.esotericsoftware.spine.AnimationState.AnimationStateAdapter;
+import com.esotericsoftware.spine.AnimationState.TrackEntry;
 import com.github.tommyettinger.textra.TypingLabel;
 import com.ray3k.template.*;
 import com.ray3k.template.battle.*;
@@ -39,13 +42,14 @@ public class BattleScreen extends JamScreen {
     private Array<Image> highlights = new Array<>();
     private Label playOrderLabel;
     public Array<SpineDrawable> spineDrawables = new Array<>();
+    public Music music;
     
     @Override
     public void show() {
         super.show();
         var room = getRoom();
     
-        final Music music = bgm_game;
+        music = bgm_game;
         if (!music.isPlaying()) {
             music.play();
             music.setVolume(bgm);
@@ -357,8 +361,7 @@ public class BattleScreen extends JamScreen {
             playerOrder += character.name + " " + character.speed + "\n";
         }
         playOrderLabel.setText(playerOrder);
-        
-        calculateOrder(turn);
+
         if (turn < characterOrder.size) {
             var character = characterOrder.get(turn);
             for (var cell : playerTiles) {
@@ -366,10 +369,18 @@ public class BattleScreen extends JamScreen {
                     conductPlayerTurn(character, cell);
                 }
             }
+            
+            for (int i = 0; i < enemyTiles.size; i++) {
+                var cell = enemyTiles.get(i);
+                if (cell.getUserObject() == character) {
+                    conductEnemyTurn(character, cell);
+                }
+            }
         }
     }
     
     public void conductPlayerTurn(CharacterData hero, Table cell) {
+        popTable.setColor(Color.WHITE);
         popTable.clear();
         popTable.setStyle(new PopTableStyle(wPointerDown));
         popTable.attachToActor(cell, Align.top, Align.top);
@@ -390,7 +401,7 @@ public class BattleScreen extends JamScreen {
                 public void changed(ChangeEvent event, Actor actor) {
                     popTable.hide();
                     stage.addAction(sequence(delay(.5f),run(() -> {
-                        selectTarget(hero, skill, cell);
+                        playerSelectTarget(hero, skill, cell);
                     })));
                 }
             });
@@ -407,7 +418,7 @@ public class BattleScreen extends JamScreen {
         popTable.show(stage);
     }
     
-    public void selectTarget(CharacterData hero, SkillData skill, Table cell) {
+    public void playerSelectTarget(CharacterData hero, SkillData skill, Table cell) {
         popTable.clear();
         popTable.setStyle(new PopTableStyle(wDefault));
         popTable.attachToActor(dividerImage, Align.center, Align.center);
@@ -473,9 +484,31 @@ public class BattleScreen extends JamScreen {
         popTable.show(stage);
     }
     
+    public void conductEnemyTurn(CharacterData enemy, Table cell) {
+        var skill = enemy.skills.random();
+    
+        var selectableTiles = Selector.selectAnyEnemy(this, false);
+        
+        popTable.clear();
+        popTable.setStyle(new PopTableStyle(wDefault));
+        popTable.attachToActor(dividerImage, Align.center, Align.center);
+    
+        popTable.defaults().space(10);
+        var label = new Label(enemy.name + " casts " + skill.name, lButton);
+        popTable.add(label);
+    
+        popTable.addAction(sequence(delay(2f), fadeOut(.5f), run(() -> {
+            popTable.hide();
+            var tile = selectableTiles.random();
+            conductSkill(enemy, skill, playerTiles.contains(tile, true) ? playerTiles : enemyTiles, tile);
+        }), removeActor()));
+    
+        popTable.show(stage);
+    }
+    
     public void conductSkill(CharacterData character, SkillData skill, Array<Table> tiles, Table target) {
         skill.execute(this, character, tiles, target, () -> {
-            finishTurn();
+            checkForDead();
         });
     }
     
@@ -508,7 +541,73 @@ public class BattleScreen extends JamScreen {
         label.addAction(sequence(delay(1f),run(() -> showTextEffectClear(tile, enemy))));
     }
     
+    public void checkForDead() {
+        var foundDead = false;
+    
+        for (var tile : enemyTiles) {
+            var character = (CharacterData) tile.getUserObject();
+            if (character != null && character.health <= 0) {
+                applyBlood(tile);
+                
+                foundDead = true;
+                tile.setUserObject(null);
+                tile.clearChildren();
+                enemyTeam.removeValue(character, true);
+            }
+        }
+    
+        for (var tile : playerTiles) {
+            var character = (CharacterData) tile.getUserObject();
+            if (character != null && character.health <= 0) {
+                applyBlood(tile);
+            
+                foundDead = true;
+                tile.setUserObject(null);
+                tile.clearChildren();
+                playerTeam.removeValue(character, true);
+            }
+        }
+        
+        if (!foundDead) finishTurn();
+        else {
+            stage.addAction(Actions.sequence(Actions.delay(3f), Actions.run(this::finishTurn)));
+        }
+    }
+    
+    public void applyBlood(Table tile) {
+        var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlood.skeletonData, SpineBlood.animationData);
+        spineDrawable.getAnimationState().setAnimation(0, SpineBlood.animationAnimation, false);
+        spineDrawable.setCrop(-10, -10, 20, 20);
+        spineDrawables.add(spineDrawable);
+    
+        Image image = new Image(spineDrawable);
+        image.setTouchable(Touchable.disabled);
+        stage.addActor(image);
+    
+        temp.set(76, 51);
+        tile.localToStageCoordinates(temp);
+        image.setPosition(temp.x, temp.y, Align.center);
+    
+        spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
+            @Override
+            public void complete(TrackEntry entry) {
+                image.remove();
+                spineDrawables.removeValue(spineDrawable, true);
+            }
+        });
+    }
+    
     public void finishTurn() {
+        if (playerTeam.size == 0) {
+            music.stop();
+            core.transition(new GameOverScreen());
+        } else if (enemyTeam.size == 0) {
+            music.stop();
+            var room = GameData.getRoom();
+            room.hasEnemies = false;
+            core.transition(new RoomScreen());
+        }
+        
         turn++;
         conductTurn();
     }

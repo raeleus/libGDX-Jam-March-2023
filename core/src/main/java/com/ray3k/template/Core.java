@@ -733,18 +733,18 @@ public class Core extends JamGame {
                 if (root.getBoolean("success", false)) {
                     Gdx.app.postRunnable(() -> handler.handle(column, row, Color.valueOf(root.getString("data"))));
                 } else {
-                    Gdx.app.postRunnable(() -> handler.handle(column, row, Color.BLACK));
+                    Gdx.app.postRunnable(() -> handler.handle(column, row, Color.WHITE));
                 }
             }
         
             @Override
             public void failed(Throwable t) {
-                Gdx.app.postRunnable(() -> handler.handle(column, row, Color.BLACK));
+                Gdx.app.postRunnable(() -> handler.handle(column, row, Color.WHITE));
             }
         
             @Override
             public void cancelled() {
-                Gdx.app.postRunnable(() -> handler.handle(column, row, Color.BLACK));
+                Gdx.app.postRunnable(() -> handler.handle(column, row, Color.WHITE));
             }
         });
     }
@@ -769,18 +769,18 @@ public class Core extends JamGame {
                 if (root.getBoolean("success", false)) {
                     handler.handle(column, row, Color.valueOf(root.getString("data")));
                 } else {
-                    handler.handle(column, row, Color.BLACK);
+                    handler.handle(column, row, Color.WHITE);
                 }
             }
             
             @Override
             public void failed(Throwable t) {
-                handler.handle(column, row, Color.BLACK);
+                handler.handle(column, row, Color.WHITE);
             }
             
             @Override
             public void cancelled() {
-                handler.handle(column, row, Color.BLACK);
+                handler.handle(column, row, Color.WHITE);
             }
         });
     }
@@ -826,7 +826,7 @@ public class Core extends JamGame {
                         if (child.getBoolean("success", false)) {
                             Gdx.app.postRunnable(() -> handler.handle(cValue, row, Color.valueOf(child.getString("data"))));
                         } else {
-                            Gdx.app.postRunnable(() -> handler.handle(cValue, row, Color.BLACK));
+                            Gdx.app.postRunnable(() -> handler.handle(cValue, row, Color.WHITE));
                         }
                         c++;
                     }
