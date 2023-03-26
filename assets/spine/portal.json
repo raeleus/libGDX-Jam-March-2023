@@ -1,6 +1,6 @@
 {
 "skeleton": {
-	"hash": "L9mQ8yxfWKY",
+	"hash": "8M0O+DBuQ7c",
 	"spine": "4.1.19",
 	"x": -70,
 	"y": -62.25,
@@ -36,9 +36,9 @@
 	"animation": {
 		"slots": {
 			"game/portal-01": {
-				"rgba": [
-					{ "time": 0.9, "color": "ffffffff" },
-					{ "time": 1.4667, "color": "ffffff00" }
+				"alpha": [
+					{ "time": 0.9, "value": 1 },
+					{ "time": 1.4667, "value": 0 }
 				],
 				"attachment": [
 					{},

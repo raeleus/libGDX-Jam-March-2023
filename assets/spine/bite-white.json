@@ -1,0 +1,58 @@
+{
+"skeleton": {
+	"hash": "wpyiaR+b1vg",
+	"spine": "4.1.19",
+	"x": -57.2,
+	"y": -40.71,
+	"width": 111,
+	"height": 88,
+	"images": "",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" },
+	{ "name": "game/bite", "parent": "root", "length": 74.1, "rotation": 0.39, "x": -0.03, "y": -0.28 }
+],
+"slots": [
+	{ "name": "game/bite", "bone": "game/bite", "dark": "ffffff", "attachment": "game/bite" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"game/bite": {
+				"game/bite": { "x": -1.65, "y": 3.58, "rotation": -0.39, "width": 111, "height": 88 }
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"slots": {
+			"game/bite": {
+				"alpha": [
+					{
+						"value": 0.0011,
+						"curve": [ 0.067, 0, 0.066, 1 ]
+					},
+					{
+						"time": 0.2,
+						"value": 1,
+						"curve": [ 0.503, 0.99, 0.511, 0 ]
+					},
+					{ "time": 0.6667, "value": 0.0011 }
+				]
+			}
+		},
+		"bones": {
+			"game/bite": {
+				"translate": [
+					{},
+					{ "time": 0.2, "y": 19.16 },
+					{ "time": 0.6667, "y": -38.31 }
+				]
+			}
+		}
+	}
+}
+}

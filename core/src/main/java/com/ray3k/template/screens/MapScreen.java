@@ -6,10 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.ray3k.template.*;
@@ -23,18 +20,19 @@ import static com.ray3k.template.Resources.*;
 public class MapScreen extends JamScreen {
     private Stage stage;
     private final static Color BG_COLOR = new Color(Color.BLACK);
+    Music music;
     
     @Override
     public void show() {
         super.show();
         
         var room = getRoom();
-        
-        final Music bgm = bgm_menu;
-        if (!bgm.isPlaying()) {
-            bgm.play();
-            bgm.setVolume(core.bgm);
-            bgm.setLooping(true);
+    
+        music = bgm_menu;
+        if (!music.isPlaying()) {
+            music.play();
+            music.setVolume(bgm);
+            music.setLooping(true);
         }
         
         stage = new Stage(new ScreenViewport(), batch);
@@ -64,6 +62,23 @@ public class MapScreen extends JamScreen {
         if (row - 1 >= 0) {
             var nextRoom = GameData.getRoom(column, row - 1);
             upRoomButton.setColor(nextRoom.marker);
+            
+            if (nextRoom.hasEnemies) {
+                var label = new Label("DANGER", lLog);
+                label.setColor(Color.RED);
+                upRoomButton.add(label);
+            } else if (nextRoom.upgrade || nextRoom.tag || nextRoom.hero != null) {
+                var label = new Label("LOOT", lLog);
+                label.setColor(Color.GOLD);
+                upRoomButton.add(label);
+            }
+            
+            if (nextRoom.restoration && !nextRoom.hasEnemies) {
+                upRoomButton.row();
+                var label = new Label("HEART", lLog);
+                label.setColor(Color.PINK);
+                upRoomButton.add(label);
+            }
             
             var listener = new ChangeListener() {
                 @Override
@@ -104,6 +119,24 @@ public class MapScreen extends JamScreen {
         if (column - 1 >= 0) {
             var nextRoom = GameData.getRoom(column - 1, row);
             leftRoomButton.setColor(nextRoom.marker);
+    
+            if (nextRoom.hasEnemies) {
+                var label = new Label("DANGER", lLog);
+                label.setColor(Color.RED);
+                leftRoomButton.add(label);
+            } else if (nextRoom.upgrade || nextRoom.tag || nextRoom.hero != null) {
+                var label = new Label("LOOT", lLog);
+                label.setColor(Color.GOLD);
+                leftRoomButton.add(label);
+            }
+    
+            if (nextRoom.restoration && !nextRoom.hasEnemies) {
+                leftRoomButton.row();
+                var label = new Label("HEART", lLog);
+                label.setColor(Color.PINK);
+                leftRoomButton.add(label);
+            }
+            
             var listener = new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
@@ -137,6 +170,23 @@ public class MapScreen extends JamScreen {
             }
         });
         thisRoomButton.setColor(room.marker);
+    
+        if (room.hasEnemies) {
+            var label = new Label("DANGER", lLog);
+            label.setColor(Color.RED);
+            thisRoomButton.add(label);
+        } else if (room.upgrade || room.tag || room.hero != null) {
+            var label = new Label("LOOT", lLog);
+            label.setColor(Color.GOLD);
+            thisRoomButton.add(label);
+        }
+    
+        if (room.restoration && !room.hasEnemies) {
+            thisRoomButton.row();
+            var label = new Label("HEART", lLog);
+            label.setColor(Color.PINK);
+            thisRoomButton.add(label);
+        }
         
         table.row();
         var label = new Label("(" + column + "," + row + ")", lButton);
@@ -169,6 +219,23 @@ public class MapScreen extends JamScreen {
             button.addListener(listener);
             
             rightRoomButton.setColor(nextRoom.marker);
+            if (nextRoom.hasEnemies) {
+                label = new Label("DANGER", lLog);
+                label.setColor(Color.RED);
+                rightRoomButton.add(label);
+            } else if (nextRoom.upgrade || nextRoom.tag || nextRoom.hero != null) {
+                label = new Label("LOOT", lLog);
+                label.setColor(Color.GOLD);
+                rightRoomButton.add(label);
+            }
+    
+            if (nextRoom.restoration && !nextRoom.hasEnemies) {
+                upRoomButton.row();
+                label = new Label("HEART", lLog);
+                label.setColor(Color.PINK);
+                rightRoomButton.add(label);
+            }
+            
             rightRoomButton.addListener(listener);
             Core.fetchPixel(column + 1, row, (c, r, color) -> {
                 nextRoom.marker = color;
@@ -209,6 +276,23 @@ public class MapScreen extends JamScreen {
             button.addListener(listener);
             
             downRoomButton.setColor(nextRoom.marker);
+            if (nextRoom.hasEnemies) {
+                label = new Label("DANGER", lLog);
+                label.setColor(Color.RED);
+                downRoomButton.add(label);
+            } else if (nextRoom.upgrade || nextRoom.tag || nextRoom.hero != null) {
+                label = new Label("LOOT", lLog);
+                label.setColor(Color.GOLD);
+                downRoomButton.add(label);
+            }
+    
+            if (nextRoom.restoration && !nextRoom.hasEnemies) {
+                downRoomButton.row();
+                label = new Label("HEART", lLog);
+                label.setColor(Color.PINK);
+                downRoomButton.add(label);
+            }
+            
             downRoomButton.addListener(listener);
             Core.fetchPixel(column, row + 1, (c, r, color) -> {
                 nextRoom.marker = color;
@@ -274,6 +358,12 @@ public class MapScreen extends JamScreen {
     }
     
     private void loadNextRoom() {
-        core.transition(new RoomScreen());
+        var room = getRoom();
+        if (room.hasEnemies) {
+            core.transition(new PreBattleScreen());
+            music.stop();
+        } else {
+            core.transition(new RoomScreen());
+        }
     }
 }

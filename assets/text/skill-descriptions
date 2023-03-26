@@ -16,7 +16,7 @@ Spawn a hairball that distracts enemies.
 Bite an enemy in melee range.
 Scoop damage to enemy in melee range.
 Character is enraged next turn.
-Throw a pistachio nut at a character. It heals allies and hurts enemies.
+Throw a pistachio nut at an enemy.
 Serve yogurt to an ally. Ally receives reduced damage for a turn.
 Serve sherbet to an ally. The ally is faster for the rest of the match.
 Serve a banana sundae to an ally. The ally does increased damage for a turn.
@@ -32,10 +32,10 @@ Spawn an ice character that distracts enemies.
 Strong melee attack to enemy in a diagonal cell.
 Stuns an enemy in melee range. Character is stunned as well.
 Devastating combination of attacks to enemy directly in front of character.
-Take down an enemy with less than 10% health.
+Take down an enemy in melee range with less than 10% health.
 Melee attack that stumbles an enemy to a side cell.
 Melee attack that pushes an enemy to the back row.
-Melee attack up to three different enemies in melee range.
+Melee attack all enemies in the front row.
 Melee attack an enemy in melee range or in two cells directly ahead.
 Block the next attack. Can be stacked.
 Counter-attack the next attack. Can be stacked.
@@ -70,7 +70,7 @@ Move to any adjacent cell.
 Spawn a new bunny.
 Ranged attack.
 Ranged attack. Enemy is poisoned.
-Incoming damage is decreased for the remainder of the match.
+Incoming damage is negated for the next round.
 Any player or enemy action rewards a small heal to the character.
 Devastating bunny melee attack.
 Heal character and target ally.
@@ -115,7 +115,7 @@ Devastating melee attack.
 Cannot be targeted. Character is stunned.
 Melee attack.
 Ranged attack.
-Stun an enemy.
+Stun an enemy in melee range.
 Melee attack two enemies.
 Heal self. Character is stunned.
 Move an ally to an adjacent cell.
@@ -180,4 +180,4 @@ A delicious snack for some, but a terrible outcome for the pineapple.
 Ooooh tasty!
 I'm the pine-apple! Bananas ain't got shit on me.
 Instant kill an enemy at 10% health or less. Heal self by that amount.
-It slices! It dices!
+Cutting melee attack.

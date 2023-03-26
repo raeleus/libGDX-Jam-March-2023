@@ -1,0 +1,57 @@
+{
+"skeleton": {
+	"hash": "l5ceJbwQqp8",
+	"spine": "4.1.19",
+	"x": -53.5,
+	"y": -51.5,
+	"width": 107,
+	"height": 103,
+	"images": "",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "game/shot-01", "bone": "root", "color": "ff0000ff", "dark": "ff0000", "attachment": "game/shot-01" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"game/shot-01": {
+				"game/shot-01": {
+					"path": "game/shot-",
+					"width": 107,
+					"height": 103,
+					"sequence": { "count": 12, "digits": 2 }
+				}
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"slots": {
+			"game/shot-01": {
+				"attachment": [
+					{},
+					{ "time": 0.0333, "name": "game/shot-01" },
+					{ "time": 0.7 }
+				]
+			}
+		},
+		"attachments": {
+			"default": {
+				"game/shot-01": {
+					"game/shot-01": {
+						"sequence": [
+							{ "time": 0.0333, "mode": "once", "delay": 0.05 }
+						]
+					}
+				}
+			}
+		}
+	}
+}
+}

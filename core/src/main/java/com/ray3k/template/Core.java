@@ -26,6 +26,7 @@ import com.badlogic.gdx.utils.ObjectIntMap.Entry;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.crashinvaders.vfx.VfxManager;
 import com.dongbat.jbump.CollisionFilter;
+import com.dongbat.jbump.Item;
 import com.dongbat.jbump.Response;
 import com.dongbat.jbump.World;
 import com.esotericsoftware.spine.AnimationStateData;
@@ -40,6 +41,7 @@ import com.ray3k.template.screens.*;
 import com.ray3k.template.transitions.*;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
+import javax.print.attribute.standard.MediaSize.Other;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.util.Iterator;
@@ -733,18 +735,18 @@ public class Core extends JamGame {
                 if (root.getBoolean("success", false)) {
                     Gdx.app.postRunnable(() -> handler.handle(column, row, Color.valueOf(root.getString("data"))));
                 } else {
-                    Gdx.app.postRunnable(() -> handler.handle(column, row, Color.BLACK));
+                    Gdx.app.postRunnable(() -> handler.handle(column, row, Color.WHITE));
                 }
             }
         
             @Override
             public void failed(Throwable t) {
-                Gdx.app.postRunnable(() -> handler.handle(column, row, Color.BLACK));
+                Gdx.app.postRunnable(() -> handler.handle(column, row, Color.WHITE));
             }
         
             @Override
             public void cancelled() {
-                Gdx.app.postRunnable(() -> handler.handle(column, row, Color.BLACK));
+                Gdx.app.postRunnable(() -> handler.handle(column, row, Color.WHITE));
             }
         });
     }
@@ -769,18 +771,18 @@ public class Core extends JamGame {
                 if (root.getBoolean("success", false)) {
                     handler.handle(column, row, Color.valueOf(root.getString("data")));
                 } else {
-                    handler.handle(column, row, Color.BLACK);
+                    handler.handle(column, row, Color.WHITE);
                 }
             }
             
             @Override
             public void failed(Throwable t) {
-                handler.handle(column, row, Color.BLACK);
+                handler.handle(column, row, Color.WHITE);
             }
             
             @Override
             public void cancelled() {
-                handler.handle(column, row, Color.BLACK);
+                handler.handle(column, row, Color.WHITE);
             }
         });
     }
@@ -826,7 +828,7 @@ public class Core extends JamGame {
                         if (child.getBoolean("success", false)) {
                             Gdx.app.postRunnable(() -> handler.handle(cValue, row, Color.valueOf(child.getString("data"))));
                         } else {
-                            Gdx.app.postRunnable(() -> handler.handle(cValue, row, Color.BLACK));
+                            Gdx.app.postRunnable(() -> handler.handle(cValue, row, Color.WHITE));
                         }
                         c++;
                     }
@@ -876,10 +878,15 @@ public class Core extends JamGame {
         
         var skillNames = Gdx.files.internal("text/skill-names").readString().split("\\n");
         var skillDescriptions = Gdx.files.internal("text/skill-descriptions").readString().split("\\n");
+        var skillUses = Gdx.files.internal("text/skill-uses").readString().split("\\n");
+        var skillRegenerateUses = Gdx.files.internal("text/skill-regenerateUses").readString().split("\\n");
         for (int i = 0; i < skillNames.length; i++) {
             var skill = new SkillData();
             skill.name = skillNames[i];
             skill.description = skillDescriptions[i];
+            skill.usesMax = Integer.parseInt(skillUses[i].trim());
+            skill.uses = skill.usesMax;
+            skill.regenerateUses = Boolean.parseBoolean(skillRegenerateUses[i]);
             skillTemplates.add(skill);
         }
         
@@ -895,9 +902,28 @@ public class Core extends JamGame {
                 hero.addSkill(skill);
             }
             for (var tag : heroTags[i].split(",")) {
-                hero.addTag(tag);
+                hero.addTag(tag, false);
+            }
+            for (var tag : hero.tags) {
+                for (var skill : hero.skills) {
+                    tag.availableSkills.removeValue(skill.name, false);
+                }
             }
             heroTemplates.add(hero);
+        }
+    
+        var enemyNames = Gdx.files.internal("text/enemy-names").readString().split("\\n");
+        var enemySkills = Gdx.files.internal("text/enemy-skills").readString().split("\\n");
+        var enemyHealth = Gdx.files.internal("text/enemy-health").readString().split("\\n");
+        for (int i = 0; i < enemyNames.length; i++) {
+            var enemy = new CharacterData();
+            enemy.name = enemyNames[i];
+            for (var skill : enemySkills[i].split(",")) {
+                enemy.addSkill(skill);
+            }
+            enemy.healthMax = Integer.parseInt(enemyHealth[i]);
+            enemy.health = enemy.healthMax;
+            enemyTemplates.add(enemy);
         }
         
         preferences = Gdx.app.getPreferences(PROJECT_NAME);

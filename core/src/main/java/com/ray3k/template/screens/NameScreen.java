@@ -39,11 +39,11 @@ public class NameScreen extends JamScreen {
     public void show() {
         super.show();
     
-        final Music bgm = bgm_menu;
-        if (!bgm.isPlaying()) {
-            bgm.play();
-            bgm.setVolume(core.bgm);
-            bgm.setLooping(true);
+        final Music music = bgm_menu;
+        if (!music.isPlaying()) {
+            music.play();
+            music.setVolume(bgm);
+            music.setLooping(true);
         }
         
         stage = new Stage(new ScreenViewport(), batch);
@@ -101,7 +101,6 @@ public class NameScreen extends JamScreen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Gdx.input.setInputProcessor(null);
-                bgm.stop();
                 
                 column = MathUtils.random(49);
                 row = MathUtils.random(49);
@@ -116,10 +115,11 @@ public class NameScreen extends JamScreen {
                 for (int i = 0; i < 50 * 50; i++) {
                     var room = new RoomData();
                     room.description = roomDescriptions.get(i % roomDescriptions.size);
-                    room.marker = Color.BLACK;
-                    room.upgrade = i < 50 * 50 * .25f;
-                    room.tag = i < 50 * 50 * .10f;
-                    room.hero = i < 50 * 50 * .05f ? heroTemplates.random().name : null;
+                    room.marker = Color.WHITE;
+                    room.upgrade = i < 50 * 50 * .70f;
+                    room.tag = i < 50 * 50 * .50f;
+                    room.restoration = i < 50 * 50 * .10f;
+                    room.hero = i < 50 * 50 * .10f ? heroTemplates.random().name : null;
                     rooms.add(room);
                 }
                 rooms.shuffle();
@@ -127,13 +127,17 @@ public class NameScreen extends JamScreen {
                 var startingRoom = rooms.get(getRoomIndex());
                 startingRoom.description = Gdx.files.internal("text/rooms-first").readString().split("\\n")[0];
                 startingRoom.upgrade = true;
-                startingRoom.tag = false;
+                startingRoom.tag = true;
                 startingRoom.hasEnemies = false;
+                startingRoom.restoration = true;
                 startingRoom.hero = heroTemplates.random().name;
     
+                playerTeam.clear();
                 var hero = new CharacterData();
                 hero.name = name;
-                hero.addTag(tag);
+                hero.addTag(tag, true);
+                hero.addSkill("leap");
+                hero.addSkill("charge");
                 hero.description = description;
                 playerTeam.add(hero);
                 

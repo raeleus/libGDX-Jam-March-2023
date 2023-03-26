@@ -25,11 +25,11 @@ public class MenuScreen extends JamScreen {
     public void show() {
         super.show();
     
-        final Music bgm = bgm_menu;
-        if (!bgm.isPlaying()) {
-            bgm.play();
-            bgm.setVolume(core.bgm);
-            bgm.setLooping(true);
+        final Music music = bgm_menu;
+        if (!music.isPlaying()) {
+            music.play();
+            music.setVolume(bgm);
+            music.setLooping(true);
         }
         
         stage = new Stage(new ScreenViewport(), batch);
@@ -55,7 +55,6 @@ public class MenuScreen extends JamScreen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Gdx.input.setInputProcessor(null);
-                bgm.stop();
                 core.transition(new StoryScreen());
             }
         });

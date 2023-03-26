@@ -11,6 +11,9 @@ public class CharacterData {
     public Array<SkillData> skills = new Array<>();
     public Array<TagData> tags = new Array<>();
     public int position;
+    public boolean stunned;
+    public float damageMitigation;
+    public float extraDamage;
     
     public CharacterData() {
     }
@@ -21,12 +24,16 @@ public class CharacterData {
         this.health = other.health;
         this.healthMax = other.healthMax;
         this.speed = other.speed;
+        this.stunned = other.stunned;
+        this.damageMitigation = other.damageMitigation;
+        this.extraDamage = other.extraDamage;
         skills.addAll(other.skills);
         tags.addAll(other.tags);
     }
     
-    public void addTag(String tag) {
+    public void addTag(String tag, boolean addFirstSkill) {
         var tagData = GameData.findTag(tag);
+        tagData = new TagData(tagData);
         tags.add(tagData);
         
         healthMax += tagData.healthModifier;
@@ -34,7 +41,7 @@ public class CharacterData {
         
         speed += tagData.speedModifier;
         
-        if (tagData.availableSkills.size > 0) {
+        if (addFirstSkill && tagData.availableSkills.size > 0) {
             addSkill(tagData.availableSkills.first());
             tagData.availableSkills.removeIndex(0);
         }
@@ -46,6 +53,6 @@ public class CharacterData {
         }
         
         var skillData = GameData.findSkill(skill);
-        skills.add(skillData);
+        skills.add(new SkillData(skillData));
     }
 }

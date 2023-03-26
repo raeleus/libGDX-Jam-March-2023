@@ -12,11 +12,13 @@ public class GameData {
     public static Array<TagData> tagTemplates = new Array<>();
     public static Array<SkillData> skillTemplates = new Array<>();
     public static Array<CharacterData> heroTemplates = new Array<>();
+    public static Array<CharacterData> enemyTemplates = new Array<>();
     public static Array<RoomData> rooms = new Array<>();
     public static Array<Color> colors = new Array<>(new Color[]{Color.BLACK, Color.WHITE, Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.BROWN, Color.CYAN, Color.GRAY, Color.PURPLE, Color.ORANGE, Color.PINK, Color.GOLD});
     public static Array<String> colorNames = new Array<>(new String[]{"Off", "White", "Red", "Green", "Blue", "Yellow", "Brown", "Cyan", "Gray", "Purple", "Orange", "Pink", "Gold"});
     public static Array<CharacterData> playerTeam = new Array<>();
     public static Array<CharacterData> enemyTeam = new Array<>();
+    public static Array<CharacterData> characterOrder = new Array<>();
     
     public static TagData matchTag(String name) {
         for (int i = 0; i < tagTemplates.size; i++) {
@@ -83,5 +85,23 @@ public class GameData {
             if (arrayColor.toIntBits() == colorInt) return colorNames.get(i);
         }
         return "error";
+    }
+    
+    public static void calculateOrder(int turn) {
+        var order = new Array<CharacterData>();
+        
+        if (turn >= characterOrder.size) {
+            characterOrder.addAll(nextOrder());
+        }
+        order.addAll(characterOrder);
+    }
+    
+    public static Array<CharacterData> nextOrder() {
+        var order = new Array<CharacterData>();
+    
+        order.addAll(playerTeam);
+        order.addAll(enemyTeam);
+        order.sort((o1, o2) -> o2.speed - o1.speed);
+        return order;
     }
 }

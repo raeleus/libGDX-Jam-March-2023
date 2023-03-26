@@ -6,13 +6,16 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.ray3k.template.data.*;
 import com.ray3k.template.stripe.*;
 import com.ray3k.template.*;
+import com.ray3k.template.stripe.PopTable.*;
 
 import java.util.Locale;
 
@@ -31,11 +34,11 @@ public class RoomScreen extends JamScreen {
         
         var room = getRoom();
     
-        final Music bgm = bgm_menu;
-        if (!bgm.isPlaying()) {
-            bgm.play();
-            bgm.setVolume(core.bgm);
-            bgm.setLooping(true);
+        final Music music = bgm_menu;
+        if (!music.isPlaying()) {
+            music.play();
+            music.setVolume(bgm);
+            music.setLooping(true);
         }
         
         stage = new Stage(new ScreenViewport(), batch);
@@ -123,6 +126,49 @@ public class RoomScreen extends JamScreen {
             }
         });
         
+        if (room.restoration) {
+            root.row();
+            var restorationLabel = new Label("Someone left a bleeding heart here. It pumps with supernatural rhythm.", lLog);
+            root.add(restorationLabel);
+    
+            root.row();
+            var restoreButton = new TextButton("Restore health and gear", skin);
+            root.add(restoreButton);
+            restoreButton.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    var pop = new PopTable(wDefault);
+                    pop.setModal(true);
+                    pop.setKeepCenteredInWindow(true);
+                    pop.setKeepSizedWithinStage(true);
+            
+                    pop.defaults().space(10);
+                    var label = new Label("Health and gear fill your insides...", skin);
+                    pop.add(label);
+            
+                    pop.row();
+                    var textButton = new TextButton("OK", skin);
+                    pop.add(textButton);
+                    textButton.addListener(new ChangeListener() {
+                        @Override
+                        public void changed(ChangeEvent event, Actor actor) {
+                            for (var hero : playerTeam) {
+                                hero.health = hero.healthMax;
+                            }
+                            
+                            room.restoration = false;
+                            
+                            restoreButton.setVisible(false);
+                            restoreButton.setDisabled(true);
+                            pop.hide();
+                        }
+                    });
+            
+                    pop.show(stage);
+                }
+            });
+        }
+        
         root.row();
         var labelTable = new Table();
         root.add(labelTable);
@@ -135,18 +181,20 @@ public class RoomScreen extends JamScreen {
             root.add(label);
     
             root.row();
-            var buttonTable = new Table();
-            root.add(buttonTable);
-            buttonTable.defaults().space(10);
+            var horizontalGroup = new HorizontalGroup();
+            root.add(horizontalGroup).growX();
+            horizontalGroup.wrapSpace(10);
+            horizontalGroup.space(10);
+            horizontalGroup.wrap();
+            horizontalGroup.align(Align.center);
     
             if (room.upgrade) {
                 labelTable.row();
                 label = new Label("An upgrade cube hums in the corner.", lLog);
                 labelTable.add(label);
-        
-                buttonTable.row();
+                
                 textButton = new TextButton("Take the upgrade", skin);
-                buttonTable.add(textButton);
+                horizontalGroup.addActor(textButton);
                 textButton.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
@@ -201,13 +249,21 @@ public class RoomScreen extends JamScreen {
                                                         @Override
                                                         public void changed(ChangeEvent event, Actor actor) {
                                                             skill.level++;
-    
+                                                            
                                                             room.upgrade = false;
                                                             room.tag = false;
                                                             room.hero = null;
                                                             core.transition(new MapScreen());
                                                         }
                                                     });
+    
+                                                    var hoverListener = new PopTableHoverListener(Align.top, Align.top, new PopTableStyle(wPointerDown));
+                                                    textButton.addListener(hoverListener);
+                                                    var descriptionPop = hoverListener.getPopTable();
+                                                    label = new Label(skill.description, lLog);
+                                                    label.setWrap(true);
+                                                    label.setAlignment(Align.center);
+                                                    descriptionPop.add(label).growX().width(200);
                                                 }
                                             }
                                             
@@ -351,17 +407,46 @@ public class RoomScreen extends JamScreen {
                 labelTable.row();
                 label = new Label("A powerful tag is within reach.", lLog);
                 labelTable.add(label);
-        
-                buttonTable.row();
+                
                 textButton = new TextButton("Add a tag to a hero", skin);
-                buttonTable.add(textButton);
+                horizontalGroup.addActor(textButton);
                 textButton.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
-                        room.upgrade = false;
-                        room.tag = false;
-                        room.hero = null;
-                        core.transition(new MapScreen());
+                        var pop = new PopTable(wDefault);
+                        pop.setKeepCenteredInWindow(true);
+                        pop.setModal(true);
+                        pop.pad(10);
+        
+                        pop.defaults().space(10);
+                        var label = new Label("Which hero?", lButton);
+                        pop.add(label);
+        
+                        for (var teamHero : playerTeam) {
+                            pop.row();
+                            var textButton = new TextButton(teamHero.name, skin);
+                            pop.add(textButton);
+                            textButton.addListener(new ChangeListener() {
+                                @Override
+                                public void changed(ChangeEvent event, Actor actor) {
+                                    pop.hide();
+    
+                                    showConfirmTagPop(teamHero, room);
+                                }
+                            });
+                        }
+        
+                        pop.row();
+                        var textButton = new TextButton("Cancel", skin);
+                        pop.add(textButton);
+                        textButton.addListener(new ChangeListener() {
+                            @Override
+                            public void changed(ChangeEvent event, Actor actor) {
+                                pop.hide();
+                            }
+                        });
+        
+                        pop.show(stage);
                     }
                 });
             }
@@ -370,10 +455,9 @@ public class RoomScreen extends JamScreen {
                 labelTable.row();
                 label = new Label("A hero, " + room.hero + ", is trapped in a hyperbolic phase cell.", lLog);
                 labelTable.add(label);
-        
-                buttonTable.row();
+                
                 textButton = new TextButton("Release " + room.hero, skin);
-                buttonTable.add(textButton);
+                horizontalGroup.addActor(textButton);
                 textButton.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
@@ -391,10 +475,9 @@ public class RoomScreen extends JamScreen {
                 label.setAlignment(Align.center);
                 pop.add(label).growX();
             }
-    
-            buttonTable.row();
+            
             textButton = new TextButton("Just leave and forget about it", skin);
-            buttonTable.add(textButton);
+            horizontalGroup.addActor(textButton);
             textButton.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
@@ -450,8 +533,55 @@ public class RoomScreen extends JamScreen {
     
         tagConfirmationPop.defaults().space(10);
         var label = new Label("Added skill: " + skill, lButton);
+        label.setTouchable(Touchable.enabled);
         tagConfirmationPop.add(label);
     
+        var hoverListener = new PopTableHoverListener(Align.top, Align.top, new PopTableStyle(wPointerDown));
+        label.addListener(hoverListener);
+        var skillPop = hoverListener.getPopTable();
+        label = new Label(findSkill(skill).description, lLog);
+        label.setWrap(true);
+        label.setAlignment(Align.center);
+        skillPop.add(label).growX().width(200);
+    
+        tagConfirmationPop.row();
+        var textButton = new TextButton("OK", skin);
+        tagConfirmationPop.add(textButton);
+        textButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                room.upgrade = false;
+                room.tag = false;
+                room.hero = null;
+                core.transition(new MapScreen());
+            }
+        });
+        tagConfirmationPop.show(stage);
+    }
+    
+    private void showConfirmTagPop(CharacterData teamHero, RoomData room) {
+        var tags = new Array<TagData>();
+        tags.addAll(tagTemplates);
+        var iter = tags.iterator();
+        while (iter.hasNext()) {
+            var tag = iter.next();
+            for (var heroTag : teamHero.tags) {
+                if (tag.name.equals(heroTag.name)) iter.remove();
+            }
+        }
+        
+        var tag = tags.random();
+        teamHero.addTag(tag.name, false);
+        
+        var tagConfirmationPop = new PopTable(wDefault);
+        tagConfirmationPop.setKeepCenteredInWindow(true);
+        tagConfirmationPop.setModal(true);
+        tagConfirmationPop.pad(10);
+        
+        tagConfirmationPop.defaults().space(10);
+        var label = new Label("Added tag: " + tag.name, lButton);
+        tagConfirmationPop.add(label);
+        
         tagConfirmationPop.row();
         var textButton = new TextButton("OK", skin);
         tagConfirmationPop.add(textButton);

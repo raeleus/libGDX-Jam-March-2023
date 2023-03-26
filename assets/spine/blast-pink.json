@@ -1,6 +1,6 @@
 {
 "skeleton": {
-	"hash": "PnPsIidCCAs",
+	"hash": "jFHWuYteLN0",
 	"spine": "4.1.19",
 	"x": -77.75,
 	"y": -77.25,
@@ -48,8 +48,7 @@
 				"game/blast-01": {
 					"game/blast-01": {
 						"sequence": [
-							{ "time": 0.0333, "mode": "once", "delay": 0.05 },
-							{ "time": 2.5667, "mode": "once", "index": 15, "delay": 0.0833 }
+							{ "time": 0.0333, "mode": "once", "delay": 0.05 }
 						]
 					}
 				}

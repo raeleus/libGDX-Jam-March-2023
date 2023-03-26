@@ -1,0 +1,62 @@
+{
+"skeleton": {
+	"hash": "G6BnUq8Gsi0",
+	"spine": "4.1.19",
+	"x": -70,
+	"y": -62.25,
+	"width": 140,
+	"height": 124.5,
+	"images": "",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "game/portal-01", "bone": "root", "color": "00ff14ff", "dark": "00ff40", "attachment": "game/portal-01" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"game/portal-01": {
+				"game/portal-01": {
+					"path": "game/portal-",
+					"scaleX": 0.5,
+					"scaleY": 0.5,
+					"width": 280,
+					"height": 249,
+					"sequence": { "count": 30, "digits": 2 }
+				}
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"slots": {
+			"game/portal-01": {
+				"alpha": [
+					{ "time": 0.9, "value": 1 },
+					{ "time": 1.4667, "value": 0 }
+				],
+				"attachment": [
+					{},
+					{ "time": 0.0333, "name": "game/portal-01" }
+				]
+			}
+		},
+		"attachments": {
+			"default": {
+				"game/portal-01": {
+					"game/portal-01": {
+						"sequence": [
+							{ "time": 0.0333, "mode": "once", "delay": 0.0333 }
+						]
+					}
+				}
+			}
+		}
+	}
+}
+}

@@ -32,10 +32,22 @@
 	}
 },
 "com.badlogic.gdx.graphics.Color": {
+	"dark-gray": {
+		"r": 0.15686275,
+		"g": 0.15686275,
+		"b": 0.15686275,
+		"a": 1
+	},
 	"gray": {
 		"r": 0.4745098,
 		"g": 0.4745098,
 		"b": 0.4745098,
+		"a": 1
+	},
+	"green": {
+		"r": 0,
+		"g": 1,
+		"b": 0.15686275,
 		"a": 1
 	},
 	"invisible": {
@@ -44,10 +56,34 @@
 		"b": 1,
 		"a": 0
 	},
+	"light-blue": {
+		"r": 0,
+		"g": 0.9019608,
+		"b": 1,
+		"a": 1
+	},
+	"red": {
+		"r": 1,
+		"g": 0,
+		"b": 0,
+		"a": 1
+	},
+	"RGBA_0_0_0_255": {
+		"r": 0,
+		"g": 0,
+		"b": 0,
+		"a": 1
+	},
 	"white": {
 		"r": 1,
 		"g": 1,
 		"b": 1,
+		"a": 1
+	},
+	"yellow": {
+		"r": 1,
+		"g": 0.85393256,
+		"b": 0,
 		"a": 1
 	}
 },
@@ -55,7 +91,7 @@
 	"battle-divider-10": {
 		"region": "battle-divider",
 		"horizontalStretchAreas": [ 0, 99, 244, 345 ],
-		"verticalStretchAreas": [ 0, 30 ],
+		"verticalStretchAreas": [ 0, 16, 18, 30 ],
 		"tiling": false,
 		"minWidth": 346,
 		"minHeight": 31,
@@ -97,8 +133,8 @@
 		"horizontalStretchAreas": [ 5, 146 ],
 		"verticalStretchAreas": [ 5, 96 ],
 		"tiling": false,
-		"minWidth": 152,
-		"minHeight": 102,
+		"minWidth": 10,
+		"minHeight": 10,
 		"rightWidth": 0,
 		"leftWidth": 0,
 		"bottomHeight": 0,
@@ -117,8 +153,8 @@
 		"horizontalStretchAreas": [ 25, 161 ],
 		"verticalStretchAreas": [ 25, 106 ],
 		"tiling": false,
-		"minWidth": 187,
-		"minHeight": 132,
+		"minWidth": 10,
+		"minHeight": 10,
 		"rightWidth": 0,
 		"leftWidth": 0,
 		"bottomHeight": 0,
@@ -258,8 +294,8 @@
 		"horizontalStretchAreas": [ 14, 156 ],
 		"verticalStretchAreas": [ 14, 102 ],
 		"tiling": false,
-		"minWidth": 171,
-		"minHeight": 117,
+		"minWidth": 10,
+		"minHeight": 10,
 		"rightWidth": 7,
 		"leftWidth": 7,
 		"bottomHeight": 7,
@@ -373,6 +409,151 @@
 		"regions": [],
 		"playMode": 2,
 		"crushMode": 0
+	},
+	"character-box-empty-10": {
+		"region": "character-box-empty",
+		"horizontalStretchAreas": [ 2, 149 ],
+		"verticalStretchAreas": [ 2, 99 ],
+		"tiling": true,
+		"minWidth": 152,
+		"minHeight": 102,
+		"rightWidth": 0,
+		"leftWidth": 0,
+		"bottomHeight": 0,
+		"topHeight": 0,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2,
+		"crushMode": 0
+	},
+	"progress-bar-knob-10": {
+		"region": "progress-bar-knob",
+		"horizontalStretchAreas": [ 0, 5 ],
+		"verticalStretchAreas": [ 0, 5 ],
+		"tiling": false,
+		"minWidth": 0,
+		"minHeight": 6,
+		"rightWidth": 0,
+		"leftWidth": 0,
+		"bottomHeight": 0,
+		"topHeight": 0,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2,
+		"crushMode": 0
+	},
+	"progress-bar-knob-bg-10": {
+		"region": "progress-bar-knob",
+		"color": "invisible",
+		"horizontalStretchAreas": [ 0, 5 ],
+		"verticalStretchAreas": [ 0, 5 ],
+		"tiling": false,
+		"minWidth": 6,
+		"minHeight": 6,
+		"rightWidth": 0,
+		"leftWidth": 0,
+		"bottomHeight": 0,
+		"topHeight": 0,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2,
+		"crushMode": 0
+	},
+	"progress-bar-knob-red-10": {
+		"region": "progress-bar-knob",
+		"color": "red",
+		"horizontalStretchAreas": [ 0, 5 ],
+		"verticalStretchAreas": [ 0, 5 ],
+		"tiling": false,
+		"minWidth": 0,
+		"minHeight": 6,
+		"rightWidth": 0,
+		"leftWidth": 0,
+		"bottomHeight": 0,
+		"topHeight": 0,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2,
+		"crushMode": 0
+	},
+	"progress-bar-knob-blue-10": {
+		"region": "progress-bar-knob",
+		"color": "light-blue",
+		"horizontalStretchAreas": [ 0, 5 ],
+		"verticalStretchAreas": [ 0, 5 ],
+		"tiling": false,
+		"minWidth": 0,
+		"minHeight": 6,
+		"rightWidth": 0,
+		"leftWidth": 0,
+		"bottomHeight": 0,
+		"topHeight": 0,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2,
+		"crushMode": 0
+	},
+	"progress-bar-knob-yellow-10": {
+		"region": "progress-bar-knob",
+		"color": "yellow",
+		"horizontalStretchAreas": [ 0, 5 ],
+		"verticalStretchAreas": [ 0, 5 ],
+		"tiling": false,
+		"minWidth": 0,
+		"minHeight": 6,
+		"rightWidth": 0,
+		"leftWidth": 0,
+		"bottomHeight": 0,
+		"topHeight": 0,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2,
+		"crushMode": 0
+	},
+	"button-disabled-10": {
+		"region": "button-normal",
+		"color": "dark-gray",
+		"horizontalStretchAreas": [ 6, 129 ],
+		"verticalStretchAreas": [ 7, 25 ],
+		"tiling": false,
+		"minWidth": 136,
+		"minHeight": 32,
+		"rightWidth": 8,
+		"leftWidth": 8,
+		"bottomHeight": 6,
+		"topHeight": 6,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2,
+		"crushMode": 0
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle": {
@@ -393,6 +574,12 @@
 	},
 	"compass-left": {
 		"up": "compass-left"
+	},
+	"character-highlight": {
+		"up": "character-highlight-10"
+	},
+	"character-selectable": {
+		"up": "character-target-10"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
@@ -412,6 +599,27 @@
 		"font": "big"
 	}
 },
+"com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle": {
+	"default-horizontal": {
+		"background": "progress-bar-knob-bg-10",
+		"knobBefore": "progress-bar-knob-10"
+	},
+	"default-vertical": {
+		"background": "progress-bar-knob-bg-10"
+	},
+	"health": {
+		"background": "progress-bar-knob-bg-10",
+		"knobBefore": "progress-bar-knob-red-10"
+	},
+	"magic": {
+		"background": "progress-bar-knob-bg-10",
+		"knobBefore": "progress-bar-knob-blue-10"
+	},
+	"gear": {
+		"background": "progress-bar-knob-bg-10",
+		"knobBefore": "progress-bar-knob-yellow-10"
+	}
+},
 "com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle": {
 	"default-horizontal": {
 		"background": "slider-10",
@@ -421,8 +629,10 @@
 "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
 	"default": {
 		"font": "button",
+		"disabledFontColor": "dark-gray",
 		"up": "button-normal-10",
-		"down": "button-pressed-10"
+		"down": "button-pressed-10",
+		"disabled": "button-disabled-10"
 	},
 	"toggle": {
 		"font": "button",
