@@ -411,7 +411,7 @@ public class BattleScreen extends JamScreen {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     popTable.hide();
-                    stage.addAction(sequence(delay(.5f), run(() -> {
+                    stage.addAction(sequence(delay(.2f), run(() -> {
                         playerSelectTarget(hero, skill, cell);
                     })));
                 }
