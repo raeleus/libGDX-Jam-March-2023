@@ -6,10 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.ray3k.template.*;
@@ -66,6 +63,11 @@ public class MapScreen extends JamScreen {
             var nextRoom = GameData.getRoom(column, row - 1);
             upRoomButton.setColor(nextRoom.marker);
             
+            if (nextRoom.hasEnemies) {
+                var image = new Image(skin.getDrawable("enemy-icon"));
+                upRoomButton.add(image);
+            }
+            
             var listener = new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
@@ -105,6 +107,12 @@ public class MapScreen extends JamScreen {
         if (column - 1 >= 0) {
             var nextRoom = GameData.getRoom(column - 1, row);
             leftRoomButton.setColor(nextRoom.marker);
+    
+            if (nextRoom.hasEnemies) {
+                var image = new Image(skin.getDrawable("enemy-icon"));
+                leftRoomButton.add(image);
+            }
+            
             var listener = new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
@@ -138,6 +146,11 @@ public class MapScreen extends JamScreen {
             }
         });
         thisRoomButton.setColor(room.marker);
+    
+        if (room.hasEnemies) {
+            var image = new Image(skin.getDrawable("enemy-icon"));
+            thisRoomButton.add(image);
+        }
         
         table.row();
         var label = new Label("(" + column + "," + row + ")", lButton);
@@ -170,6 +183,11 @@ public class MapScreen extends JamScreen {
             button.addListener(listener);
             
             rightRoomButton.setColor(nextRoom.marker);
+            if (nextRoom.hasEnemies) {
+                var image = new Image(skin.getDrawable("enemy-icon"));
+                rightRoomButton.add(image);
+            }
+            
             rightRoomButton.addListener(listener);
             Core.fetchPixel(column + 1, row, (c, r, color) -> {
                 nextRoom.marker = color;
@@ -210,6 +228,11 @@ public class MapScreen extends JamScreen {
             button.addListener(listener);
             
             downRoomButton.setColor(nextRoom.marker);
+            if (nextRoom.hasEnemies) {
+                var image = new Image(skin.getDrawable("enemy-icon"));
+                downRoomButton.add(image);
+            }
+            
             downRoomButton.addListener(listener);
             Core.fetchPixel(column, row + 1, (c, r, color) -> {
                 nextRoom.marker = color;

@@ -876,10 +876,15 @@ public class Core extends JamGame {
         
         var skillNames = Gdx.files.internal("text/skill-names").readString().split("\\n");
         var skillDescriptions = Gdx.files.internal("text/skill-descriptions").readString().split("\\n");
+        var skillUses = Gdx.files.internal("text/skill-uses").readString().split("\\n");
+        var skillRegenerateUses = Gdx.files.internal("text/skill-regenerateUses").readString().split("\\n");
         for (int i = 0; i < skillNames.length; i++) {
             var skill = new SkillData();
             skill.name = skillNames[i];
             skill.description = skillDescriptions[i];
+            skill.usesMax = Integer.parseInt(skillUses[i].trim());
+            skill.uses = skill.usesMax;
+            skill.regenerateUses = Boolean.parseBoolean(skillRegenerateUses[i]);
             skillTemplates.add(skill);
         }
         

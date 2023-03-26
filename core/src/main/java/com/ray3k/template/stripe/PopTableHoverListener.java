@@ -24,7 +24,7 @@ public class PopTableHoverListener extends InputListener {
         hideOnExit = true;
         popTable = new com.ray3k.template.stripe.PopTable(style);
         popTable.setModal(false);
-        popTable.setHideOnUnfocus(true);
+        popTable.setHideOnUnfocus(false);
         popTable.setTouchable(Touchable.disabled);
         this.edge = edge;
         this.align = align;
@@ -43,7 +43,7 @@ public class PopTableHoverListener extends InputListener {
     
     @Override
     public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-        if (popTable.isHidden()) {
+        if (pointer == -1 && popTable.isHidden()) {
             if (fromActor == null || !event.getListenerActor().isAscendantOf(fromActor)) {
                 Stage stage = event.getListenerActor().getStage();
                 Actor actor = event.getListenerActor();
@@ -63,7 +63,7 @@ public class PopTableHoverListener extends InputListener {
 
     @Override
     public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-        if (hideOnExit && !popTable.isHidden()) {
+        if (pointer == -1 && hideOnExit && !popTable.isHidden()) {
             if (toActor == null || !event.getListenerActor().isAscendantOf(toActor)) {
                 popTable.hide();
             }

@@ -19,6 +19,10 @@ public class SkillData {
     public String description;
     public int level = 1;
     public int maxLevel = 10;
+    public int uses;
+    public int usesMax = -1;
+    public boolean regenerateUses;
+    
     private static final Vector2 temp = new Vector2();
     
     public SkillData() {
@@ -29,9 +33,14 @@ public class SkillData {
         this.description = other.description;
         this.level = other.level;
         this.maxLevel = other.maxLevel;
+        this.uses = other.uses;
+        this.usesMax = other.usesMax;
+        this.regenerateUses = other.regenerateUses;
     }
     
     public void execute(BattleScreen battleScreen, CharacterData character, Array<Table> tiles, Table target, Runnable runnable) {
+        if (usesMax > 0) uses--;
+        
         var stage = battleScreen.stage;
         var targetTiles = selectTiles(tiles, target);
         

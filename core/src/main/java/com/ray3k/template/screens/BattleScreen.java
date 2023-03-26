@@ -358,7 +358,7 @@ public class BattleScreen extends JamScreen {
         order.addAll(nextOrder());
     
         for (var character : order) {
-            playerOrder += character.name + " " + character.speed + "\n";
+            playerOrder += character.name +  "\n";
         }
         playOrderLabel.setText(playerOrder);
 
@@ -393,18 +393,37 @@ public class BattleScreen extends JamScreen {
         var table = new Table();
         popTable.add(table);
         
+        table.defaults().space(10);
         for (var skill : hero.skills) {
             var textButton = new TextButton(skill.name, skin);
+            textButton.setDisabled(skill.usesMax != -1 && skill.uses <= 0);
             table.add(textButton);
+
+            if (skill.usesMax > 0) {
+                textButton.row();
+                var progressBar = new ProgressBar(0, skill.usesMax, 1, false,
+                        skill.regenerateUses ? pMagic : pGear);
+                progressBar.setValue(skill.uses);
+                textButton.add(progressBar).growX().space(2);
+            }
+
             textButton.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     popTable.hide();
-                    stage.addAction(sequence(delay(.5f),run(() -> {
+                    stage.addAction(sequence(delay(.5f), run(() -> {
                         playerSelectTarget(hero, skill, cell);
                     })));
                 }
             });
+
+            var hoverListener = new PopTableHoverListener(Align.top, Align.top, new PopTableStyle(wPointerDown));
+            textButton.addListener(hoverListener);
+            var skillPop = hoverListener.getPopTable();
+            label = new Label(skill.description, lLog);
+            label.setWrap(true);
+            label.setAlignment(Align.center);
+            skillPop.add(label).growX().width(200);
         }
         
         popTable.row();
@@ -414,6 +433,14 @@ public class BattleScreen extends JamScreen {
             popTable.hide();
             stage.addAction(sequence(delay(.5f), run(this::finishTurn)));
         });
+    
+        var hoverListener = new PopTableHoverListener(Align.top, Align.top, new PopTableStyle(wPointerDown));
+        textButton.addListener(hoverListener);
+        var skillPop = hoverListener.getPopTable();
+        label = new Label("Pass turn and wait.", lLog);
+        label.setWrap(true);
+        label.setAlignment(Align.center);
+        skillPop.add(label).growX().width(200);
         
         popTable.show(stage);
     }
@@ -552,6 +579,7 @@ public class BattleScreen extends JamScreen {
                 foundDead = true;
                 tile.setUserObject(null);
                 tile.clearChildren();
+                tile.setBackground(skin.getDrawable("character-box-empty-10"));
                 enemyTeam.removeValue(character, true);
             }
         }

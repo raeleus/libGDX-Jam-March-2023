@@ -807,15 +807,17 @@ bounds:1,660,152,102
 character-target
 bounds:1,764,187,132
 compass-down
-bounds:727,1400,55,32
+bounds:1893,1909,55,32
 compass-left
-bounds:1893,1886,32,55
-compass-right
 bounds:509,1159,32,55
+compass-right
+bounds:663,1263,32,55
 compass-up
-bounds:663,1286,55,32
+bounds:1,626,55,32
 dangerous-title
 bounds:1,1799,1382,246
+enemy-icon
+bounds:727,1353,63,79
 image-outline
 bounds:509,1434,338,330
 log-font
@@ -831,7 +833,7 @@ bounds:509,1320,216,112
 pop-skills
 bounds:190,791,133,105
 progress-bar-knob
-bounds:1,652,6,6
+bounds:155,756,6,6
 setup-divider
 bounds:509,1766,740,31
 slider
@@ -841,4 +843,4 @@ bounds:1197,1741,9,23
 textfield
 bounds:1251,1785,46,12
 white
-bounds:155,761,1,1
+bounds:190,788,1,1
