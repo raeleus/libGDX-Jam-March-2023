@@ -23,6 +23,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.github.tommyettinger.textra.TextraLabel;
 import com.ray3k.template.*;
 import com.ray3k.template.data.*;
+import com.ray3k.template.stripe.*;
 
 import static com.ray3k.template.Core.*;
 import static com.ray3k.template.Resources.SkinSkinStyles.*;
@@ -279,6 +280,23 @@ public class PreBattleScreen extends JamScreen {
             textra.setAlignment(Align.center);
             textra.setWrap(true);
             characterCell.add(textra).growX();
+            
+            var listener = new PopTableHoverListener(Align.top, Align.top, new PopTable.PopTableStyle(wPointerDown));
+            characterCell.addListener(listener);
+            
+            var pop = listener.getPopTable();
+            
+            pop.defaults().space(10);
+            label = new Label("Skills:", lButton);
+            pop.add(label);
+            
+            for (var skill : hero.skills) {
+                pop.row();
+                pop = listener.getPopTable();
+                var textraLabel = new TextraLabel("[*]" + skill.name + "[*]: " + skill.description, lLog);
+                textraLabel.setWrap(true);
+                pop.add(textraLabel).width(250);
+            }
             
             characterCell.pack();
             characterCell.setPosition(stage.getWidth() - 30, offset, Align.bottomRight);
