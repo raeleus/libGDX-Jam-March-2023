@@ -558,11 +558,18 @@ public class BattleScreen extends JamScreen {
     }
     
     public void conductEnemyTurn(CharacterData enemy, Table cell) {
-        var skill = enemy.skills.random();
-    
-        var selectableTiles = skill.collectAvailableTiles(this, false, enemy.position);
+        Array<SkillData> skillPool = new Array<>(enemy.skills);
+        skillPool.shuffle();
         
-        if (selectableTiles.size == 0) {
+        var skillTemp = skillPool.pop();
+        var selectableTilesTemp = skillTemp.collectAvailableTiles(this, false, enemy.position);
+        
+        while (selectableTilesTemp.size == 0 && skillPool.size > 0) {
+            skillTemp = skillPool.pop();
+            selectableTilesTemp = skillTemp.collectAvailableTiles(this, false, enemy.position);
+        }
+        
+        if (selectableTilesTemp.size == 0) {
             popTable.clear();
             popTable.setStyle(new PopTableStyle(wDefault));
             popTable.attachToActor(dividerImage, Align.center, Align.center);
@@ -583,9 +590,11 @@ public class BattleScreen extends JamScreen {
             popTable.attachToActor(dividerImage, Align.center, Align.center);
     
             popTable.defaults().space(10);
-            var label = new Label(enemy.name + " casts " + skill.name, lButton);
+            var label = new Label(enemy.name + " casts " + skillTemp.name, lButton);
             popTable.add(label);
     
+            final var skill = skillTemp;
+            final var selectableTiles = selectableTilesTemp;
             popTable.addAction(sequence(delay(2f), fadeOut(.5f), run(() -> {
                 popTable.hide();
                 var tile = selectableTiles.random();
