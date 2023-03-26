@@ -1,17 +1,17 @@
 {
 "skeleton": {
-	"hash": "cUa0KavNegY",
+	"hash": "MykYb1b4f70",
 	"spine": "4.1.19",
-	"x": -51.55,
-	"y": -13.06,
-	"width": 117.11,
-	"height": 137.46,
+	"x": -6.09,
+	"y": -11.45,
+	"width": 121.44,
+	"height": 75.1,
 	"images": "",
 	"audio": ""
 },
 "bones": [
 	{ "name": "root" },
-	{ "name": "game/strike-01", "parent": "root", "length": 95.62, "rotation": 91.01, "x": 0.98, "y": 1.83 }
+	{ "name": "game/strike-01", "parent": "root", "length": 95.62, "rotation": 31.25, "x": 0.98, "y": 1.83 }
 ],
 "slots": [
 	{ "name": "game/strike-01", "bone": "game/strike-01", "dark": "ffffff", "attachment": "game/strike-01" }
@@ -51,9 +51,11 @@
 			"game/strike-01": {
 				"translate": [
 					{
-						"curve": [ 0.398, -0.28, 0.073, 1.12, 0.178, 0, 0.356, -85 ]
+						"x": 20.94,
+						"y": 18.81,
+						"curve": [ 0.178, 20.94, 0.356, -57.06, 0.178, 18.81, 0.356, -37.19 ]
 					},
-					{ "time": 0.5333, "y": -85 }
+					{ "time": 0.5333, "x": -57.06, "y": -37.19 }
 				]
 			}
 		},
