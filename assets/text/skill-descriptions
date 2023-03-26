@@ -11,15 +11,15 @@ Move to any free cell.
 Heal self. Character is stunned.
 Damage given and received is increased for a turn.
 Enemy has reduced damage for a turn.
-If character receives no damage by the next turn, do devasting damage to an enemy in melee range.
+If character receives no damage by the next turn, do devastating damage to an enemy in melee range.
 Spawn a hairball that distracts enemies.
 Bite an enemy in melee range.
 Scoop damage to enemy in melee range.
 Character is enraged next turn.
 Throw a pistachio nut at a character. It heals allies and hurts enemies.
 Serve yogurt to an ally. Ally receives reduced damage for a turn.
-Serve sherbert to an ally. The ally is faster for the rest of the match.
-Serve a banana sundade to an ally. The ally does increased damage for a turn.
+Serve sherbet to an ally. The ally is faster for the rest of the match.
+Serve a banana sundae to an ally. The ally does increased damage for a turn.
 Cover enemy in choco syrup. Enemy is stunned but receives reduced damage.
 Heal all allies.
 All allies do more damage but are slower for the rest of the match.
@@ -91,7 +91,7 @@ Ranged elite hacking attack.
 Enemy deals less damage.
 An enemy is duplicated as an ally.
 Heal this turn and receive poison damage every following turn.
-Copy the tags and skills of an ally. Non-reversable.
+Copy the tags and skills of an ally. Non-reversible.
 Fire damage in melee range.
 Melee attack. Target has decreased damage.
 Fire damage to a row at next turn.
@@ -175,8 +175,9 @@ Every enemy attacked receives additional damage per turn.
 Incredibly furious melee poking damage. 
 Character screams at the top of their lungs, demeaning the enemy.
 Why won't these people listen gob gammit!?
-Nothing pentrates the skin. Well, not too deep.
+Nothing penetrates the skin. Well, not too deep.
 A delicious snack for some, but a terrible outcome for the pineapple.
 Ooooh tasty!
-I'm the pine-apple! Bananas aint got shit on me.
+I'm the pine-apple! Bananas ain't got shit on me.
 Instant kill an enemy at 10% health or less. Heal self by that amount.
+It slices! It dices!
