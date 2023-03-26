@@ -40,11 +40,11 @@ headbutt,slap,grapple
 cat-nap,cat-nip,meow,stalk,bite
 bite,scratch,slash,leap,stalk
 bite,leap,hairball,cat-nap
-scoop,ice-scream,yogurt,sherbert,free samples
+scoop,ice-scream,yogurt,sherbet,free samples
 ice cream social,choco syrup,snowball,scoop
 scoop,banana sundae,pistachio
 ice cream social,scoop,ice-clone,freeze ray
-slime slap,goo blast, scoop,sherbert
+slime slap,goo blast, scoop,sherbet
 incendiary grenade,juice up,deflect,heroic kick,heavy punch
 slap,tickle
 slap,tickle,cat-nap
@@ -58,7 +58,7 @@ grapple,heavy punch,slash,caltrops,blast
 thwack,quick punch,blast,retreat,advance
 lightning strike,fire-ball,flame bolt
 blaspheme,siphon filter,shotgun,grumble
-energy sword,contort,iceicle,snowball,lightning strike
+energy sword,contort,icicle,snowball,lightning strike
 nibble,hop,lob carrot
 pellet blast,cute up,fuzzy,bunny claw
 nibble,bite,scratch,lob carrot,multiply,snuggle
@@ -105,7 +105,7 @@ chomp,tiny arm smack,tail sweep,belly crawl
 chomp,crocodile roll,tiny arm smack,tail sweep
 thrash,dino bop,belly crawl,tail whip
 charge,chomp,tail sweep,thrash
-scratch,chomp,crocodile,tail sweep
+scratch,chomp,crocodile roll,tail sweep
 bite,claw,yip,snarl,trot,dance
 laser beam,concussive beam,focused beam,devastating beam
 laser beam,burst fire,ricochet
