@@ -12,6 +12,7 @@ import com.esotericsoftware.spine.AnimationState.AnimationStateAdapter;
 import com.esotericsoftware.spine.AnimationState.TrackEntry;
 import com.ray3k.template.*;
 import com.ray3k.template.Resources.*;
+import com.ray3k.template.battle.*;
 import com.ray3k.template.screens.*;
 
 public class SkillData {
@@ -42,7 +43,7 @@ public class SkillData {
         if (usesMax > 0) uses--;
         
         var stage = battleScreen.stage;
-        var targetTiles = selectTiles(tiles, target);
+        var targetTiles = chooseTiles(tiles, target);
         
         switch (name) {
             case "punch":
@@ -677,7 +678,7 @@ public class SkillData {
                     var enemy = (CharacterData) tile.getUserObject();
             
                     var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSplashWhite.skeletonData, SpineSplashWhite.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpineStrike.animationAnimation, false);
+                    spineDrawable.getAnimationState().setAnimation(0, SpineSplashWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
             
@@ -1272,7 +1273,7 @@ public class SkillData {
                     var enemy = (CharacterData) tile.getUserObject();
             
                     var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikex3.skeletonData, SpineStrikex3.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpineStrike.animationAnimation, false);
+                    spineDrawable.getAnimationState().setAnimation(0, SpineStrikex3.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
             
@@ -1470,7 +1471,7 @@ public class SkillData {
                     var enemy = (CharacterData) tile.getUserObject();
             
                     var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastGray.skeletonData, SpineBlastGray.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpineStrike.animationAnimation, false);
+                    spineDrawable.getAnimationState().setAnimation(0, SpineBlastGray.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
             
@@ -3485,7 +3486,7 @@ public class SkillData {
                     var enemy = (CharacterData) tile.getUserObject();
             
                     var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeBlue.skeletonData, SpineStrikeBlue.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpineStrike.animationAnimation, false);
+                    spineDrawable.getAnimationState().setAnimation(0, SpineStrikeBlue.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
             
@@ -4542,7 +4543,7 @@ public class SkillData {
                     var enemy = (CharacterData) tile.getUserObject();
             
                     var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBurnGreen.skeletonData, SpineBurnGreen.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpineStrike.animationAnimation, false);
+                    spineDrawable.getAnimationState().setAnimation(0, SpineBurnGreen.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
             
@@ -4707,7 +4708,7 @@ public class SkillData {
                     var enemy = (CharacterData) tile.getUserObject();
             
                     var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBite.skeletonData, SpineBite.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpineStrike.animationAnimation, false);
+                    spineDrawable.getAnimationState().setAnimation(0, SpineBite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
             
@@ -5136,7 +5137,7 @@ public class SkillData {
                     var enemy = (CharacterData) tile.getUserObject();
             
                     var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeRed.skeletonData, SpineStrikeRed.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpineStrike.animationAnimation, false);
+                    spineDrawable.getAnimationState().setAnimation(0, SpineStrikeRed.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
             
@@ -6061,7 +6062,7 @@ public class SkillData {
                     var enemy = (CharacterData) tile.getUserObject();
             
                     var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSlashWhite.skeletonData, SpineSlashWhite.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpineStrike.animationAnimation, false);
+                    spineDrawable.getAnimationState().setAnimation(0, SpineSlashWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
             
@@ -6095,11 +6096,22 @@ public class SkillData {
         }
     }
     
-    public Array<Table> selectTiles(Array<Table> tiles, Table target) {
+    public Array<Table> chooseTiles(Array<Table> tiles, Table target) {
         var selected = new Array<Table>();
         
-        selected.add(target);
+        switch (name) {
+            default:
+                selected.add(target);
+                break;
+        }
         
         return selected;
+    }
+    
+    public Array<Table> collectAvailableTiles(BattleScreen battleScreen, boolean playerTeam, int characterPosition) {
+        switch (name) {
+            default:
+                return Selector.selectMelee(battleScreen, playerTeam, characterPosition);
+        }
     }
 }

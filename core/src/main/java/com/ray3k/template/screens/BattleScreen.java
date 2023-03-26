@@ -454,7 +454,8 @@ public class BattleScreen extends JamScreen {
         var label = new Label("Select target", lButton);
         popTable.add(label);
         
-        var selectableTiles = Selector.selectAnyEnemy(this, true);
+        var selectableTiles = skill.collectAvailableTiles(this, true, hero.position);
+        if (selectableTiles.size == 0) label.setText("No available targets");
         selectables.clear();
         highlights.clear();
         for (var tile : selectableTiles) {
@@ -476,7 +477,7 @@ public class BattleScreen extends JamScreen {
                 @Override
                 public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                     var stack = (Stack) button.getParent();
-                    skill.selectTiles(playerTiles.contains(tile, true) ? playerTiles : enemyTiles, tile);
+                    skill.chooseTiles(playerTiles.contains(tile, true) ? playerTiles : enemyTiles, tile);
                     var image = new Image(skin.getDrawable("character-highlight-10"));
                     image.setTouchable(Touchable.disabled);
                     stack.add(image);
@@ -514,23 +515,40 @@ public class BattleScreen extends JamScreen {
     public void conductEnemyTurn(CharacterData enemy, Table cell) {
         var skill = enemy.skills.random();
     
-        var selectableTiles = Selector.selectAnyEnemy(this, false);
+        var selectableTiles = skill.collectAvailableTiles(this, false, enemy.position);
         
-        popTable.clear();
-        popTable.setStyle(new PopTableStyle(wDefault));
-        popTable.attachToActor(dividerImage, Align.center, Align.center);
+        if (selectableTiles.size == 0) {
+            popTable.clear();
+            popTable.setStyle(new PopTableStyle(wDefault));
+            popTable.attachToActor(dividerImage, Align.center, Align.center);
     
-        popTable.defaults().space(10);
-        var label = new Label(enemy.name + " casts " + skill.name, lButton);
-        popTable.add(label);
+            popTable.defaults().space(10);
+            var label = new Label(enemy.name + " is sleeping", lButton);
+            popTable.add(label);
     
-        popTable.addAction(sequence(delay(2f), fadeOut(.5f), run(() -> {
-            popTable.hide();
-            var tile = selectableTiles.random();
-            conductSkill(enemy, skill, playerTiles.contains(tile, true) ? playerTiles : enemyTiles, tile);
-        }), removeActor()));
+            popTable.addAction(sequence(delay(2f), fadeOut(.5f), run(() -> {
+                popTable.hide();
+                checkForDead();
+            }), removeActor()));
     
-        popTable.show(stage);
+            popTable.show(stage);
+        } else {
+            popTable.clear();
+            popTable.setStyle(new PopTableStyle(wDefault));
+            popTable.attachToActor(dividerImage, Align.center, Align.center);
+    
+            popTable.defaults().space(10);
+            var label = new Label(enemy.name + " casts " + skill.name, lButton);
+            popTable.add(label);
+    
+            popTable.addAction(sequence(delay(2f), fadeOut(.5f), run(() -> {
+                popTable.hide();
+                var tile = selectableTiles.random();
+                conductSkill(enemy, skill, playerTiles.contains(tile, true) ? playerTiles : enemyTiles, tile);
+            }), removeActor()));
+    
+            popTable.show(stage);
+        }
     }
     
     public void conductSkill(CharacterData character, SkillData skill, Array<Table> tiles, Table target) {

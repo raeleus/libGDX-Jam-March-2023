@@ -131,9 +131,14 @@ public class Selector {
             }
         }
         
-        if (enemyTiles.get(characterPosition + offset).getUserObject() != null) returnValue.add(enemyTiles.get(characterPosition + offset));
-        else if (characterPosition - 1 >= offset && enemyTiles.get(characterPosition - 1 + offset).getUserObject() != null) returnValue.add(enemyTiles.get(characterPosition - 1 + offset));
-        else if (characterPosition + 1 < 3 + offset && enemyTiles.get(characterPosition + 1 + offset).getUserObject() != null) returnValue.add(enemyTiles.get(characterPosition + 1 + offset));
+        if (enemyTiles.get(characterPosition + offset).getUserObject() != null) returnValue.add(enemyTiles.get(characterPosition));
+        else if (characterPosition - 1 >= offset && enemyTiles.get(characterPosition - 1).getUserObject() != null) returnValue.add(enemyTiles.get(characterPosition - 1));
+        else if (characterPosition + 1 < 3 + offset && enemyTiles.get(characterPosition + 1).getUserObject() != null) returnValue.add(enemyTiles.get(characterPosition + 1));
+        
+        if (returnValue.size == 0) {
+            if (characterPosition - 2 >= offset && enemyTiles.get(characterPosition - 2).getUserObject() != null) returnValue.add(enemyTiles.get(characterPosition - 2));
+            else if (characterPosition + 2 < 3 + offset && enemyTiles.get(characterPosition + 2).getUserObject() != null) returnValue.add(enemyTiles.get(characterPosition + 2));
+        }
         
         return returnValue;
     }
