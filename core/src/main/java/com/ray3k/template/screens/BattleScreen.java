@@ -374,6 +374,30 @@ public class BattleScreen extends JamScreen {
         return null;
     }
     
+    public int positionOfTile(Table tile) {
+        for (int i = 0; i < playerTiles.size; i++) {
+            var checkTile = playerTiles.get(i);
+            if (checkTile == tile) return i;
+        }
+        for (int i = 0; i < enemyTiles.size; i++) {
+            var checkTile = enemyTiles.get(i);
+            if (checkTile == tile) return i;
+        }
+        return -1;
+    }
+    
+    public int positionOfCharacter(CharacterData character) {
+        for (int i = 0; i < playerTiles.size; i++) {
+            var tile = playerTiles.get(i);
+            if (tile.getUserObject() == character) return i;
+        }
+        for (int i = 0; i < enemyTiles.size; i++) {
+            var tile = enemyTiles.get(i);
+            if (tile.getUserObject() == character) return i;
+        }
+        return -1;
+    }
+    
     public void conductStunnedTurn(CharacterData character, Table tile) {
         character.stunned = false;
         

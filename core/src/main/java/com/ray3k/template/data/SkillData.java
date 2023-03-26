@@ -147,8 +147,6 @@ public class SkillData {
                 break;
             case "grumble":
                 for (var tile : targetTiles) {
-                    var enemy = (CharacterData) tile.getUserObject();
-            
                     var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastPink.skeletonData, SpineBlastPink.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlastPink.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
@@ -325,6 +323,10 @@ public class SkillData {
                                 enemy.health -= damage;
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
+                                
+                                character.health -= damage;
+                                battleScreen.showDamage(battleScreen.findTile(character), character, damage);
+                                battleScreen.showTextEffectHurt(battleScreen.findTile(character), character);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
@@ -366,8 +368,6 @@ public class SkillData {
                 break;
             case "leap":
                 for (var tile : targetTiles) {
-                    var enemy = (CharacterData) tile.getUserObject();
-            
                     var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSpark.skeletonData, SpineSpark.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSpark.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
@@ -380,19 +380,15 @@ public class SkillData {
                     temp.set(76, 51);
                     tile.localToStageCoordinates(temp);
                     image.setPosition(temp.x, temp.y, Align.center);
-            
+    
+                    var newPosition = battleScreen.positionOfTile(target);
+                    battleScreen.moveCharacter(character, newPosition, isPlayerTeam);
+                    stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                     spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
                         @Override
                         public void complete(TrackEntry entry) {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
-                            }
-                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
                     });
                 }
@@ -1445,19 +1441,15 @@ public class SkillData {
                     temp.set(76, 51);
                     tile.localToStageCoordinates(temp);
                     image.setPosition(temp.x, temp.y, Align.center);
-            
+    
+                    var newPosition = battleScreen.positionOfTile(target);
+                    battleScreen.moveCharacter(character, newPosition, isPlayerTeam);
+                    stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                     spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
                         @Override
                         public void complete(TrackEntry entry) {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
-                            }
-                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
                     });
                 }
@@ -1478,19 +1470,15 @@ public class SkillData {
                     temp.set(76, 51);
                     tile.localToStageCoordinates(temp);
                     image.setPosition(temp.x, temp.y, Align.center);
-            
+    
+                    var newPosition = battleScreen.positionOfTile(target);
+                    battleScreen.moveCharacter(character, newPosition, isPlayerTeam);
+                    stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                     spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
                         @Override
                         public void complete(TrackEntry entry) {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
-                            }
-                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
                     });
                 }
@@ -1511,19 +1499,15 @@ public class SkillData {
                     temp.set(76, 51);
                     tile.localToStageCoordinates(temp);
                     image.setPosition(temp.x, temp.y, Align.center);
-            
+    
+                    var newPosition = battleScreen.positionOfTile(target);
+                    battleScreen.moveCharacter(character, newPosition, isPlayerTeam);
+                    stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                     spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
                         @Override
                         public void complete(TrackEntry entry) {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
-                            }
-                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
                     });
                 }
@@ -2105,19 +2089,15 @@ public class SkillData {
                     temp.set(76, 51);
                     tile.localToStageCoordinates(temp);
                     image.setPosition(temp.x, temp.y, Align.center);
-            
+    
+                    var newPosition = battleScreen.positionOfTile(target);
+                    battleScreen.moveCharacter(character, newPosition, isPlayerTeam);
+                    stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                     spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
                         @Override
                         public void complete(TrackEntry entry) {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
-                            }
-                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
                     });
                 }
@@ -2272,19 +2252,15 @@ public class SkillData {
                     temp.set(76, 51);
                     tile.localToStageCoordinates(temp);
                     image.setPosition(temp.x, temp.y, Align.center);
-            
+    
+                    var newPosition = battleScreen.positionOfTile(target);
+                    battleScreen.moveCharacter(character, newPosition, isPlayerTeam);
+                    stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                     spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
                         @Override
                         public void complete(TrackEntry entry) {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
-                            }
-                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
                     });
                 }
@@ -2338,19 +2314,15 @@ public class SkillData {
                     temp.set(76, 51);
                     tile.localToStageCoordinates(temp);
                     image.setPosition(temp.x, temp.y, Align.center);
-            
+    
+                    var newPosition = battleScreen.positionOfTile(target);
+                    battleScreen.moveCharacter(character, newPosition, isPlayerTeam);
+                    stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                     spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
                         @Override
                         public void complete(TrackEntry entry) {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
-                            }
-                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
                     });
                 }
@@ -4044,6 +4016,7 @@ public class SkillData {
                 }
                 break;
             case "throw weight around":
+                //todo:fix
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
@@ -4786,19 +4759,15 @@ public class SkillData {
                     temp.set(76, 51);
                     tile.localToStageCoordinates(temp);
                     image.setPosition(temp.x, temp.y, Align.center);
-            
+    
+                    var newPosition = battleScreen.positionOfTile(target);
+                    battleScreen.moveCharacter(character, newPosition, isPlayerTeam);
+                    stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                     spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
                         @Override
                         public void complete(TrackEntry entry) {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
-                            }
-                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
                     });
                 }
@@ -4952,19 +4921,15 @@ public class SkillData {
                     temp.set(76, 51);
                     tile.localToStageCoordinates(temp);
                     image.setPosition(temp.x, temp.y, Align.center);
-            
+    
+                    var newPosition = battleScreen.positionOfTile(target);
+                    battleScreen.moveCharacter(character, newPosition, isPlayerTeam);
+                    stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                     spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
                         @Override
                         public void complete(TrackEntry entry) {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
-                            }
-                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
                     });
                 }
@@ -5585,18 +5550,21 @@ public class SkillData {
                     temp.set(76, 51);
                     tile.localToStageCoordinates(temp);
                     image.setPosition(temp.x, temp.y, Align.center);
-            
+                    
                     spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
                         @Override
                         public void complete(TrackEntry entry) {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= damage;
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
-                            }
+                            
+                            int heal = MathUtils.floor(1 + (float) level / maxLevel * 20.f);
+                            character.health += heal;
+                            if (character.health > character.healthMax) character.health = character.healthMax;
+                            battleScreen.showHeal(tile, character, heal);
+                            battleScreen.showTextEffectHeal(tile, character);
+                            
+                            var newPosition = battleScreen.positionOfTile(target);
+                            battleScreen.moveCharacter(character, newPosition, isPlayerTeam);
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
                     });
