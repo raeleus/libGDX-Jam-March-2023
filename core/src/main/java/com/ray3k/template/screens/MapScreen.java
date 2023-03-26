@@ -67,6 +67,17 @@ public class MapScreen extends JamScreen {
                 var label = new Label("DANGER", lLog);
                 label.setColor(Color.RED);
                 upRoomButton.add(label);
+            } else if (nextRoom.upgrade || nextRoom.tag || nextRoom.hero != null) {
+                var label = new Label("LOOT", lLog);
+                label.setColor(Color.GOLD);
+                upRoomButton.add(label);
+            }
+            
+            if (nextRoom.restoration && !nextRoom.hasEnemies) {
+                upRoomButton.row();
+                var label = new Label("HEART", lLog);
+                label.setColor(Color.PINK);
+                upRoomButton.add(label);
             }
             
             var listener = new ChangeListener() {
@@ -113,6 +124,17 @@ public class MapScreen extends JamScreen {
                 var label = new Label("DANGER", lLog);
                 label.setColor(Color.RED);
                 leftRoomButton.add(label);
+            } else if (nextRoom.upgrade || nextRoom.tag || nextRoom.hero != null) {
+                var label = new Label("LOOT", lLog);
+                label.setColor(Color.GOLD);
+                leftRoomButton.add(label);
+            }
+    
+            if (nextRoom.restoration && !nextRoom.hasEnemies) {
+                leftRoomButton.row();
+                var label = new Label("HEART", lLog);
+                label.setColor(Color.PINK);
+                leftRoomButton.add(label);
             }
             
             var listener = new ChangeListener() {
@@ -153,6 +175,17 @@ public class MapScreen extends JamScreen {
             var label = new Label("DANGER", lLog);
             label.setColor(Color.RED);
             thisRoomButton.add(label);
+        } else if (room.upgrade || room.tag || room.hero != null) {
+            var label = new Label("LOOT", lLog);
+            label.setColor(Color.GOLD);
+            thisRoomButton.add(label);
+        }
+    
+        if (room.restoration && !room.hasEnemies) {
+            thisRoomButton.row();
+            var label = new Label("HEART", lLog);
+            label.setColor(Color.PINK);
+            thisRoomButton.add(label);
         }
         
         table.row();
@@ -189,6 +222,17 @@ public class MapScreen extends JamScreen {
             if (nextRoom.hasEnemies) {
                 label = new Label("DANGER", lLog);
                 label.setColor(Color.RED);
+                rightRoomButton.add(label);
+            } else if (nextRoom.upgrade || nextRoom.tag || nextRoom.hero != null) {
+                label = new Label("LOOT", lLog);
+                label.setColor(Color.GOLD);
+                rightRoomButton.add(label);
+            }
+    
+            if (nextRoom.restoration && !nextRoom.hasEnemies) {
+                upRoomButton.row();
+                label = new Label("HEART", lLog);
+                label.setColor(Color.PINK);
                 rightRoomButton.add(label);
             }
             
@@ -235,6 +279,17 @@ public class MapScreen extends JamScreen {
             if (nextRoom.hasEnemies) {
                 label = new Label("DANGER", lLog);
                 label.setColor(Color.RED);
+                downRoomButton.add(label);
+            } else if (nextRoom.upgrade || nextRoom.tag || nextRoom.hero != null) {
+                label = new Label("LOOT", lLog);
+                label.setColor(Color.GOLD);
+                downRoomButton.add(label);
+            }
+    
+            if (nextRoom.restoration && !nextRoom.hasEnemies) {
+                downRoomButton.row();
+                label = new Label("HEART", lLog);
+                label.setColor(Color.PINK);
                 downRoomButton.add(label);
             }
             

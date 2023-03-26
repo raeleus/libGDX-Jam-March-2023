@@ -143,7 +143,7 @@ public class Selector {
             if (targetIndex + 2 < 3) {
                 tile = enemyTiles.get(targetIndex + 2);
                 if (tile.getUserObject() != null) returnValue.add(tile);
-            } else if (targetIndex - 2 >= 0) {
+            } else if (targetIndex - 2 >= 0) { //check far left
                 tile = enemyTiles.get(targetIndex - 2);
                 if (tile.getUserObject() != null) returnValue.add(tile);
             }
@@ -167,6 +167,18 @@ public class Selector {
             if (targetIndex + 1 < 3) {
                 tile = enemyTiles.get(targetIndex + 1);
                 if (tile.getUserObject() != null) returnValue.add(tile);
+            }
+    
+            //if no targets
+            if (returnValue.size == 0) {
+                //check far right
+                if (targetIndex + 2 < 6) {
+                    tile = enemyTiles.get(targetIndex + 2);
+                    if (tile.getUserObject() != null) returnValue.add(tile);
+                } else if (targetIndex - 2 >= 3) { //check far left
+                    tile = enemyTiles.get(targetIndex - 2);
+                    if (tile.getUserObject() != null) returnValue.add(tile);
+                }
             }
         }
         return returnValue;
