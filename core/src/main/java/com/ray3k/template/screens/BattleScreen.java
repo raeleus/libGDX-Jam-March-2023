@@ -17,7 +17,6 @@ import com.esotericsoftware.spine.AnimationState.AnimationStateAdapter;
 import com.esotericsoftware.spine.AnimationState.TrackEntry;
 import com.github.tommyettinger.textra.TypingLabel;
 import com.ray3k.template.*;
-import com.ray3k.template.battle.*;
 import com.ray3k.template.data.CharacterData;
 import com.ray3k.template.data.*;
 import com.ray3k.template.stripe.*;
@@ -86,10 +85,7 @@ public class BattleScreen extends JamScreen {
         for (var enemy : enemyTeam) {
             if (enemy.position == 3) {
                 found = true;
-                enemyCell3.setBackground(skin.getDrawable("character-box-10"));
-                enemyCell3.setUserObject(enemy);
-    
-                addCharacterToCell(enemy, enemyCell3);
+                addCharacterToTile(enemy, enemyCell3);
                 break;
             }
         }
@@ -102,10 +98,7 @@ public class BattleScreen extends JamScreen {
         for (var enemy : enemyTeam) {
             if (enemy.position == 4) {
                 found = true;
-                enemyCell4.setBackground(skin.getDrawable("character-box-10"));
-                enemyCell4.setUserObject(enemy);
-    
-                addCharacterToCell(enemy, enemyCell4);
+                addCharacterToTile(enemy, enemyCell4);
                 break;
             }
         }
@@ -118,10 +111,7 @@ public class BattleScreen extends JamScreen {
         for (var enemy : enemyTeam) {
             if (enemy.position == 5) {
                 found = true;
-                enemyCell5.setBackground(skin.getDrawable("character-box-10"));
-                enemyCell5.setUserObject(enemy);
-    
-                addCharacterToCell(enemy, enemyCell5);
+                addCharacterToTile(enemy, enemyCell5);
                 break;
             }
         }
@@ -135,10 +125,7 @@ public class BattleScreen extends JamScreen {
         for (var enemy : enemyTeam) {
             if (enemy.position == 0) {
                 found = true;
-                enemyCell0.setBackground(skin.getDrawable("character-box-10"));
-                enemyCell0.setUserObject(enemy);
-    
-                addCharacterToCell(enemy, enemyCell0);
+                addCharacterToTile(enemy, enemyCell0);
                 break;
             }
         }
@@ -151,10 +138,7 @@ public class BattleScreen extends JamScreen {
         for (var enemy : enemyTeam) {
             if (enemy.position == 1) {
                 found = true;
-                enemyCell1.setBackground(skin.getDrawable("character-box-10"));
-                enemyCell1.setUserObject(enemy);
-    
-                addCharacterToCell(enemy, enemyCell1);
+                addCharacterToTile(enemy, enemyCell1);
                 break;
             }
         }
@@ -167,10 +151,7 @@ public class BattleScreen extends JamScreen {
         for (var enemy : enemyTeam) {
             if (enemy.position == 2) {
                 found = true;
-                enemyCell2.setBackground(skin.getDrawable("character-box-10"));
-                enemyCell2.setUserObject(enemy);
-    
-                addCharacterToCell(enemy, enemyCell2);
+                addCharacterToTile(enemy, enemyCell2);
                 break;
             }
         }
@@ -200,10 +181,7 @@ public class BattleScreen extends JamScreen {
         for (var hero : playerTeam) {
             if (hero.position == 0) {
                 found = true;
-                playerCell0.setBackground(skin.getDrawable("character-box-10"));
-                playerCell0.setUserObject(hero);
-            
-                addCharacterToCell(hero, playerCell0);
+                addCharacterToTile(hero, playerCell0);
                 break;
             }
         }
@@ -217,10 +195,7 @@ public class BattleScreen extends JamScreen {
         for (var hero : playerTeam) {
             if (hero.position == 1) {
                 found = true;
-                playerCell1.setBackground(skin.getDrawable("character-box-10"));
-                playerCell1.setUserObject(hero);
-    
-                addCharacterToCell(hero, playerCell1);
+                addCharacterToTile(hero, playerCell1);
                 break;
             }
         }
@@ -234,10 +209,7 @@ public class BattleScreen extends JamScreen {
         for (var hero : playerTeam) {
             if (hero.position == 2) {
                 found = true;
-                playerCell2.setBackground(skin.getDrawable("character-box-10"));
-                playerCell2.setUserObject(hero);
-    
-                addCharacterToCell(hero, playerCell2);
+                addCharacterToTile(hero, playerCell2);
                 break;
             }
         }
@@ -252,10 +224,7 @@ public class BattleScreen extends JamScreen {
         for (var hero : playerTeam) {
             if (hero.position == 3) {
                 found = true;
-                playerCell3.setBackground(skin.getDrawable("character-box-10"));
-                playerCell3.setUserObject(hero);
-    
-                addCharacterToCell(hero, playerCell3);
+                addCharacterToTile(hero, playerCell3);
                 break;
             }
         }
@@ -269,10 +238,7 @@ public class BattleScreen extends JamScreen {
         for (var hero : playerTeam) {
             if (hero.position == 4) {
                 found = true;
-                playerCell4.setBackground(skin.getDrawable("character-box-10"));
-                playerCell4.setUserObject(hero);
-    
-                addCharacterToCell(hero, playerCell4);
+                addCharacterToTile(hero, playerCell4);
                 break;
             }
         }
@@ -286,10 +252,7 @@ public class BattleScreen extends JamScreen {
         for (var hero : playerTeam) {
             if (hero.position == 5) {
                 found = true;
-                playerCell5.setBackground(skin.getDrawable("character-box-10"));
-                playerCell5.setUserObject(hero);
-    
-                addCharacterToCell(hero, playerCell5);
+                addCharacterToTile(hero, playerCell5);
                 break;
             }
         }
@@ -330,9 +293,13 @@ public class BattleScreen extends JamScreen {
         conductTurn();
     }
     
-    private void addCharacterToCell(CharacterData character, Table cell) {
+    private void addCharacterToTile(CharacterData character, Table tile) {
+        tile.clearChildren();
+        tile.setBackground(skin.getDrawable("character-box-10"));
+        tile.setUserObject(character);
+        
         var stack = new Stack();
-        cell.add(stack).grow();
+        tile.add(stack).grow();
     
         var textra = new TypingLabel(character.name, skin);
         textra.setAlignment(Align.center);
@@ -364,7 +331,9 @@ public class BattleScreen extends JamScreen {
 
         if (turn < characterOrder.size) {
             var character = characterOrder.get(turn);
+            System.out.println("new turn");
             for (var cell : playerTiles) {
+                System.out.println("player tile " + cell.getUserObject());
                 if (cell.getUserObject() == character) {
                     conductPlayerTurn(character, cell);
                 }
@@ -459,7 +428,12 @@ public class BattleScreen extends JamScreen {
         selectables.clear();
         highlights.clear();
         for (var tile : selectableTiles) {
-            var stack = (Stack) tile.getChild(0);
+            Stack stack;
+            if (tile.hasChildren()) stack = (Stack) tile.getChild(0);
+            else {
+                stack = new Stack();
+                tile.add(stack).grow();
+            }
             
             var button = new Button(bCharacterSelectable);
             stack.add(button);
@@ -576,6 +550,22 @@ public class BattleScreen extends JamScreen {
         progressBar.setValue(enemy.health);
     }
     
+    public void showHeal(Table tile, CharacterData enemy, int healing) {
+        var label = new Label("+" + healing, lNamesake);
+        label.setColor(Color.LIME);
+        stage.addActor(label);
+        label.pack();
+        
+        temp.set(tile.getWidth() / 2, tile.getHeight() / 2);
+        tile.localToStageCoordinates(temp);
+        label.setPosition(temp.x, temp.y, Align.center);
+        
+        label.addAction(sequence(parallel(moveBy(0, 50, 1.0f, Interpolation.sineOut), fadeOut(1.0f)), removeActor()));
+        
+        var progressBar = (ProgressBar) ((Container) ((Stack) tile.getChild(0)).getChild(1)).getActor();
+        progressBar.setValue(enemy.health);
+    }
+    
     public void showTextEffectClear(Table tile, CharacterData enemy) {
         var label = (TypingLabel) ((Stack)tile.getChild(0)).getChild(0);
         label.setText(enemy.name);
@@ -587,9 +577,37 @@ public class BattleScreen extends JamScreen {
         label.addAction(sequence(delay(1f),run(() -> showTextEffectClear(tile, enemy))));
     }
     
+    public void showTextEffectHeal(Table tile, CharacterData enemy) {
+        var label = (TypingLabel) ((Stack)tile.getChild(0)).getChild(0);
+        label.setText("{WAVE}" + enemy.name);
+        label.addAction(sequence(delay(1f),run(() -> showTextEffectClear(tile, enemy))));
+    }
+    
+    public void moveCharacter(CharacterData characterData, int newIndex, boolean isPlayerTeam) {
+        Table tile = null;
+        
+        var tiles = isPlayerTeam ? playerTiles : enemyTiles;
+        
+        for (var testTile : tiles) {
+            if (testTile.getUserObject() == characterData) {
+                tile = testTile;
+                break;
+            }
+        }
+        
+        if (tile != null) {
+            tile.setUserObject(null);
+            tile.clearChildren();
+            tile.setBackground(skin.getDrawable("character-box-empty-10"));
+        }
+        
+        characterData.position = newIndex;
+        addCharacterToTile(characterData, tiles.get(newIndex));
+    }
+    
     public void checkForDead() {
         var foundDead = false;
-    
+        
         for (var tile : enemyTiles) {
             var character = (CharacterData) tile.getUserObject();
             if (character != null && character.health <= 0) {
@@ -611,6 +629,7 @@ public class BattleScreen extends JamScreen {
                 foundDead = true;
                 tile.setUserObject(null);
                 tile.clearChildren();
+                tile.setBackground(skin.getDrawable("character-box-empty-10"));
                 playerTeam.removeValue(character, true);
             }
         }
@@ -652,6 +671,7 @@ public class BattleScreen extends JamScreen {
             music.stop();
             var room = GameData.getRoom();
             room.hasEnemies = false;
+            difficulty++;
             core.transition(new RoomScreen());
         }
         

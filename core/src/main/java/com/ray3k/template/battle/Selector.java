@@ -151,20 +151,22 @@ public class Selector {
         
         //if still no targets
         if (returnValue.size == 0) {
+            System.out.println("before " + targetIndex);
             targetIndex += 3;
+            System.out.println("after " + targetIndex);
     
             //back row
             tile = enemyTiles.get(targetIndex);
             if (tile.getUserObject() != null) returnValue.add(tile);
     
             //check to left
-            if (targetIndex - 1 >= 0) {
+            if (targetIndex - 1 >= 3) {
                 tile = enemyTiles.get(targetIndex - 1);
                 if (tile.getUserObject() != null) returnValue.add(tile);
             }
     
             //check to right
-            if (targetIndex + 1 < 3) {
+            if (targetIndex + 1 < 6) {
                 tile = enemyTiles.get(targetIndex + 1);
                 if (tile.getUserObject() != null) returnValue.add(tile);
             }

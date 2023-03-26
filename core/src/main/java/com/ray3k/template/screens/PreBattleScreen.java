@@ -41,7 +41,7 @@ public class PreBattleScreen extends JamScreen {
         super.show();
         var room = getRoom();
         
-        var numberOfEnemies = MathUtils.clamp(difficulty / 5, 1, 6);
+        var numberOfEnemies = MathUtils.clamp(difficulty / 5f, 1, 6);
         enemyTeam.clear();
         
         var newEnemyPositions = new IntArray(new int[]{0,1,2,3,4,5});
@@ -52,6 +52,10 @@ public class PreBattleScreen extends JamScreen {
             enemy.healthMax = (difficulty * .05f + .5f) * enemy.healthMax;
             enemy.health = enemy.healthMax;
             enemy.position = newEnemyPositions.pop();
+            
+            for (var skill : enemy.skills) {
+                skill.level = MathUtils.clamp(MathUtils.floor(difficulty * .5f), 0, skill.maxLevel);
+            }
             enemyTeam.add(enemy);
         }
     

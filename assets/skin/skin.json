@@ -91,7 +91,7 @@
 	"battle-divider-10": {
 		"region": "battle-divider",
 		"horizontalStretchAreas": [ 0, 99, 244, 345 ],
-		"verticalStretchAreas": [ 0, 30 ],
+		"verticalStretchAreas": [ 0, 16, 18, 30 ],
 		"tiling": false,
 		"minWidth": 346,
 		"minHeight": 31,

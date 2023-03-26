@@ -26,6 +26,7 @@ import com.badlogic.gdx.utils.ObjectIntMap.Entry;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.crashinvaders.vfx.VfxManager;
 import com.dongbat.jbump.CollisionFilter;
+import com.dongbat.jbump.Item;
 import com.dongbat.jbump.Response;
 import com.dongbat.jbump.World;
 import com.esotericsoftware.spine.AnimationStateData;
@@ -40,6 +41,7 @@ import com.ray3k.template.screens.*;
 import com.ray3k.template.transitions.*;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
+import javax.print.attribute.standard.MediaSize.Other;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.util.Iterator;
@@ -901,6 +903,11 @@ public class Core extends JamGame {
             }
             for (var tag : heroTags[i].split(",")) {
                 hero.addTag(tag, false);
+            }
+            for (var tag : hero.tags) {
+                for (var skill : hero.skills) {
+                    tag.availableSkills.removeValue(skill.name, false);
+                }
             }
             heroTemplates.add(hero);
         }
