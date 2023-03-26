@@ -11,6 +11,7 @@ public class CharacterData {
     public Array<SkillData> skills = new Array<>();
     public Array<TagData> tags = new Array<>();
     public int position;
+    public boolean stunned;
     
     public CharacterData() {
     }
@@ -21,6 +22,7 @@ public class CharacterData {
         this.health = other.health;
         this.healthMax = other.healthMax;
         this.speed = other.speed;
+        this.stunned = other.stunned;
         skills.addAll(other.skills);
         tags.addAll(other.tags);
     }

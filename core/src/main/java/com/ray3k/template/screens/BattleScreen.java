@@ -331,21 +331,67 @@ public class BattleScreen extends JamScreen {
 
         if (turn < characterOrder.size) {
             var character = characterOrder.get(turn);
-            System.out.println("new turn");
-            for (var cell : playerTiles) {
-                System.out.println("player tile " + cell.getUserObject());
-                if (cell.getUserObject() == character) {
-                    conductPlayerTurn(character, cell);
-                }
-            }
             
-            for (int i = 0; i < enemyTiles.size; i++) {
-                var cell = enemyTiles.get(i);
-                if (cell.getUserObject() == character) {
-                    conductEnemyTurn(character, cell);
+            if (character.stunned) {
+                for (var tile : playerTiles) {
+                    if (tile.getUserObject() == character) {
+                        conductStunnedTurn(character, tile);
+                        break;
+                    }
+                }
+                for (var tile : enemyTiles) {
+                    if (tile.getUserObject() == character) {
+                        conductStunnedTurn(character, tile);
+                        break;
+                    }
+                }
+            } else {
+                for (var tile : playerTiles) {
+                    if (tile.getUserObject() == character) {
+                        conductPlayerTurn(character, tile);
+                    }
+                }
+    
+                for (int i = 0; i < enemyTiles.size; i++) {
+                    var tile = enemyTiles.get(i);
+                    if (tile.getUserObject() == character) {
+                        conductEnemyTurn(character, tile);
+                    }
                 }
             }
         }
+    }
+    
+    public Table findTile(CharacterData character) {
+        for (int i = 0; i < playerTiles.size; i++) {
+            var tile = playerTiles.get(i);
+            if (tile.getUserObject() == character) return tile;
+        }
+        for (int i = 0; i < enemyTiles.size; i++) {
+            var tile = enemyTiles.get(i);
+            if (tile.getUserObject() == character) return tile;
+        }
+        return null;
+    }
+    
+    public void conductStunnedTurn(CharacterData character, Table tile) {
+        character.stunned = false;
+        
+        popTable.clear();
+        popTable.setStyle(new PopTableStyle(wDefault));
+        popTable.attachToActor(dividerImage, Align.center, Align.center);
+    
+        popTable.defaults().space(10);
+        var label = new Label(character.name + " is stunned!", lButton);
+        popTable.add(label);
+    
+        popTable.addAction(sequence(delay(2f), fadeOut(.5f), run(() -> {
+            popTable.hide();
+            checkForDead();
+            showTextEffectClear(tile, character);
+        }), removeActor()));
+    
+        popTable.show(stage);
     }
     
     public void conductPlayerTurn(CharacterData hero, Table cell) {
@@ -581,6 +627,11 @@ public class BattleScreen extends JamScreen {
         var label = (TypingLabel) ((Stack)tile.getChild(0)).getChild(0);
         label.setText("{WAVE}" + enemy.name);
         label.addAction(sequence(delay(1f),run(() -> showTextEffectClear(tile, enemy))));
+    }
+    
+    public void showTextEffectStunned(Table tile, CharacterData enemy) {
+        var label = (TypingLabel) ((Stack)tile.getChild(0)).getChild(0);
+        label.setText("{SICK}[YELLOW]" + enemy.name);
     }
     
     public void moveCharacter(CharacterData characterData, int newIndex, boolean isPlayerTeam) {
