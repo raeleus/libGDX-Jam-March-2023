@@ -51,7 +51,7 @@ public class BattleScreen extends JamScreen {
         music = bgm_game;
         if (!music.isPlaying()) {
             music.play();
-            music.setVolume(bgm);
+            music.setVolume(bgm * .6f);
             music.setLooping(true);
         }
         
@@ -275,6 +275,7 @@ public class BattleScreen extends JamScreen {
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                sfx_click.play(sfx);
                 music.stop();
                 core.transition(new GameOverScreen());
             }
@@ -450,6 +451,7 @@ public class BattleScreen extends JamScreen {
             textButton.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
+                    sfx_click.play(sfx);
                     popTable.hide();
                     stage.addAction(sequence(delay(.2f), run(() -> {
                         playerSelectTarget(hero, skill, cell);
@@ -470,6 +472,7 @@ public class BattleScreen extends JamScreen {
         var textButton = new TextButton("Sleep", skin);
         popTable.add(textButton);
         onChange(textButton, () -> {
+            sfx_click.play(sfx);
             popTable.hide();
             stage.addAction(sequence(delay(.5f), run(() -> {
                 finishTurn(hero);
@@ -512,6 +515,7 @@ public class BattleScreen extends JamScreen {
             stack.add(button);
             selectables.add(button);
             onChange(button, () -> {
+                sfx_click.play(sfx);
                 for (var selectable : selectables) {
                     if (selectable != button) selectable.addAction(sequence(fadeOut(.1f), removeActor()));
                 }
@@ -545,6 +549,7 @@ public class BattleScreen extends JamScreen {
         var textButton = new TextButton("Cancel", skin);
         popTable.add(textButton);
         onChange(textButton, () -> {
+            sfx_click.play(sfx);
             for (var selectable : selectables) {
                 selectable.addAction(sequence(fadeOut(.1f), removeActor()));
             }
@@ -746,6 +751,7 @@ public class BattleScreen extends JamScreen {
     }
     
     public void applyBlood(Table tile) {
+        sfx_dying.play(sfx);
         var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlood.skeletonData, SpineBlood.animationData);
         spineDrawable.getAnimationState().setAnimation(0, SpineBlood.animationAnimation, false);
         spineDrawable.setCrop(-10, -10, 20, 20);

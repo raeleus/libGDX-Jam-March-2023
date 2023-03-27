@@ -62,7 +62,7 @@ public class PreBattleScreen extends JamScreen {
         final Music music = bgm_game;
         if (!music.isPlaying()) {
             music.play();
-            music.setVolume(bgm);
+            music.setVolume(bgm * .6f);
             music.setLooping(true);
         }
         
@@ -243,6 +243,7 @@ public class PreBattleScreen extends JamScreen {
         fightButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                sfx_click.play(sfx);
                 core.transition(new BattleScreen());
             }
         });
@@ -258,6 +259,7 @@ public class PreBattleScreen extends JamScreen {
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                sfx_click.play(sfx);
                 music.stop();
                 core.transition(new GameOverScreen());
             }

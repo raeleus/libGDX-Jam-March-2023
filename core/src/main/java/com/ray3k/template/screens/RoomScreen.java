@@ -79,6 +79,7 @@ public class RoomScreen extends JamScreen {
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                sfx_click.play(sfx);
                 var pop = new PopTable(wDefault);
                 pop.setModal(true);
                 pop.setKeepCenteredInWindow(true);
@@ -102,6 +103,7 @@ public class RoomScreen extends JamScreen {
                     textButton.addListener(new ChangeListener() {
                         @Override
                         public void changed(ChangeEvent event, Actor actor) {
+                            sfx_click.play(sfx);
                             var index = colorNames.indexOf(textButton.getText().toString(), false);
                             var color = colors.get(index);
                             setPixel(column, row, color);
@@ -118,6 +120,7 @@ public class RoomScreen extends JamScreen {
                 textButton.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
+                        sfx_click.play(sfx);
                         pop.hide();
                     }
                 });
@@ -137,6 +140,7 @@ public class RoomScreen extends JamScreen {
             restoreButton.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
+                    sfx_click.play(sfx);
                     var pop = new PopTable(wDefault);
                     pop.setModal(true);
                     pop.setKeepCenteredInWindow(true);
@@ -152,6 +156,7 @@ public class RoomScreen extends JamScreen {
                     textButton.addListener(new ChangeListener() {
                         @Override
                         public void changed(ChangeEvent event, Actor actor) {
+                            sfx_click.play(sfx);
                             for (var hero : playerTeam) {
                                 hero.health = hero.healthMax;
                             }
@@ -198,6 +203,7 @@ public class RoomScreen extends JamScreen {
                 textButton.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
+                        sfx_click.play(sfx);
                         var pop = new PopTable(wDefault);
                         pop.setKeepCenteredInWindow(true);
                         pop.setModal(true);
@@ -214,6 +220,7 @@ public class RoomScreen extends JamScreen {
                             textButton.addListener(new ChangeListener() {
                                 @Override
                                 public void changed(ChangeEvent event, Actor actor) {
+                                    sfx_click.play(sfx);
                                     pop.hide();
     
                                     var upgradeChoicePop = new PopTable(wDefault);
@@ -227,6 +234,7 @@ public class RoomScreen extends JamScreen {
                                     textButton.addListener(new ChangeListener() {
                                         @Override
                                         public void changed(ChangeEvent event, Actor actor) {
+                                            sfx_click.play(sfx);
                                             upgradeChoicePop.hide();
                                             
                                             var skillPop = new PopTable(wDefault);
@@ -248,6 +256,7 @@ public class RoomScreen extends JamScreen {
                                                     textButton.addListener(new ChangeListener() {
                                                         @Override
                                                         public void changed(ChangeEvent event, Actor actor) {
+                                                            sfx_click.play(sfx);
                                                             skill.level++;
                                                             
                                                             room.upgrade = false;
@@ -273,6 +282,7 @@ public class RoomScreen extends JamScreen {
                                             textButton.addListener(new ChangeListener() {
                                                 @Override
                                                 public void changed(ChangeEvent event, Actor actor) {
+                                                    sfx_click.play(sfx);
                                                     skillPop.hide();
                                                 }
                                             });
@@ -287,6 +297,7 @@ public class RoomScreen extends JamScreen {
                                     textButton.addListener(new ChangeListener() {
                                         @Override
                                         public void changed(ChangeEvent event, Actor actor) {
+                                            sfx_click.play(sfx);
                                             upgradeChoicePop.hide();
             
                                             var tagPop = new PopTable(wDefault);
@@ -309,6 +320,7 @@ public class RoomScreen extends JamScreen {
                                                     textButton.addListener(new ChangeListener() {
                                                         @Override
                                                         public void changed(ChangeEvent event, Actor actor) {
+                                                            sfx_click.play(sfx);
                                                             tagPop.hide();
                                                             
                                                             if (teamHero.skills.size >= 6) {
@@ -330,6 +342,7 @@ public class RoomScreen extends JamScreen {
                                                                         @Override
                                                                         public void changed(ChangeEvent event,
                                                                                             Actor actor) {
+                                                                            sfx_click.play(sfx);
                                                                             deleteSkillPop.hide();
                                                                             
                                                                             teamHero.skills.removeValue(skill, true);
@@ -346,6 +359,7 @@ public class RoomScreen extends JamScreen {
                                                                     @Override
                                                                     public void changed(ChangeEvent event,
                                                                                         Actor actor) {
+                                                                        sfx_click.play(sfx);
                                                                         deleteSkillPop.hide();
                                                                     }
                                                                 });
@@ -365,6 +379,7 @@ public class RoomScreen extends JamScreen {
                                             textButton.addListener(new ChangeListener() {
                                                 @Override
                                                 public void changed(ChangeEvent event, Actor actor) {
+                                                    sfx_click.play(sfx);
                                                     tagPop.hide();
                                                 }
                                             });
@@ -379,6 +394,7 @@ public class RoomScreen extends JamScreen {
                                     textButton.addListener(new ChangeListener() {
                                         @Override
                                         public void changed(ChangeEvent event, Actor actor) {
+                                            sfx_click.play(sfx);
                                             upgradeChoicePop.hide();
                                         }
                                     });
@@ -394,6 +410,7 @@ public class RoomScreen extends JamScreen {
                         textButton.addListener(new ChangeListener() {
                             @Override
                             public void changed(ChangeEvent event, Actor actor) {
+                                sfx_click.play(sfx);
                                 pop.hide();
                             }
                         });
@@ -413,6 +430,7 @@ public class RoomScreen extends JamScreen {
                 textButton.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
+                        sfx_click.play(sfx);
                         var pop = new PopTable(wDefault);
                         pop.setKeepCenteredInWindow(true);
                         pop.setModal(true);
@@ -429,6 +447,7 @@ public class RoomScreen extends JamScreen {
                             textButton.addListener(new ChangeListener() {
                                 @Override
                                 public void changed(ChangeEvent event, Actor actor) {
+                                    sfx_click.play(sfx);
                                     pop.hide();
     
                                     showConfirmTagPop(teamHero, room);
@@ -442,6 +461,7 @@ public class RoomScreen extends JamScreen {
                         textButton.addListener(new ChangeListener() {
                             @Override
                             public void changed(ChangeEvent event, Actor actor) {
+                                sfx_click.play(sfx);
                                 pop.hide();
                             }
                         });
@@ -461,6 +481,7 @@ public class RoomScreen extends JamScreen {
                 textButton.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
+                        sfx_click.play(sfx);
                         showConfirmHeroPop(room);
                     }
                 });
@@ -481,6 +502,7 @@ public class RoomScreen extends JamScreen {
             textButton.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
+                    sfx_click.play(sfx);
                     Gdx.input.setInputProcessor(null);
                     Core.fetchPixel(column, row, (c, r, color) -> {
                         room.marker = color;
@@ -495,6 +517,7 @@ public class RoomScreen extends JamScreen {
             textButton.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
+                    sfx_click.play(sfx);
                     Gdx.input.setInputProcessor(null);
                     Core.fetchPixel(column, row, (c, r, color) -> {
                         room.marker = color;
@@ -515,6 +538,7 @@ public class RoomScreen extends JamScreen {
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                sfx_click.play(sfx);
                 core.transition(new GameOverScreen());
             }
         });
@@ -550,6 +574,7 @@ public class RoomScreen extends JamScreen {
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                sfx_click.play(sfx);
                 room.upgrade = false;
                 room.tag = false;
                 room.hero = null;
@@ -588,6 +613,7 @@ public class RoomScreen extends JamScreen {
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                sfx_click.play(sfx);
                 room.upgrade = false;
                 room.tag = false;
                 room.hero = null;
@@ -615,6 +641,7 @@ public class RoomScreen extends JamScreen {
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                sfx_click.play(sfx);
                 playerTeam.add(hero);
                 room.upgrade = false;
                 room.tag = false;
@@ -642,6 +669,7 @@ public class RoomScreen extends JamScreen {
                 textButton.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
+                        sfx_click.play(sfx);
                         playerTeam.removeValue(teamHero, true);
                         pop.hide();
                         congratsPop.show(stage);
@@ -655,6 +683,7 @@ public class RoomScreen extends JamScreen {
             textButton.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
+                    sfx_click.play(sfx);
                     pop.hide();
                 }
             });

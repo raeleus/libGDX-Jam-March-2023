@@ -58,6 +58,7 @@ public class StoryScreen extends JamScreen {
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                sfx_click.play(sfx);
                 Gdx.input.setInputProcessor(null);
                 core.transition(new NameScreen());
             }

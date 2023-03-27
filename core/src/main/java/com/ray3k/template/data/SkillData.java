@@ -15,6 +15,9 @@ import com.ray3k.template.Resources.*;
 import com.ray3k.template.battle.*;
 import com.ray3k.template.screens.*;
 
+import static com.ray3k.template.Core.*;
+import static com.ray3k.template.Resources.*;
+
 public class SkillData {
     public String name;
     public String description;
@@ -47,10 +50,11 @@ public class SkillData {
         
         switch (name) {
             case "punch":
+                sfx_punch.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrike.skeletonData, SpineStrike.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrike.skeletonData, SpineStrike.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrike.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -80,10 +84,11 @@ public class SkillData {
                 }
                 break;
             case "heavy punch":
+                sfx_powerPunch.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeRed.skeletonData, SpineStrikeRed.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeRed.skeletonData, SpineStrikeRed.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeRed.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -113,8 +118,9 @@ public class SkillData {
                 }
                 break;
             case "scratch head":
+                sfx_hmm.play(sfx);
                 for (var tile : targetTiles) {
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastGray.skeletonData, SpineBlastGray.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastGray.skeletonData, SpineBlastGray.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlastGray.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -146,8 +152,9 @@ public class SkillData {
                 }
                 break;
             case "grumble":
+                sfx_hulk.play(sfx);
                 for (var tile : targetTiles) {
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastPink.skeletonData, SpineBlastPink.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastPink.skeletonData, SpineBlastPink.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlastPink.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -179,8 +186,9 @@ public class SkillData {
                 }
                 break;
             case "charge":
+                sfx_lightBeam.play(sfx);
                 for (var tile : targetTiles) {
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSwipeUp.skeletonData, SpineSwipeUp.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSwipeUp.skeletonData, SpineSwipeUp.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSwipeUp.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -204,7 +212,7 @@ public class SkillData {
                                 battleScreen.moveCharacter(character, newPosition, isPlayerTeam);
                                 var enemyTile = battleScreen.getEnemyTiles().get(newPosition);
                                 if (enemyTile.getUserObject() != null) {
-                                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeUpRed.skeletonData, SpineStrikeUpRed.animationData);
+                                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeUpRed.skeletonData, SpineStrikeUpRed.animationData);
                                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeUpRed.animationAnimation, false);
                                     spineDrawable.setCrop(-10, -10, 20, 20);
                                     battleScreen.spineDrawables.add(spineDrawable);
@@ -233,7 +241,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeLeft.skeletonData, SpineStrikeLeft.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeLeft.skeletonData, SpineStrikeLeft.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeLeft.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -264,10 +272,11 @@ public class SkillData {
                 }
                 break;
             case "tickle":
+                sfx_giggle.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastPink.skeletonData, SpineBlastPink.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastPink.skeletonData, SpineBlastPink.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlastPink.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -298,10 +307,11 @@ public class SkillData {
                 }
                 break;
             case "headbutt":
+                sfx_blocking.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeUp.skeletonData, SpineStrikeUp.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeUp.skeletonData, SpineStrikeUp.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeUp.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -335,10 +345,11 @@ public class SkillData {
                 }
                 break;
             case "scratch":
+                sfx_scratch.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSlashx3.skeletonData, SpineSlashx3.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSlashx3.skeletonData, SpineSlashx3.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSlashx3.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -368,8 +379,9 @@ public class SkillData {
                 }
                 break;
             case "leap":
+                sfx_dodge.play(sfx);
                 for (var tile : targetTiles) {
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSpark.skeletonData, SpineSpark.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSpark.skeletonData, SpineSpark.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSpark.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -395,8 +407,9 @@ public class SkillData {
                 }
                 break;
             case "cat-nap":
+                sfx_cat.play(sfx);
                 for (var tile : targetTiles) {
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastWhite.skeletonData, SpineBlastWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastWhite.skeletonData, SpineBlastWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlastWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -429,10 +442,11 @@ public class SkillData {
                 }
                 break;
             case "cat-nip":
+                sfx_cat.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSplashBrown.skeletonData, SpineSplashBrown.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSplashBrown.skeletonData, SpineSplashBrown.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSplashBrown.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -459,10 +473,11 @@ public class SkillData {
                 }
                 break;
             case "meow":
+                sfx_cat.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastWhite.skeletonData, SpineBlastWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastWhite.skeletonData, SpineBlastWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlastWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -495,7 +510,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastGray.skeletonData, SpineBlastGray.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastGray.skeletonData, SpineBlastGray.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlastGray.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -528,7 +543,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineExplosionBrown.skeletonData, SpineExplosionBrown.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineExplosionBrown.skeletonData, SpineExplosionBrown.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineExplosionBrown.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -558,10 +573,11 @@ public class SkillData {
                 }
                 break;
             case "bite":
+                sfx_bite.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBite.skeletonData, SpineBite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBite.skeletonData, SpineBite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -591,10 +607,11 @@ public class SkillData {
                 }
                 break;
             case "scoop":
+                sfx_squish.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineExplosionPink.skeletonData, SpineExplosionPink.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineExplosionPink.skeletonData, SpineExplosionPink.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineExplosionPink.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -624,10 +641,11 @@ public class SkillData {
                 }
                 break;
             case "ice-scream":
+                sfx_scream.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineExplosionWhite.skeletonData, SpineExplosionWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineExplosionWhite.skeletonData, SpineExplosionWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineExplosionWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -660,7 +678,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeGreen.skeletonData, SpineStrikeGreen.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeGreen.skeletonData, SpineStrikeGreen.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeGreen.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -690,10 +708,11 @@ public class SkillData {
                 }
                 break;
             case "yogurt":
+                sfx_lightBeam.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSplashWhite.skeletonData, SpineSplashWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSplashWhite.skeletonData, SpineSplashWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSplashWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -722,10 +741,11 @@ public class SkillData {
                 }
                 break;
             case "sherbert":
+                sfx_squish.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSplashPurple.skeletonData, SpineSplashPurple.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSplashPurple.skeletonData, SpineSplashPurple.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSplashPurple.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -755,10 +775,11 @@ public class SkillData {
                 }
                 break;
             case "banana sundae":
+                sfx_squish.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineExplosionYellow.skeletonData, SpineExplosionYellow.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineExplosionYellow.skeletonData, SpineExplosionYellow.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineExplosionYellow.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -787,10 +808,11 @@ public class SkillData {
                 }
                 break;
             case "choco syrup":
+                sfx_squish.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineExplosionBrown.skeletonData, SpineExplosionBrown.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineExplosionBrown.skeletonData, SpineExplosionBrown.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineExplosionBrown.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -822,8 +844,9 @@ public class SkillData {
                 }
                 break;
             case "free samples":
+                sfx_iceCream.play(sfx);
                 for (var tile : targetTiles) {
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastBlue.skeletonData, SpineBlastBlue.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastBlue.skeletonData, SpineBlastBlue.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlastBlue.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -855,10 +878,11 @@ public class SkillData {
                 }
                 break;
             case "ice cream social":
+                sfx_iceCream.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineHealth.skeletonData, SpineHealth.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineHealth.skeletonData, SpineHealth.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineHealth.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -887,10 +911,11 @@ public class SkillData {
                 }
                 break;
             case "snowball":
+                sfx_dodge.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineExplosionBlue.skeletonData, SpineExplosionBlue.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineExplosionBlue.skeletonData, SpineExplosionBlue.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineExplosionBlue.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -920,10 +945,11 @@ public class SkillData {
                 }
                 break;
             case "icicle":
+                sfx_frozen.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeBlue.skeletonData, SpineStrikeBlue.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeBlue.skeletonData, SpineStrikeBlue.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeBlue.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -953,10 +979,11 @@ public class SkillData {
                 }
                 break;
             case "freeze ray":
+                sfx_frozen.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineShotBlue.skeletonData, SpineShotBlue.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineShotBlue.skeletonData, SpineShotBlue.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineShotBlue.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -987,10 +1014,11 @@ public class SkillData {
                 }
                 break;
             case "patented ice cube system":
+                sfx_sprayPaintShake.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpinePortalBlue.skeletonData, SpinePortalBlue.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpinePortalBlue.skeletonData, SpinePortalBlue.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpinePortalBlue.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1020,10 +1048,11 @@ public class SkillData {
                 }
                 break;
             case "slide":
+                sfx_sprayPaint.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSwipeLeft.skeletonData, SpineSwipeLeft.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSwipeLeft.skeletonData, SpineSwipeLeft.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSwipeLeft.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1053,10 +1082,11 @@ public class SkillData {
                 }
                 break;
             case "ice-clone":
+                sfx_frozen.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSplashBlue.skeletonData, SpineSplashBlue.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSplashBlue.skeletonData, SpineSplashBlue.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSplashBlue.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1086,10 +1116,11 @@ public class SkillData {
                 }
                 break;
             case "round-house kick":
+                sfx_kick.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeRight.skeletonData, SpineStrikeRight.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeRight.skeletonData, SpineStrikeRight.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeRight.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1122,7 +1153,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineInfinityBrown.skeletonData,
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineInfinityBrown.skeletonData,
                             SpineInfinityBrown.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineInfinityBrown.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
@@ -1158,10 +1189,11 @@ public class SkillData {
                 }
                 break;
             case "combo":
+                sfx_powerPunch.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikex3.skeletonData, SpineStrikex3.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikex3.skeletonData, SpineStrikex3.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikex3.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1194,7 +1226,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeDown.skeletonData, SpineStrikeDown.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeDown.skeletonData, SpineStrikeDown.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeDown.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1224,10 +1256,11 @@ public class SkillData {
                 }
                 break;
             case "hook":
+                sfx_punch.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeLeft.skeletonData, SpineStrikeLeft.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeLeft.skeletonData, SpineStrikeLeft.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeLeft.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1257,10 +1290,11 @@ public class SkillData {
                 }
                 break;
             case "uppercut":
+                sfx_powerPunch.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSlashWhiteUp.skeletonData, SpineSlashWhiteUp.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSlashWhiteUp.skeletonData, SpineSlashWhiteUp.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSlashWhiteUp.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1290,10 +1324,11 @@ public class SkillData {
                 }
                 break;
             case "triple kick":
+                sfx_kick.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikex3.skeletonData, SpineStrikex3.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikex3.skeletonData, SpineStrikex3.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikex3.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1326,7 +1361,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeGray.skeletonData, SpineStrikeGray.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeGray.skeletonData, SpineStrikeGray.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeGray.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1356,10 +1391,11 @@ public class SkillData {
                 }
                 break;
             case "parry":
+                sfx_dodge.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineShieldYellow.skeletonData, SpineShieldYellow.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineShieldYellow.skeletonData, SpineShieldYellow.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineShieldYellow.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1389,10 +1425,11 @@ public class SkillData {
                 }
                 break;
             case "riposte":
+                sfx_blocking.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSlashWhite.skeletonData, SpineSlashWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSlashWhite.skeletonData, SpineSlashWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSlashWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1425,7 +1462,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSwipeUp.skeletonData, SpineSwipeUp.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSwipeUp.skeletonData, SpineSwipeUp.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSwipeUp.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1454,7 +1491,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSwipeDown.skeletonData, SpineSwipeDown.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSwipeDown.skeletonData, SpineSwipeDown.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSwipeDown.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1483,7 +1520,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastGray.skeletonData, SpineBlastGray.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastGray.skeletonData, SpineBlastGray.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlastGray.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1509,10 +1546,11 @@ public class SkillData {
                 }
                 break;
             case "dagger throw":
+                sfx_dodge.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineShotRed.skeletonData, SpineShotRed.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineShotRed.skeletonData, SpineShotRed.animationData);
                     spineDrawable.getAnimationState().setAnimation(20, SpineShotRed.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1542,10 +1580,11 @@ public class SkillData {
                 }
                 break;
             case "blast":
+                sfx_grenade.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineShot.skeletonData, SpineShot.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineShot.skeletonData, SpineShot.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineShot.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1575,10 +1614,11 @@ public class SkillData {
                 }
                 break;
             case "covering fire":
+                sfx_burstGun.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineShot.skeletonData, SpineShot.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineShot.skeletonData, SpineShot.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineShot.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1608,10 +1648,11 @@ public class SkillData {
                 }
                 break;
             case "snipe":
+                sfx_shotgun.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineShot.skeletonData, SpineShot.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineShot.skeletonData, SpineShot.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineShot.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1641,10 +1682,11 @@ public class SkillData {
                 }
                 break;
             case "burst fire":
+                sfx_burstGun.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineShot3.skeletonData, SpineShot3.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineShot3.skeletonData, SpineShot3.animationData);
                     spineDrawable.getAnimationState().setAnimation(25, SpineShot3.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1674,10 +1716,11 @@ public class SkillData {
                 }
                 break;
             case "grenade":
+                sfx_grenade.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineExplosion.skeletonData, SpineExplosion.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineExplosion.skeletonData, SpineExplosion.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineExplosion.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1707,10 +1750,11 @@ public class SkillData {
                 }
                 break;
             case "tripwire":
+                sfx_twang.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineExplosion.skeletonData, SpineExplosion.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineExplosion.skeletonData, SpineExplosion.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineExplosion.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1743,7 +1787,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrike.skeletonData, SpineStrike.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrike.skeletonData, SpineStrike.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrike.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1773,10 +1817,11 @@ public class SkillData {
                 }
                 break;
             case "shotgun":
+                sfx_shotgun.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineShotgun.skeletonData, SpineShotgun.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineShotgun.skeletonData, SpineShotgun.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineShotgun.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1806,10 +1851,11 @@ public class SkillData {
                 }
                 break;
             case "flame bolt":
+                sfx_thunder.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBurn.skeletonData, SpineBurn.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBurn.skeletonData, SpineBurn.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBurn.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1839,10 +1885,11 @@ public class SkillData {
                 }
                 break;
             case "fire-ball":
+                sfx_thunder.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineExplosion.skeletonData, SpineExplosion.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineExplosion.skeletonData, SpineExplosion.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineExplosion.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1872,10 +1919,11 @@ public class SkillData {
                 }
                 break;
             case "lightning strike":
+                sfx_thunder.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineLightning.skeletonData, SpineLightning.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineLightning.skeletonData, SpineLightning.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineLightning.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1908,7 +1956,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineHealthRed.skeletonData, SpineHealthRed.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineHealthRed.skeletonData, SpineHealthRed.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineHealthRed.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1941,7 +1989,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpinePortalRed.skeletonData, SpinePortalRed.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpinePortalRed.skeletonData, SpinePortalRed.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpinePortalRed.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -1975,7 +2023,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpinePortalBlue.skeletonData, SpinePortalBlue.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpinePortalBlue.skeletonData, SpinePortalBlue.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpinePortalBlue.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2005,10 +2053,11 @@ public class SkillData {
                 }
                 break;
             case "plasma beam":
+                sfx_lightBeam.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikePurple.skeletonData, SpineStrikePurple.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikePurple.skeletonData, SpineStrikePurple.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikePurple.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2038,10 +2087,11 @@ public class SkillData {
                 }
                 break;
             case "energy sword":
+                sfx_energyGunShot.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSlashYellow.skeletonData, SpineSlashYellow.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSlashYellow.skeletonData, SpineSlashYellow.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSlashYellow.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2074,7 +2124,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSwipeUp.skeletonData, SpineSwipeUp.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSwipeUp.skeletonData, SpineSwipeUp.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSwipeUp.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2103,7 +2153,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikePurple.skeletonData, SpineStrikePurple.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikePurple.skeletonData, SpineStrikePurple.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikePurple.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2133,10 +2183,11 @@ public class SkillData {
                 }
                 break;
             case "key blade":
+                sfx_swordDraw.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSlashYellow.skeletonData, SpineSlashYellow.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSlashYellow.skeletonData, SpineSlashYellow.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSlashYellow.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2166,10 +2217,11 @@ public class SkillData {
                 }
                 break;
             case "energy staff":
+                sfx_energyGunShot.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSlashBlue.skeletonData, SpineSlashBlue.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSlashBlue.skeletonData, SpineSlashBlue.animationData);
                     spineDrawable.getAnimationState().setAnimation(20, SpineSlashBlue.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2202,7 +2254,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineExplosionWhite.skeletonData,
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineExplosionWhite.skeletonData,
                             SpineExplosionWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineExplosionWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
@@ -2237,7 +2289,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSwipeUp.skeletonData, SpineSwipeUp.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSwipeUp.skeletonData, SpineSwipeUp.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSwipeUp.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2263,10 +2315,11 @@ public class SkillData {
                 }
                 break;
             case "nibble":
+                sfx_bite.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBiteWhite.skeletonData, SpineBiteWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBiteWhite.skeletonData, SpineBiteWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBiteWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2296,10 +2349,9 @@ public class SkillData {
                 }
                 break;
             case "hop":
+                sfx_dodge.play(sfx);
                 for (var tile : targetTiles) {
-                    var enemy = (CharacterData) tile.getUserObject();
-            
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSwipeUp.skeletonData, SpineSwipeUp.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSwipeUp.skeletonData, SpineSwipeUp.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSwipeUp.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2325,10 +2377,11 @@ public class SkillData {
                 }
                 break;
             case "multiply":
+                sfx_multiplying.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastPink.skeletonData, SpineBlastPink.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastPink.skeletonData, SpineBlastPink.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlastPink.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2358,10 +2411,11 @@ public class SkillData {
                 }
                 break;
             case "lob carrot":
+                sfx_blocking.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastOrange.skeletonData, SpineBlastOrange.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastOrange.skeletonData, SpineBlastOrange.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlastOrange.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2391,10 +2445,11 @@ public class SkillData {
                 }
                 break;
             case "pellet blast":
+                
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBloodBrown.skeletonData, SpineBloodBrown.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBloodBrown.skeletonData, SpineBloodBrown.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBloodBrown.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2424,10 +2479,11 @@ public class SkillData {
                 }
                 break;
             case "cute up":
+                sfx_giggle.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineExplosionPink.skeletonData, SpineExplosionPink.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineExplosionPink.skeletonData, SpineExplosionPink.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineExplosionPink.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2456,10 +2512,11 @@ public class SkillData {
                 }
                 break;
             case "fuzzy":
+                sfx_powerPunch.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSparkWhite.skeletonData, SpineSparkWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSparkWhite.skeletonData, SpineSparkWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSparkWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2489,10 +2546,11 @@ public class SkillData {
                 }
                 break;
             case "bunny claw":
+                sfx_swordDraw.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSlashx3.skeletonData, SpineSlashx3.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSlashx3.skeletonData, SpineSlashx3.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSlashx3.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2522,8 +2580,9 @@ public class SkillData {
                 }
                 break;
             case "snuggle":
+                sfx_giggle.play(sfx);
                 for (var tile : targetTiles) {
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineInfinityWhite.skeletonData, SpineInfinityWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineInfinityWhite.skeletonData, SpineInfinityWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineInfinityWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2555,10 +2614,11 @@ public class SkillData {
                 }
                 break;
             case "quick punch":
+                sfx_punch.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrike.skeletonData, SpineStrike.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrike.skeletonData, SpineStrike.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrike.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2588,10 +2648,11 @@ public class SkillData {
                 }
                 break;
             case "double punch":
+                sfx_powerPunch.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikex2.skeletonData, SpineStrikex2.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikex2.skeletonData, SpineStrikex2.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikex2.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2621,10 +2682,11 @@ public class SkillData {
                 }
                 break;
             case "dash punch":
+                sfx_powerPunch.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeUp.skeletonData, SpineStrikeUp.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeUp.skeletonData, SpineStrikeUp.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeUp.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2654,10 +2716,11 @@ public class SkillData {
                 }
                 break;
             case "quick dodge":
+                sfx_dodge.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSwipeDown.skeletonData, SpineSwipeDown.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSwipeDown.skeletonData, SpineSwipeDown.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSwipeDown.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2687,10 +2750,11 @@ public class SkillData {
                 }
                 break;
             case "phase":
+                sfx_lightBeam.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpinePortalGreen.skeletonData, SpinePortalGreen.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpinePortalGreen.skeletonData, SpinePortalGreen.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpinePortalGreen.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2723,7 +2787,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastWhite.skeletonData, SpineBlastWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastWhite.skeletonData, SpineBlastWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlastWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2753,10 +2817,11 @@ public class SkillData {
                 }
                 break;
             case "extendo punch":
+                sfx_blocking.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeUp.skeletonData, SpineStrikeUp.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeUp.skeletonData, SpineStrikeUp.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeUp.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2786,10 +2851,11 @@ public class SkillData {
                 }
                 break;
             case "grapnel hook":
+                sfx_swordClink.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeGray.skeletonData, SpineStrikeGray.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeGray.skeletonData, SpineStrikeGray.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeGray.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2819,10 +2885,11 @@ public class SkillData {
                 }
                 break;
             case "smoke pellet":
+                sfx_sprayPaint.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastGray.skeletonData, SpineBlastGray.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastGray.skeletonData, SpineBlastGray.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlastGray.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2852,10 +2919,11 @@ public class SkillData {
                 }
                 break;
             case "caltrops":
+                sfx_bullets.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineShotGray.skeletonData, SpineShotGray.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineShotGray.skeletonData, SpineShotGray.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineShotGray.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2886,7 +2954,7 @@ public class SkillData {
                 break;
             case "gadget crisps":
                 for (var tile : targetTiles) {
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastOrange.skeletonData, SpineBlastOrange.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastOrange.skeletonData, SpineBlastOrange.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlastOrange.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2918,10 +2986,11 @@ public class SkillData {
                 }
                 break;
             case "sticky tape":
+                sfx_sticky.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeGray.skeletonData, SpineStrikeGray.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeGray.skeletonData, SpineStrikeGray.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeGray.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2955,7 +3024,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineHealthRed.skeletonData, SpineHealthRed.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineHealthRed.skeletonData, SpineHealthRed.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineHealthRed.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -2987,7 +3056,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpinePortalGreen.skeletonData, SpinePortalGreen.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpinePortalGreen.skeletonData, SpinePortalGreen.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpinePortalGreen.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3020,7 +3089,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpinePortalRed.skeletonData, SpinePortalRed.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpinePortalRed.skeletonData, SpinePortalRed.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpinePortalRed.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3049,10 +3118,11 @@ public class SkillData {
                 }
                 break;
             case "dupe":
+                sfx_multiplying.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineLightningWhite.skeletonData, SpineLightningWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineLightningWhite.skeletonData, SpineLightningWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineLightningWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3083,7 +3153,7 @@ public class SkillData {
                 break;
             case "crypto":
                 for (var tile : targetTiles) {
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineHealth.skeletonData, SpineHealth.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineHealth.skeletonData, SpineHealth.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineHealth.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3118,7 +3188,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineExplosionWhite.skeletonData, SpineExplosionWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineExplosionWhite.skeletonData, SpineExplosionWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineExplosionWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3148,10 +3218,11 @@ public class SkillData {
                 }
                 break;
             case "burn":
+                sfx_thunder.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBurn.skeletonData, SpineBurn.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBurn.skeletonData, SpineBurn.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBurn.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3181,10 +3252,11 @@ public class SkillData {
                 }
                 break;
             case "tail whip":
+                sfx_dodge.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeRight.skeletonData, SpineStrikeRight.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeRight.skeletonData, SpineStrikeRight.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeRight.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3215,10 +3287,11 @@ public class SkillData {
                 }
                 break;
             case "incendiary grenade":
+                sfx_grenade.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineExplosionYellow.skeletonData, SpineExplosionYellow.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineExplosionYellow.skeletonData, SpineExplosionYellow.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineExplosionYellow.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3248,10 +3321,11 @@ public class SkillData {
                 }
                 break;
             case "brimstone":
+                sfx_thunder.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineExplosion.skeletonData, SpineExplosion.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineExplosion.skeletonData, SpineExplosion.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineExplosion.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3281,10 +3355,11 @@ public class SkillData {
                 }
                 break;
             case "torch":
+                sfx_thunder.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBurn.skeletonData,
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBurn.skeletonData,
                             SpineBurn.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBurn.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
@@ -3315,10 +3390,11 @@ public class SkillData {
                 }
                 break;
             case "flame shotgun":
+                sfx_shotgun.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineShotgunOrange.skeletonData, SpineShotgunOrange.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineShotgunOrange.skeletonData, SpineShotgunOrange.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineShotgunOrange.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3348,10 +3424,11 @@ public class SkillData {
                 }
                 break;
             case "thwack":
+                sfx_punch.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeRed.skeletonData, SpineStrikeRed.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeRed.skeletonData, SpineStrikeRed.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeRed.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3384,7 +3461,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineHealth.skeletonData, SpineHealth.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineHealth.skeletonData, SpineHealth.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineHealth.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3416,7 +3493,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineHealthBrown.skeletonData, SpineHealthBrown.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineHealthBrown.skeletonData, SpineHealthBrown.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineHealthBrown.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3448,7 +3525,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpinePortalBlue.skeletonData, SpinePortalBlue.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpinePortalBlue.skeletonData, SpinePortalBlue.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpinePortalBlue.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3477,10 +3554,11 @@ public class SkillData {
                 }
                 break;
             case "beam":
+                sfx_lightBeam.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeBlue.skeletonData, SpineStrikeBlue.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeBlue.skeletonData, SpineStrikeBlue.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeBlue.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3510,10 +3588,11 @@ public class SkillData {
                 }
                 break;
             case "self-destruct":
+                sfx_dying.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineExplosion.skeletonData, SpineExplosion.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineExplosion.skeletonData, SpineExplosion.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineExplosion.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3546,7 +3625,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineShotGray.skeletonData, SpineShotGray.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineShotGray.skeletonData, SpineShotGray.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineShotGray.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3576,10 +3655,11 @@ public class SkillData {
                 }
                 break;
             case "bone rattle":
+                sfx_sprayPaintShake.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineShotWhite.skeletonData, SpineShotWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineShotWhite.skeletonData, SpineShotWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineShotWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3609,10 +3689,11 @@ public class SkillData {
                 }
                 break;
             case "bone throw":
+                sfx_bite.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastWhite.skeletonData, SpineBlastWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastWhite.skeletonData, SpineBlastWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlastWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3642,10 +3723,11 @@ public class SkillData {
                 }
                 break;
             case "knee cap":
+                sfx_sprayPaintShake.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineShotWhite.skeletonData, SpineShotWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineShotWhite.skeletonData, SpineShotWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineShotWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3676,10 +3758,11 @@ public class SkillData {
                 }
                 break;
             case "spinal tap":
+                sfx_sprayPaintShake.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastYellow.skeletonData, SpineBlastYellow.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastYellow.skeletonData, SpineBlastYellow.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlastYellow.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3709,10 +3792,11 @@ public class SkillData {
                 }
                 break;
             case "rigor mortis":
+                sfx_dying.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpinePortalRed.skeletonData, SpinePortalRed.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpinePortalRed.skeletonData, SpinePortalRed.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpinePortalRed.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3741,10 +3825,11 @@ public class SkillData {
                 }
                 break;
             case "dead eye":
+                sfx_dying.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSplashBrown.skeletonData, SpineSplashBrown.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSplashBrown.skeletonData, SpineSplashBrown.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSplashBrown.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3776,7 +3861,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeWhite.skeletonData, SpineStrikeWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeWhite.skeletonData, SpineStrikeWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3806,10 +3891,11 @@ public class SkillData {
                 }
                 break;
             case "bury":
+                sfx_dying.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSplashBrown.skeletonData, SpineSplashBrown.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSplashBrown.skeletonData, SpineSplashBrown.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSplashBrown.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3838,10 +3924,11 @@ public class SkillData {
                 }
                 break;
             case "panda paw":
+                sfx_powerPunch.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeGreen.skeletonData, SpineStrikeGreen.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeGreen.skeletonData, SpineStrikeGreen.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeGreen.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3871,10 +3958,11 @@ public class SkillData {
                 }
                 break;
             case "bamboo shoot":
+                sfx_dodge.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineShotGreen.skeletonData, SpineShotGreen.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineShotGreen.skeletonData, SpineShotGreen.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineShotGreen.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3904,10 +3992,11 @@ public class SkillData {
                 }
                 break;
             case "gobsmack":
+                sfx_slap.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastGreen.skeletonData, SpineBlastGreen.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastGreen.skeletonData, SpineBlastGreen.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlastGreen.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3938,10 +4027,11 @@ public class SkillData {
                 }
                 break;
             case "snap":
+                sfx_salad.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlood.skeletonData, SpineBlood.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlood.skeletonData, SpineBlood.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlood.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -3971,8 +4061,9 @@ public class SkillData {
                 }
                 break;
             case "lay down for a bit":
+                sfx_yawn.play(sfx);
                 for (var tile : targetTiles) {
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpinePortalBlue.skeletonData, SpinePortalBlue.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpinePortalBlue.skeletonData, SpinePortalBlue.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpinePortalBlue.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4005,11 +4096,12 @@ public class SkillData {
                 }
                 break;
             case "throw weight around":
+                sfx_hulk.play(sfx);
                 //todo:fix
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSplashBlue.skeletonData, SpineSplashBlue.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSplashBlue.skeletonData, SpineSplashBlue.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSplashBlue.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4039,10 +4131,11 @@ public class SkillData {
                 }
                 break;
             case "panda smash":
+                sfx_hulk.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineExplosionWhite.skeletonData, SpineExplosionWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineExplosionWhite.skeletonData, SpineExplosionWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineExplosionWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4072,10 +4165,11 @@ public class SkillData {
                 }
                 break;
             case "eat":
+                sfx_bite.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlood.skeletonData, SpineBlood.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlood.skeletonData, SpineBlood.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlood.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4105,10 +4199,11 @@ public class SkillData {
                 }
                 break;
             case "line piece":
+                sfx_tetris.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineExplosionWhite.skeletonData, SpineExplosionWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineExplosionWhite.skeletonData, SpineExplosionWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineExplosionWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4138,10 +4233,11 @@ public class SkillData {
                 }
                 break;
             case "j piece":
+                sfx_tetris.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineExplosionWhite.skeletonData, SpineExplosionWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineExplosionWhite.skeletonData, SpineExplosionWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineExplosionWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4171,10 +4267,11 @@ public class SkillData {
                 }
                 break;
             case "l piece":
+                sfx_tetris.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineExplosionWhite.skeletonData, SpineExplosionWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineExplosionWhite.skeletonData, SpineExplosionWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineExplosionWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4204,10 +4301,11 @@ public class SkillData {
                 }
                 break;
             case "square":
+                sfx_tetris.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineExplosionWhite.skeletonData, SpineExplosionWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineExplosionWhite.skeletonData, SpineExplosionWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineExplosionWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4237,10 +4335,11 @@ public class SkillData {
                 }
                 break;
             case "tee":
+                sfx_tetris.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineExplosionWhite.skeletonData, SpineExplosionWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineExplosionWhite.skeletonData, SpineExplosionWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineExplosionWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4273,7 +4372,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineExplosionYellow.skeletonData, SpineExplosionYellow.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineExplosionYellow.skeletonData, SpineExplosionYellow.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineExplosionYellow.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4303,10 +4402,11 @@ public class SkillData {
                 }
                 break;
             case "scrub":
+                sfx_dishes.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSparkWhite.skeletonData, SpineSparkWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSparkWhite.skeletonData, SpineSparkWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSparkWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4336,10 +4436,11 @@ public class SkillData {
                 }
                 break;
             case "buff":
+                sfx_dishes.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastBlue.skeletonData, SpineBlastBlue.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastBlue.skeletonData, SpineBlastBlue.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlastBlue.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4373,7 +4474,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineInfinity.skeletonData,
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineInfinity.skeletonData,
                             SpineInfinity.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineInfinity.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
@@ -4404,10 +4505,11 @@ public class SkillData {
                 }
                 break;
             case "rinse":
+                sfx_dishes.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastBlue.skeletonData, SpineBlastBlue.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastBlue.skeletonData, SpineBlastBlue.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlastBlue.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4440,7 +4542,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineLightningReverseWhite.skeletonData, SpineLightningReverseWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineLightningReverseWhite.skeletonData, SpineLightningReverseWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineLightningReverseWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4470,10 +4572,11 @@ public class SkillData {
                 }
                 break;
             case "spatula":
+                sfx_swordDraw.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeGray.skeletonData, SpineStrikeGray.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeGray.skeletonData, SpineStrikeGray.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeGray.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4503,10 +4606,11 @@ public class SkillData {
                 }
                 break;
             case "pie slice":
+                sfx_hmm.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSlashWhite.skeletonData, SpineSlashWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSlashWhite.skeletonData, SpineSlashWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSlashWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4536,10 +4640,11 @@ public class SkillData {
                 }
                 break;
             case "pie graph":
+                sfx_hmm.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBurnGreen.skeletonData, SpineBurnGreen.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBurnGreen.skeletonData, SpineBurnGreen.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBurnGreen.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4569,10 +4674,11 @@ public class SkillData {
                 }
                 break;
             case "radial menu":
+                sfx_hmm.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpinePortalBlue.skeletonData, SpinePortalBlue.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpinePortalBlue.skeletonData, SpinePortalBlue.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpinePortalBlue.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4602,10 +4708,11 @@ public class SkillData {
                 }
                 break;
             case "circumference":
+                sfx_hmm.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpinePortalRed.skeletonData, SpinePortalRed.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpinePortalRed.skeletonData, SpinePortalRed.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpinePortalRed.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4635,10 +4742,11 @@ public class SkillData {
                 }
                 break;
             case "radius":
+                sfx_hmm.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeRed.skeletonData, SpineStrikeRed.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeRed.skeletonData, SpineStrikeRed.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeRed.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4671,7 +4779,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpinePortal.skeletonData, SpinePortal.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpinePortal.skeletonData, SpinePortal.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpinePortal.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4701,10 +4809,11 @@ public class SkillData {
                 }
                 break;
             case "chomp":
+                sfx_bite.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBite.skeletonData, SpineBite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBite.skeletonData, SpineBite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4737,7 +4846,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpinePortalGreen.skeletonData, SpinePortalGreen.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpinePortalGreen.skeletonData, SpinePortalGreen.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpinePortalGreen.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4763,10 +4872,11 @@ public class SkillData {
                 }
                 break;
             case "tiny arm smack":
+                sfx_blocking.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeRed.skeletonData, SpineStrikeRed.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeRed.skeletonData, SpineStrikeRed.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeRed.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4796,10 +4906,11 @@ public class SkillData {
                 }
                 break;
             case "tail sweep":
+                sfx_dodge.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeLeft.skeletonData, SpineStrikeLeft.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeLeft.skeletonData, SpineStrikeLeft.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeLeft.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4833,7 +4944,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeRed.skeletonData, SpineStrikeRed.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeRed.skeletonData, SpineStrikeRed.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeRed.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4862,10 +4973,11 @@ public class SkillData {
                 }
                 break;
             case "dino bop":
+                sfx_powerPunch.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSplashPurple.skeletonData, SpineSplashPurple.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSplashPurple.skeletonData, SpineSplashPurple.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSplashPurple.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4898,7 +5010,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSwipeUp.skeletonData, SpineSwipeUp.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSwipeUp.skeletonData, SpineSwipeUp.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSwipeUp.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4927,7 +5039,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineShieldRed.skeletonData, SpineShieldRed.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineShieldRed.skeletonData, SpineShieldRed.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineShieldRed.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4957,10 +5069,11 @@ public class SkillData {
                 }
                 break;
             case "heroic punch":
+                sfx_powerPunch.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeUpRed.skeletonData, SpineStrikeUpRed.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeUpRed.skeletonData, SpineStrikeUpRed.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeUpRed.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -4990,10 +5103,11 @@ public class SkillData {
                 }
                 break;
             case "juice up":
+                sfx_hulk.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastGreen.skeletonData, SpineBlastGreen.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastGreen.skeletonData, SpineBlastGreen.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlastGreen.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5022,10 +5136,11 @@ public class SkillData {
                 }
                 break;
             case "block":
+                sfx_blocking.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineShield.skeletonData, SpineShield.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineShield.skeletonData, SpineShield.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineShield.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5055,10 +5170,11 @@ public class SkillData {
                 }
                 break;
             case "defend":
+                sfx_swordClink.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineShieldYellow.skeletonData, SpineShieldYellow.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineShieldYellow.skeletonData, SpineShieldYellow.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineShieldYellow.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5090,7 +5206,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineShieldYellow.skeletonData, SpineShieldYellow.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineShieldYellow.skeletonData, SpineShieldYellow.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineShieldYellow.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5120,10 +5236,11 @@ public class SkillData {
                 }
                 break;
             case "heroic kick":
+                sfx_kick.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeRed.skeletonData, SpineStrikeRed.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeRed.skeletonData, SpineStrikeRed.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeRed.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5153,10 +5270,12 @@ public class SkillData {
                 }
                 break;
             case "slime slap":
+                sfx_slap.play(sfx);
+                sfx_spit.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSlashWhite.skeletonData, SpineSlashWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSlashWhite.skeletonData, SpineSlashWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSlashWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5187,10 +5306,11 @@ public class SkillData {
                 }
                 break;
             case "divide":
+                sfx_multiplying.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpinePortal.skeletonData, SpinePortal.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpinePortal.skeletonData, SpinePortal.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpinePortal.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5223,7 +5343,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpinePortal.skeletonData, SpinePortal.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpinePortal.skeletonData, SpinePortal.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpinePortal.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5253,10 +5373,11 @@ public class SkillData {
                 }
                 break;
             case "sticky":
+                sfx_sticky.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBurnGreen.skeletonData, SpineBurnGreen.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBurnGreen.skeletonData, SpineBurnGreen.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBurnGreen.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5286,10 +5407,11 @@ public class SkillData {
                 }
                 break;
             case "goo blast":
+                sfx_slime.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastWhite.skeletonData, SpineBlastWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastWhite.skeletonData, SpineBlastWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlastWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5319,10 +5441,11 @@ public class SkillData {
                 }
                 break;
             case "goopicide":
+                sfx_slime.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineExplosionWhite.skeletonData, SpineExplosionWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineExplosionWhite.skeletonData, SpineExplosionWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineExplosionWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5358,7 +5481,7 @@ public class SkillData {
                 break;
             case "regenerate":
                 for (var tile : targetTiles) {
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineHealth.skeletonData, SpineHealth.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineHealth.skeletonData, SpineHealth.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineHealth.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5390,10 +5513,11 @@ public class SkillData {
                 }
                 break;
             case "claw":
+                sfx_salad.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSlashx3.skeletonData, SpineSlashx3.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSlashx3.skeletonData, SpineSlashx3.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSlashx3.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5426,7 +5550,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineLightning.skeletonData, SpineLightning.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineLightning.skeletonData, SpineLightning.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineLightning.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5455,10 +5579,11 @@ public class SkillData {
                 }
                 break;
             case "snarl":
+                sfx_dragon.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastRed.skeletonData,
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastRed.skeletonData,
                             SpineBlastRed.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlastRed.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
@@ -5492,7 +5617,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastGray.skeletonData, SpineBlastGray.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastGray.skeletonData, SpineBlastGray.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlastGray.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5525,7 +5650,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSwipeLeft.skeletonData, SpineSwipeLeft.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSwipeLeft.skeletonData, SpineSwipeLeft.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSwipeLeft.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5561,7 +5686,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpinePortalRed.skeletonData, SpinePortalRed.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpinePortalRed.skeletonData, SpinePortalRed.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpinePortalRed.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5591,10 +5716,11 @@ public class SkillData {
                 }
                 break;
             case "laser beam":
+                sfx_lightBeam.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeUpRed.skeletonData, SpineStrikeUpRed.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeUpRed.skeletonData, SpineStrikeUpRed.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeUpRed.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5624,10 +5750,11 @@ public class SkillData {
                 }
                 break;
             case "concussive beam":
+                sfx_lightBeam.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikeUpGray.skeletonData, SpineStrikeUpGray.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeUpGray.skeletonData, SpineStrikeUpGray.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeUpGray.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5658,10 +5785,11 @@ public class SkillData {
                 }
                 break;
             case "focused beam":
+                sfx_lightBeam.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineStrikePurple.skeletonData, SpineStrikePurple.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikePurple.skeletonData, SpineStrikePurple.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikePurple.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5691,10 +5819,11 @@ public class SkillData {
                 }
                 break;
             case "devastating beam":
+                sfx_lightBeam.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineExplosion.skeletonData, SpineExplosion.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineExplosion.skeletonData, SpineExplosion.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineExplosion.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5724,10 +5853,11 @@ public class SkillData {
                 }
                 break;
             case "ricochet":
+                sfx_twang.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSpark.skeletonData, SpineSpark.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSpark.skeletonData, SpineSpark.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineSpark.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5760,7 +5890,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastRed.skeletonData, SpineBlastRed.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastRed.skeletonData, SpineBlastRed.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlastRed.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5793,7 +5923,7 @@ public class SkillData {
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastGray.skeletonData, SpineBlastGray.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastGray.skeletonData, SpineBlastGray.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlastGray.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5823,10 +5953,11 @@ public class SkillData {
                 }
                 break;
             case "scream":
+                sfx_scream.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineInfinityWhite.skeletonData, SpineInfinityWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineInfinityWhite.skeletonData, SpineInfinityWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineInfinityWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5856,10 +5987,11 @@ public class SkillData {
                 }
                 break;
             case "rage out":
+                sfx_hulk.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlood.skeletonData, SpineBlood.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlood.skeletonData, SpineBlood.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlood.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5889,10 +6021,11 @@ public class SkillData {
                 }
                 break;
             case "rind":
+                sfx_salad.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlastOrange.skeletonData, SpineBlastOrange.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastOrange.skeletonData, SpineBlastOrange.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBlastOrange.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5922,10 +6055,11 @@ public class SkillData {
                 }
                 break;
             case "tasty snack":
+                sfx_salad.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineHealth.skeletonData, SpineHealth.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineHealth.skeletonData, SpineHealth.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineHealth.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5955,10 +6089,11 @@ public class SkillData {
                 }
                 break;
             case "vitamin c":
+                sfx_salad.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineExplosionYellow.skeletonData, SpineExplosionYellow.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineExplosionYellow.skeletonData, SpineExplosionYellow.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineExplosionYellow.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -5988,10 +6123,11 @@ public class SkillData {
                 }
                 break;
             case "crown of thorns":
+                sfx_dragon.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineHealthRed.skeletonData, SpineHealthRed.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineHealthRed.skeletonData, SpineHealthRed.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineHealthRed.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -6021,10 +6157,11 @@ public class SkillData {
                 }
                 break;
             case "flay and bake":
+                sfx_dragon.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBurn.skeletonData, SpineBurn.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBurn.skeletonData, SpineBurn.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineBurn.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);
@@ -6054,10 +6191,11 @@ public class SkillData {
                 }
                 break;
             case "slash":
+                sfx_salad.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
-                    var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineSlashWhite.skeletonData, SpineSlashWhite.animationData);
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSlashWhite.skeletonData, SpineSlashWhite.animationData);
                     spineDrawable.getAnimationState().setAnimation(25, SpineSlashWhite.animationAnimation, false);
                     spineDrawable.setCrop(-10, -10, 20, 20);
                     battleScreen.spineDrawables.add(spineDrawable);

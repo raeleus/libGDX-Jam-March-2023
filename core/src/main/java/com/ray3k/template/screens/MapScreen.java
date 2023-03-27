@@ -166,6 +166,7 @@ public class MapScreen extends JamScreen {
         thisRoomButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                sfx_click.play(sfx);
                 loadNextRoom();
             }
         });
@@ -318,6 +319,7 @@ public class MapScreen extends JamScreen {
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                sfx_click.play(sfx);
                 core.transition(new GameOverScreen());
             }
         });

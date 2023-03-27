@@ -100,6 +100,7 @@ public class NameScreen extends JamScreen {
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                sfx_click.play(sfx);
                 Gdx.input.setInputProcessor(null);
                 
                 column = MathUtils.random(49);
