@@ -6224,6 +6224,40 @@ public class SkillData {
                     });
                 }
                 break;
+            case "admin":
+                sfx_punch.play(sfx);
+                for (var tile : targetTiles) {
+                    var enemy = (CharacterData) tile.getUserObject();
+            
+                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeRed.skeletonData, SpineStrikeRed.animationData);
+                    spineDrawable.getAnimationState().setAnimation(25, SpineStrikeRed.animationAnimation, false);
+                    spineDrawable.setCrop(-10, -10, 20, 20);
+                    battleScreen.spineDrawables.add(spineDrawable);
+            
+                    Image image = new Image(spineDrawable);
+                    image.setTouchable(Touchable.disabled);
+                    stage.addActor(image);
+            
+                    temp.set(76, 51);
+                    tile.localToStageCoordinates(temp);
+                    image.setPosition(temp.x, temp.y, Align.center);
+            
+                    spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
+                        @Override
+                        public void complete(TrackEntry entry) {
+                            image.remove();
+                            battleScreen.spineDrawables.removeValue(spineDrawable, true);
+                            if (enemy != null) {
+                                int damage = MathUtils.floor(2000 + (float) level / maxLevel * 20.f);
+                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
+                                battleScreen.showDamage(tile, enemy, damage);
+                                battleScreen.showTextEffectHurt(tile, enemy);
+                            }
+                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
+                        }
+                    });
+                }
+                break;
             default:
                 stage.addAction(Actions.sequence(Actions.delay(.5f), Actions.run(runnable)));
                 break;

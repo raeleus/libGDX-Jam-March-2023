@@ -42,6 +42,7 @@ public class BattleScreen extends JamScreen {
     private Label playOrderLabel;
     public Array<SpineDrawable> spineDrawables = new Array<>();
     public Music music;
+    private static final Vector2 temp = new Vector2();
     
     @Override
     public void show() {
@@ -364,42 +365,6 @@ public class BattleScreen extends JamScreen {
         }
     }
     
-    public Table findTile(CharacterData character) {
-        for (int i = 0; i < playerTiles.size; i++) {
-            var tile = playerTiles.get(i);
-            if (tile.getUserObject() == character) return tile;
-        }
-        for (int i = 0; i < enemyTiles.size; i++) {
-            var tile = enemyTiles.get(i);
-            if (tile.getUserObject() == character) return tile;
-        }
-        return null;
-    }
-    
-    public int positionOfTile(Table tile) {
-        for (int i = 0; i < playerTiles.size; i++) {
-            var checkTile = playerTiles.get(i);
-            if (checkTile == tile) return i;
-        }
-        for (int i = 0; i < enemyTiles.size; i++) {
-            var checkTile = enemyTiles.get(i);
-            if (checkTile == tile) return i;
-        }
-        return -1;
-    }
-    
-    public int positionOfCharacter(CharacterData character) {
-        for (int i = 0; i < playerTiles.size; i++) {
-            var tile = playerTiles.get(i);
-            if (tile.getUserObject() == character) return i;
-        }
-        for (int i = 0; i < enemyTiles.size; i++) {
-            var tile = enemyTiles.get(i);
-            if (tile.getUserObject() == character) return i;
-        }
-        return -1;
-    }
-    
     public void conductStunnedTurn(CharacterData character, Table tile) {
         character.stunned = false;
         
@@ -619,7 +584,86 @@ public class BattleScreen extends JamScreen {
         });
     }
     
-    private static final Vector2 temp = new Vector2();
+    public void checkForDead(CharacterData character) {
+        var foundDead = false;
+        
+        var tiles = new Array<Table>();
+        tiles.addAll(enemyTiles);
+        tiles.addAll(playerTiles);
+        
+        for (var tile : tiles) {
+            var tileCharacter = (CharacterData) tile.getUserObject();
+            if (tileCharacter != null && tileCharacter.health <= 0) {
+                applyBlood(tile);
+                
+                foundDead = true;
+                tile.setUserObject(null);
+                tile.clearChildren();
+                tile.setBackground(skin.getDrawable("character-box-empty-10"));
+                enemyTeam.removeValue(tileCharacter, true);
+                GameData.removeCharacterFromOrder(turn,tileCharacter);
+            }
+        }
+        
+        if (!foundDead) finishTurn(character);
+        else {
+            stage.addAction(Actions.sequence(Actions.delay(3f), Actions.run(() -> {
+                finishTurn(character);
+            })));
+        }
+    }
+    
+    public void finishTurn(CharacterData character) {
+        if (playerTeam.size == 0) {
+            music.stop();
+            core.transition(new GameOverScreen());
+        } else if (enemyTeam.size == 0) {
+            music.stop();
+            var room = GameData.getRoom();
+            room.hasEnemies = false;
+            difficulty++;
+            core.transition(new RoomScreen());
+        }
+        
+        turn++;
+        conductTurn();
+    }
+    
+    public Table findTile(CharacterData character) {
+        for (int i = 0; i < playerTiles.size; i++) {
+            var tile = playerTiles.get(i);
+            if (tile.getUserObject() == character) return tile;
+        }
+        for (int i = 0; i < enemyTiles.size; i++) {
+            var tile = enemyTiles.get(i);
+            if (tile.getUserObject() == character) return tile;
+        }
+        return null;
+    }
+    
+    public int positionOfTile(Table tile) {
+        for (int i = 0; i < playerTiles.size; i++) {
+            var checkTile = playerTiles.get(i);
+            if (checkTile == tile) return i;
+        }
+        for (int i = 0; i < enemyTiles.size; i++) {
+            var checkTile = enemyTiles.get(i);
+            if (checkTile == tile) return i;
+        }
+        return -1;
+    }
+    
+    public int positionOfCharacter(CharacterData character) {
+        for (int i = 0; i < playerTiles.size; i++) {
+            var tile = playerTiles.get(i);
+            if (tile.getUserObject() == character) return i;
+        }
+        for (int i = 0; i < enemyTiles.size; i++) {
+            var tile = enemyTiles.get(i);
+            if (tile.getUserObject() == character) return i;
+        }
+        return -1;
+    }
     
     public void showDamage(Table tile, CharacterData enemy, int damage) {
         var label = new Label("-" + damage, lNamesake);
@@ -630,7 +674,7 @@ public class BattleScreen extends JamScreen {
         temp.set(tile.getWidth() / 2, tile.getHeight() / 2);
         tile.localToStageCoordinates(temp);
         label.setPosition(temp.x, temp.y, Align.center);
-    
+        
         label.addAction(sequence(parallel(moveBy(0, 50, 1.0f, Interpolation.sineOut), fadeOut(1.0f)), removeActor()));
         
         var progressBar = (ProgressBar) ((Container) ((Stack) tile.getChild(0)).getChild(1)).getActor();
@@ -667,6 +711,30 @@ public class BattleScreen extends JamScreen {
         
         var progressBar = (ProgressBar) ((Container) ((Stack) tile.getChild(0)).getChild(1)).getActor();
         progressBar.setValue(enemy.health);
+    }
+    
+    public void applyBlood(Table tile) {
+        sfx_dying.play(sfx);
+        var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlood.skeletonData, SpineBlood.animationData);
+        spineDrawable.getAnimationState().setAnimation(0, SpineBlood.animationAnimation, false);
+        spineDrawable.setCrop(-10, -10, 20, 20);
+        spineDrawables.add(spineDrawable);
+        
+        Image image = new Image(spineDrawable);
+        image.setTouchable(Touchable.disabled);
+        stage.addActor(image);
+        
+        temp.set(76, 51);
+        tile.localToStageCoordinates(temp);
+        image.setPosition(temp.x, temp.y, Align.center);
+        
+        spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
+            @Override
+            public void complete(TrackEntry entry) {
+                image.remove();
+                spineDrawables.removeValue(spineDrawable, true);
+            }
+        });
     }
     
     public void showTextEffectClear(Table tile, CharacterData enemy) {
@@ -711,83 +779,6 @@ public class BattleScreen extends JamScreen {
         
         characterData.position = newIndex;
         addCharacterToTile(characterData, tiles.get(newIndex));
-    }
-    
-    public void checkForDead(CharacterData character) {
-        var foundDead = false;
-        
-        for (var tile : enemyTiles) {
-            var tileCharacter = (CharacterData) tile.getUserObject();
-            if (tileCharacter != null && tileCharacter.health <= 0) {
-                applyBlood(tile);
-                
-                foundDead = true;
-                tile.setUserObject(null);
-                tile.clearChildren();
-                tile.setBackground(skin.getDrawable("character-box-empty-10"));
-                enemyTeam.removeValue(tileCharacter, true);
-            }
-        }
-    
-        for (var tile : playerTiles) {
-            var tileCharacter = (CharacterData) tile.getUserObject();
-            if (tileCharacter != null && tileCharacter.health <= 0) {
-                applyBlood(tile);
-            
-                foundDead = true;
-                tile.setUserObject(null);
-                tile.clearChildren();
-                tile.setBackground(skin.getDrawable("character-box-empty-10"));
-                playerTeam.removeValue(tileCharacter, true);
-            }
-        }
-        
-        if (!foundDead) finishTurn(character);
-        else {
-            stage.addAction(Actions.sequence(Actions.delay(3f), Actions.run(() -> {
-                finishTurn(character);
-            })));
-        }
-    }
-    
-    public void applyBlood(Table tile) {
-        sfx_dying.play(sfx);
-        var spineDrawable = new SpineDrawable(Core.skeletonRenderer, SpineBlood.skeletonData, SpineBlood.animationData);
-        spineDrawable.getAnimationState().setAnimation(0, SpineBlood.animationAnimation, false);
-        spineDrawable.setCrop(-10, -10, 20, 20);
-        spineDrawables.add(spineDrawable);
-    
-        Image image = new Image(spineDrawable);
-        image.setTouchable(Touchable.disabled);
-        stage.addActor(image);
-    
-        temp.set(76, 51);
-        tile.localToStageCoordinates(temp);
-        image.setPosition(temp.x, temp.y, Align.center);
-    
-        spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
-            @Override
-            public void complete(TrackEntry entry) {
-                image.remove();
-                spineDrawables.removeValue(spineDrawable, true);
-            }
-        });
-    }
-    
-    public void finishTurn(CharacterData character) {
-        if (playerTeam.size == 0) {
-            music.stop();
-            core.transition(new GameOverScreen());
-        } else if (enemyTeam.size == 0) {
-            music.stop();
-            var room = GameData.getRoom();
-            room.hasEnemies = false;
-            difficulty++;
-            core.transition(new RoomScreen());
-        }
-        
-        turn++;
-        conductTurn();
     }
     
     @Override

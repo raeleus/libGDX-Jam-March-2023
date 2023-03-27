@@ -96,6 +96,16 @@ public class GameData {
         order.addAll(characterOrder);
     }
     
+    public static void removeCharacterFromOrder(int turn, CharacterData removeCharacter) {
+        for (int i = turn; i < characterOrder.size; i++) {
+            var character = characterOrder.get(i);
+            if (removeCharacter == character) {
+                characterOrder.removeIndex(i);
+                i--;
+            }
+        }
+    }
+    
     public static Array<CharacterData> nextOrder() {
         var order = new Array<CharacterData>();
     

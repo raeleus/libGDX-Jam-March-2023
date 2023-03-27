@@ -39,9 +39,8 @@ public class PreBattleScreen extends JamScreen {
     @Override
     public void show() {
         super.show();
-        var room = getRoom();
         
-        var numberOfEnemies = MathUtils.clamp(difficulty / 5f, 1, 6);
+        var numberOfEnemies = MathUtils.clamp(difficulty / 4f, 1, 6);
         enemyTeam.clear();
         
         var newEnemyPositions = new IntArray(new int[]{0,1,2,3,4,5});
