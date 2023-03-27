@@ -1,4 +1,22 @@
+sfx/beep.mp3
+sfx/bite.mp3
+sfx/blocking.mp3
+sfx/bullets.mp3
+sfx/burst-gun.mp3
+sfx/cat.mp3
 sfx/click.mp3
+sfx/dishes.mp3
+sfx/dodge.mp3
+sfx/dragon.mp3
+sfx/dying.mp3
+sfx/energy gun shot.mp3
+sfx/frozen.mp3
+sfx/giggle.mp3
+sfx/grenade.mp3
+sfx/hmm.mp3
+sfx/hulk.mp3
+sfx/ice-cream.mp3
+sfx/kick.mp3
 sfx/libgdx01.mp3
 sfx/libgdx02.mp3
 sfx/libgdx03.mp3
@@ -10,7 +28,28 @@ sfx/libgdx08.mp3
 sfx/libgdx09.mp3
 sfx/libgdx10.mp3
 sfx/libgdx11.mp3
+sfx/light beam.mp3
+sfx/multiplying.mp3
+sfx/power punch.mp3
+sfx/punch.mp3
 sfx/ray3k01.mp3
 sfx/ray3k02.mp3
 sfx/ray3k03.mp3
 sfx/ray3k04.mp3
+sfx/salad.mp3
+sfx/scratch.mp3
+sfx/scream.mp3
+sfx/shotgun.mp3
+sfx/slap.mp3
+sfx/slime.mp3
+sfx/spit.mp3
+sfx/spray-paint-shake.mp3
+sfx/spray-paint.mp3
+sfx/squish.mp3
+sfx/sticky.mp3
+sfx/sword-clink.mp3
+sfx/sword-draw.mp3
+sfx/tetris.mp3
+sfx/thunder.mp3
+sfx/twang.mp3
+sfx/yawn.mp3

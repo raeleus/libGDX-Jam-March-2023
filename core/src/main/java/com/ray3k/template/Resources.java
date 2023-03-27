@@ -26,7 +26,43 @@ public class Resources {
 
     public static Skin skin_skin;
 
+    public static Sound sfx_beep;
+
+    public static Sound sfx_bite;
+
+    public static Sound sfx_blocking;
+
+    public static Sound sfx_bullets;
+
+    public static Sound sfx_burstGun;
+
+    public static Sound sfx_cat;
+
     public static Sound sfx_click;
+
+    public static Sound sfx_dishes;
+
+    public static Sound sfx_dodge;
+
+    public static Sound sfx_dragon;
+
+    public static Sound sfx_dying;
+
+    public static Sound sfx_energyGunShot;
+
+    public static Sound sfx_frozen;
+
+    public static Sound sfx_giggle;
+
+    public static Sound sfx_grenade;
+
+    public static Sound sfx_hmm;
+
+    public static Sound sfx_hulk;
+
+    public static Sound sfx_iceCream;
+
+    public static Sound sfx_kick;
 
     public static Sound sfx_libgdx01;
 
@@ -50,6 +86,14 @@ public class Resources {
 
     public static Sound sfx_libgdx11;
 
+    public static Sound sfx_lightBeam;
+
+    public static Sound sfx_multiplying;
+
+    public static Sound sfx_powerPunch;
+
+    public static Sound sfx_punch;
+
     public static Sound sfx_ray3k01;
 
     public static Sound sfx_ray3k02;
@@ -57,6 +101,40 @@ public class Resources {
     public static Sound sfx_ray3k03;
 
     public static Sound sfx_ray3k04;
+
+    public static Sound sfx_salad;
+
+    public static Sound sfx_scratch;
+
+    public static Sound sfx_scream;
+
+    public static Sound sfx_shotgun;
+
+    public static Sound sfx_slap;
+
+    public static Sound sfx_slime;
+
+    public static Sound sfx_spit;
+
+    public static Sound sfx_sprayPaintShake;
+
+    public static Sound sfx_sprayPaint;
+
+    public static Sound sfx_squish;
+
+    public static Sound sfx_sticky;
+
+    public static Sound sfx_swordClink;
+
+    public static Sound sfx_swordDraw;
+
+    public static Sound sfx_tetris;
+
+    public static Sound sfx_thunder;
+
+    public static Sound sfx_twang;
+
+    public static Sound sfx_yawn;
 
     public static Music bgm_audioSample;
 
@@ -818,7 +896,25 @@ public class Resources {
         SkinSkinStyles.wPointerUp = skin_skin.get("pointer-up", Window.WindowStyle.class);
         SkinSkinStyles.wDefault = skin_skin.get("default", Window.WindowStyle.class);
         SkinSkinStyles.wPointerDown = skin_skin.get("pointer-down", Window.WindowStyle.class);
+        sfx_beep = assetManager.get("sfx/beep.mp3");
+        sfx_bite = assetManager.get("sfx/bite.mp3");
+        sfx_blocking = assetManager.get("sfx/blocking.mp3");
+        sfx_bullets = assetManager.get("sfx/bullets.mp3");
+        sfx_burstGun = assetManager.get("sfx/burst-gun.mp3");
+        sfx_cat = assetManager.get("sfx/cat.mp3");
         sfx_click = assetManager.get("sfx/click.mp3");
+        sfx_dishes = assetManager.get("sfx/dishes.mp3");
+        sfx_dodge = assetManager.get("sfx/dodge.mp3");
+        sfx_dragon = assetManager.get("sfx/dragon.mp3");
+        sfx_dying = assetManager.get("sfx/dying.mp3");
+        sfx_energyGunShot = assetManager.get("sfx/energy gun shot.mp3");
+        sfx_frozen = assetManager.get("sfx/frozen.mp3");
+        sfx_giggle = assetManager.get("sfx/giggle.mp3");
+        sfx_grenade = assetManager.get("sfx/grenade.mp3");
+        sfx_hmm = assetManager.get("sfx/hmm.mp3");
+        sfx_hulk = assetManager.get("sfx/hulk.mp3");
+        sfx_iceCream = assetManager.get("sfx/ice-cream.mp3");
+        sfx_kick = assetManager.get("sfx/kick.mp3");
         sfx_libgdx01 = assetManager.get("sfx/libgdx01.mp3");
         sfx_libgdx02 = assetManager.get("sfx/libgdx02.mp3");
         sfx_libgdx03 = assetManager.get("sfx/libgdx03.mp3");
@@ -830,10 +926,31 @@ public class Resources {
         sfx_libgdx09 = assetManager.get("sfx/libgdx09.mp3");
         sfx_libgdx10 = assetManager.get("sfx/libgdx10.mp3");
         sfx_libgdx11 = assetManager.get("sfx/libgdx11.mp3");
+        sfx_lightBeam = assetManager.get("sfx/light beam.mp3");
+        sfx_multiplying = assetManager.get("sfx/multiplying.mp3");
+        sfx_powerPunch = assetManager.get("sfx/power punch.mp3");
+        sfx_punch = assetManager.get("sfx/punch.mp3");
         sfx_ray3k01 = assetManager.get("sfx/ray3k01.mp3");
         sfx_ray3k02 = assetManager.get("sfx/ray3k02.mp3");
         sfx_ray3k03 = assetManager.get("sfx/ray3k03.mp3");
         sfx_ray3k04 = assetManager.get("sfx/ray3k04.mp3");
+        sfx_salad = assetManager.get("sfx/salad.mp3");
+        sfx_scratch = assetManager.get("sfx/scratch.mp3");
+        sfx_scream = assetManager.get("sfx/scream.mp3");
+        sfx_shotgun = assetManager.get("sfx/shotgun.mp3");
+        sfx_slap = assetManager.get("sfx/slap.mp3");
+        sfx_slime = assetManager.get("sfx/slime.mp3");
+        sfx_spit = assetManager.get("sfx/spit.mp3");
+        sfx_sprayPaintShake = assetManager.get("sfx/spray-paint-shake.mp3");
+        sfx_sprayPaint = assetManager.get("sfx/spray-paint.mp3");
+        sfx_squish = assetManager.get("sfx/squish.mp3");
+        sfx_sticky = assetManager.get("sfx/sticky.mp3");
+        sfx_swordClink = assetManager.get("sfx/sword-clink.mp3");
+        sfx_swordDraw = assetManager.get("sfx/sword-draw.mp3");
+        sfx_tetris = assetManager.get("sfx/tetris.mp3");
+        sfx_thunder = assetManager.get("sfx/thunder.mp3");
+        sfx_twang = assetManager.get("sfx/twang.mp3");
+        sfx_yawn = assetManager.get("sfx/yawn.mp3");
         bgm_audioSample = assetManager.get("bgm/audio-sample.mp3");
         bgm_game = assetManager.get("bgm/game.mp3");
         bgm_menu = assetManager.get("bgm/menu.mp3");
