@@ -62,6 +62,12 @@
 		"b": 1,
 		"a": 1
 	},
+	"pink": {
+		"r": 1,
+		"g": 0.5294118,
+		"b": 0.9254902,
+		"a": 1
+	},
 	"red": {
 		"r": 1,
 		"g": 0,
@@ -554,6 +560,27 @@
 		"regions": [],
 		"playMode": 2,
 		"crushMode": 0
+	},
+	"progress-bar-knob-pink-10": {
+		"region": "progress-bar-knob",
+		"color": "pink",
+		"horizontalStretchAreas": [ 0, 5 ],
+		"verticalStretchAreas": [ 0, 5 ],
+		"tiling": false,
+		"minWidth": 0,
+		"minHeight": 6,
+		"rightWidth": 0,
+		"leftWidth": 0,
+		"bottomHeight": 0,
+		"topHeight": 0,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2,
+		"crushMode": 0
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle": {
@@ -618,6 +645,10 @@
 	"gear": {
 		"background": "progress-bar-knob-bg-10",
 		"knobBefore": "progress-bar-knob-yellow-10"
+	},
+	"healthVul": {
+		"background": "progress-bar-knob-bg-10",
+		"knobBefore": "progress-bar-knob-pink-10"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle": {

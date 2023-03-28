@@ -13,7 +13,9 @@ public class CharacterData {
     public int position;
     public boolean stunned;
     public float damageMitigation;
+    
     public float extraDamage;
+    public float extraDamageNextTurn;
     
     public CharacterData() {
     }
@@ -26,7 +28,7 @@ public class CharacterData {
         this.speed = other.speed;
         this.stunned = other.stunned;
         this.damageMitigation = other.damageMitigation;
-        this.extraDamage = other.extraDamage;
+        this.extraDamageNextTurn = other.extraDamageNextTurn;
         skills.addAll(other.skills);
         tags.addAll(other.tags);
     }

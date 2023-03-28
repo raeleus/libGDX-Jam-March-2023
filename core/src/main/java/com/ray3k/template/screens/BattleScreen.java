@@ -13,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.esotericsoftware.spine.AnimationState.AnimationStateAdapter;
 import com.esotericsoftware.spine.AnimationState.TrackEntry;
 import com.github.tommyettinger.textra.TypingLabel;
@@ -310,10 +309,17 @@ public class BattleScreen extends JamScreen {
         textra.skipToTheEnd();
         stack.add(textra);
     
-        var progressBar = new ProgressBar(0, character.healthMax, 1, false, pHealth);
+        var progressBar = new ProgressBar(0, character.healthMax, 1, false, pGear);
         progressBar.setValue(character.health);
         progressBar.setAnimateDuration(.5f);
         var container = new Container(progressBar);
+        container.bottom();
+        stack.add(container);
+        
+        progressBar = new ProgressBar(0, character.healthMax, 1, false, pHealth);
+        progressBar.setValue(character.health);
+        progressBar.setAnimateDuration(.5f);
+        container = new Container(progressBar);
         container.bottom();
         stack.add(container);
     }
@@ -335,6 +341,7 @@ public class BattleScreen extends JamScreen {
         if (turn < characterOrder.size) {
             var character = characterOrder.get(turn);
             character.damageMitigation = 0;
+            character.extraDamage = character.extraDamageNextTurn;
             
             if (character.stunned) {
                 for (var tile : playerTiles) {
@@ -368,6 +375,7 @@ public class BattleScreen extends JamScreen {
     
     public void conductStunnedTurn(CharacterData character, Table tile) {
         character.stunned = false;
+        showTextEffectNormal(tile, character);
     
         popTable.setColor(Color.WHITE);
         popTable.clear();
@@ -381,7 +389,6 @@ public class BattleScreen extends JamScreen {
         popTable.addAction(sequence(delay(1.5f), fadeOut(.5f), run(() -> {
             popTable.hide();
             checkForDead(character);
-            showTextEffectClear(tile, character);
         }), removeActor()));
     
         popTable.show(stage);
@@ -620,6 +627,8 @@ public class BattleScreen extends JamScreen {
     }
     
     public void finishTurn(CharacterData character) {
+        character.extraDamage = 0;
+        
         if (playerTeam.size == 0) {
             music.stop();
             core.transition(new GameOverScreen());
@@ -682,9 +691,8 @@ public class BattleScreen extends JamScreen {
         label.setPosition(temp.x, temp.y, Align.center);
         
         label.addAction(sequence(parallel(moveBy(0, 50, 1.0f, Interpolation.sineOut), fadeOut(1.0f)), removeActor()));
-        
-        var progressBar = (ProgressBar) ((Container) ((Stack) tile.getChild(0)).getChild(1)).getActor();
-        progressBar.setValue(enemy.health);
+    
+        updateProgressBars(tile);
     }
     
     public void showBuff(Table tile, CharacterData enemy, int damage) {
@@ -698,9 +706,8 @@ public class BattleScreen extends JamScreen {
         label.setPosition(temp.x, temp.y, Align.center);
         
         label.addAction(sequence(parallel(moveBy(0, 50, 1.0f, Interpolation.sineOut), fadeOut(1.0f)), removeActor()));
-        
-        var progressBar = (ProgressBar) ((Container) ((Stack) tile.getChild(0)).getChild(1)).getActor();
-        progressBar.setValue(enemy.health);
+    
+        updateProgressBars(tile);
     }
     
     public void showHeal(Table tile, CharacterData enemy, int healing) {
@@ -715,8 +722,7 @@ public class BattleScreen extends JamScreen {
         
         label.addAction(sequence(parallel(moveBy(0, 50, 1.0f, Interpolation.sineOut), fadeOut(1.0f)), removeActor()));
         
-        var progressBar = (ProgressBar) ((Container) ((Stack) tile.getChild(0)).getChild(1)).getActor();
-        progressBar.setValue(enemy.health);
+        updateProgressBars(tile);
     }
     
     public void applyBlood(Table tile) {
@@ -743,26 +749,52 @@ public class BattleScreen extends JamScreen {
         });
     }
     
-    public void showTextEffectClear(Table tile, CharacterData enemy) {
+    public void showTextEffectNormal(Table tile, CharacterData enemy) {
         var label = (TypingLabel) ((Stack)tile.getChild(0)).getChild(0);
-        label.setText(enemy.name);
+        
+        if (enemy.stunned) label.setText("{SICK}[YELLOW]" + enemy.name);
+        else label.setText(enemy.name);
     }
     
     public void showTextEffectHurt(Table tile, CharacterData enemy) {
         var label = (TypingLabel) ((Stack)tile.getChild(0)).getChild(0);
         label.setText("{SHAKE}" + enemy.name);
-        label.addAction(sequence(delay(1f),run(() -> showTextEffectClear(tile, enemy))));
+        label.addAction(sequence(delay(1f),run(() -> showTextEffectNormal(tile, enemy))));
     }
     
     public void showTextEffectHeal(Table tile, CharacterData enemy) {
         var label = (TypingLabel) ((Stack)tile.getChild(0)).getChild(0);
         label.setText("{WAVE}" + enemy.name);
-        label.addAction(sequence(delay(1f),run(() -> showTextEffectClear(tile, enemy))));
+        label.addAction(sequence(delay(1f),run(() -> showTextEffectNormal(tile, enemy))));
     }
     
-    public void showTextEffectStunned(Table tile, CharacterData enemy) {
-        var label = (TypingLabel) ((Stack)tile.getChild(0)).getChild(0);
-        label.setText("{SICK}[YELLOW]" + enemy.name);
+    public void updateProgressBars(Table tile) {
+        var character = (CharacterData) tile.getUserObject();
+        
+        if (character.damageMitigation >= 0) {
+            var progressBar = (ProgressBar) ((Container) ((Stack) tile.getChild(0)).getChild(1)).getActor();
+            progressBar.setStyle(pGear);
+            System.out.println(
+                    "character.health + character.damageMitigation = " + character.health + character.damageMitigation);
+            System.out.println("character.health = " + character.health);
+            progressBar.setRange(0, character.healthMax + character.damageMitigation);
+            progressBar.setValue(character.health + character.damageMitigation);
+            
+            progressBar = (ProgressBar) ((Container) ((Stack) tile.getChild(0)).getChild(2)).getActor();
+            progressBar.setStyle(pHealth);
+            progressBar.setRange(0, character.healthMax + character.damageMitigation);
+            progressBar.setValue(character.health);
+        } else {
+            var progressBar = (ProgressBar) ((Container) ((Stack) tile.getChild(0)).getChild(1)).getActor();
+            progressBar.setStyle(pHealthVul);
+            progressBar.setRange(0, character.healthMax);
+            progressBar.setValue(character.health);
+    
+            progressBar = (ProgressBar) ((Container) ((Stack) tile.getChild(0)).getChild(2)).getActor();
+            progressBar.setStyle(pHealth);
+            progressBar.setRange(0, character.healthMax);
+            progressBar.setValue(character.health + character.damageMitigation);
+        }
     }
     
     public void moveCharacter(CharacterData characterData, int newIndex, boolean isPlayerTeam) {

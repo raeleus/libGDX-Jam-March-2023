@@ -11,7 +11,6 @@ import com.badlogic.gdx.utils.Array;
 import com.esotericsoftware.spine.AnimationState.AnimationStateAdapter;
 import com.esotericsoftware.spine.AnimationState.TrackEntry;
 import com.ray3k.template.*;
-import com.ray3k.template.Resources.*;
 import com.ray3k.template.battle.*;
 import com.ray3k.template.screens.*;
 
@@ -49,7 +48,7 @@ public class SkillData {
         var targetTiles = chooseTiles(battleScreen, target, isPlayerTeam);
         
         switch (name) {
-            case "punch":
+            case "punch"://player tested
                 sfx_punch.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
@@ -83,7 +82,7 @@ public class SkillData {
                     });
                 }
                 break;
-            case "heavy punch":
+            case "heavy punch"://player tested
                 sfx_powerPunch.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
@@ -117,7 +116,7 @@ public class SkillData {
                     });
                 }
                 break;
-            case "scratch head":
+            case "scratch head"://player tested
                 sfx_hmm.play(sfx);
                 for (var tile : targetTiles) {
                     var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastGray.skeletonData, SpineBlastGray.animationData);
@@ -151,7 +150,7 @@ public class SkillData {
                     });
                 }
                 break;
-            case "grumble":
+            case "grumble"://player tested
                 sfx_hulk.play(sfx);
                 for (var tile : targetTiles) {
                     var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastPink.skeletonData, SpineBlastPink.animationData);
@@ -174,10 +173,8 @@ public class SkillData {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (targetCharacter != null) {
-                                int heal = MathUtils.floor(1 + (float) level / maxLevel * 20.f);
-                                targetCharacter.health += heal;
-                                if (targetCharacter.health > targetCharacter.healthMax) targetCharacter.health = character.healthMax;
-                                battleScreen.showHeal(tile, targetCharacter, heal);
+                                targetCharacter.extraDamageNextTurn += 5;
+                                battleScreen.showBuff(tile, targetCharacter, 5);
                                 battleScreen.showTextEffectHeal(tile, targetCharacter);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
@@ -185,7 +182,7 @@ public class SkillData {
                     });
                 }
                 break;
-            case "charge":
+            case "charge"://player tested
                 sfx_lightBeam.play(sfx);
                 for (var tile : targetTiles) {
                     var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSwipeUp.skeletonData, SpineSwipeUp.animationData);
@@ -210,7 +207,7 @@ public class SkillData {
                             var newPosition = character.position - 3;
                             if (character.position >= 3) {
                                 battleScreen.moveCharacter(character, newPosition, isPlayerTeam);
-                                var enemyTile = battleScreen.getEnemyTiles().get(newPosition);
+                                var enemyTile = (isPlayerTeam ? battleScreen.getEnemyTiles() : battleScreen.getPlayerTiles()).get(newPosition);
                                 if (enemyTile.getUserObject() != null) {
                                     var spineDrawable = new SpineDrawable(skeletonRenderer, SpineStrikeUpRed.skeletonData, SpineStrikeUpRed.animationData);
                                     spineDrawable.getAnimationState().setAnimation(0, SpineStrikeUpRed.animationAnimation, false);
@@ -262,7 +259,7 @@ public class SkillData {
                             if (enemy != null) {
                                 int damage = MathUtils.floor(5 + (float) level / maxLevel * 20.f);
                                 enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
-                                enemy.extraDamage -= 20;
+                                enemy.extraDamageNextTurn -= 20;
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -299,7 +296,7 @@ public class SkillData {
                                 enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 enemy.stunned = true;
                                 battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectStunned(tile, enemy);
+                                battleScreen.showTextEffectNormal(tile, enemy);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
@@ -434,7 +431,7 @@ public class SkillData {
                                 targetCharacter.stunned = true;
                                 if (targetCharacter.health > targetCharacter.healthMax) targetCharacter.health = character.healthMax;
                                 battleScreen.showHeal(tile, targetCharacter, heal);
-                                battleScreen.showTextEffectStunned(tile, targetCharacter);
+                                battleScreen.showTextEffectNormal(tile, targetCharacter);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
@@ -466,7 +463,7 @@ public class SkillData {
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             
                             character.damageMitigation += 10;
-                            character.extraDamage += 10;
+                            character.extraDamageNextTurn += 10;
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
                     });
@@ -798,7 +795,7 @@ public class SkillData {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
-                                enemy.extraDamage = 10;
+                                enemy.extraDamageNextTurn = 10;
                                 battleScreen.showBuff(tile, enemy, 10);
                                 battleScreen.showTextEffectHeal(tile, enemy);
                             }
@@ -836,7 +833,7 @@ public class SkillData {
                                 enemy.stunned = true;
                                 enemy.damageMitigation = 20;
                                 battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectStunned(tile, enemy);
+                                battleScreen.showTextEffectNormal(tile, enemy);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
@@ -901,7 +898,7 @@ public class SkillData {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
-                                enemy.extraDamage += 5;
+                                enemy.extraDamageNextTurn += 5;
                                 battleScreen.showBuff(tile, enemy, 5);
                                 battleScreen.showTextEffectHeal(tile, enemy);
                             }
@@ -1006,7 +1003,7 @@ public class SkillData {
                                 enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 enemy.stunned = true;
                                 battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectStunned(tile, enemy);
+                                battleScreen.showTextEffectNormal(tile, enemy);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
@@ -1149,7 +1146,7 @@ public class SkillData {
                     });
                 }
                 break;
-            case "grapple":
+            case "grapple"://player tested
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
@@ -1177,11 +1174,11 @@ public class SkillData {
                                 enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 enemy.stunned = true;
                                 battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectStunned(tile, enemy);
+                                battleScreen.showTextEffectNormal(tile, enemy);
                                 
                                 character.stunned = true;
                                 
-                                battleScreen.showTextEffectStunned(battleScreen.findTile(character), character);
+                                battleScreen.showTextEffectNormal(battleScreen.findTile(character), character);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
@@ -2010,7 +2007,7 @@ public class SkillData {
                             if (enemy != null) {
                                 int damage = MathUtils.floor(5 + (float) level / maxLevel * 20.f);
                                 enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
-                                enemy.extraDamage -= 10;
+                                enemy.extraDamageNextTurn -= 10;
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -2278,7 +2275,7 @@ public class SkillData {
                                 enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 enemy.stunned = true;
                                 battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectStunned(tile, enemy);
+                                battleScreen.showTextEffectNormal(tile, enemy);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
@@ -3013,7 +3010,7 @@ public class SkillData {
                                 enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 enemy.stunned = true;
                                 battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectStunned(tile, enemy);
+                                battleScreen.showTextEffectNormal(tile, enemy);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
@@ -3108,7 +3105,7 @@ public class SkillData {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
-                                enemy.extraDamage -= 10;
+                                enemy.extraDamageNextTurn -= 10;
                                 battleScreen.showBuff(tile, enemy, 10);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -3277,7 +3274,7 @@ public class SkillData {
                             if (enemy != null) {
                                 int damage = MathUtils.floor(20 + (float) level / maxLevel * 20.f);
                                 enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
-                                enemy.extraDamage -= 5;
+                                enemy.extraDamageNextTurn -= 5;
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -3480,7 +3477,7 @@ public class SkillData {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
-                                enemy.extraDamage += 10;
+                                enemy.extraDamageNextTurn += 10;
                                 battleScreen.showBuff(tile, enemy, 10);
                                 battleScreen.showTextEffectHeal(tile, enemy);
                             }
@@ -3512,7 +3509,7 @@ public class SkillData {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
-                                enemy.extraDamage = 10;
+                                enemy.extraDamageNextTurn = 10;
                                 battleScreen.showBuff(tile, enemy, 10);
                                 battleScreen.showTextEffectHeal(tile, enemy);
                             }
@@ -3750,7 +3747,7 @@ public class SkillData {
                                 enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 enemy.stunned = true;
                                 battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectStunned(tile, enemy);
+                                battleScreen.showTextEffectNormal(tile, enemy);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
@@ -4019,7 +4016,7 @@ public class SkillData {
                                 enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 enemy.stunned = true;
                                 battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectStunned(tile, enemy);
+                                battleScreen.showTextEffectNormal(tile, enemy);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
@@ -4088,7 +4085,7 @@ public class SkillData {
                                 if (targetCharacter.health > targetCharacter.healthMax) targetCharacter.health = character.healthMax;
                                 targetCharacter.stunned = true;
                                 battleScreen.showHeal(tile, targetCharacter, heal);
-                                battleScreen.showTextEffectStunned(tile, targetCharacter);
+                                battleScreen.showTextEffectNormal(tile, targetCharacter);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
@@ -4459,7 +4456,7 @@ public class SkillData {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
-                                enemy.extraDamage = 10;
+                                enemy.extraDamageNextTurn = 10;
                                 enemy.stunned = false;
                                 enemy.damageMitigation = 0;
                                 battleScreen.showDamage(tile, enemy, 10);
@@ -4933,7 +4930,7 @@ public class SkillData {
                                 enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 enemy.stunned = true;
                                 battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectStunned(tile, enemy);
+                                battleScreen.showTextEffectNormal(tile, enemy);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
@@ -4963,7 +4960,7 @@ public class SkillData {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
-                                enemy.extraDamage += 20;
+                                enemy.extraDamageNextTurn += 20;
                                 battleScreen.showBuff(tile, enemy, 20);
                                 battleScreen.showTextEffectHeal(tile, enemy);
                             }
@@ -5126,7 +5123,7 @@ public class SkillData {
                             image.remove();
                             battleScreen.spineDrawables.removeValue(spineDrawable, true);
                             if (enemy != null) {
-                                enemy.extraDamage += 20;
+                                enemy.extraDamageNextTurn += 20;
                                 battleScreen.showBuff(tile, enemy, 20);
                                 battleScreen.showTextEffectHeal(tile, enemy);
                             }
@@ -5296,7 +5293,7 @@ public class SkillData {
                             if (enemy != null) {
                                 int damage = MathUtils.floor(12 + (float) level / maxLevel * 20.f);
                                 enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
-                                enemy.extraDamage -= 20;
+                                enemy.extraDamageNextTurn -= 20;
                                 battleScreen.showDamage(tile, enemy, damage);
                                 battleScreen.showTextEffectHurt(tile, enemy);
                             }
@@ -5471,7 +5468,7 @@ public class SkillData {
                                 
                                 for (var enemy : GameData.enemyTeam) {
                                     enemy.stunned = true;
-                                    battleScreen.showTextEffectStunned(battleScreen.findTile(enemy), enemy);
+                                    battleScreen.showTextEffectNormal(battleScreen.findTile(enemy), enemy);
                                 }
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
@@ -5777,7 +5774,7 @@ public class SkillData {
                                 enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
                                 enemy.stunned = true;
                                 battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectStunned(tile, enemy);
+                                battleScreen.showTextEffectNormal(tile, enemy);
                             }
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
                         }
@@ -6374,7 +6371,6 @@ public class SkillData {
     public Array<Table> collectAvailableTiles(BattleScreen battleScreen, boolean playerTeam, int characterPosition) {
         switch (name) {
             case "scratch head":
-            case "grumble":
             case "cat nap":
             case "cat nip":
             case "ice-scream":
@@ -6448,6 +6444,7 @@ public class SkillData {
             case "block":
             case "merge":
             case "tasty snack":
+            case "grumble":
                 return Selector.selectAnyAlly(battleScreen, playerTeam);
             case "defend":
                 return Selector.selectAnyAllyFrontRow(battleScreen, playerTeam);

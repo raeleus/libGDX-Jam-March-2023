@@ -884,6 +884,7 @@ public class Resources {
         SkinSkinStyles.lButton = skin_skin.get("button", Label.LabelStyle.class);
         SkinSkinStyles.lLog = skin_skin.get("log", Label.LabelStyle.class);
         SkinSkinStyles.pMagic = skin_skin.get("magic", ProgressBar.ProgressBarStyle.class);
+        SkinSkinStyles.pHealthVul = skin_skin.get("healthVul", ProgressBar.ProgressBarStyle.class);
         SkinSkinStyles.pGear = skin_skin.get("gear", ProgressBar.ProgressBarStyle.class);
         SkinSkinStyles.pDefaultVertical = skin_skin.get("default-vertical", ProgressBar.ProgressBarStyle.class);
         SkinSkinStyles.pHealth = skin_skin.get("health", ProgressBar.ProgressBarStyle.class);
@@ -2608,6 +2609,8 @@ public class Resources {
         public static Label.LabelStyle lLog;
 
         public static ProgressBar.ProgressBarStyle pMagic;
+
+        public static ProgressBar.ProgressBarStyle pHealthVul;
 
         public static ProgressBar.ProgressBarStyle pGear;
 
