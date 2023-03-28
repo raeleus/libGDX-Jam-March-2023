@@ -35,7 +35,6 @@ public class BattleScreen extends JamScreen {
     private Array<Table> enemyTiles = new Array<>();
     private Array<Table> playerTiles = new Array<>();
     private int turn;
-    private final PopTable popTable = new PopTable();
     private Image dividerImage;
     private Array<Button> selectables = new Array<>();
     private Array<Image> highlights = new Array<>();
@@ -43,6 +42,7 @@ public class BattleScreen extends JamScreen {
     public Array<SpineDrawable> spineDrawables = new Array<>();
     public Music music;
     private static final Vector2 temp = new Vector2();
+    private final static PopTableStyle popTableStyle = new PopTableStyle(wPointerDown);
     
     @Override
     public void show() {
@@ -61,8 +61,6 @@ public class BattleScreen extends JamScreen {
         
         stage = new Stage(new ScreenViewport(), batch);
         Gdx.input.setInputProcessor(stage);
-        
-        popTable.setStyle(new PopTableStyle(wPointerDown));
         
         var root = new Table();
         root.setFillParent(true);
@@ -368,7 +366,7 @@ public class BattleScreen extends JamScreen {
     public void conductStunnedTurn(CharacterData character, Table tile) {
         character.stunned = false;
         
-        popTable.clear();
+        var popTable = new PopTable(popTableStyle);
         popTable.setStyle(new PopTableStyle(wDefault));
         popTable.attachToActor(dividerImage, Align.center, Align.center);
     
@@ -386,6 +384,7 @@ public class BattleScreen extends JamScreen {
     }
     
     public void conductPlayerTurn(CharacterData hero, Table cell) {
+        var popTable = new PopTable(popTableStyle);
         popTable.setColor(Color.WHITE);
         popTable.clear();
         popTable.setStyle(new PopTableStyle(wPointerDown));
@@ -456,7 +455,7 @@ public class BattleScreen extends JamScreen {
     }
     
     public void playerSelectTarget(CharacterData hero, SkillData skill, Table cell) {
-        popTable.clear();
+        var popTable = new PopTable(popTableStyle);
         popTable.setStyle(new PopTableStyle(wDefault));
         popTable.attachToActor(dividerImage, Align.center, Align.center);
     
@@ -543,7 +542,7 @@ public class BattleScreen extends JamScreen {
         }
         
         if (selectableTilesTemp.size == 0) {
-            popTable.clear();
+            var popTable = new PopTable(popTableStyle);
             popTable.setStyle(new PopTableStyle(wDefault));
             popTable.attachToActor(dividerImage, Align.center, Align.center);
     
@@ -551,14 +550,14 @@ public class BattleScreen extends JamScreen {
             var label = new Label(enemy.name + " is sleeping", lButton);
             popTable.add(label);
     
-            popTable.addAction(sequence(delay(2f), fadeOut(.5f), run(() -> {
+            popTable.addAction(sequence(delay(1.5f), fadeOut(.5f), run(() -> {
                 popTable.hide();
                 checkForDead(enemy);
             }), removeActor()));
     
             popTable.show(stage);
         } else {
-            popTable.clear();
+            var popTable = new PopTable(popTableStyle);
             popTable.setStyle(new PopTableStyle(wDefault));
             popTable.attachToActor(dividerImage, Align.center, Align.center);
     
@@ -601,6 +600,7 @@ public class BattleScreen extends JamScreen {
                 tile.clearChildren();
                 tile.setBackground(skin.getDrawable("character-box-empty-10"));
                 enemyTeam.removeValue(tileCharacter, true);
+                playerTeam.removeValue(tileCharacter, true);
                 GameData.removeCharacterFromOrder(turn,tileCharacter);
             }
         }
