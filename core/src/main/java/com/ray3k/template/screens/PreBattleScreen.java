@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntArray;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.github.tommyettinger.textra.TextraLabel;
 import com.ray3k.template.*;
@@ -40,7 +41,7 @@ public class PreBattleScreen extends JamScreen {
     public void show() {
         super.show();
     
-        var numberOfEnemies = MathUtils.floor(MathUtils.clamp(difficulty / 4f + 1, 1, 6));
+        var numberOfEnemies = MathUtils.floor(MathUtils.clamp(difficulty / 4f + 1, 2, 6));
         enemyTeam.clear();
         
         var newEnemyPositions = new IntArray(new int[]{0,1,2,3,4,5});
@@ -65,7 +66,7 @@ public class PreBattleScreen extends JamScreen {
             music.setLooping(true);
         }
         
-        stage = new Stage(new ScreenViewport(), batch);
+        stage = new Stage(new FitViewport(1024, 576), batch);
         Gdx.input.setInputProcessor(stage);
         
         var root = new Table();

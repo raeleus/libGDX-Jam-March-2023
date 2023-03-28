@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.ray3k.template.data.*;
 import com.ray3k.template.stripe.*;
@@ -41,7 +42,7 @@ public class RoomScreen extends JamScreen {
             music.setLooping(true);
         }
         
-        stage = new Stage(new ScreenViewport(), batch);
+        stage = new Stage(new FitViewport(1024, 576), batch);
         Gdx.input.setInputProcessor(stage);
         
         var root = new Table();
@@ -159,6 +160,9 @@ public class RoomScreen extends JamScreen {
                             sfx_click.play(sfx);
                             for (var hero : playerTeam) {
                                 hero.health = hero.healthMax;
+                                for (var skill : hero.skills) {
+                                    if (skill.usesMax != -1) skill.uses = skill.usesMax;
+                                }
                             }
                             
                             room.restoration = false;

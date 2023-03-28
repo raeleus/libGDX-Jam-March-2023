@@ -151,9 +151,7 @@ public class Selector {
         
         //if still no targets
         if (returnValue.size == 0) {
-            System.out.println("before " + targetIndex);
             targetIndex += 3;
-            System.out.println("after " + targetIndex);
     
             //back row
             tile = enemyTiles.get(targetIndex);

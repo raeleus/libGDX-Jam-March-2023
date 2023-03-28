@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.esotericsoftware.spine.AnimationState.AnimationStateAdapter;
 import com.esotericsoftware.spine.AnimationState.TrackEntry;
@@ -59,7 +60,7 @@ public class BattleScreen extends JamScreen {
         characterOrder.clear();
         calculateOrder(turn);
         
-        stage = new Stage(new ScreenViewport(), batch);
+        stage = new Stage(new FitViewport(1024, 576), batch);
         Gdx.input.setInputProcessor(stage);
         
         popTable.setStyle(new PopTableStyle(wPointerDown));
@@ -318,7 +319,7 @@ public class BattleScreen extends JamScreen {
     }
     
     public void conductTurn() {
-        var playerOrder = "";
+        var playerOrderText = "";
         calculateOrder(turn);
         var order = new Array<CharacterData>();
         for (int i = turn; i < characterOrder.size; i++) {
@@ -327,9 +328,9 @@ public class BattleScreen extends JamScreen {
         order.addAll(nextOrder());
     
         for (var character : order) {
-            playerOrder += character.name +  "\n";
+            playerOrderText += character.name +  "\n";
         }
-        playOrderLabel.setText(playerOrder);
+        playOrderLabel.setText(playerOrderText);
 
         if (turn < characterOrder.size) {
             var character = characterOrder.get(turn);
@@ -367,7 +368,8 @@ public class BattleScreen extends JamScreen {
     
     public void conductStunnedTurn(CharacterData character, Table tile) {
         character.stunned = false;
-        
+    
+        popTable.setColor(Color.WHITE);
         popTable.clear();
         popTable.setStyle(new PopTableStyle(wDefault));
         popTable.attachToActor(dividerImage, Align.center, Align.center);
@@ -456,6 +458,7 @@ public class BattleScreen extends JamScreen {
     }
     
     public void playerSelectTarget(CharacterData hero, SkillData skill, Table cell) {
+        popTable.setColor(Color.WHITE);
         popTable.clear();
         popTable.setStyle(new PopTableStyle(wDefault));
         popTable.attachToActor(dividerImage, Align.center, Align.center);
@@ -543,6 +546,7 @@ public class BattleScreen extends JamScreen {
         }
         
         if (selectableTilesTemp.size == 0) {
+            popTable.setColor(Color.WHITE);
             popTable.clear();
             popTable.setStyle(new PopTableStyle(wDefault));
             popTable.attachToActor(dividerImage, Align.center, Align.center);
@@ -558,6 +562,7 @@ public class BattleScreen extends JamScreen {
     
             popTable.show(stage);
         } else {
+            popTable.setColor(Color.WHITE);
             popTable.clear();
             popTable.setStyle(new PopTableStyle(wDefault));
             popTable.attachToActor(dividerImage, Align.center, Align.center);
@@ -601,7 +606,8 @@ public class BattleScreen extends JamScreen {
                 tile.clearChildren();
                 tile.setBackground(skin.getDrawable("character-box-empty-10"));
                 enemyTeam.removeValue(tileCharacter, true);
-                GameData.removeCharacterFromOrder(turn,tileCharacter);
+                playerTeam.removeValue(tileCharacter, true);
+                GameData.removeCharacterFromOrder(turn, tileCharacter);
             }
         }
         

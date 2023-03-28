@@ -97,12 +97,18 @@ public class GameData {
     }
     
     public static void removeCharacterFromOrder(int turn, CharacterData removeCharacter) {
-        for (int i = turn; i < characterOrder.size; i++) {
+        System.out.println(removeCharacter.name);
+        for (int i = turn + 1; i < characterOrder.size; i++) {
             var character = characterOrder.get(i);
             if (removeCharacter == character) {
                 characterOrder.removeIndex(i);
                 i--;
             }
+        }
+        
+        for (int i = turn; i < characterOrder.size; i++) {
+            var character = characterOrder.get(i);
+            System.out.println("character.name = " + character.name);
         }
     }
     
