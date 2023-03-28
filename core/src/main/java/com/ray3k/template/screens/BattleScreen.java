@@ -378,7 +378,7 @@ public class BattleScreen extends JamScreen {
         var label = new Label(character.name + " is stunned!", lButton);
         popTable.add(label);
     
-        popTable.addAction(sequence(delay(2f), fadeOut(.5f), run(() -> {
+        popTable.addAction(sequence(delay(1.5f), fadeOut(.5f), run(() -> {
             popTable.hide();
             checkForDead(character);
             showTextEffectClear(tile, character);
@@ -555,7 +555,7 @@ public class BattleScreen extends JamScreen {
             var label = new Label(enemy.name + " is sleeping", lButton);
             popTable.add(label);
     
-            popTable.addAction(sequence(delay(2f), fadeOut(.5f), run(() -> {
+            popTable.addAction(sequence(delay(1.5f), fadeOut(.5f), run(() -> {
                 popTable.hide();
                 checkForDead(enemy);
             }), removeActor()));

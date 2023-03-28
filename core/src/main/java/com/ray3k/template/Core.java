@@ -803,7 +803,7 @@ public class Core extends JamGame {
         var url = "https://api.gamejolt.com/api/game/v1_2/batch?game_id=" + gameID + "&parallel=true";
         for (int column = 0; column < 50; column++) {
             String subUrl = "/data-store/";
-            String content = "?game_id=" + gameID + "&key=" + row + "-" + column;
+            String content = "?game_id=" + gameID + "&key=" + column + "-" + row;
             String signature = encrypt(subUrl + content + key);
             subUrl = subUrl + content + "&signature=" + signature;
             subUrl = "&" + "requests[]=" + urlEncode(subUrl);

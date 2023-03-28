@@ -6,17 +6,19 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.ray3k.template.*;
 import com.ray3k.template.data.*;
 
 import static com.ray3k.template.Core.*;
-import static com.ray3k.template.data.GameData.*;
 import static com.ray3k.template.Resources.SkinSkinStyles.*;
 import static com.ray3k.template.Resources.*;
+import static com.ray3k.template.data.GameData.*;
 
 public class MapScreen extends JamScreen {
     private Stage stage;
@@ -66,7 +68,7 @@ public class MapScreen extends JamScreen {
             
             if (nextRoom.hasEnemies) {
                 var label = new Label("DANGER", lLog);
-                label.setColor(Color.RED);
+                label.setColor(Color.FIREBRICK);
                 upRoomButton.add(label);
             } else if (nextRoom.upgrade || nextRoom.tag || nextRoom.hero != null) {
                 var label = new Label("LOOT", lLog);
@@ -123,7 +125,7 @@ public class MapScreen extends JamScreen {
     
             if (nextRoom.hasEnemies) {
                 var label = new Label("DANGER", lLog);
-                label.setColor(Color.RED);
+                label.setColor(Color.FIREBRICK);
                 leftRoomButton.add(label);
             } else if (nextRoom.upgrade || nextRoom.tag || nextRoom.hero != null) {
                 var label = new Label("LOOT", lLog);
@@ -175,7 +177,7 @@ public class MapScreen extends JamScreen {
     
         if (room.hasEnemies) {
             var label = new Label("DANGER", lLog);
-            label.setColor(Color.RED);
+            label.setColor(Color.FIREBRICK);
             thisRoomButton.add(label);
         } else if (room.upgrade || room.tag || room.hero != null) {
             var label = new Label("LOOT", lLog);
@@ -223,7 +225,7 @@ public class MapScreen extends JamScreen {
             rightRoomButton.setColor(nextRoom.marker);
             if (nextRoom.hasEnemies) {
                 label = new Label("DANGER", lLog);
-                label.setColor(Color.RED);
+                label.setColor(Color.FIREBRICK);
                 rightRoomButton.add(label);
             } else if (nextRoom.upgrade || nextRoom.tag || nextRoom.hero != null) {
                 label = new Label("LOOT", lLog);
@@ -280,7 +282,7 @@ public class MapScreen extends JamScreen {
             downRoomButton.setColor(nextRoom.marker);
             if (nextRoom.hasEnemies) {
                 label = new Label("DANGER", lLog);
-                label.setColor(Color.RED);
+                label.setColor(Color.FIREBRICK);
                 downRoomButton.add(label);
             } else if (nextRoom.upgrade || nextRoom.tag || nextRoom.hero != null) {
                 label = new Label("LOOT", lLog);
