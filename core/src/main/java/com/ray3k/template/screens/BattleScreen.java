@@ -774,9 +774,6 @@ public class BattleScreen extends JamScreen {
         if (character.damageMitigation >= 0) {
             var progressBar = (ProgressBar) ((Container) ((Stack) tile.getChild(0)).getChild(1)).getActor();
             progressBar.setStyle(pGear);
-            System.out.println(
-                    "character.health + character.damageMitigation = " + character.health + character.damageMitigation);
-            System.out.println("character.health = " + character.health);
             progressBar.setRange(0, character.healthMax + character.damageMitigation);
             progressBar.setValue(character.health + character.damageMitigation);
             
