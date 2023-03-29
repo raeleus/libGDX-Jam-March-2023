@@ -85,7 +85,7 @@ public class SkillData {
                 @Override
                 public void complete(TrackEntry entry) {
                     if (enemy != null) {
-                        int damage = MathUtils.floor(ad.value + (float) level / maxLevel * 20.f);
+                        int damage = MathUtils.round(ad.value + (float) level / maxLevel * ad.value);
                         enemy.health -= Math.max(damage + ad.character.extraDamage - enemy.damageMitigation, 0);
                         ad.battleScreen.showDamage(tile, enemy, MathUtils.floor(damage + ad.character.extraDamage));
                         ad.battleScreen.showTextEffectHurt(tile, enemy);
@@ -106,7 +106,7 @@ public class SkillData {
                 @Override
                 public void complete(TrackEntry entry) {
                     if (targetCharacter != null) {
-                        int heal = MathUtils.floor(ad.value + (float) level / maxLevel * 20.f);
+                        int heal = MathUtils.round(ad.value + (float) level / maxLevel * ad.value);
                         targetCharacter.health += heal;
                         if (targetCharacter.health > targetCharacter.healthMax) targetCharacter.health = ad.character.healthMax;
                         ad.battleScreen.showHeal(tile, targetCharacter, heal);
@@ -129,7 +129,7 @@ public class SkillData {
                 @Override
                 public void complete(TrackEntry entry) {
                     if (targetCharacter != null) {
-                        targetCharacter.extraDamageNextTurn += ad.value;
+                        targetCharacter.extraDamageNextTurn += MathUtils.round(ad.value + (float) level / maxLevel * ad.value);
                         ad.battleScreen.showBuff(tile, targetCharacter, 5);
                         ad.battleScreen.showTextEffectHeal(tile, targetCharacter);
                     }

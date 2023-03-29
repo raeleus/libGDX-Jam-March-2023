@@ -43,10 +43,10 @@ public class PreBattleScreen extends JamScreen {
     public void show() {
         super.show();
     
-        var numberOfEnemies = MathUtils.floor(MathUtils.clamp(difficulty / 4f + 1, 2, 6));
+        var numberOfEnemies = MathUtils.floor(MathUtils.clamp(difficulty / 4f + 1, 1, 6));
         enemyTeam.clear();
         
-        var newEnemyPositions = new IntArray(new int[]{0,1,2,3,4,5});
+        var newEnemyPositions = new IntArray(new int[]{0, 1, 2, 3, 4, 5});
         newEnemyPositions.shuffle();
         
         for (int i = 0; i < numberOfEnemies; i++) {
