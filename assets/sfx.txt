@@ -5,6 +5,9 @@ sfx/bullets.mp3
 sfx/burst-gun.mp3
 sfx/cat.mp3
 sfx/click.mp3
+sfx/creep.mp3
+sfx/crunch.mp3
+sfx/dark-magic.mp3
 sfx/dishes.mp3
 sfx/dodge.mp3
 sfx/dragon.mp3
@@ -13,7 +16,11 @@ sfx/energy gun shot.mp3
 sfx/frozen.mp3
 sfx/giggle.mp3
 sfx/grenade.mp3
+sfx/grunt.mp3
+sfx/hairball.mp3
+sfx/harp.mp3
 sfx/hmm.mp3
+sfx/howl.mp3
 sfx/hulk.mp3
 sfx/ice-cream.mp3
 sfx/kick.mp3
@@ -29,6 +36,7 @@ sfx/libgdx09.mp3
 sfx/libgdx10.mp3
 sfx/libgdx11.mp3
 sfx/light beam.mp3
+sfx/magic.mp3
 sfx/multiplying.mp3
 sfx/power punch.mp3
 sfx/punch.mp3
@@ -50,6 +58,8 @@ sfx/sticky.mp3
 sfx/sword-clink.mp3
 sfx/sword-draw.mp3
 sfx/tetris.mp3
+sfx/thrash.mp3
 sfx/thunder.mp3
+sfx/trot.mp3
 sfx/twang.mp3
 sfx/yawn.mp3

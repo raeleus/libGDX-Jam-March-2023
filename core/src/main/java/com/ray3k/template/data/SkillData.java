@@ -413,6 +413,7 @@ public class SkillData {
                 normalExtraDamageBuff(ad);
                 break;
             case "stalk":
+                sfx_creep.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
@@ -446,6 +447,7 @@ public class SkillData {
                 }
                 break;
             case "hairball":
+                sfx_hairball.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
@@ -515,7 +517,7 @@ public class SkillData {
                 normalExtraDamageBuff(ad);
                 break;
             case "pistachio"://player tested
-                ad.sound = null;
+                ad.sound = sfx_crunch;
                 ad.skeletonData = SpineStrikeGreen.skeletonData;
                 ad.animationStateData = SpineStrikeGreen.animationData;
                 ad.animation = SpineStrikeGreen.animationAnimation;
@@ -742,7 +744,7 @@ public class SkillData {
             case "grapple"://player tested
                 skillRunnable = runnable;
                 
-                ad.sound = null;
+                ad.sound = sfx_thrash;
                 ad.skeletonData = SpineInfinityBrown.skeletonData;
                 ad.animationStateData = SpineInfinityBrown.animationData;
                 ad.animation = SpineInfinityBrown.animationAnimation;
@@ -784,6 +786,7 @@ public class SkillData {
                 normalAttack(ad);
                 break;
             case "finisher":
+                sfx_magic.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
@@ -891,7 +894,7 @@ public class SkillData {
                 normalAttack(ad);
                 break;
             case "lunge"://player tested
-                ad.sound = null;
+                ad.sound = sfx_grunt;
                 ad.skeletonData = SpineStrikeGray.skeletonData;
                 ad.animationStateData = SpineStrikeGray.animationData;
                 ad.animation = SpineStrikeGray.animationAnimation;
@@ -967,21 +970,21 @@ public class SkillData {
                 }
                 break;
             case "advance"://player tested
-                ad.sound = null;
+                ad.sound = sfx_creep;
                 ad.skeletonData = SpineSwipeUp.skeletonData;
                 ad.animationStateData = SpineSwipeUp.animationData;
                 ad.animation = SpineSwipeUp.animationAnimation;
                 normalMove(ad);
                 break;
             case "retreat"://player tested
-                ad.sound = null;
+                ad.sound = sfx_trot;
                 ad.skeletonData = SpineSwipeDown.skeletonData;
                 ad.animationStateData = SpineSwipeDown.animationData;
                 ad.animation = SpineSwipeDown.animationAnimation;
                 normalMove(ad);
                 break;
             case "pirouette"://player tested
-                ad.sound = null;
+                ad.sound = sfx_harp;
                 ad.skeletonData = SpineBlastGray.skeletonData;
                 ad.animationStateData = SpineBlastGray.animationData;
                 ad.animation = SpineBlastGray.animationAnimation;
@@ -1121,7 +1124,7 @@ public class SkillData {
                 }
                 break;
             case "pistol-whip"://player tested
-                ad.sound = null;
+                ad.sound = sfx_grunt;
                 ad.skeletonData = SpineStrike.skeletonData;
                 ad.animationStateData = SpineStrike.animationData;
                 ad.animation = SpineStrike.animationAnimation;
@@ -1161,6 +1164,7 @@ public class SkillData {
                 normalAttack(ad);
                 break;
             case "siphon filter":
+                sfx_magic.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
@@ -1194,6 +1198,7 @@ public class SkillData {
                 }
                 break;
             case "contort":
+                sfx_magic.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
@@ -1228,6 +1233,7 @@ public class SkillData {
                 }
                 break;
             case "blaspheme":
+                sfx_magic.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
@@ -1277,7 +1283,7 @@ public class SkillData {
                 normalAttack(ad);
                 break;
             case "fly"://player tested
-                ad.sound = null;
+                ad.sound = sfx_harp;
                 ad.skeletonData = SpineSwipeUp.skeletonData;
                 ad.animationStateData = SpineSwipeUp.animationData;
                 ad.animation = SpineSwipeUp.animationAnimation;
@@ -1308,13 +1314,14 @@ public class SkillData {
                 normalAttack(ad);
                 break;
             case "flash":
-                ad.sound = null;
+                ad.sound = sfx_harp;
                 ad.skeletonData = SpineExplosionWhite.skeletonData;
                 ad.animationStateData = SpineExplosionWhite.animationData;
                 ad.animation = SpineExplosionWhite.animationAnimation;
                 normalStun(ad);
                 break;
             case "flutter":
+                sfx_harp.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
@@ -1630,6 +1637,7 @@ public class SkillData {
                 }
                 break;
             case "speed up":
+                sfx_harp.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
@@ -1772,38 +1780,13 @@ public class SkillData {
                     });
                 }
                 break;
-            case "gadget crisps":
-                for (var tile : targetTiles) {
-                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastOrange.skeletonData, SpineBlastOrange.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpineBlastOrange.animationAnimation, false);
-                    spineDrawable.setCrop(-10, -10, 20, 20);
-                    battleScreen.spineDrawables.add(spineDrawable);
-            
-                    Image image = new Image(spineDrawable);
-                    image.setTouchable(Touchable.disabled);
-                    stage.addActor(image);
-            
-                    temp.set(76, 51);
-                    tile.localToStageCoordinates(temp);
-                    image.setPosition(temp.x, temp.y, Align.center);
-    
-                    var targetCharacter = (CharacterData) tile.getUserObject();
-                    spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
-                        @Override
-                        public void complete(TrackEntry entry) {
-                            image.remove();
-                            battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (targetCharacter != null) {
-                                int heal = MathUtils.floor(25 + (float) level / maxLevel * 20.f);
-                                targetCharacter.health += heal;
-                                if (targetCharacter.health > targetCharacter.healthMax) targetCharacter.health = character.healthMax;
-                                battleScreen.showHeal(tile, targetCharacter, heal);
-                                battleScreen.showTextEffectHeal(tile, targetCharacter);
-                            }
-                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
-                        }
-                    });
-                }
+            case "gadget crisps"://player tested
+                ad.sound = sfx_crunch;
+                ad.skeletonData = SpineBlastOrange.skeletonData;
+                ad.animationStateData = SpineBlastOrange.animationData;
+                ad.animation = SpineBlastOrange.animationAnimation;
+                ad.value = 25;
+                normalHeal(ad);
                 break;
             case "sticky tape"://player tested
                 ad.sound = sfx_sticky;
@@ -1813,6 +1796,7 @@ public class SkillData {
                 normalStun(ad);
                 break;
             case "scanner":
+                sfx_beep.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
@@ -1845,7 +1829,7 @@ public class SkillData {
                 }
                 break;
             case "hack"://player tested
-                ad.sound = null;
+                ad.sound = sfx_beep;
                 ad.skeletonData = SpinePortalGreen.skeletonData;
                 ad.animationStateData = SpinePortalGreen.animationData;
                 ad.animation = SpinePortalGreen.animationAnimation;
@@ -1853,6 +1837,7 @@ public class SkillData {
                 normalAttack(ad);
                 break;
             case "nerf":
+                sfx_darkMagic.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
@@ -1919,6 +1904,7 @@ public class SkillData {
                 }
                 break;
             case "crypto":
+                sfx_darkMagic.play(sfx);
                 for (var tile : targetTiles) {
                     var spineDrawable = new SpineDrawable(skeletonRenderer, SpineHealth.skeletonData, SpineHealth.animationData);
                     spineDrawable.getAnimationState().setAnimation(0, SpineHealth.animationAnimation, false);
@@ -1952,6 +1938,7 @@ public class SkillData {
                 }
                 break;
             case "fanboy":
+                sfx_harp.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
@@ -2079,6 +2066,7 @@ public class SkillData {
                 normalAttack(ad);
                 break;
             case "compute":
+                sfx_darkMagic.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
@@ -2111,6 +2099,7 @@ public class SkillData {
                 }
                 break;
             case "fuel up":
+                sfx_magic.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
@@ -2143,6 +2132,7 @@ public class SkillData {
                 }
                 break;
             case "acceleron":
+                sfx_harp.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
@@ -2217,6 +2207,7 @@ public class SkillData {
                 }
                 break;
             case "gear":
+                sfx_magic.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
@@ -2373,7 +2364,7 @@ public class SkillData {
                 }
                 break;
             case "tombstone smack"://player tested
-                ad.sound = null;
+                ad.sound = sfx_grunt;
                 ad.skeletonData = SpineStrikeWhite.skeletonData;
                 ad.animationStateData = SpineStrikeWhite.animationData;
                 ad.animation = SpineStrikeWhite.animationAnimation;
@@ -2684,6 +2675,7 @@ public class SkillData {
                 }
                 break;
             case "squeeze":
+                sfx_darkMagic.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
@@ -2752,6 +2744,7 @@ public class SkillData {
                 }
                 break;
             case "absorb":
+                sfx_darkMagic.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
@@ -2875,7 +2868,7 @@ public class SkillData {
                 normalAttack(ad);
                 break;
             case "crocodile roll":
-                ad.sound = null;
+                ad.sound = sfx_thrash;
                 ad.skeletonData = SpinePortalGreen.skeletonData;
                 ad.animationStateData = SpinePortalGreen.animationData;
                 ad.animation = SpinePortalGreen.animationAnimation;
@@ -2897,6 +2890,7 @@ public class SkillData {
                 normalStun(ad);
                 break;
             case "thrash":
+                sfx_thrash.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
@@ -2963,14 +2957,14 @@ public class SkillData {
                 }
                 break;
             case "belly crawl"://player tested
-                ad.sound = null;
+                ad.sound = sfx_creep;
                 ad.skeletonData = SpineSwipeUp.skeletonData;
                 ad.animationStateData = SpineSwipeUp.animationData;
                 ad.animation = SpineSwipeUp.animationAnimation;
                 normalMove(ad);
                 break;
             case "shield throw"://player tested
-                ad.sound = null;
+                ad.sound = sfx_grunt;
                 ad.skeletonData = SpineShieldRed.skeletonData;
                 ad.animationStateData = SpineShieldRed.animationData;
                 ad.animation = SpineShieldRed.animationAnimation;
@@ -3170,6 +3164,7 @@ public class SkillData {
                 }
                 break;
             case "merge":
+                sfx_darkMagic.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
@@ -3284,7 +3279,7 @@ public class SkillData {
                 }
                 break;
             case "regenerate"://player tested
-                ad.sound = null;
+                ad.sound = sfx_harp;
                 ad.skeletonData = SpineHealth.skeletonData;
                 ad.animationStateData = SpineHealth.animationData;
                 ad.animation = SpineHealth.animationAnimation;
@@ -3300,6 +3295,7 @@ public class SkillData {
                 normalAttack(ad);
                 break;
             case "yip":
+                sfx_howl.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
@@ -3367,6 +3363,7 @@ public class SkillData {
                 }
                 break;
             case "howl":
+                sfx_howl.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
@@ -3402,7 +3399,7 @@ public class SkillData {
             case "trot"://player tested
                 skillRunnable = ad.runnable;
                 
-                ad.sound = null;
+                ad.sound = sfx_trot;
                 ad.skeletonData = SpineSwipeLeft.skeletonData;
                 ad.animationStateData = SpineSwipeLeft.animationData;
                 ad.animation = SpineSwipeLeft.animationAnimation;
@@ -3421,6 +3418,7 @@ public class SkillData {
                 normalMove(ad);
                 break;
             case "dance":
+                sfx_harp.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
@@ -3519,6 +3517,7 @@ public class SkillData {
                 normalAttack(ad);
                 break;
             case "heat vision":
+                sfx_darkMagic.play(sfx);
                 for (var tile : targetTiles) {
                     var enemy = (CharacterData) tile.getUserObject();
             
@@ -3552,7 +3551,7 @@ public class SkillData {
                 }
                 break;
             case "poke":
-                ad.sound = null;
+                ad.sound = sfx_grunt;
                 ad.skeletonData = SpineBlastGray.skeletonData;
                 ad.animationStateData = SpineBlastGray.animationData;
                 ad.animation = SpineBlastGray.animationAnimation;

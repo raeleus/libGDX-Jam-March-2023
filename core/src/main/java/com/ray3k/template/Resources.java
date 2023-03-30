@@ -40,6 +40,12 @@ public class Resources {
 
     public static Sound sfx_click;
 
+    public static Sound sfx_creep;
+
+    public static Sound sfx_crunch;
+
+    public static Sound sfx_darkMagic;
+
     public static Sound sfx_dishes;
 
     public static Sound sfx_dodge;
@@ -56,7 +62,15 @@ public class Resources {
 
     public static Sound sfx_grenade;
 
+    public static Sound sfx_grunt;
+
+    public static Sound sfx_hairball;
+
+    public static Sound sfx_harp;
+
     public static Sound sfx_hmm;
+
+    public static Sound sfx_howl;
 
     public static Sound sfx_hulk;
 
@@ -87,6 +101,8 @@ public class Resources {
     public static Sound sfx_libgdx11;
 
     public static Sound sfx_lightBeam;
+
+    public static Sound sfx_magic;
 
     public static Sound sfx_multiplying;
 
@@ -130,7 +146,11 @@ public class Resources {
 
     public static Sound sfx_tetris;
 
+    public static Sound sfx_thrash;
+
     public static Sound sfx_thunder;
+
+    public static Sound sfx_trot;
 
     public static Sound sfx_twang;
 
@@ -904,6 +924,9 @@ public class Resources {
         sfx_burstGun = assetManager.get("sfx/burst-gun.mp3");
         sfx_cat = assetManager.get("sfx/cat.mp3");
         sfx_click = assetManager.get("sfx/click.mp3");
+        sfx_creep = assetManager.get("sfx/creep.mp3");
+        sfx_crunch = assetManager.get("sfx/crunch.mp3");
+        sfx_darkMagic = assetManager.get("sfx/dark-magic.mp3");
         sfx_dishes = assetManager.get("sfx/dishes.mp3");
         sfx_dodge = assetManager.get("sfx/dodge.mp3");
         sfx_dragon = assetManager.get("sfx/dragon.mp3");
@@ -912,7 +935,11 @@ public class Resources {
         sfx_frozen = assetManager.get("sfx/frozen.mp3");
         sfx_giggle = assetManager.get("sfx/giggle.mp3");
         sfx_grenade = assetManager.get("sfx/grenade.mp3");
+        sfx_grunt = assetManager.get("sfx/grunt.mp3");
+        sfx_hairball = assetManager.get("sfx/hairball.mp3");
+        sfx_harp = assetManager.get("sfx/harp.mp3");
         sfx_hmm = assetManager.get("sfx/hmm.mp3");
+        sfx_howl = assetManager.get("sfx/howl.mp3");
         sfx_hulk = assetManager.get("sfx/hulk.mp3");
         sfx_iceCream = assetManager.get("sfx/ice-cream.mp3");
         sfx_kick = assetManager.get("sfx/kick.mp3");
@@ -928,6 +955,7 @@ public class Resources {
         sfx_libgdx10 = assetManager.get("sfx/libgdx10.mp3");
         sfx_libgdx11 = assetManager.get("sfx/libgdx11.mp3");
         sfx_lightBeam = assetManager.get("sfx/light beam.mp3");
+        sfx_magic = assetManager.get("sfx/magic.mp3");
         sfx_multiplying = assetManager.get("sfx/multiplying.mp3");
         sfx_powerPunch = assetManager.get("sfx/power punch.mp3");
         sfx_punch = assetManager.get("sfx/punch.mp3");
@@ -949,7 +977,9 @@ public class Resources {
         sfx_swordClink = assetManager.get("sfx/sword-clink.mp3");
         sfx_swordDraw = assetManager.get("sfx/sword-draw.mp3");
         sfx_tetris = assetManager.get("sfx/tetris.mp3");
+        sfx_thrash = assetManager.get("sfx/thrash.mp3");
         sfx_thunder = assetManager.get("sfx/thunder.mp3");
+        sfx_trot = assetManager.get("sfx/trot.mp3");
         sfx_twang = assetManager.get("sfx/twang.mp3");
         sfx_yawn = assetManager.get("sfx/yawn.mp3");
         bgm_audioSample = assetManager.get("bgm/audio-sample.mp3");
