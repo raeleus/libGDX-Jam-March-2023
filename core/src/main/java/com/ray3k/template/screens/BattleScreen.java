@@ -342,33 +342,14 @@ public class BattleScreen extends JamScreen {
             var character = characterOrder.get(turn);
             character.damageMitigation = 0;
             character.extraDamage = character.extraDamageNextTurn;
+            var tile = findTile(character);
+            updateProgressBars(tile);
             
             if (character.stunned) {
-                for (var tile : playerTiles) {
-                    if (tile.getUserObject() == character) {
-                        conductStunnedTurn(character, tile);
-                        break;
-                    }
-                }
-                for (var tile : enemyTiles) {
-                    if (tile.getUserObject() == character) {
-                        conductStunnedTurn(character, tile);
-                        break;
-                    }
-                }
+                conductStunnedTurn(character, tile);
             } else {
-                for (var tile : playerTiles) {
-                    if (tile.getUserObject() == character) {
-                        conductPlayerTurn(character, tile);
-                    }
-                }
-    
-                for (int i = 0; i < enemyTiles.size; i++) {
-                    var tile = enemyTiles.get(i);
-                    if (tile.getUserObject() == character) {
-                        conductEnemyTurn(character, tile);
-                    }
-                }
+                if (playerTeam.contains(character, true)) conductPlayerTurn(character, tile);
+                else conductEnemyTurn(character, tile);
             }
         }
     }
@@ -693,6 +674,19 @@ public class BattleScreen extends JamScreen {
         label.addAction(sequence(parallel(moveBy(0, 50, 1.0f, Interpolation.sineOut), fadeOut(1.0f)), removeActor()));
     
         updateProgressBars(tile);
+    }
+    
+    public void showStun(Table tile) {
+        var label = new Label("STUN", lNamesake);
+        label.setColor(Color.ORANGE);
+        stage.addActor(label);
+        label.pack();
+        
+        temp.set(tile.getWidth() / 2, tile.getHeight() / 2);
+        tile.localToStageCoordinates(temp);
+        label.setPosition(temp.x, temp.y, Align.center);
+        
+        label.addAction(sequence(parallel(moveBy(0, 50, 1.0f, Interpolation.sineOut), fadeOut(1.0f)), removeActor()));
     }
     
     public void showBuff(Table tile, CharacterData enemy, int damage) {
