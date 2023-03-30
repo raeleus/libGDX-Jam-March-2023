@@ -342,6 +342,7 @@ public class BattleScreen extends JamScreen {
             var character = characterOrder.get(turn);
             character.damageMitigation = 0;
             character.extraDamage = character.extraDamageNextTurn;
+            character.extraDamageNextTurn = 0;
             var tile = findTile(character);
             updateProgressBars(tile);
             
@@ -659,6 +660,10 @@ public class BattleScreen extends JamScreen {
             if (tile.getUserObject() == character) return i;
         }
         return -1;
+    }
+    
+    public Array<Table> getTeamTiles(CharacterData character) {
+        return enemyTeam.contains(character, true) ? enemyTiles : playerTiles;
     }
     
     public void showDamage(Table tile, CharacterData enemy, int damage) {

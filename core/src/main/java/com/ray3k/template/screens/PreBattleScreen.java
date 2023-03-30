@@ -60,6 +60,12 @@ public class PreBattleScreen extends JamScreen {
             }
             enemyTeam.add(enemy);
         }
+        
+        for (var hero : playerTeam) {
+            for (var skill : hero.skills) {
+                if (skill.regenerateUses) skill.uses = skill.usesMax;
+            }
+        }
     
         final Music music = bgm_game;
         if (!music.isPlaying()) {

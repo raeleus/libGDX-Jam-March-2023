@@ -886,7 +886,7 @@ public class Core extends JamGame {
             skill.description = skillDescriptions[i];
             skill.usesMax = Integer.parseInt(skillUses[i].trim());
             skill.uses = skill.usesMax;
-            skill.regenerateUses = Boolean.parseBoolean(skillRegenerateUses[i]);
+            skill.regenerateUses = Boolean.parseBoolean(skillRegenerateUses[i].trim());
             skillTemplates.add(skill);
         }
         

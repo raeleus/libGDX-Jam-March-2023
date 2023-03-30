@@ -312,11 +312,15 @@ public class Selector {
         var rangeMin = characterPosition < 3 ? 0 : 3;
         var rangeMax = characterPosition < 3 ? 3 : 6;
         
-        tile = tiles.get(characterPosition - 1);
-        if (characterPosition >= rangeMin && tile.getUserObject() == null) returnValue.add(tile);
+        if (characterPosition - 1 >= rangeMin) {
+            tile = tiles.get(characterPosition - 1);
+            if (tile.getUserObject() == null) returnValue.add(tile);
+        }
         
-        tile = tiles.get(characterPosition + 1);
-        if (characterPosition < rangeMax && tile.getUserObject() == null) returnValue.add(tile);
+        if (characterPosition + 1 < rangeMax && tile.getUserObject() == null) {
+            tile = tiles.get(characterPosition + 1);
+            if (tile.getUserObject() == null) returnValue.add(tile);
+        }
         return returnValue;
     }
     

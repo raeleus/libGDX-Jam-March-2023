@@ -138,8 +138,8 @@ public class NameScreen extends JamScreen {
                 var hero = new CharacterData();
                 hero.name = name;
                 hero.addTag(tag, true);
-                hero.addSkill("grapple");
-                hero.addSkill("slime slap");
+//                hero.addSkill("snuggle");
+//                hero.addSkill("fly");
                 hero.description = description;
                 playerTeam.add(hero);
                 
