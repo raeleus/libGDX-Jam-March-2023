@@ -62,6 +62,16 @@ public class PreBattleScreen extends JamScreen {
         }
         
         for (var hero : playerTeam) {
+            hero.stunEnemyOnNextHit = false;
+            hero.stunned = false;
+            hero.extraDamageIfNotHurt = 0;
+            hero.extraDamageNextTurn = 0;
+            hero.extraDamage = 0;;
+            hero.damageMitigation = 0;
+            hero.blockNextAttack = false;
+            hero.counterNextAttack = 0;
+            hero.delayedDamage = 0;
+            
             for (var skill : hero.skills) {
                 if (skill.regenerateUses) skill.uses = skill.usesMax;
             }

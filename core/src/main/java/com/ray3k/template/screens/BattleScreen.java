@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -343,7 +344,23 @@ public class BattleScreen extends JamScreen {
             character.damageMitigation = 0;
             character.extraDamage = character.extraDamageNextTurn;
             character.extraDamageNextTurn = 0;
+            character.extraDamage += character.extraDamageIfNotHurt;
+            character.extraDamageIfNotHurt = 0;
             var tile = findTile(character);
+            updateProgressBars(tile);
+            
+            if (character.delayedDamage > 0) {
+                int damage = MathUtils.round(character.delayedDamage);
+                character.health -= Math.max(damage - character.damageMitigation, 0);
+                if (character.damageMitigation > 0)
+                    character.damageMitigation -= Math.max(damage, 0);
+                character.extraDamageIfNotHurt = 0;
+                
+                showDamage(tile, character, MathUtils.floor(damage));
+                showTextEffectHurt(tile, character);
+                character.delayedDamage = 0;
+            }
+            
             updateProgressBars(tile);
             
             if (character.stunned) {
@@ -391,57 +408,64 @@ public class BattleScreen extends JamScreen {
         popTable.add(table);
         
         table.defaults().space(10);
-        for (var skill : hero.skills) {
-            var textButton = new TextButton(skill.name, skin);
-            textButton.setDisabled(skill.usesMax != -1 && skill.uses <= 0);
-            table.add(textButton);
-
-            if (skill.usesMax > 0) {
-                textButton.row();
-                var progressBar = new ProgressBar(0, skill.usesMax, 1, false,
-                        skill.regenerateUses ? pMagic : pGear);
-                progressBar.setValue(skill.uses);
-                textButton.add(progressBar).growX().space(2);
-            }
-
-            textButton.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    sfx_click.play(sfx);
-                    popTable.hide();
-                    stage.addAction(sequence(delay(.2f), run(() -> {
-                        playerSelectTarget(hero, skill, cell);
-                    })));
+        if (hero.skills.size > 0) {
+            for (var skill : hero.skills) {
+                var textButton = new TextButton(skill.name, skin);
+                textButton.setDisabled(skill.usesMax != -1 && skill.uses <= 0);
+                table.add(textButton);
+                
+                if (skill.usesMax > 0) {
+                    textButton.row();
+                    var progressBar = new ProgressBar(0, skill.usesMax, 1, false,
+                            skill.regenerateUses ? pMagic : pGear);
+                    progressBar.setValue(skill.uses);
+                    textButton.add(progressBar).growX().space(2);
                 }
+                
+                textButton.addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+                        sfx_click.play(sfx);
+                        popTable.hide();
+                        stage.addAction(sequence(delay(.2f), run(() -> {
+                            playerSelectTarget(hero, skill, cell);
+                        })));
+                    }
+                });
+                
+                var hoverListener = new PopTableHoverListener(Align.top, Align.top, new PopTableStyle(wPointerDown));
+                textButton.addListener(hoverListener);
+                var skillPop = hoverListener.getPopTable();
+                label = new Label(skill.description, lLog);
+                label.setWrap(true);
+                label.setAlignment(Align.center);
+                skillPop.add(label).growX().width(200);
+            }
+            
+            popTable.row();
+            var textButton = new TextButton("Sleep", skin);
+            popTable.add(textButton);
+            onChange(textButton, () -> {
+                sfx_click.play(sfx);
+                popTable.hide();
+                stage.addAction(sequence(delay(.5f), run(() -> {
+                    finishTurn(hero);
+                })));
             });
-
+            
             var hoverListener = new PopTableHoverListener(Align.top, Align.top, new PopTableStyle(wPointerDown));
             textButton.addListener(hoverListener);
             var skillPop = hoverListener.getPopTable();
-            label = new Label(skill.description, lLog);
+            label = new Label("Pass turn and wait.", lLog);
             label.setWrap(true);
             label.setAlignment(Align.center);
             skillPop.add(label).growX().width(200);
-        }
-        
-        popTable.row();
-        var textButton = new TextButton("Sleep", skin);
-        popTable.add(textButton);
-        onChange(textButton, () -> {
-            sfx_click.play(sfx);
-            popTable.hide();
-            stage.addAction(sequence(delay(.5f), run(() -> {
+        } else {
+            label.setText(hero.name + " is too dumb to do anything.");
+            popTable.addAction(sequence(delay(1.0f), fadeOut(.5f), run(() -> {
                 finishTurn(hero);
             })));
-        });
-    
-        var hoverListener = new PopTableHoverListener(Align.top, Align.top, new PopTableStyle(wPointerDown));
-        textButton.addListener(hoverListener);
-        var skillPop = hoverListener.getPopTable();
-        label = new Label("Pass turn and wait.", lLog);
-        label.setWrap(true);
-        label.setAlignment(Align.center);
-        skillPop.add(label).growX().width(200);
+        }
         
         popTable.show(stage);
     }
@@ -526,48 +550,67 @@ public class BattleScreen extends JamScreen {
         Array<SkillData> skillPool = new Array<>(enemy.skills);
         skillPool.shuffle();
         
-        var skillTemp = skillPool.pop();
-        var selectableTilesTemp = skillTemp.collectAvailableTiles(this, false, enemy.position);
-        
-        while (selectableTilesTemp.size == 0 && skillPool.size > 0) {
-            skillTemp = skillPool.pop();
-            selectableTilesTemp = skillTemp.collectAvailableTiles(this, false, enemy.position);
-        }
-        
-        if (selectableTilesTemp.size == 0) {
-            popTable.setColor(Color.WHITE);
-            popTable.clear();
-            popTable.setStyle(new PopTableStyle(wDefault));
-            popTable.attachToActor(dividerImage, Align.center, Align.center);
-    
-            popTable.defaults().space(10);
-            var label = new Label(enemy.name + " is sleeping", lButton);
-            popTable.add(label);
-    
-            popTable.addAction(sequence(delay(1.5f), fadeOut(.5f), run(() -> {
-                popTable.hide();
-                checkForDead(enemy);
-            }), removeActor()));
-    
-            popTable.show(stage);
+        if (skillPool.size > 0) {
+            var skillTemp = skillPool.pop();
+            var selectableTilesTemp = skillTemp.collectAvailableTiles(this, false, enemy.position);
+            
+            while (selectableTilesTemp.size == 0 && skillPool.size > 0) {
+                skillTemp = skillPool.pop();
+                selectableTilesTemp = skillTemp.collectAvailableTiles(this, false, enemy.position);
+            }
+            
+            if (selectableTilesTemp.size == 0) {
+                popTable.setColor(Color.WHITE);
+                popTable.clear();
+                popTable.setStyle(new PopTableStyle(wDefault));
+                popTable.attachToActor(dividerImage, Align.center, Align.center);
+                
+                popTable.defaults().space(10);
+                var label = new Label(enemy.name + " is sleeping", lButton);
+                popTable.add(label);
+                
+                popTable.addAction(sequence(delay(1.5f), fadeOut(.5f), run(() -> {
+                    popTable.hide();
+                    checkForDead(enemy);
+                }), removeActor()));
+                
+                popTable.show(stage);
+            } else {
+                popTable.setColor(Color.WHITE);
+                popTable.clear();
+                popTable.setStyle(new PopTableStyle(wDefault));
+                popTable.attachToActor(dividerImage, Align.center, Align.center);
+                
+                popTable.defaults().space(10);
+                var label = new Label(enemy.name + " casts " + skillTemp.name, lButton);
+                popTable.add(label);
+                
+                final var skill = skillTemp;
+                final var selectableTiles = selectableTilesTemp;
+                popTable.addAction(sequence(delay(2f), fadeOut(.5f), run(() -> {
+                    popTable.hide();
+                    var tile = selectableTiles.random();
+                    conductSkill(enemy, skill, playerTiles.contains(tile, true) ? playerTiles : enemyTiles, tile,
+                            false);
+                }), removeActor()));
+                
+                popTable.show(stage);
+            }
         } else {
             popTable.setColor(Color.WHITE);
             popTable.clear();
             popTable.setStyle(new PopTableStyle(wDefault));
             popTable.attachToActor(dividerImage, Align.center, Align.center);
-    
+            
             popTable.defaults().space(10);
-            var label = new Label(enemy.name + " casts " + skillTemp.name, lButton);
+            var label = new Label(enemy.name + " is sleeping", lButton);
             popTable.add(label);
-    
-            final var skill = skillTemp;
-            final var selectableTiles = selectableTilesTemp;
-            popTable.addAction(sequence(delay(2f), fadeOut(.5f), run(() -> {
+            
+            popTable.addAction(sequence(delay(1.5f), fadeOut(.5f), run(() -> {
                 popTable.hide();
-                var tile = selectableTiles.random();
-                conductSkill(enemy, skill, playerTiles.contains(tile, true) ? playerTiles : enemyTiles, tile, false);
+                checkForDead(enemy);
             }), removeActor()));
-    
+            
             popTable.show(stage);
         }
     }
@@ -611,7 +654,12 @@ public class BattleScreen extends JamScreen {
     public void finishTurn(CharacterData character) {
         character.extraDamage = 0;
         
-        if (playerTeam.size == 0) {
+        var playerTeamSize = playerTeam.size;
+        for (var hero : playerTeam) {
+            if (hero.killOnBattleCompletion) playerTeamSize--;
+        }
+        
+        if (playerTeamSize <= 0) {
             music.stop();
             core.transition(new GameOverScreen());
         } else if (enemyTeam.size == 0) {
@@ -619,6 +667,13 @@ public class BattleScreen extends JamScreen {
             var room = GameData.getRoom();
             room.hasEnemies = false;
             difficulty++;
+            
+            var iter = playerTeam.iterator();
+            while (iter.hasNext()) {
+                var hero = iter.next();
+                if (hero.killOnBattleCompletion) iter.remove();
+            }
+            
             core.transition(new RoomScreen());
         }
         
@@ -694,6 +749,84 @@ public class BattleScreen extends JamScreen {
         label.addAction(sequence(parallel(moveBy(0, 50, 1.0f, Interpolation.sineOut), fadeOut(1.0f)), removeActor()));
     }
     
+    public void showCold(Table tile) {
+        var label = new Label("ICE COLD", lNamesake);
+        label.setColor(Color.BLUE);
+        stage.addActor(label);
+        label.pack();
+        
+        temp.set(tile.getWidth() / 2, tile.getHeight() / 2);
+        tile.localToStageCoordinates(temp);
+        label.setPosition(temp.x, temp.y, Align.center);
+        
+        label.addAction(sequence(parallel(moveBy(0, 50, 1.0f, Interpolation.sineOut), fadeOut(1.0f)), removeActor()));
+    }
+    
+    public void showBlocked(Table tile) {
+        var label = new Label("BLOCKED", lNamesake);
+        label.setColor(Color.BLUE);
+        stage.addActor(label);
+        label.pack();
+        
+        temp.set(tile.getWidth() / 2, tile.getHeight() / 2);
+        tile.localToStageCoordinates(temp);
+        label.setPosition(temp.x, temp.y, Align.center);
+        
+        label.addAction(sequence(parallel(moveBy(0, 50, 1.0f, Interpolation.sineOut), fadeOut(1.0f)), removeActor()));
+    }
+    
+    public void showBlocking(Table tile) {
+        var label = new Label("BLOCKING", lNamesake);
+        label.setColor(Color.BLUE);
+        stage.addActor(label);
+        label.pack();
+        
+        temp.set(tile.getWidth() / 2, tile.getHeight() / 2);
+        tile.localToStageCoordinates(temp);
+        label.setPosition(temp.x, temp.y, Align.center);
+        
+        label.addAction(sequence(parallel(moveBy(0, 50, 1.0f, Interpolation.sineOut), fadeOut(1.0f)), removeActor()));
+    }
+    
+    public void showCounterNextAttack(Table tile) {
+        var label = new Label("COUNTER ATTACK", lNamesake);
+        label.setColor(Color.BLUE);
+        stage.addActor(label);
+        label.pack();
+        
+        temp.set(tile.getWidth() / 2, tile.getHeight() / 2);
+        tile.localToStageCoordinates(temp);
+        label.setPosition(temp.x, temp.y, Align.center);
+        
+        label.addAction(sequence(parallel(moveBy(0, 50, 1.0f, Interpolation.sineOut), fadeOut(1.0f)), removeActor()));
+    }
+    
+    public void showDelayedDamage(Table tile, int value) {
+        var label = new Label("DELAYED DAMAGE: -" + value, lNamesake);
+        label.setColor(Color.RED);
+        stage.addActor(label);
+        label.pack();
+        
+        temp.set(tile.getWidth() / 2, tile.getHeight() / 2);
+        tile.localToStageCoordinates(temp);
+        label.setPosition(temp.x, temp.y, Align.center);
+        
+        label.addAction(sequence(parallel(moveBy(0, 50, 1.0f, Interpolation.sineOut), fadeOut(1.0f)), removeActor()));
+    }
+    
+    public void showRestoreMagic(Table tile) {
+        var label = new Label("GROOVY", lNamesake);
+        label.setColor(Color.RED);
+        stage.addActor(label);
+        label.pack();
+        
+        temp.set(tile.getWidth() / 2, tile.getHeight() / 2);
+        tile.localToStageCoordinates(temp);
+        label.setPosition(temp.x, temp.y, Align.center);
+        
+        label.addAction(sequence(parallel(moveBy(0, 50, 1.0f, Interpolation.sineOut), fadeOut(1.0f)), removeActor()));
+    }
+    
     public void showBuff(Table tile, CharacterData enemy, int damage) {
         var label = new Label((damage > 0 ? "+" : "")  + damage, lNamesake);
         label.setColor(Color.YELLOW);
@@ -752,6 +885,7 @@ public class BattleScreen extends JamScreen {
         var label = (TypingLabel) ((Stack)tile.getChild(0)).getChild(0);
         
         if (enemy.stunned) label.setText("{SICK}[YELLOW]" + enemy.name);
+        else if (enemy.stunEnemyOnNextHit || enemy.stunEnemyOnHit) label.setText("{WIND}[CYAN]" + enemy.name);
         else label.setText(enemy.name);
     }
     

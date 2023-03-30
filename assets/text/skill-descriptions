@@ -11,7 +11,7 @@ Move to any free cell.
 Heal self. Character is stunned.
 Damage given and received is increased for a turn.
 Enemy has reduced damage for a turn.
-If character receives no damage by the next turn, do devastating damage to an enemy in melee range.
+If character receives no damage by the next turn, do extra damage next turn.
 Spawn a hairball that distracts enemies.
 Bite an enemy in melee range.
 Scoop damage to enemy in melee range.
@@ -28,7 +28,7 @@ Attack enemies in a column directly in front of the character.
 Ranged attack that stuns a character.
 Enemy that attacks this character next turn will be stunned.
 Slide to any unoccupied cell horizontally or vertically.
-Spawn an ice character that distracts enemies.
+Spawn an ice clone that distracts enemies. The enemy is stunned when it's attacked.
 Strong melee attack to enemy in a diagonal cell.
 Stuns an enemy in melee range. Character is stunned as well.
 Devastating combination of attacks to enemy directly in front of character.
@@ -37,7 +37,7 @@ Melee attack that stumbles an enemy to a side cell.
 Melee attack that pushes an enemy to the back row.
 Melee attack all enemies in the front row.
 Melee attack an enemy in melee range or in two cells directly ahead.
-Block the next attack. Can be stacked.
+Block the next attack.
 Counter-attack the next attack. Can be stacked.
 Move forward one cell.
 Move back one cell.
@@ -48,7 +48,7 @@ Counter-attack any enemies that damage allies.
 Devastating ranged attack to an enemy in the back row.
 Devastating attack to an enemy in the front row.
 Ranged attack. Damage is delayed by one turn.
-Explosive damage to enemy front row by next attack.
+Damage to enemy front row. Damage is delayed by one turn.
 Melee attack.
 Attack two enemies in front row.
 Ranged fire attack.
@@ -83,7 +83,7 @@ Speed is increased for the rest of the match. Can be stacked.
 Attack an enemy in melee range or in cell directly in back row.
 Drag an enemy from back to front row if the cell is empty.
 Character cannot be directly targeted next turn.
-Enemies take damage each turn while standing on this cell.
+Enemies take damage when attacking this character.
 Heal self.
 Enemy is stunned.
 Enemy weakness is found for increased damage.
@@ -154,7 +154,7 @@ All incoming attacks to the front row are reduced in damage.
 Any ranged attacks to the back row are reflected back to the enemy.
 Melee attack. Enemy moves to back cell. If back cell is occupied, double the damage.
 Smack an enemy in melee range with your appendage.
-Decrease health by half and create a duplicate of character.
+Decrease health and skill uses by half and create a duplicate of character.
 Ally is sacrificed. All health, tags, and skills are merged randomly.
 Ranged attack. Character is damaged.
 Ranged attack. Enemy is slower.
