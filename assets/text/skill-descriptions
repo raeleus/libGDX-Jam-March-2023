@@ -18,11 +18,11 @@ Scoop damage to enemy in melee range.
 Character does extra damage for a turn at the cost of some health.
 Throw a pistachio nut at an enemy.
 Serve yogurt to an ally. Ally receives reduced damage for a turn.
-Serve sherbet to an ally. The ally is faster for the rest of the match.
+Serve sherbet to an ally. The character does incredible damage for a turn, but gets sherbet poisoning.
 Serve a banana sundae to an ally. The ally does increased damage for a turn.
 Cover enemy in choco syrup. Enemy is stunned but receives reduced damage.
 Heal all allies.
-All allies do more damage but are slower for the rest of the match.
+All allies do more damage but suffer from ice cream poisoning.
 Ranged ice attack.
 Attack enemies in a column directly in front of the character.
 Ranged attack that stuns a character.
@@ -56,7 +56,7 @@ Ranged fire attack. Adjacent enemies also receive fire damage.
 Ranged lightning attack.
 Restore magic power by hurting an ally.
 Ranged attack that reduces enemy damage for a turn.
-Decrease speed of enemy for the rest of the match.
+Heal the enemy but make them vulnerable to attack.
 Ranged attack.
 Melee attack.
 Move to any unblocked cell.
@@ -64,22 +64,22 @@ Damage the two cells directly in front of the character.
 Melee attack to front row if there are no back row enemies.
 Melee attack to the back row if there are no front row enemies.
 Stun all enemies.
-Move to an adjacent cell to avoid an attack.
+Move to an adjacent cell and avoid the next attack.
 Tiny melee attack.
 Move to any adjacent cell.
 Spawn a new bunny.
 Ranged attack.
 Ranged attack. Enemy is poisoned.
-Incoming damage is negated for the next round.
-Any player or enemy action rewards a small heal to the character.
+Incoming damage is reduced for the next round.
+Small counter attack buff.
 Devastating bunny melee attack.
 Heal character and target ally.
 Melee attack.
 Melee attack. Hit twice if character is alone in row.
 Strong melee attack if there is an empty cell in front of character.
-Move to side cell to avoid an attack.
-Character cannot be directly targeted next turn.
-Speed is increased for the rest of the match. Can be stacked.
+Move to an adjacent cell to avoid an attack.
+Receive a little damage to stun attackers.
+Damage is increased at the cost of receiving more damage
 Attack an enemy in melee range or in cell directly in back row.
 Drag an enemy from back to front row if the cell is empty.
 Character cannot be directly targeted next turn.
@@ -118,7 +118,7 @@ Ranged attack.
 Stun an enemy in melee range.
 Melee attack two enemies.
 Heal self. Character is stunned.
-Move an ally to an adjacent cell.
+This skill is broken. Disappointed!
 Push back enemies in the front row.
 If character last hits an enemy, heal.
 Attack enemy in melee range. Also damage enemy behind.
@@ -144,7 +144,7 @@ Move to side cell.
 Devastating melee attack enemy directly in front of character.
 Stun an enemy in the front row.
 Character is reduced to 1 health but does significant damage to enemies.
-All allies start dancing and move to random cells.
+Attack an enemy but increase their damage mitigation.
 Move forward or backward.
 Ranged attack.
 Melee attack. Enemy either moves back or to side.
@@ -155,8 +155,8 @@ Any ranged attacks to the back row are reduced in damage.
 Melee attack. Enemy moves to back cell.
 Smack an enemy in melee range with your appendage.
 Decrease health and skill uses by half and create a duplicate of character.
-Ally is sacrificed. All health, tags, and skills are merged randomly.
-Ranged attack. Character is damaged.
+I didn't like this skill so enjoy the free health.
+Ranged attack. Character is stunned.
 Ranged attack. Enemy is slower.
 Character is sacrificed. All enemies are stunned.
 Heal self.

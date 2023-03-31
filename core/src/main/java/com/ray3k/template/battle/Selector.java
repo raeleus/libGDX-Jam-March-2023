@@ -2,6 +2,7 @@ package com.ray3k.template.battle;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
+import com.ray3k.template.data.CharacterData;
 import com.ray3k.template.screens.*;
 
 public class Selector {
@@ -10,6 +11,13 @@ public class Selector {
         for (var tile : playerTeam ? battle.getEnemyTiles() : battle.getPlayerTiles()) {
             if (tile.getUserObject() != null) returnValue.add(tile);
         }
+        
+        var iter = returnValue.iterator();
+        while (iter.hasNext()) {
+            var tile = iter.next();
+            if (tile.getUserObject() != null && ((CharacterData) tile.getUserObject()).untargetable) iter.remove();
+        }
+        
         return returnValue;
     }
     
@@ -21,6 +29,12 @@ public class Selector {
             
             if (tile.getUserObject() != null) returnValue.add(tile);
         }
+        
+        var iter = returnValue.iterator();
+        while (iter.hasNext()) {
+            var tile = iter.next();
+            if (tile.getUserObject() != null && ((CharacterData) tile.getUserObject()).untargetable) iter.remove();
+        }
         return returnValue;
     }
     
@@ -31,6 +45,12 @@ public class Selector {
             var tile = tiles.get(i);
             
             if (tile.getUserObject() != null) returnValue.add(tile);
+        }
+        
+        var iter = returnValue.iterator();
+        while (iter.hasNext()) {
+            var tile = iter.next();
+            if (tile.getUserObject() != null && ((CharacterData) tile.getUserObject()).untargetable) iter.remove();
         }
         return returnValue;
     }
@@ -45,6 +65,12 @@ public class Selector {
         }
         var tile = tiles.get(1);
         if (tile.getUserObject() != null) returnValue.add(tile);
+        
+        var iter = returnValue.iterator();
+        while (iter.hasNext()) {
+            var tile2 = iter.next();
+            if (tile2.getUserObject() != null && ((CharacterData) tile2.getUserObject()).untargetable) iter.remove();
+        }
         return returnValue;
     }
     
@@ -64,6 +90,12 @@ public class Selector {
         tile = tiles.get(5);
         if (tile.getUserObject() != null) returnValue.add(tile);
         
+        var iter = returnValue.iterator();
+        while (iter.hasNext()) {
+            var tile2 = iter.next();
+            if (tile2.getUserObject() != null && ((CharacterData) tile2.getUserObject()).untargetable) iter.remove();
+        }
+        
         return returnValue;
     }
     
@@ -75,6 +107,12 @@ public class Selector {
             
             if (tiles.get(i - 3).getUserObject() == null && tile.getUserObject() != null) returnValue.add(tile);
         }
+        
+        var iter = returnValue.iterator();
+        while (iter.hasNext()) {
+            var tile = iter.next();
+            if (tile.getUserObject() != null && ((CharacterData) tile.getUserObject()).untargetable) iter.remove();
+        }
         return returnValue;
     }
     
@@ -82,6 +120,12 @@ public class Selector {
         var returnValue = new Array<Table>();
         for (var tile : playerTeam ? battle.getPlayerTiles() : battle.getEnemyTiles()) {
             if (tile.getUserObject() != null) returnValue.add(tile);
+        }
+        
+        var iter = returnValue.iterator();
+        while (iter.hasNext()) {
+            var tile = iter.next();
+            if (tile.getUserObject() != null && ((CharacterData) tile.getUserObject()).untargetable) iter.remove();
         }
         return returnValue;
     }
@@ -95,6 +139,12 @@ public class Selector {
                 if (tile.getUserObject() != null) returnValue.add(tile);
             }
         }
+        
+        var iter = returnValue.iterator();
+        while (iter.hasNext()) {
+            var tile = iter.next();
+            if (tile.getUserObject() != null && ((CharacterData) tile.getUserObject()).untargetable) iter.remove();
+        }
         return returnValue;
     }
     
@@ -106,6 +156,12 @@ public class Selector {
             
             if (tile.getUserObject() != null) returnValue.add(tile);
         }
+        
+        var iter = returnValue.iterator();
+        while (iter.hasNext()) {
+            var tile = iter.next();
+            if (tile.getUserObject() != null && ((CharacterData) tile.getUserObject()).untargetable) iter.remove();
+        }
         return returnValue;
     }
     
@@ -116,6 +172,12 @@ public class Selector {
             var tile = tiles.get(i);
             
             if (tile.getUserObject() != null) returnValue.add(tile);
+        }
+        
+        var iter = returnValue.iterator();
+        while (iter.hasNext()) {
+            var tile = iter.next();
+            if (tile.getUserObject() != null && ((CharacterData) tile.getUserObject()).untargetable) iter.remove();
         }
         return returnValue;
     }
@@ -194,6 +256,12 @@ public class Selector {
                 }
             }
         }
+        
+        var iter = returnValue.iterator();
+        while (iter.hasNext()) {
+            var tile2 = iter.next();
+            if (tile2.getUserObject() != null && ((CharacterData) tile2.getUserObject()).untargetable) iter.remove();
+        }
         return returnValue;
     }
     
@@ -223,6 +291,11 @@ public class Selector {
         
         if (enemyTiles.get(characterPosition + offset).getUserObject() != null) returnValue.add(enemyTiles.get(characterPosition + offset));
         
+        var iter = returnValue.iterator();
+        while (iter.hasNext()) {
+            var tile = iter.next();
+            if (tile.getUserObject() != null && ((CharacterData) tile.getUserObject()).untargetable) iter.remove();
+        }
         return returnValue;
     }
     
@@ -253,6 +326,12 @@ public class Selector {
         if (characterPosition - 1 >= offset && enemyTiles.get(characterPosition - 1 + offset).getUserObject() != null) returnValue.add(enemyTiles.get(characterPosition - 1 + offset));
         else if (characterPosition + 1 < 3 + offset && enemyTiles.get(characterPosition + 1 + offset).getUserObject() != null) returnValue.add(enemyTiles.get(characterPosition + 1 + offset));
         
+        var iter = returnValue.iterator();
+        while (iter.hasNext()) {
+            var tile = iter.next();
+            if (tile.getUserObject() != null && ((CharacterData) tile.getUserObject()).untargetable) iter.remove();
+        }
+        
         return returnValue;
     }
     
@@ -260,6 +339,13 @@ public class Selector {
         var returnValue = new Array<Table>();
         var tiles = playerTeam ? battle.getPlayerTiles() : battle.getEnemyTiles();
         returnValue.add(tiles.get(characterPosition));
+        
+        var iter = returnValue.iterator();
+        while (iter.hasNext()) {
+            var tile = iter.next();
+            if (tile.getUserObject() != null && ((CharacterData) tile.getUserObject()).untargetable) iter.remove();
+        }
+        
         return returnValue;
     }
     
@@ -271,6 +357,13 @@ public class Selector {
         var tiles = playerTeam ? battle.getPlayerTiles() : battle.getEnemyTiles();
         var tile = tiles.get(characterPosition - 3);
         if (tile.getUserObject() == null) returnValue.add(tile);
+        
+        var iter = returnValue.iterator();
+        while (iter.hasNext()) {
+            var tile2 = iter.next();
+            if (tile2.getUserObject() != null && ((CharacterData) tile2.getUserObject()).untargetable) iter.remove();
+        }
+        
         return returnValue;
     }
     
@@ -282,6 +375,13 @@ public class Selector {
         var tiles = playerTeam ? battle.getPlayerTiles() : battle.getEnemyTiles();
         var tile = tiles.get(characterPosition + 3);
         if (tile.getUserObject() == null) returnValue.add(tile);
+        
+        var iter = returnValue.iterator();
+        while (iter.hasNext()) {
+            var tile2 = iter.next();
+            if (tile2.getUserObject() != null && ((CharacterData) tile2.getUserObject()).untargetable) iter.remove();
+        }
+        
         return returnValue;
     }
     
@@ -297,6 +397,13 @@ public class Selector {
         
         tile = tiles.get(characterPosition + 1);
         if (characterPosition < rangeMax && tile.getUserObject() == null) returnValue.add(tile);
+        
+        var iter = returnValue.iterator();
+        while (iter.hasNext()) {
+            var tile2 = iter.next();
+            if (tile2.getUserObject() != null && ((CharacterData) tile2.getUserObject()).untargetable) iter.remove();
+        }
+        
         return returnValue;
     }
     
@@ -309,6 +416,13 @@ public class Selector {
         else tile = tiles.get(characterPosition - 3);
         
         if (tile.getUserObject() == null) returnValue.add(tile);
+        
+        var iter = returnValue.iterator();
+        while (iter.hasNext()) {
+            var tile2 = iter.next();
+            if (tile2.getUserObject() != null && ((CharacterData) tile2.getUserObject()).untargetable) iter.remove();
+        }
+        
         return returnValue;
     }
     
@@ -334,6 +448,13 @@ public class Selector {
             tile = tiles.get(characterPosition + 1);
             if (tile.getUserObject() == null) returnValue.add(tile);
         }
+        
+        var iter = returnValue.iterator();
+        while (iter.hasNext()) {
+            var tile2 = iter.next();
+            if (tile2.getUserObject() != null && ((CharacterData) tile2.getUserObject()).untargetable) iter.remove();
+        }
+        
         return returnValue;
     }
     
@@ -344,6 +465,13 @@ public class Selector {
         for (var tile : tiles) {
             if (tile.getUserObject() == null) returnValue.add(tile);
         }
+        
+        var iter = returnValue.iterator();
+        while (iter.hasNext()) {
+            var tile = iter.next();
+            if (tile.getUserObject() != null && ((CharacterData) tile.getUserObject()).untargetable) iter.remove();
+        }
+        
         return returnValue;
     }
     
@@ -357,6 +485,13 @@ public class Selector {
         for (var tile : battle.getPlayerTiles()) {
             if (tile.getUserObject() != null) returnValue.add(tile);
         }
+        
+        var iter = returnValue.iterator();
+        while (iter.hasNext()) {
+            var tile = iter.next();
+            if (tile.getUserObject() != null && ((CharacterData) tile.getUserObject()).untargetable) iter.remove();
+        }
+        
         return returnValue;
     }
     
@@ -374,6 +509,13 @@ public class Selector {
         if (enemyTiles.get(characterPosition).getUserObject() != null) returnValue.add(enemyTiles.get(characterPosition));
         if (characterPosition >= 3 && enemyTiles.get(characterPosition - 3).getUserObject() != null) returnValue.add(enemyTiles.get(characterPosition - 3));
         else if (characterPosition < 3 && enemyTiles.get(characterPosition + 3).getUserObject() != null) returnValue.add(enemyTiles.get(characterPosition + 3));
+        
+        var iter = returnValue.iterator();
+        while (iter.hasNext()) {
+            var tile = iter.next();
+            if (tile.getUserObject() != null && ((CharacterData) tile.getUserObject()).untargetable) iter.remove();
+        }
+        
         return returnValue;
     }
 }

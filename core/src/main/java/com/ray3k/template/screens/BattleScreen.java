@@ -349,6 +349,7 @@ public class BattleScreen extends JamScreen {
         if (turn < characterOrder.size) {
             var character = characterOrder.get(turn);
             character.damageMitigation = 0;
+            character.untargetable = false;
             character.extraDamage = character.extraDamageNextTurn;
             character.extraDamageNextTurn = 0;
             character.extraDamage += character.extraDamageIfNotHurt;
@@ -808,6 +809,19 @@ public class BattleScreen extends JamScreen {
     
     public void showStun(Table tile) {
         var label = new Label("STUN", lNamesake);
+        label.setColor(Color.ORANGE);
+        stage.addActor(label);
+        label.pack();
+        
+        temp.set(tile.getWidth() / 2, tile.getHeight() / 2);
+        tile.localToStageCoordinates(temp);
+        label.setPosition(temp.x, temp.y, Align.center);
+        
+        label.addAction(sequence(parallel(moveBy(0, 50, 1.0f, Interpolation.sineOut), fadeOut(1.0f)), removeActor()));
+    }
+    
+    public void showUntargetable(Table tile) {
+        var label = new Label("POOF", lNamesake);
         label.setColor(Color.ORANGE);
         stage.addActor(label);
         label.pack();

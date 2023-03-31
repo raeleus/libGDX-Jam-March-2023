@@ -29,6 +29,8 @@ public class CharacterData {
     
     public float poison;
     
+    public boolean untargetable;
+    
     public CharacterData() {
     }
     
@@ -56,6 +58,7 @@ public class CharacterData {
         this.counterNextAttack = other.counterNextAttack;
         this.delayedDamage = other.delayedDamage;
         this.poison = other.poison;
+        this.untargetable = other.untargetable;
     }
     
     public void addTag(String tag, boolean addFirstSkill) {

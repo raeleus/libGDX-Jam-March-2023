@@ -298,6 +298,30 @@ public class SkillData {
         }
     }
     
+    public void normalUntargetable(AttackData ad) {
+        if (ad.sound != null) ad.sound.play(sfx);
+        
+        var stage = ad.battleScreen.stage;
+        var targetTiles = chooseTiles(ad.battleScreen, ad.target, ad.isPlayerTeam, ad);
+        
+        for (var tile : targetTiles) {
+            var enemy = (CharacterData) tile.getUserObject();
+            
+            playSpine(ad, tile, new AnimationStateAdapter() {
+                @Override
+                public void complete(TrackEntry entry) {
+                    if (enemy != null) {
+                        enemy.untargetable = true;
+                        ad.battleScreen.showUntargetable(tile);
+                        ad.battleScreen.showTextEffectNormal(tile, enemy);
+                    }
+                    if (ad.runnable != null) stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(ad.runnable)));
+                    ad.runnable = null;
+                }
+            });
+        }
+    }
+    
     public void normalBlock(AttackData ad) {
         if (ad.sound != null) ad.sound.play(sfx);
         
@@ -421,6 +445,7 @@ public class SkillData {
                         character.stunned = false;
                         character.stunEnemyOnNextHit = false;
                         character.stunEnemyOnHit = false;
+                        character.untargetable = false;
                         ad.battleScreen.showRemoveBuffs(tile);
                         ad.battleScreen.showTextEffectNormal(tile, character);
                     }
@@ -835,38 +860,24 @@ public class SkillData {
                 normalDamageMitigation(ad);
                 break;
             case "sherbet":
-                sfx_squish.play(sfx);
-                for (var tile : targetTiles) {
-                    var enemy = (CharacterData) tile.getUserObject();
-            
-                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSplashPurple.skeletonData, SpineSplashPurple.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpineSplashPurple.animationAnimation, false);
-                    spineDrawable.setCrop(-10, -10, 20, 20);
-                    battleScreen.spineDrawables.add(spineDrawable);
-            
-                    Image image = new Image(spineDrawable);
-                    image.setTouchable(Touchable.disabled);
-                    stage.addActor(image);
-            
-                    temp.set(76, 51);
-                    tile.localToStageCoordinates(temp);
-                    image.setPosition(temp.x, temp.y, Align.center);
-            
-                    spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
-                        @Override
-                        public void complete(TrackEntry entry) {
-                            image.remove();
-                            battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
-                            }
-                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
-                        }
-                    });
-                }
+                skillRunnable = runnable;
+                
+                ad.sound = sfx_squish;
+                ad.skeletonData = SpineSplashPurple.skeletonData;
+                ad.animationStateData = SpineSplashPurple.animationData;
+                ad.animation = SpineSplashPurple.animationAnimation;
+                ad.value = 30;
+                ad.delay = .5f;
+                ad.runnable = () -> {
+                    var ad2 = new AttackData(ad);
+                    ad2.sound = null;
+                    ad2.skeletonData = null;
+                    ad2.value = 20;
+                    ad2.runnable = skillRunnable;
+                    ad2.delay = 1f;
+                    normalPoison(ad2);
+                };
+                normalExtraDamageBuff(ad);
                 break;
             case "banana sundae":
                 ad.sound = sfx_squish;
@@ -905,37 +916,24 @@ public class SkillData {
                 sfx_iceCream.play(sfx);
                 break;
             case "ice cream social":
-                sfx_iceCream.play(sfx);
-                for (var tile : targetTiles) {
-                    var enemy = (CharacterData) tile.getUserObject();
-            
-                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineHealth.skeletonData, SpineHealth.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpineHealth.animationAnimation, false);
-                    spineDrawable.setCrop(-10, -10, 20, 20);
-                    battleScreen.spineDrawables.add(spineDrawable);
-            
-                    Image image = new Image(spineDrawable);
-                    image.setTouchable(Touchable.disabled);
-                    stage.addActor(image);
-            
-                    temp.set(76, 51);
-                    tile.localToStageCoordinates(temp);
-                    image.setPosition(temp.x, temp.y, Align.center);
-            
-                    spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
-                        @Override
-                        public void complete(TrackEntry entry) {
-                            image.remove();
-                            battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                enemy.extraDamageNextTurn += 5;
-                                battleScreen.showBuff(tile, 5);
-                                battleScreen.showTextEffectHeal(tile, enemy);
-                            }
-                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
-                        }
-                    });
-                }
+                skillRunnable = runnable;
+                
+                ad.sound = sfx_iceCream;
+                ad.skeletonData = SpineHealth.skeletonData;
+                ad.animationStateData = SpineHealth.animationData;
+                ad.animation = SpineHealth.animationAnimation;
+                ad.value = 8;
+                ad.delay = .5f;
+                ad.runnable = () -> {
+                    var ad2 = new AttackData(ad);
+                    ad2.sound = null;
+                    ad2.skeletonData = null;
+                    ad2.value = 2;
+                    ad2.runnable = skillRunnable;
+                    ad2.delay = 1f;
+                    normalPoison(ad2);
+                };
+                normalExtraDamageBuff(ad);
                 break;
             case "snowball"://player tested
                 ad.sound = sfx_dodge;
@@ -1297,38 +1295,24 @@ public class SkillData {
                 normalAttack(ad);
                 break;
             case "blaspheme":
-                sfx_magic.play(sfx);
-                for (var tile : targetTiles) {
-                    var enemy = (CharacterData) tile.getUserObject();
-            
-                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpinePortalBlue.skeletonData, SpinePortalBlue.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpinePortalBlue.animationAnimation, false);
-                    spineDrawable.setCrop(-10, -10, 20, 20);
-                    battleScreen.spineDrawables.add(spineDrawable);
-            
-                    Image image = new Image(spineDrawable);
-                    image.setTouchable(Touchable.disabled);
-                    stage.addActor(image);
-            
-                    temp.set(76, 51);
-                    tile.localToStageCoordinates(temp);
-                    image.setPosition(temp.x, temp.y, Align.center);
-            
-                    spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
-                        @Override
-                        public void complete(TrackEntry entry) {
-                            image.remove();
-                            battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
-                            }
-                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
-                        }
-                    });
-                }
+                skillRunnable = runnable;
+                
+                ad.sound = sfx_magic;
+                ad.skeletonData = SpinePortalBlue.skeletonData;
+                ad.animationStateData = SpinePortalBlue.animationData;
+                ad.animation = SpinePortalBlue.animationAnimation;
+                ad.value = 20;
+                ad.delay = .5f;
+                ad.runnable = () -> {
+                    var ad2 = new AttackData(ad);
+                    ad2.sound = null;
+                    ad2.skeletonData = null;
+                    ad2.value = -15;
+                    ad2.runnable = skillRunnable;
+                    ad2.delay = 1f;
+                    normalDamageMitigation(ad2);
+                };
+                normalHeal(ad);
                 break;
             case "plasma beam"://player tested
                 ad.sound = sfx_lightBeam;
@@ -1385,34 +1369,23 @@ public class SkillData {
                 normalStun(ad);
                 break;
             case "flutter":
-                sfx_harp.play(sfx);
-                for (var tile : targetTiles) {
-                    var enemy = (CharacterData) tile.getUserObject();
-            
-                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSwipeUp.skeletonData, SpineSwipeUp.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpineSwipeUp.animationAnimation, false);
-                    spineDrawable.setCrop(-10, -10, 20, 20);
-                    battleScreen.spineDrawables.add(spineDrawable);
-            
-                    Image image = new Image(spineDrawable);
-                    image.setTouchable(Touchable.disabled);
-                    stage.addActor(image);
-            
-                    temp.set(76, 51);
-                    tile.localToStageCoordinates(temp);
-                    image.setPosition(temp.x, temp.y, Align.center);
-    
-                    newPosition = battleScreen.positionOfTile(target);
-                    battleScreen.moveCharacter(character, newPosition, isPlayerTeam);
-                    stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
-                    spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
-                        @Override
-                        public void complete(TrackEntry entry) {
-                            image.remove();
-                            battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                        }
-                    });
-                }
+                skillRunnable = ad.runnable;
+                
+                ad.sound = sfx_harp;
+                ad.skeletonData = SpineSwipeUp.skeletonData;
+                ad.animationStateData = SpineSwipeUp.animationData;
+                ad.animation = SpineSwipeUp.animationAnimation;
+                ad.delay = .5f;
+                ad.runnable = () -> {
+                    var ad2 = new AttackData(ad);
+                    ad2.sound = null;
+                    ad2.skeletonData = null;
+                    ad2.target = battleScreen.findTile(character);
+                    ad2.runnable = skillRunnable;
+                    ad2.delay = 1f;
+                    normalBlock(ad2);
+                };
+                normalMove(ad);
                 break;
             case "nibble"://player tested
                 ad.sound = sfx_bite;
@@ -1453,105 +1426,28 @@ public class SkillData {
                 normalAttack(ad);
                 break;
             case "pellet blast":
-                
-                for (var tile : targetTiles) {
-                    var enemy = (CharacterData) tile.getUserObject();
-            
-                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBloodBrown.skeletonData, SpineBloodBrown.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpineBloodBrown.animationAnimation, false);
-                    spineDrawable.setCrop(-10, -10, 20, 20);
-                    battleScreen.spineDrawables.add(spineDrawable);
-            
-                    Image image = new Image(spineDrawable);
-                    image.setTouchable(Touchable.disabled);
-                    stage.addActor(image);
-            
-                    temp.set(76, 51);
-                    tile.localToStageCoordinates(temp);
-                    image.setPosition(temp.x, temp.y, Align.center);
-            
-                    spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
-                        @Override
-                        public void complete(TrackEntry entry) {
-                            image.remove();
-                            battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                int damage = MathUtils.floor(30 + (float) level / maxLevel * 20.f);
-                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
-                            }
-                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
-                        }
-                    });
-                }
+                ad.sound = sfx_blocking;
+                ad.skeletonData = SpineBloodBrown.skeletonData;
+                ad.animationStateData = SpineBloodBrown.animationData;
+                ad.animation = SpineBloodBrown.animationAnimation;
+                ad.value = 15;
+                normalPoison(ad);
                 break;
             case "cute up":
-                sfx_giggle.play(sfx);
-                for (var tile : targetTiles) {
-                    var enemy = (CharacterData) tile.getUserObject();
-            
-                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineExplosionPink.skeletonData, SpineExplosionPink.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpineExplosionPink.animationAnimation, false);
-                    spineDrawable.setCrop(-10, -10, 20, 20);
-                    battleScreen.spineDrawables.add(spineDrawable);
-            
-                    Image image = new Image(spineDrawable);
-                    image.setTouchable(Touchable.disabled);
-                    stage.addActor(image);
-            
-                    temp.set(76, 51);
-                    tile.localToStageCoordinates(temp);
-                    image.setPosition(temp.x, temp.y, Align.center);
-            
-                    spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
-                        @Override
-                        public void complete(TrackEntry entry) {
-                            image.remove();
-                            battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                enemy.damageMitigation += 100;
-                                battleScreen.showBuff(tile, 100);
-                                battleScreen.showTextEffectHeal(tile, enemy);
-                            }
-                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
-                        }
-                    });
-                }
+                ad.sound = sfx_giggle;
+                ad.skeletonData = SpineExplosionPink.skeletonData;
+                ad.animationStateData = SpineExplosionPink.animationData;
+                ad.animation = SpineExplosionPink.animationAnimation;
+                ad.value = 15;
+                normalHeal(ad);
                 break;
             case "fuzzy":
-                sfx_powerPunch.play(sfx);
-                for (var tile : targetTiles) {
-                    var enemy = (CharacterData) tile.getUserObject();
-            
-                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSparkWhite.skeletonData, SpineSparkWhite.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpineSparkWhite.animationAnimation, false);
-                    spineDrawable.setCrop(-10, -10, 20, 20);
-                    battleScreen.spineDrawables.add(spineDrawable);
-            
-                    Image image = new Image(spineDrawable);
-                    image.setTouchable(Touchable.disabled);
-                    stage.addActor(image);
-            
-                    temp.set(76, 51);
-                    tile.localToStageCoordinates(temp);
-                    image.setPosition(temp.x, temp.y, Align.center);
-            
-                    spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
-                        @Override
-                        public void complete(TrackEntry entry) {
-                            image.remove();
-                            battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
-                            }
-                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
-                        }
-                    });
-                }
+                ad.sound = sfx_powerPunch;
+                ad.skeletonData = SpineSparkWhite.skeletonData;
+                ad.animationStateData = SpineSparkWhite.animationData;
+                ad.animation = SpineSparkWhite.animationAnimation;
+                ad.value = 5;
+                normalCounterNextAttack(ad);
                 break;
             case "bunny claw"://player tested
                 ad.sound = sfx_swordDraw;
@@ -1614,106 +1510,62 @@ public class SkillData {
                 normalAttack(ad);
                 break;
             case "quick dodge":
-                sfx_dodge.play(sfx);
-                for (var tile : targetTiles) {
-                    var enemy = (CharacterData) tile.getUserObject();
-            
-                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSwipeDown.skeletonData, SpineSwipeDown.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpineSwipeDown.animationAnimation, false);
-                    spineDrawable.setCrop(-10, -10, 20, 20);
-                    battleScreen.spineDrawables.add(spineDrawable);
-            
-                    Image image = new Image(spineDrawable);
-                    image.setTouchable(Touchable.disabled);
-                    stage.addActor(image);
-            
-                    temp.set(76, 51);
-                    tile.localToStageCoordinates(temp);
-                    image.setPosition(temp.x, temp.y, Align.center);
-            
-                    spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
-                        @Override
-                        public void complete(TrackEntry entry) {
-                            image.remove();
-                            battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
-                            }
-                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
-                        }
-                    });
-                }
+                skillRunnable = ad.runnable;
+                
+                ad.sound = sfx_dodge;
+                ad.skeletonData = SpineSwipeDown.skeletonData;
+                ad.animationStateData = SpineSwipeDown.animationData;
+                ad.animation = SpineSwipeDown.animationAnimation;
+                ad.delay = .5f;
+                ad.runnable = () -> {
+                    var ad2 = new AttackData(ad);
+                    ad2.sound = null;
+                    ad2.skeletonData = null;
+                    ad2.target = battleScreen.findTile(character);
+                    ad2.runnable = skillRunnable;
+                    ad2.delay = 1f;
+                    normalBlock(ad2);
+                };
+                normalMove(ad);
                 break;
             case "phase":
-                sfx_lightBeam.play(sfx);
-                for (var tile : targetTiles) {
-                    var enemy = (CharacterData) tile.getUserObject();
-            
-                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpinePortalGreen.skeletonData, SpinePortalGreen.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpinePortalGreen.animationAnimation, false);
-                    spineDrawable.setCrop(-10, -10, 20, 20);
-                    battleScreen.spineDrawables.add(spineDrawable);
-            
-                    Image image = new Image(spineDrawable);
-                    image.setTouchable(Touchable.disabled);
-                    stage.addActor(image);
-            
-                    temp.set(76, 51);
-                    tile.localToStageCoordinates(temp);
-                    image.setPosition(temp.x, temp.y, Align.center);
-            
-                    spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
-                        @Override
-                        public void complete(TrackEntry entry) {
-                            image.remove();
-                            battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
-                            }
-                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
-                        }
-                    });
-                }
+                skillRunnable = ad.runnable;
+                
+                ad.sound = sfx_lightBeam;
+                ad.skeletonData = SpinePortalGreen.skeletonData;
+                ad.animationStateData = SpinePortalGreen.animationData;
+                ad.animation = SpinePortalGreen.animationAnimation;
+                ad.value = 5;
+                ad.delay = .5f;
+                ad.runnable = () -> {
+                    var ad2 = new AttackData(ad);
+                    ad2.sound = null;
+                    ad2.skeletonData = null;
+                    ad2.runnable = skillRunnable;
+                    ad2.delay = 1f;
+                    normalStunEnemyOnNextHit(ad2);
+                };
+                normalAttack(ad);
                 break;
             case "speed up":
-                sfx_harp.play(sfx);
-                for (var tile : targetTiles) {
-                    var enemy = (CharacterData) tile.getUserObject();
-            
-                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastWhite.skeletonData, SpineBlastWhite.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpineBlastWhite.animationAnimation, false);
-                    spineDrawable.setCrop(-10, -10, 20, 20);
-                    battleScreen.spineDrawables.add(spineDrawable);
-            
-                    Image image = new Image(spineDrawable);
-                    image.setTouchable(Touchable.disabled);
-                    stage.addActor(image);
-            
-                    temp.set(76, 51);
-                    tile.localToStageCoordinates(temp);
-                    image.setPosition(temp.x, temp.y, Align.center);
-            
-                    spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
-                        @Override
-                        public void complete(TrackEntry entry) {
-                            image.remove();
-                            battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
-                            }
-                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
-                        }
-                    });
-                }
+                skillRunnable = runnable;
+                
+                ad.sound = sfx_harp;
+                ad.skeletonData = SpineBlastWhite.skeletonData;
+                ad.animationStateData = SpineBlastWhite.animationData;
+                ad.animation = SpineBlastWhite.animationAnimation;
+                ad.value = 15;
+                ad.delay = .5f;
+                ad.runnable = () -> {
+                    var ad2 = new AttackData(ad);
+                    ad2.sound = null;
+                    ad2.skeletonData = null;
+                    ad2.value = -5;
+                    ad2.runnable = skillRunnable;
+                    ad2.delay = 1f;
+                    normalDamageMitigation(ad2);
+                };
+                normalExtraDamageBuff(ad);
                 break;
             case "extendo punch":
                 ad.sound = sfx_blocking;
@@ -1740,38 +1592,11 @@ public class SkillData {
                 normalMove(ad);
                 break;
             case "smoke pellet":
-                sfx_sprayPaint.play(sfx);
-                for (var tile : targetTiles) {
-                    var enemy = (CharacterData) tile.getUserObject();
-            
-                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastGray.skeletonData, SpineBlastGray.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpineBlastGray.animationAnimation, false);
-                    spineDrawable.setCrop(-10, -10, 20, 20);
-                    battleScreen.spineDrawables.add(spineDrawable);
-            
-                    Image image = new Image(spineDrawable);
-                    image.setTouchable(Touchable.disabled);
-                    stage.addActor(image);
-            
-                    temp.set(76, 51);
-                    tile.localToStageCoordinates(temp);
-                    image.setPosition(temp.x, temp.y, Align.center);
-            
-                    spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
-                        @Override
-                        public void complete(TrackEntry entry) {
-                            image.remove();
-                            battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
-                            }
-                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
-                        }
-                    });
-                }
+                ad.sound = sfx_sprayPaint;
+                ad.skeletonData = SpineBlastGray.skeletonData;
+                ad.animationStateData = SpineBlastGray.animationData;
+                ad.animation = SpineBlastGray.animationAnimation;
+                normalUntargetable(ad);
                 break;
             case "caltrops"://player tested
                 ad.sound = sfx_bullets;
@@ -2120,39 +1945,12 @@ public class SkillData {
                 normalHeal(ad);
                 break;
             case "throw weight around":
-                sfx_hulk.play(sfx);
-                //todo:fix
-                for (var tile : targetTiles) {
-                    var enemy = (CharacterData) tile.getUserObject();
-            
-                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSplashBlue.skeletonData, SpineSplashBlue.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpineSplashBlue.animationAnimation, false);
-                    spineDrawable.setCrop(-10, -10, 20, 20);
-                    battleScreen.spineDrawables.add(spineDrawable);
-            
-                    Image image = new Image(spineDrawable);
-                    image.setTouchable(Touchable.disabled);
-                    stage.addActor(image);
-            
-                    temp.set(76, 51);
-                    tile.localToStageCoordinates(temp);
-                    image.setPosition(temp.x, temp.y, Align.center);
-            
-                    spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
-                        @Override
-                        public void complete(TrackEntry entry) {
-                            image.remove();
-                            battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
-                            }
-                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
-                        }
-                    });
-                }
+                ad.sound = sfx_hulk;
+                ad.skeletonData = SpineSplashBlue.skeletonData;
+                ad.animationStateData = SpineSplashBlue.animationData;
+                ad.animation = SpineSplashBlue.animationAnimation;
+                ad.value = 1;
+                normalAttack(ad);
                 break;
             case "panda smash"://player tested
                 ad.sound = sfx_hulk;
@@ -2429,38 +2227,24 @@ public class SkillData {
                 normalAttack(ad);
                 break;
             case "dino bop":
-                sfx_powerPunch.play(sfx);
-                for (var tile : targetTiles) {
-                    var enemy = (CharacterData) tile.getUserObject();
-            
-                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineSplashPurple.skeletonData, SpineSplashPurple.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpineSplashPurple.animationAnimation, false);
-                    spineDrawable.setCrop(-10, -10, 20, 20);
-                    battleScreen.spineDrawables.add(spineDrawable);
-            
-                    Image image = new Image(spineDrawable);
-                    image.setTouchable(Touchable.disabled);
-                    stage.addActor(image);
-            
-                    temp.set(76, 51);
-                    tile.localToStageCoordinates(temp);
-                    image.setPosition(temp.x, temp.y, Align.center);
-            
-                    spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
-                        @Override
-                        public void complete(TrackEntry entry) {
-                            image.remove();
-                            battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
-                            }
-                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
-                        }
-                    });
-                }
+                skillRunnable = runnable;
+                
+                ad.sound = sfx_powerPunch;
+                ad.skeletonData = SpineSplashPurple.skeletonData;
+                ad.animationStateData = SpineSplashPurple.animationData;
+                ad.animation = SpineSplashPurple.animationAnimation;
+                ad.value = 20;
+                ad.delay = .5f;
+                ad.runnable = () -> {
+                    var ad2 = new AttackData(ad);
+                    ad2.sound = null;
+                    ad2.skeletonData = null;
+                    ad2.value = 20;
+                    ad2.runnable = skillRunnable;
+                    ad2.delay = 1f;
+                    normalDamageMitigation(ad2);
+                };
+                normalAttack(ad);
                 break;
             case "belly crawl"://player tested
                 ad.sound = sfx_creep;
@@ -2563,72 +2347,31 @@ public class SkillData {
                 normalSpawn(ad, newCharacter);
                 break;
             case "merge":
-                sfx_darkMagic.play(sfx);
-                for (var tile : targetTiles) {
-                    var enemy = (CharacterData) tile.getUserObject();
-            
-                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpinePortal.skeletonData, SpinePortal.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpinePortal.animationAnimation, false);
-                    spineDrawable.setCrop(-10, -10, 20, 20);
-                    battleScreen.spineDrawables.add(spineDrawable);
-            
-                    Image image = new Image(spineDrawable);
-                    image.setTouchable(Touchable.disabled);
-                    stage.addActor(image);
-            
-                    temp.set(76, 51);
-                    tile.localToStageCoordinates(temp);
-                    image.setPosition(temp.x, temp.y, Align.center);
-            
-                    spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
-                        @Override
-                        public void complete(TrackEntry entry) {
-                            image.remove();
-                            battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
-                            }
-                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
-                        }
-                    });
-                }
+                ad.sound = sfx_darkMagic;
+                ad.skeletonData = SpinePortal.skeletonData;
+                ad.animationStateData = SpinePortal.animationData;
+                ad.animation = SpinePortal.animationAnimation;
+                ad.value = 10;
+                normalHeal(ad);
                 break;
             case "sticky":
-                sfx_sticky.play(sfx);
-                for (var tile : targetTiles) {
-                    var enemy = (CharacterData) tile.getUserObject();
-            
-                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBurnGreen.skeletonData, SpineBurnGreen.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpineBurnGreen.animationAnimation, false);
-                    spineDrawable.setCrop(-10, -10, 20, 20);
-                    battleScreen.spineDrawables.add(spineDrawable);
-            
-                    Image image = new Image(spineDrawable);
-                    image.setTouchable(Touchable.disabled);
-                    stage.addActor(image);
-            
-                    temp.set(76, 51);
-                    tile.localToStageCoordinates(temp);
-                    image.setPosition(temp.x, temp.y, Align.center);
-            
-                    spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
-                        @Override
-                        public void complete(TrackEntry entry) {
-                            image.remove();
-                            battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
-                            }
-                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
-                        }
-                    });
-                }
+                skillRunnable = runnable;
+                
+                ad.sound = sfx_sticky;
+                ad.skeletonData = SpineBurnGreen.skeletonData;
+                ad.animationStateData = SpineBurnGreen.animationData;
+                ad.animation = SpineBurnGreen.animationAnimation;
+                ad.value = 10;
+                ad.delay = .5f;
+                ad.runnable = () -> {
+                    var ad2 = new AttackData(ad);
+                    ad2.sound = null;
+                    ad2.skeletonData = null;
+                    ad2.runnable = skillRunnable;
+                    ad2.delay = 1f;
+                    normalStun(ad2);
+                };
+                normalAttack(ad);
                 break;
             case "goo blast":
                 ad.sound = sfx_slime;
@@ -2673,72 +2416,41 @@ public class SkillData {
                 normalAttack(ad);
                 break;
             case "yip":
-                sfx_howl.play(sfx);
-                for (var tile : targetTiles) {
-                    var enemy = (CharacterData) tile.getUserObject();
-            
-                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineLightning.skeletonData, SpineLightning.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpineLightning.animationAnimation, false);
-                    spineDrawable.setCrop(-10, -10, 20, 20);
-                    battleScreen.spineDrawables.add(spineDrawable);
-            
-                    Image image = new Image(spineDrawable);
-                    image.setTouchable(Touchable.disabled);
-                    stage.addActor(image);
-            
-                    temp.set(76, 51);
-                    tile.localToStageCoordinates(temp);
-                    image.setPosition(temp.x, temp.y, Align.center);
-            
-                    spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
-                        @Override
-                        public void complete(TrackEntry entry) {
-                            image.remove();
-                            battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                enemy.damageMitigation -= 10;
-                                battleScreen.showBuff(tile, -10);
-                                battleScreen.showTextEffectHurt(tile, enemy);
-                            }
-                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
-                        }
-                    });
-                }
+                skillRunnable = runnable;
+                
+                ad.sound = sfx_howl;
+                ad.skeletonData = SpineLightning.skeletonData;
+                ad.animationStateData = SpineLightning.animationData;
+                ad.animation = SpineLightning.animationAnimation;
+                ad.value = -100;
+                ad.delay = .5f;
+                ad.runnable = () -> {
+                    var ad2 = new AttackData(ad);
+                    ad2.sound = null;
+                    ad2.skeletonData = null;
+                    ad2.runnable = skillRunnable;
+                    ad2.delay = 1f;
+                    normalUntargetable(ad2);
+                };
+                normalDamageMitigation(ad);
                 break;
             case "snarl":
-                sfx_dragon.play(sfx);
-                for (var tile : targetTiles) {
-                    var enemy = (CharacterData) tile.getUserObject();
-            
-                    var spineDrawable = new SpineDrawable(skeletonRenderer, SpineBlastRed.skeletonData,
-                            SpineBlastRed.animationData);
-                    spineDrawable.getAnimationState().setAnimation(0, SpineBlastRed.animationAnimation, false);
-                    spineDrawable.setCrop(-10, -10, 20, 20);
-                    battleScreen.spineDrawables.add(spineDrawable);
-            
-                    Image image = new Image(spineDrawable);
-                    image.setTouchable(Touchable.disabled);
-                    stage.addActor(image);
-            
-                    temp.set(76, 51);
-                    tile.localToStageCoordinates(temp);
-                    image.setPosition(temp.x, temp.y, Align.center);
-            
-                    spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
-                        @Override
-                        public void complete(TrackEntry entry) {
-                            image.remove();
-                            battleScreen.spineDrawables.removeValue(spineDrawable, true);
-                            if (enemy != null) {
-                                int damage = MathUtils.floor(0 + (float) level / maxLevel * 20.f);
-                                enemy.health -= Math.max(damage + character.extraDamage - enemy.damageMitigation, 0);
-                                battleScreen.showDamage(tile, enemy, damage);
-                                battleScreen.showTextEffectHurt(tile, enemy);
-                            }
-                            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(runnable)));
-                        }
-                    });
-                }
+                skillRunnable = runnable;
+                
+                ad.sound = sfx_dragon;
+                ad.skeletonData = SpineBlastRed.skeletonData;
+                ad.animationStateData = SpineBlastRed.animationData;
+                ad.animation = SpineBlastRed.animationAnimation;
+                ad.delay = .5f;
+                ad.runnable = () -> {
+                    var ad2 = new AttackData(ad);
+                    ad2.sound = null;
+                    ad2.skeletonData = null;
+                    ad2.runnable = skillRunnable;
+                    ad2.delay = 1f;
+                    normalUntargetable(ad2);
+                };
+                normalStun(ad);
                 break;
             case "howl"://player tested
                 ad.sound = sfx_howl;
