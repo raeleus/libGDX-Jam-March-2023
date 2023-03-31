@@ -325,6 +325,11 @@ public class BattleScreen extends JamScreen {
         container = new Container(progressBar);
         container.bottom();
         stack.add(container);
+        
+        var label = new Label("", lLog);
+        container = new Container(label);
+        container.top().right();
+        stack.add(container);
     }
     
     public void conductTurn() {
@@ -771,6 +776,36 @@ public class BattleScreen extends JamScreen {
         updateProgressBars(tile);
     }
     
+    public void showRemoveBuffs(Table tile) {
+        var label = new Label("debuff", lNamesake);
+        label.setColor(Color.ORANGE);
+        stage.addActor(label);
+        label.pack();
+        
+        temp.set(tile.getWidth() / 2, tile.getHeight() / 2);
+        tile.localToStageCoordinates(temp);
+        label.setPosition(temp.x, temp.y, Align.center);
+        
+        label.addAction(sequence(parallel(moveBy(0, 50, 1.0f, Interpolation.sineOut), fadeOut(1.0f)), removeActor()));
+        
+        updateProgressBars(tile);
+    }
+    
+    public void showCopyBuffs(Table tile) {
+        var label = new Label("Copy Cat!", lNamesake);
+        label.setColor(Color.ORANGE);
+        stage.addActor(label);
+        label.pack();
+        
+        temp.set(tile.getWidth() / 2, tile.getHeight() / 2);
+        tile.localToStageCoordinates(temp);
+        label.setPosition(temp.x, temp.y, Align.center);
+        
+        label.addAction(sequence(parallel(moveBy(0, 50, 1.0f, Interpolation.sineOut), fadeOut(1.0f)), removeActor()));
+        
+        updateProgressBars(tile);
+    }
+    
     public void showStun(Table tile) {
         var label = new Label("STUN", lNamesake);
         label.setColor(Color.ORANGE);
@@ -862,7 +897,7 @@ public class BattleScreen extends JamScreen {
         label.addAction(sequence(parallel(moveBy(0, 50, 1.0f, Interpolation.sineOut), fadeOut(1.0f)), removeActor()));
     }
     
-    public void showBuff(Table tile, CharacterData enemy, int damage) {
+    public void showDamageMitigation(Table tile, int damage) {
         var label = new Label((damage > 0 ? "+" : "")  + damage, lNamesake);
         label.setColor(Color.YELLOW);
         stage.addActor(label);
@@ -873,7 +908,52 @@ public class BattleScreen extends JamScreen {
         label.setPosition(temp.x, temp.y, Align.center);
         
         label.addAction(sequence(parallel(moveBy(0, 50, 1.0f, Interpolation.sineOut), fadeOut(1.0f)), removeActor()));
+        
+        updateProgressBars(tile);
+    }
     
+    public void showDamageVulnerable(Table tile, int damage) {
+        var label = new Label((damage > 0 ? "+" : "")  + damage, lNamesake);
+        label.setColor(Color.PINK);
+        stage.addActor(label);
+        label.pack();
+        
+        temp.set(tile.getWidth() / 2, tile.getHeight() / 2);
+        tile.localToStageCoordinates(temp);
+        label.setPosition(temp.x, temp.y, Align.center);
+        
+        label.addAction(sequence(parallel(moveBy(0, 50, 1.0f, Interpolation.sineOut), fadeOut(1.0f)), removeActor()));
+        
+        updateProgressBars(tile);
+    }
+    
+    public void showBuff(Table tile, int damage) {
+        var label = new Label((damage > 0 ? "+" : "")  + damage, lNamesake);
+        label.setColor(Color.PURPLE);
+        stage.addActor(label);
+        label.pack();
+        
+        temp.set(tile.getWidth() / 2, tile.getHeight() / 2);
+        tile.localToStageCoordinates(temp);
+        label.setPosition(temp.x, temp.y, Align.center);
+        
+        label.addAction(sequence(parallel(moveBy(0, 50, 1.0f, Interpolation.sineOut), fadeOut(1.0f)), removeActor()));
+    
+        updateProgressBars(tile);
+    }
+    
+    public void showDebuff(Table tile, int damage) {
+        var label = new Label((damage > 0 ? "+" : "")  + damage, lNamesake);
+        label.setColor(Color.ORANGE);
+        stage.addActor(label);
+        label.pack();
+        
+        temp.set(tile.getWidth() / 2, tile.getHeight() / 2);
+        tile.localToStageCoordinates(temp);
+        label.setPosition(temp.x, temp.y, Align.center);
+        
+        label.addAction(sequence(parallel(moveBy(0, 50, 1.0f, Interpolation.sineOut), fadeOut(1.0f)), removeActor()));
+        
         updateProgressBars(tile);
     }
     
@@ -963,6 +1043,15 @@ public class BattleScreen extends JamScreen {
             progressBar.setStyle(pHealth);
             progressBar.setRange(0, character.healthMax);
             progressBar.setValue(character.health + character.damageMitigation);
+        }
+        
+        var extraDamage = MathUtils.round(character.extraDamage + character.extraDamageNextTurn + character.extraDamageIfNotHurt);
+        var label = (Label) ((Container) ((Stack) tile.getChild(0)).getChild(3)).getActor();
+        if (extraDamage != 0) {
+            label.setColor(Color.PURPLE);
+            label.setText((extraDamage > 0 ? "+" : "") + extraDamage);
+        } else {
+            label.setText("");
         }
     }
     

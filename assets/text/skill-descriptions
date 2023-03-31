@@ -148,11 +148,11 @@ All allies start dancing and move to random cells.
 Move forward or backward.
 Ranged attack.
 Melee attack. Enemy either moves back or to side.
-Do increased damage for the rest of the match. Receive damage every turn.
+Do increased damage and receive extra damage;
 Block an incoming attack to selected ally.
 All incoming attacks to the front row are reduced in damage.
-Any ranged attacks to the back row are reflected back to the enemy.
-Melee attack. Enemy moves to back cell. If back cell is occupied, double the damage.
+Any ranged attacks to the back row are reduced in damage.
+Melee attack. Enemy moves to back cell.
 Smack an enemy in melee range with your appendage.
 Decrease health and skill uses by half and create a duplicate of character.
 Ally is sacrificed. All health, tags, and skills are merged randomly.
@@ -161,24 +161,25 @@ Ranged attack. Enemy is slower.
 Character is sacrificed. All enemies are stunned.
 Heal self.
 Scraping damage to enemy in melee range.
-Increases damage received by target, but it can't be targeted directly for the next turn.
-Enemy cannot target the character.
+Significantly increases damage received by target, but it can't be targeted directly for the next turn.
+Enemy cannot be targeted but is stunned.
 Summons wolf friend.
 Move to adjacent cell. Heal self.
-Move to another cell every turn.
+Move to adjacent cell. Increase damage.
 Ranged attack.
 Ranged attack that stuns an enemy.
-Ranged attack that disables an enemy skill.
+Ranged attack that decreases the enemy's damage.
 Ranged attack that hits an enemy in the front row and the back.
 Ranged attack hits two enemies.
-Every enemy attacked receives additional damage per turn.
+Ranged attack. Enemy takes damage every turn.
 Incredibly furious melee poking damage. 
 Character screams at the top of their lungs, demeaning the enemy.
 Why won't these people listen gob gammit!?
 Nothing penetrates the skin. Well, not too deep.
 A delicious snack for some, but a terrible outcome for the pineapple.
-Ooooh tasty!
+Ooooh tasty! It stings going down though.
 I'm the pine-apple! Bananas ain't got shit on me.
 Instant kill an enemy at 10% health or less. Heal self by that amount.
 Cutting melee attack.
 admin
+Summon your favorite fox friend!
