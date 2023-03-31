@@ -35,6 +35,19 @@ public class Selector {
         return returnValue;
     }
     
+    public static Array<Table> selectTee(BattleScreen battle, boolean playerTeam) {
+        var returnValue = new Array<Table>();
+        var tiles = playerTeam ? battle.getEnemyTiles() : battle.getPlayerTiles();
+        for (int i =3; i < 6; i++) {
+            var tile = tiles.get(i);
+            
+            if (tile.getUserObject() != null) returnValue.add(tile);
+        }
+        var tile = tiles.get(1);
+        if (tile.getUserObject() != null) returnValue.add(tile);
+        return returnValue;
+    }
+    
     public static Array<Table> selectAnyEnemyCorners(BattleScreen battle, boolean playerTeam) {
         var returnValue = new Array<Table>();
         var tiles = playerTeam ? battle.getEnemyTiles() : battle.getPlayerTiles();

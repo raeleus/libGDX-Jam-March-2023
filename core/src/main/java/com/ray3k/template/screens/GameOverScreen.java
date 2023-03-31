@@ -101,6 +101,16 @@ public class GameOverScreen extends JamScreen {
             }
         });
         
+        root.row();
+        textButton = new TextButton("Quit to menu", skin);
+        root.add(textButton);
+        textButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                core.transition(new MenuScreen());
+            }
+        });
+        
         root.pack();
         spine = new SpineDrawable(skeletonRenderer, SpinePing.skeletonData, SpinePing.animationData);
         spineImage = new Image(spine);

@@ -71,6 +71,7 @@ public class PreBattleScreen extends JamScreen {
             hero.blockNextAttack = false;
             hero.counterNextAttack = 0;
             hero.delayedDamage = 0;
+            hero.poison = 0;
             
             for (var skill : hero.skills) {
                 if (skill.regenerateUses) skill.uses = skill.usesMax;

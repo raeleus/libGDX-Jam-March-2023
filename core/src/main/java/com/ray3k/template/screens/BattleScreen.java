@@ -15,11 +15,13 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.esotericsoftware.spine.AnimationState.AnimationStateAdapter;
+import com.esotericsoftware.spine.AnimationState.AnimationStateListener;
 import com.esotericsoftware.spine.AnimationState.TrackEntry;
 import com.github.tommyettinger.textra.TypingLabel;
 import com.ray3k.template.*;
 import com.ray3k.template.data.CharacterData;
 import com.ray3k.template.data.*;
+import com.ray3k.template.data.SkillData.*;
 import com.ray3k.template.stripe.*;
 import com.ray3k.template.stripe.PopTable.*;
 
@@ -53,7 +55,7 @@ public class BattleScreen extends JamScreen {
         music = bgm_game;
         if (!music.isPlaying()) {
             music.play();
-            music.setVolume(bgm * .6f);
+            music.setVolume(bgm * .4f);
             music.setLooping(true);
         }
         
@@ -359,6 +361,24 @@ public class BattleScreen extends JamScreen {
                 showDamage(tile, character, MathUtils.floor(damage));
                 showTextEffectHurt(tile, character);
                 character.delayedDamage = 0;
+                
+                var ad = new SkillData.AttackData();
+                ad.skeletonData = SpineExplosion.skeletonData;
+                ad.animationStateData = SpineExplosion.animationData;
+                ad.animation = SpineExplosion.animationAnimation;
+                ad.battleScreen = this;
+                playSpine(ad, tile, null);
+                
+                sfx_grenade.play(sfx);
+            }
+            
+            if (character.poison > 0) {
+                int damage = MathUtils.round(character.poison);
+                character.health -= Math.max(damage, 0);
+                character.extraDamageIfNotHurt = 0;
+                
+                showPoisonDamage(tile, MathUtils.floor(damage));
+                showTextEffectHurt(tile, character);
             }
             
             updateProgressBars(tile);
@@ -736,6 +756,21 @@ public class BattleScreen extends JamScreen {
         updateProgressBars(tile);
     }
     
+    public void showPoisonDamage(Table tile, int damage) {
+        var label = new Label("-" + damage, lNamesake);
+        label.setColor(Color.GREEN);
+        stage.addActor(label);
+        label.pack();
+        
+        temp.set(tile.getWidth() / 2, tile.getHeight() / 2);
+        tile.localToStageCoordinates(temp);
+        label.setPosition(temp.x, temp.y, Align.center);
+        
+        label.addAction(sequence(parallel(moveBy(0, 50, 1.0f, Interpolation.sineOut), fadeOut(1.0f)), removeActor()));
+        
+        updateProgressBars(tile);
+    }
+    
     public void showStun(Table tile) {
         var label = new Label("STUN", lNamesake);
         label.setColor(Color.ORANGE);
@@ -885,6 +920,10 @@ public class BattleScreen extends JamScreen {
         var label = (TypingLabel) ((Stack)tile.getChild(0)).getChild(0);
         
         if (enemy.stunned) label.setText("{SICK}[YELLOW]" + enemy.name);
+        else if (enemy.poison > 0) label.setText("{SICK}[GREEN]" + enemy.name);
+        else if (enemy.blockNextAttack) label.setText("{HEARTBEAT}[GRAY]" + enemy.name);
+        else if (enemy.counterNextAttack > 0) label.setText("{HEARTBEAT}[ORANGE]" + enemy.name);
+        else if (enemy.delayedDamage > 0) label.setText("{SHAKE}[FIREBRICK]" + enemy.name);
         else if (enemy.stunEnemyOnNextHit || enemy.stunEnemyOnHit) label.setText("{WIND}[CYAN]" + enemy.name);
         else label.setText(enemy.name);
     }
@@ -947,6 +986,34 @@ public class BattleScreen extends JamScreen {
         
         characterData.position = newIndex;
         addCharacterToTile(characterData, tiles.get(newIndex));
+    }
+    
+    private void playSpine(AttackData ad, Table tile, AnimationStateListener listener) {
+        if (ad.skeletonData != null && ad.animationStateData != null && ad.animation != null) {
+            var stage = ad.battleScreen.stage;
+            var spineDrawable = new SpineDrawable(skeletonRenderer, ad.skeletonData, ad.animationStateData);
+            spineDrawable.getAnimationState().setAnimation(0, ad.animation, false);
+            spineDrawable.setCrop(-10, -10, 20, 20);
+            ad.battleScreen.spineDrawables.add(spineDrawable);
+            
+            Image image = new Image(spineDrawable);
+            image.setTouchable(Touchable.disabled);
+            stage.addActor(image);
+            
+            temp.set(76, 51);
+            tile.localToStageCoordinates(temp);
+            image.setPosition(temp.x, temp.y, Align.center);
+            spineDrawable.getAnimationState().addListener(new AnimationStateAdapter() {
+                @Override
+                public void complete(TrackEntry entry) {
+                    image.remove();
+                    ad.battleScreen.spineDrawables.removeValue(spineDrawable, true);
+                }
+            });
+            if (listener != null) spineDrawable.getAnimationState().addListener(listener);
+        } else {
+            if (listener != null) listener.complete(null);
+        }
     }
     
     @Override

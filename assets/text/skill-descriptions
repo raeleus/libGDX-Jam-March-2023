@@ -89,8 +89,8 @@ Enemy is stunned.
 Enemy weakness is found for increased damage.
 Ranged elite hacking attack.
 Enemy deals less damage.
-An enemy is duplicated as an ally.
-Heal this turn and receive poison damage every following turn.
+An enemy is duplicated as an ally. The duplicate has limited health.
+Big heal this turn and receive poison damage every following turn.
 Copy the tags and skills of an ally. Non-reversible.
 Fire damage in melee range.
 Melee attack. Target has decreased damage.
@@ -99,7 +99,7 @@ Ranged fire attack.
 Fire attack to two adjacent targets.
 Burn all nearby enemies and allies
 Smack a fool in melee range.
-Next attack has increased damage.
+The character's next attack has increased damage.
 The character is faster and does increased damage for the next turn only.
 The character is faster for the rest of the round but takes more damage.
 Ranged attack.
@@ -109,10 +109,10 @@ Smack an enemy with your bone in melee range.
 Hit an enemy with a boomerang bone.
 Stun an enemy in melee range.
 Melee attack and heal.
-Take less damage for the remainder of the match.
-Allies can only target a single enemy but that enemy takes increased damage.
+Take less damage for a turn.
+Enemy takes increased damage.
 Devastating melee attack.
-Cannot be targeted. Character is stunned.
+Cannot be damaged. Character is stunned.
 Melee attack.
 Ranged attack.
 Stun an enemy in melee range.
@@ -143,7 +143,7 @@ Melee attack.
 Move to side cell.
 Devastating melee attack enemy directly in front of character.
 Stun an enemy in the front row.
-Character is no longer controllable but does significant damage to enemies.
+Character is reduced to 1 health but does significant damage to enemies.
 All allies start dancing and move to random cells.
 Move forward or backward.
 Ranged attack.

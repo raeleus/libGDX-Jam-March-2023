@@ -130,6 +130,17 @@ public class RoomScreen extends JamScreen {
             }
         });
         
+        var listener = new PopTableHoverListener(Align.top, Align.top, new PopTable.PopTableStyle(wPointerDown));
+        textButton.addListener(listener);
+        var pop = listener.getPopTable();
+        
+        pop.defaults().space(10);
+        var description = "Interact with the mysterious marker. Nearing it makes you feel connected to others...";
+        label = new Label(description, lLog);
+        label.setWrap(true);
+        label.setAlignment(Align.center);
+        pop.add(label).growX();
+        
         if (room.restoration) {
             root.row();
             var restorationLabel = new Label("Someone left a bleeding heart here. It pumps with supernatural rhythm.", lLog);
@@ -176,6 +187,16 @@ public class RoomScreen extends JamScreen {
                     pop.show(stage);
                 }
             });
+            listener = new PopTableHoverListener(Align.top, Align.top, new PopTable.PopTableStyle(wPointerDown));
+            restoreButton.addListener(listener);
+            pop = listener.getPopTable();
+            
+            pop.defaults().space(10);
+            description = "Restore health for all characters and reload any skills that have limited uses.";
+            label = new Label(description, lLog);
+            label.setWrap(true);
+            label.setAlignment(Align.center);
+            pop.add(label).growX();
         }
         
         root.row();
@@ -422,6 +443,17 @@ public class RoomScreen extends JamScreen {
                         pop.show(stage);
                     }
                 });
+                
+                listener = new PopTableHoverListener(Align.top, Align.top, new PopTable.PopTableStyle(wPointerDown));
+                textButton.addListener(listener);
+                pop = listener.getPopTable();
+                
+                pop.defaults().space(10);
+                description = "Learn a new skill or improve the strength of an existing skill.";
+                label = new Label(description, lLog);
+                label.setWrap(true);
+                label.setAlignment(Align.center);
+                pop.add(label).growX();
             }
     
             if (room.tag) {
@@ -473,6 +505,17 @@ public class RoomScreen extends JamScreen {
                         pop.show(stage);
                     }
                 });
+                
+                listener = new PopTableHoverListener(Align.top, Align.top, new PopTable.PopTableStyle(wPointerDown));
+                textButton.addListener(listener);
+                pop = listener.getPopTable();
+                
+                pop.defaults().space(10);
+                description = "Add a tag to the character that allows them to learn new categories of skills.";
+                label = new Label(description, lLog);
+                label.setWrap(true);
+                label.setAlignment(Align.center);
+                pop.add(label).growX();
             }
     
             if (room.hero != null) {
@@ -489,12 +532,12 @@ public class RoomScreen extends JamScreen {
                         showConfirmHeroPop(room);
                     }
                 });
-                var listener = new PopTableHoverListener(Align.top, Align.top, new PopTable.PopTableStyle(wPointerDown));
+                listener = new PopTableHoverListener(Align.top, Align.top, new PopTable.PopTableStyle(wPointerDown));
                 textButton.addListener(listener);
-                var pop = listener.getPopTable();
+                pop = listener.getPopTable();
     
                 pop.defaults().space(10);
-                var description = findHeroTemplate(room.hero).description;
+                description = findHeroTemplate(room.hero).description;
                 label = new Label(description, lLog);
                 label.setWrap(true);
                 label.setAlignment(Align.center);

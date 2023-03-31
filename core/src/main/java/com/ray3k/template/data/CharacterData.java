@@ -27,6 +27,8 @@ public class CharacterData {
     
     public float delayedDamage;
     
+    public float poison;
+    
     public CharacterData() {
     }
     
@@ -53,6 +55,7 @@ public class CharacterData {
         this.blockNextAttack = other.blockNextAttack;
         this.counterNextAttack = other.counterNextAttack;
         this.delayedDamage = other.delayedDamage;
+        this.poison = other.poison;
     }
     
     public void addTag(String tag, boolean addFirstSkill) {
